@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :pets
+
+  resources :logs
+
+  resources :towns
+
   resources :colusseums
   root 'items#index'
   resources :sales
@@ -27,6 +33,7 @@ as :user do
 resources :users do
   get 'add_coin'
   resources :item_insts
+  resources :sales
 end
 resources :item_insts
 resources :sales

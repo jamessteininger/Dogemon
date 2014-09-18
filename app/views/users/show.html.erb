@@ -4,9 +4,23 @@
 Coin: <%= @user.coin %>
 <h2>My Inventory</h2>
 <% @sales.each do |f| %>
-<p>Item:
+<p>
   <% if Item.exists?(id: f.item_id) %>
-  <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> <%= image_tag(Item.find(f.item_id).imageurl, width: "50px") %>
+    <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
+    <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | 
+<%= link_to "X", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
   <% end %>
 </p>
+<% end %>
+
+<h2>My Log</h2>
+
+<%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
+<%= f.hidden_field :user_id %>
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.submit %>
+<% end %>
+<% @user.logs.each do |f| %>
+<p><strong><%= time_ago_in_words(f.created_at) %></strong> <%= f.content %></p>
 <% end %>

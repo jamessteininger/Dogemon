@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :sales, dependent: :destroy
+  has_many :logs
+  has_many :pets
   
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)

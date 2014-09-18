@@ -58,9 +58,11 @@ class SalesController < ApplicationController
   # DELETE /sales/1
   # DELETE /sales/1.json
   def destroy
+    @user = User.find(params[:user_id])
+      @sale = Sale.find(params[:id])
     @sale.destroy
     respond_to do |format|
-      format.html { redirect_to sales_url, notice: 'Sale was successfully destroyed.' }
+      format.html { redirect_to @user, notice: 'Sale was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
