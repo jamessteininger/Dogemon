@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= image_tag(@item.imageurl, width: "150px") %><br>
+  <strong>Name:</strong>
+  <%= @item.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
+
+<p>
+  <strong>Worth:</strong>
+  <%= @item.worth %>
+</p>
+
+<p>
+  <strong>Imageurl:</strong>
+  <%= @item.imageurl %>
+</p>
+<p>
+  <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id} do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :item_id %>
+      <%= f.submit "Buy" %>
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<h2>Market Categories</h2>
+<ul>
+  <li>Weapons</li>
+  <li>Potions</li>
+  <li>Armor</li>
+  <li>Hats</li>
+  <li>Pets</li>
+  <li>Badges</li>
+  <li>Decorations</li>
+  <li>Music Tracks</li>
+</ul>
+<h1>Listing items</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Worth</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= image_tag(item.imageurl, width: "50px") %></td>
+        <td><%= item.name %></td>
+        <td><%= item.description %></td>
+        <td><%= item.worth %></td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item', new_item_path %>

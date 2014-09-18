@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doge</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+  <body><strong>ProjectDoge</strong> v0.01 | 
+<% if user_signed_in? %>
+  <%= link_to  logout_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %>  | 
+    <%= link_to "Account", edit_user_registration_path %> | 
+    <%= link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
+    <hr>
+    Health: 50/50 | Magic: 50/50 | Coin: <%= current_user.coin %> | 
+    <%= link_to "Profile", current_user %> | 
+    <%= link_to "Market", items_path %> | 
+    <%= link_to "Colusseum", items_path %> | 
+    <%= link_to "Factory", items_path %> | 
+    <%= link_to "Guild", items_path %> | 
+    <%= link_to "World Map", items_path %> | 
+    <hr>
+<% else %>
+  <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %> |  <%= link_to "Sign Up", new_user_registration_path, class: "" %>
+   <% end %>
+<%= yield %>
+
+</body>
+</html>

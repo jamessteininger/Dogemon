@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+<h1>Profile</h1>
+<%= @user.email %> | 
+Coin: <%= @user.coin %>
+<h2>My Inventory</h2>
+<% @sales.each do |f| %>
+<p>Item:
+  <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> <%= image_tag(Item.find(f.item_id).imageurl, width: "50px") %>
+</p>
+<% end %>
