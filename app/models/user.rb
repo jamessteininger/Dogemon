@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  has_many :sales
+  has_many :sales, dependent: :destroy
   
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)

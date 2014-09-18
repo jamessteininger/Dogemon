@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918025354) do
+ActiveRecord::Schema.define(version: 20140918040429) do
+
+  create_table "colusseums", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "item_insts", force: true do |t|
     t.integer  "item_id"

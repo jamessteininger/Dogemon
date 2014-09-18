@@ -1,0 +1,25 @@
+<%= form_for(@colusseum) do |f| %>
+  <% if @colusseum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@colusseum.errors.count, "error") %> prohibited this colusseum from being saved:</h2>
+
+      <ul>
+      <% @colusseum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

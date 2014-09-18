@@ -1,0 +1,27 @@
+<h1>Listing colusseums</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @colusseums.each do |colusseum| %>
+      <tr>
+        <td><%= colusseum.name %></td>
+        <td><%= colusseum.description %></td>
+        <td><%= link_to 'Show', colusseum %></td>
+        <td><%= link_to 'Edit', edit_colusseum_path(colusseum) %></td>
+        <td><%= link_to 'Destroy', colusseum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Colusseum', new_colusseum_path %>

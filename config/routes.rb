@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :colusseums
+  root 'items#index'
   resources :sales
 
   resources :items
@@ -28,6 +30,7 @@ resources :users do
 end
 resources :item_insts
 resources :sales
+resources :colusseums
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

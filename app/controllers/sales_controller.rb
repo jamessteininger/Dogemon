@@ -32,7 +32,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to items_path, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
+        format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }
       else
         format.html { render :new }
