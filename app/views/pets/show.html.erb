@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Imageurl:</strong>
-  <%= @pet.imageurl %>
-</p>
+<%= link_to image_tag(@pet.imageurl, width: "250px"), @pet %><br>
 
 <p>
   <strong>Name:</strong>
@@ -11,12 +7,18 @@
 </p>
 
 <p>
+  Attack:
+  <br>
+  Defense:
+  <br>
+</p>
+<p>
   <strong>Description:</strong>
   <%= @pet.description %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Owner:</strong>
   <%= @pet.user_id %>
 </p>
 

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :aenemies
+
+  resources :battles
+
+  resources :enemies
+
   resources :pets
 
   resources :logs

@@ -1,0 +1,53 @@
+<%= form_for(@enemy) do |f| %>
+  <% if @enemy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enemy.errors.count, "error") %> prohibited this enemy from being saved:</h2>
+
+      <ul>
+      <% @enemy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :health %><br>
+    <%= f.number_field :health %>
+  </div>
+  <div class="field">
+    <%= f.label :attack %><br>
+    <%= f.number_field :attack %>
+  </div>
+  <div class="field">
+    <%= f.label :defense %><br>
+    <%= f.number_field :defense %>
+  </div>
+  <div class="field">
+    <%= f.label :element %><br>
+    <%= f.text_field :element %>
+  </div>
+  <div class="field">
+    <%= f.label :coin %><br>
+    <%= f.number_field :coin %>
+  </div>
+  <div class="field">
+    <%= f.label :experience %><br>
+    <%= f.number_field :experience %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :imageurl %><br>
+    <%= f.text_field :imageurl %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

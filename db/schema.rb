@@ -11,11 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918083300) do
+ActiveRecord::Schema.define(version: 20140919175505) do
+
+  create_table "aenemies", force: true do |t|
+    t.integer  "health"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.string   "element"
+    t.integer  "coin"
+    t.integer  "experience"
+    t.string   "name"
+    t.string   "description"
+    t.string   "imageurl"
+    t.integer  "enemy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "battles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "enemy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "colusseums", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "enemies", force: true do |t|
+    t.integer  "health"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.string   "element"
+    t.integer  "coin"
+    t.integer  "experience"
+    t.string   "name"
+    t.string   "description"
+    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

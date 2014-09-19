@@ -1,0 +1,43 @@
+<h1>Listing aenemies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Health</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Element</th>
+      <th>Coin</th>
+      <th>Experience</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Imageurl</th>
+      <th>Enemy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aenemies.each do |aenemy| %>
+      <tr>
+        <td><%= aenemy.health %></td>
+        <td><%= aenemy.attack %></td>
+        <td><%= aenemy.defense %></td>
+        <td><%= aenemy.element %></td>
+        <td><%= aenemy.coin %></td>
+        <td><%= aenemy.experience %></td>
+        <td><%= aenemy.name %></td>
+        <td><%= aenemy.description %></td>
+        <td><%= aenemy.imageurl %></td>
+        <td><%= aenemy.enemy_id %></td>
+        <td><%= link_to 'Show', aenemy %></td>
+        <td><%= link_to 'Edit', edit_aenemy_path(aenemy) %></td>
+        <td><%= link_to 'Destroy', aenemy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Aenemy', new_aenemy_path %>

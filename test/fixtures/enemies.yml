@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  health: 1
+  attack: 1
+  defense: 1
+  element: MyString
+  coin: 1
+  experience: 1
+  name: MyString
+  description: MyString
+  imageurl: MyString
+
+two:
+  health: 1
+  attack: 1
+  defense: 1
+  element: MyString
+  coin: 1
+  experience: 1
+  name: MyString
+  description: MyString
+  imageurl: MyString

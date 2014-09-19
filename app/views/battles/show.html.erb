@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @battle.user_id %>
+</p>
+
+<p>
+  <strong>Enemy:</strong>
+  <%= @battle.enemy_id %>
+</p>
+
+<%= link_to 'Edit', edit_battle_path(@battle) %> |
+<%= link_to 'Back', battles_path %>

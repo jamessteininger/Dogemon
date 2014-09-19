@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= image_tag(@enemy.imageurl) %><br>
+  <strong>Health:</strong>
+  <%= @enemy.health %> | 
+  <strong>Attack:</strong>
+  <%= @enemy.attack %> | 
+
+  <strong>Defense:</strong>
+  <%= @enemy.defense %> | 
+
+  <strong>Element:</strong>
+  <%= @enemy.element %>
+</p>
+
+<p>
+  <strong>Coin:</strong>
+  <%= @enemy.coin %> | 
+  <strong>Experience:</strong>
+  <%= @enemy.experience %> | 
+  <strong>Name:</strong>
+  <%= @enemy.name %> | 
+  <strong>Description:</strong>
+  <%= @enemy.description %> | 
+</p>
+
+<%= link_to 'Edit', edit_enemy_path(@enemy) %> |
+<%= link_to 'Back', enemies_path %>
