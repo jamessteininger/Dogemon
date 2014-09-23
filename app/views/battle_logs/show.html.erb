@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @battle_log.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @battle_log.type %>
+</p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @battle_log.battle_id %>
+</p>
+
+<%= link_to 'Edit', edit_battle_log_path(@battle_log) %> |
+<%= link_to 'Back', battle_logs_path %>

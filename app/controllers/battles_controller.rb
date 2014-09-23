@@ -29,6 +29,7 @@ class BattlesController < ApplicationController
     @user = User.find(@battle.user_id)
     @enemy = Enemy.find(@battle.enemy_id)
     @aenemies = @battle.aenemies
+    @battle_logs = @battle.battle_logs
     if (@battle.aenemies.any?)
     #  @aenemy = Aenemy.find(@battle.aenemy_id)
     end

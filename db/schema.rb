@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923024850) do
+ActiveRecord::Schema.define(version: 20140923191448) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20140923024850) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "battle_id"
+  end
+
+  create_table "battle_logs", force: true do |t|
+    t.string   "description"
+    t.string   "type"
+    t.integer  "battle_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "battle_moves", force: true do |t|
@@ -134,5 +142,18 @@ ActiveRecord::Schema.define(version: 20140923024850) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votable_items", force: true do |t|
+    t.integer  "upvotes"
+    t.integer  "downvotes"
+    t.integer  "sumvotes"
+    t.string   "imageurl"
+    t.string   "name"
+    t.text     "description"
+    t.float    "worth"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

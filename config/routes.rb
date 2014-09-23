@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :battle_logs
+
+  resources :votable_items do
+    get 'upvote'
+    get 'downvote'
+  end
+
   resources :aenemies
 
   resources :battles do

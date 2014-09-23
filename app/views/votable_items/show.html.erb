@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Upvotes:</strong>
+  <%= @votable_item.upvotes %>
+</p>
+
+<p>
+  <strong>Downvotes:</strong>
+  <%= @votable_item.downvotes %>
+</p>
+
+<p>
+  <strong>Sumvotes:</strong>
+  <%= @votable_item.sumvotes %>
+</p>
+
+<p>
+  <strong>Imageurl:</strong>
+  <%= @votable_item.imageurl %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @votable_item.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @votable_item.description %>
+</p>
+
+<p>
+  <strong>Worth:</strong>
+  <%= @votable_item.worth %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @votable_item.creator_id %>
+</p>
+
+<%= link_to 'Edit', edit_votable_item_path(@votable_item) %> |
+<%= link_to 'Back', votable_items_path %>
