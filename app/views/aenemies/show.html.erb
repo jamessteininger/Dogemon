@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= image_tag(@aenemy.imageurl) %><br>
 <p>
   <strong>Health:</strong>
   <%= @aenemy.health %>
@@ -44,11 +44,16 @@
   <strong>Imageurl:</strong>
   <%= @aenemy.imageurl %>
 </p>
-
 <p>
   <strong>Enemy:</strong>
   <%= @aenemy.enemy_id %>
 </p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @aenemy.battle_id %>
+</p>
+
 
 <%= link_to 'Edit', edit_aenemy_path(@aenemy) %> |
 <%= link_to 'Back', aenemies_path %>

@@ -1,14 +1,60 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @battle.user_id %>
-</p>
-
-<p>
-  <strong>Enemy:</strong>
-  <%= @battle.enemy_id %>
-</p>
-
 <%= link_to 'Edit', edit_battle_path(@battle) %> |
 <%= link_to 'Back', battles_path %>
+
+<p>
+  <%= form_for [@battle, Aenemy.new], url: {controller: :aenemies, battle_id: @battle.id } do |f| %>
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :health, value: @enemy.health %>
+  <%= f.hidden_field :attack, value: @enemy.attack %>
+  <%= f.hidden_field :imageurl, value: @enemy.imageurl %>
+  <%= f.submit %>
+  <% end %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user.email %>
+  <br>
+  HP: 100 MP: 100
+</p>
+
+<p>
+  <%= image_tag(@enemy.imageurl) %><br>
+  <strong>Enemy:</strong>
+  <%= @enemy.name %>
+  <br>
+  HP: 100 MP: 100
+</p>
+
+<p>
+  <strong>AEnemy:</strong>
+  <% @aenemies.each do |f| %>
+  <%= image_tag(f.imageurl) %>
+  <%= link_to "d", f, method: :delete %>
+  <%= f.enemy_id %>
+  <br>
+  HP: <%= f.health %> MP: 100
+  <% end %>
+</p>
+
+<strong>
+Force Player Move: 
+  <%= link_to "Attack", battle_attack_enemy_path(@battle, amount: 5) %> | 
+<%= link_to "Magic", @battle %> | 
+<%= link_to "Item", @battle %> | 
+<%= link_to "Flee", @battle %> | 
+
+<br>
+
+Force Enemy Move: 
+<%= link_to "Attack", @battle %> | 
+<%= link_to "Magic", @battle %> | 
+<%= link_to "Item", @battle %> | 
+<%= link_to "Flee", @battle %> | 
+<br>
+</strong>
+
+<p>Moves played:</p>
+

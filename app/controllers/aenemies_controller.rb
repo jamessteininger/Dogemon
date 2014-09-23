@@ -14,7 +14,7 @@ class AenemiesController < ApplicationController
 
   # GET /aenemies/new
   def new
-    @aenemy = Aenemy.new
+    @aenemy = @user.aenemies.new
   end
 
   # GET /aenemies/1/edit
@@ -24,11 +24,12 @@ class AenemiesController < ApplicationController
   # POST /aenemies
   # POST /aenemies.json
   def create
-    @aenemy = Aenemy.new(aenemy_params)
+    @battle = Battle.find(params[:battle_id])
+    @aenemy = @battle.aenemies.new(aenemy_params)
 
     respond_to do |format|
       if @aenemy.save
-        format.html { redirect_to @aenemy, notice: 'Aenemy was successfully created.' }
+        format.html { redirect_to @battle, notice: 'Aenemy was successfully created.' }
         format.json { render :show, status: :created, location: @aenemy }
       else
         format.html { render :new }
@@ -54,9 +55,10 @@ class AenemiesController < ApplicationController
   # DELETE /aenemies/1
   # DELETE /aenemies/1.json
   def destroy
+    @battle = @aenemy.battle
     @aenemy.destroy
     respond_to do |format|
-      format.html { redirect_to aenemies_url, notice: 'Aenemy was successfully destroyed.' }
+      format.html { redirect_to @battle, notice: 'Aenemy was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

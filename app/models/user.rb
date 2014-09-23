@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)
   end
+  
+  
 end

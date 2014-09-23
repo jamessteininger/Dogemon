@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :aenemies
 
-  resources :battles
+  resources :battles do
+    get 'spawn_aenemy'
+    get 'attack_enemy'
+    resources :users
+    resources :enemies
+    resources :aenemies 
+  end
 
   resources :enemies
 
@@ -16,7 +22,7 @@ Rails.application.routes.draw do
   resources :sales
 
   resources :items
-as :user do
+  as :user do
     get '/register', to: 'devise/registrations#new', as: :register
     get '/login', to: 'devise/sessions#new', as: :login
     get '/logout', to: 'devise/sessions#destroy', as: :logout

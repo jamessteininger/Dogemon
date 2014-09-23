@@ -1,8 +1,23 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: [:show, :edit, :update, :destroy]
-
+  #before_action :find_user
   # GET /battles
   # GET /battles.json
+  def attack_enemy
+    amount = params[:amount]
+    @battle = Battle.find(params[:battle_id])
+    @user = User.find(@battle.user_id)
+    @aenemy = @battle.aenemies.first
+    @aenemy.take_damage(Integer(amount))
+    redirect_to @battle, notice: @user.email + " attacks " + " for " + amount + " damage"
+  end
+  
+  def spawn_aenemy
+    @battle = Battle.find(params[:battle_id])
+    @aenemy = @battle.aenemies.new
+    redirect_to @battle
+  end
+  
   def index
     @battles = Battle.all
   end
@@ -10,6 +25,13 @@ class BattlesController < ApplicationController
   # GET /battles/1
   # GET /battles/1.json
   def show
+    @battle = Battle.find(params[:id])
+    @user = User.find(@battle.user_id)
+    @enemy = Enemy.find(@battle.enemy_id)
+    @aenemies = @battle.aenemies
+    if (@battle.aenemies.any?)
+    #  @aenemy = Aenemy.find(@battle.aenemy_id)
+    end
   end
 
   # GET /battles/new
@@ -62,6 +84,9 @@ class BattlesController < ApplicationController
   end
 
   private
+    def find_user
+      @user = User.find(params[:user_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_battle
       @battle = Battle.find(params[:id])

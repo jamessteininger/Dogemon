@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919175505) do
+ActiveRecord::Schema.define(version: 20140923024850) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20140919175505) do
     t.integer  "enemy_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "battle_id"
+  end
+
+  create_table "battle_moves", force: true do |t|
+    t.integer  "battle_id"
+    t.integer  "attacker_id"
+    t.integer  "defender_id"
+    t.string   "move_type"
+    t.integer  "move_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "battles", force: true do |t|
@@ -33,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140919175505) do
     t.integer  "enemy_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "aenemy_id"
   end
 
   create_table "colusseums", force: true do |t|
