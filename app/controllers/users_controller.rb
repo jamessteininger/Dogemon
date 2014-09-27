@@ -8,6 +8,13 @@ class UsersController < ApplicationController
     redirect_to @user, notice: 'Got coin.'
   end
   
+  def set_town
+   # town = params[:town_id]
+    @user = User.find(params[:user_id])
+    @user.set_town(params[:town_id])
+    redirect_to @user, notice: 'Traveled to '
+  end
+  
   def destroy
 		@user = User.find(params[:id])
 		@user.destroy

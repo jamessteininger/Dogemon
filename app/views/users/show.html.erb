@@ -1,7 +1,17 @@
 <p id="notice"><%= notice %></p>
-<h1>Profile</h1>
+<h1><%= image_tag @user.imageurl %> <%= @user.dogetag %></h1><%= link_to "Edit Profile", edit_user_registration_path(@user) %>
 <%= @user.email %> | 
-Coin: <%= @user.coin %>
+Coin: <%= @user.coin %><br>
+<strong>Location:</strong> <% if @user.town_id.presence %><%= Town.find(@user.town_id).name %><% end %> | 
+
+<%= link_to "Set Town 1", user_set_town_path(@user, town_id: 1) %> | 
+
+<%= form_for (@user), url: user_set_town_path(@user), method: :post do |f| %>
+<%= f.collection_select :town_id, Town.all, :id, :name %>
+<%= f.hidden_field :town_id, value: 5 %>
+<%= f.submit %>
+<% end %>
+
 <h2>My Inventory</h2>
 <% @sales.each do |f| %>
 <p>

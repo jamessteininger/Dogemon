@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923191448) do
+ActiveRecord::Schema.define(version: 20140925032015) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -138,6 +138,10 @@ ActiveRecord::Schema.define(version: 20140923191448) do
     t.datetime "updated_at"
     t.float    "coin"
     t.string   "nickname"
+    t.integer  "town_id"
+    t.text     "bio"
+    t.string   "dogetag"
+    t.string   "imageurl"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

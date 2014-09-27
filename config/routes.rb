@@ -44,13 +44,16 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, skip: [:sessions] do
+    get 'set_town'
     members do
-      patch :edit
+      get 'set_town'
+      patch :edit, 'set_town'
     end
   end
-
 resources :users do
   get 'add_coin'
+  post 'set_town'
+  get 'set_town'
   resources :item_insts
   resources :sales
 end

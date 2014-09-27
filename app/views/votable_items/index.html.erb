@@ -2,11 +2,10 @@
 
 <table>
   <thead>
-    <tr>
+    <tr><th></th>
       <th>Upvotes</th>
       <th>Downvotes</th>
       <th>Sumvotes</th>
-      <th>Imageurl</th>
       <th>Name</th>
       <th>Description</th>
       <th>Worth</th>
@@ -16,12 +15,12 @@
   </thead>
 
   <tbody>
-    <% @votable_items.each do |votable_item| %>
-      <tr>
+    <% @votable_items.order("sumvotes desc").each do |votable_item| %>
+    
+    <tr><td><%= image_tag votable_item.imageurl, width: 50 %></td>
         <td><%= votable_item.upvotes %></td>
         <td><%= votable_item.downvotes %></td>
-        <td><%= votable_item.sumvotes %></td>
-        <td><%= votable_item.imageurl %></td>
+      <td><%= votable_item.sumvotes %></td>
         <td><%= votable_item.name %></td>
         <td><%= votable_item.description %></td>
         <td><%= votable_item.worth %></td>
