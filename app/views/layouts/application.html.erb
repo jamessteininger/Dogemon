@@ -6,27 +6,50 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
   <body>
-    <strong>ProjectDoge</strong> v0.01 | 
-<% if user_signed_in? %>
-  <%= link_to  logout_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %>  | 
-    <%= link_to "Account", edit_user_registration_path %> | 
-    <%= link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
-    <hr>
-    Health: 50/50 | Magic: 50/50 | Coin: <%= current_user.coin %> | 
-    <%= link_to "Profile", current_user %> | 
-    <%= link_to "Pets", pets_path %> | 
-    <%= link_to "Market", items_path %> | 
-    <%= link_to "Colosseum", colusseums_path %> | 
-    <%= link_to "Enemies", enemies_path %> | 
-    <%= link_to "Battles", battles_path %> | 
-    <%= link_to "Factory", votable_items_path %> | 
-    <%= link_to "Guild", items_path %> | 
-    <%= link_to "World Map", towns_path %> | 
-    <hr>
+    
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to root_path, class: "navbar-brand" do %>
+            <i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01
+          <% end %>
+        </div>
+        <div class="collapse navbar-collapse">  
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <li> <%= link_to "Profile", current_user %>
+            </li>
+            <li>
+    <%= link_to "Market", items_path %></li><li>
+    <%= link_to "Colosseum", colusseums_path %></li><li>
+    <%= link_to "Guild", items_path %></li><li>
+    <%= link_to "World Map", towns_path %>
+            </li>
+            <li>
+              <%= link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
+            </li>
+          </ul>
+        
 <% else %>
-  <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %> |  <%= link_to "Sign Up", new_user_registration_path, class: "" %>
+    <ul class="nav navbar-nav">
+    <li>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %></li><li><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default" %>
+      </li>
+    </ul>
    <% end %>
+   </div>
+    </div>
+    </div>
+    </div>
+  <div class="container">
 <%= yield %>
 
 </body>

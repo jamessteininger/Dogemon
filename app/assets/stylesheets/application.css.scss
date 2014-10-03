@@ -13,7 +13,14 @@
  *= require_tree .
  *= require_self
 
-@import "bootstrap";
-@import "bootstrap/progress-bars";
 
  */
+@import "bootswatch/readable/variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+body {
+  padding-top: 70px;
+}
+
+@import "bootswatch/readable/bootswatch";

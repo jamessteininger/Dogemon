@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925032015) do
+ActiveRecord::Schema.define(version: 20141003011556) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(version: 20140925032015) do
     t.datetime "updated_at"
   end
 
+  create_table "market_item_votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pets", force: true do |t|
     t.string   "imageurl"
     t.string   "name"
@@ -142,6 +149,10 @@ ActiveRecord::Schema.define(version: 20140925032015) do
     t.text     "bio"
     t.string   "dogetag"
     t.string   "imageurl"
+    t.integer  "health"
+    t.integer  "total_health"
+    t.integer  "magic"
+    t.integer  "attack"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

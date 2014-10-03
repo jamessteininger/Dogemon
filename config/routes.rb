@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :market_item_votes
+
   resources :battle_logs
 
   resources :votable_items do
@@ -28,7 +30,12 @@ Rails.application.routes.draw do
   root 'items#index'
   resources :sales
 
-  resources :items
+  resources :items do
+    get 'upvote'
+    member do
+      post 'upvote'
+    end
+  end
   as :user do
     get '/register', to: 'devise/registrations#new', as: :register
     get '/login', to: 'devise/sessions#new', as: :login

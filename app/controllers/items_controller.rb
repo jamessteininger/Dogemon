@@ -21,6 +21,18 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
   end
+  
+  def upvote
+    @item = Item.find(params[:id])
+
+    if @item.market_item_votes.create(user_id: current_user.id)
+      flash[:notice] =  "Thank you for upvoting!"
+      redirect_to(items_path)
+    else 
+      flash[:notice] =  "You have already upvoted this!"
+      redirect_to(items_path)
+    end
+  end
 
   # POST /items
   # POST /items.json

@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 	end
   
   def show
+    @blockio = BlockIo.get_user_balance user_id: params[:id]
 		@user = User.find(params[:id])
     @sales = @user.sales
 
@@ -40,6 +41,6 @@ class UsersController < ApplicationController
   
   private 
   def user_params
-    params.require(:user).permit(:email, :coin)
+    params.require(:user).permit(:email, :coin, :health, :total_health, :magic, :attack)
    end
 end

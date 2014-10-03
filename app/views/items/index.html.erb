@@ -1,17 +1,28 @@
 <p id="notice"><%= notice %></p>
-<h1>Welcome to ProjectDoge</h1>
-<h2>Market Categories</h2>
-<ul>
-  <li>Weapons</li>
-  <li>Potions</li>
-  <li>Armor</li>
-  <li>Hats</li>
-  <li>Pets</li>
-  <li>Badges</li>
-  <li>Decorations</li>
-  <li>Music Tracks</li>
+<h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
+<div class="navbar -default">
+<ul class="nav navbar-nav">
+  <li><%= link_to "All", items_path %></li>
+  <li><%= link_to "Music", items_path %></li>
+  <li><%= link_to "Art", items_path %></li>
+  <li><%= link_to "Weapons", items_path %></li>
+  <li><%= link_to "Top Downloaded", items_path %></li>
+  
 </ul>
-<h1>Listing items</h1>
+</div><hr>
+<% @items.each do |item| %>
+<h4>
+  <%= link_to item_upvote_path(item, id: item.id), class: 'pull-right' do %><span class="label label-default">
+  <%= item.market_item_votes.count %> <i class="fa fa-caret-up"> </i> Upvote
+  </span>
+  <% end %>
+  <%= image_tag(item.imageurl, width: "60px") %>
+  <%= link_to item, class: "btn btn-lg btn-default" do %>
+  <span class="l-default"><strong><%= item.name %>: </strong><%= item.worth %></span>
+
+  <% end %>
+  </h4>
+<% end %>
 <table>
   <thead>
     <tr>

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :logs
   has_many :pets
   #has_one :town
+  has_many :market_item_votes, dependent: :destroy
+  has_many :upvoted_items, through: :market_item_votes, source: :item
   
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)

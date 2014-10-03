@@ -1,9 +1,24 @@
 <p id="notice"><%= notice %></p>
-<h1><%= image_tag @user.imageurl %> <%= @user.dogetag %></h1><%= link_to "Edit Profile", edit_user_registration_path(@user) %>
+<h1>
+  <%= image_tag @user.imageurl %>
+  <%= @user.dogetag %>
+<%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
+ <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %> </h1><h3>
+  <span class="label label-danger">Health: 50/50</span> 
+  <span class="label label-primary">Magic: 50/50</span>   
+  <span class="label label-warning">Coin: <%= current_user.coin %></span>
+  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"] %></span>
+<span class="label label-warning">Dogecoin: <%= @blockio["data"]["address"] %></span>
+
+</h3>
+
 <%= @user.email %> | 
 Coin: <%= @user.coin %><br>
 <strong>Location:</strong> <% if @user.town_id.presence %><%= Town.find(@user.town_id).name %><% end %> | 
-
+  <%= link_to "Pets", pets_path, class: "pull-right btn btn-primary" %>
+    <%= link_to "Enemies", enemies_path %></li><li>
+    <%= link_to "Battles", battles_path %></li><li>
+    <%= link_to "Factory", votable_items_path %></li><li>
 <%= link_to "Set Town 1", user_set_town_path(@user, town_id: 1) %> | 
 
 <%= form_for (@user), url: user_set_town_path(@user), method: :post do |f| %>
@@ -11,8 +26,12 @@ Coin: <%= @user.coin %><br>
 <%= f.hidden_field :town_id, value: 5 %>
 <%= f.submit %>
 <% end %>
-
-<h2>My Inventory</h2>
+<div class="row">
+  <div class="col-md-6">
+<div class="panel panel-default">
+<div class="panel-heading">
+  <h2><i class="fa fa-suitcase"></i> Inventory</h2>
+</div class="panel-body">
 <% @sales.each do |f| %>
 <p>
   <% if Item.exists?(id: f.item_id) %>
@@ -22,9 +41,39 @@ Coin: <%= @user.coin %><br>
   <% end %>
 </p>
 <% end %>
-
-<h2>My Log</h2>
-
+  <%= BlockIo.get_user_balance user_id: 1 %>
+  BALANCE: <%= @blockio["data"]["available_balance"] %>
+  <% BlockIo.get_my_addresses.each do |f| %>
+  A | 
+  <% end %>
+</div>
+  </div>
+  <div class="col-md-6">
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+<h2>Spirits</h2>
+      </div>
+      
+      <div class="panel-body">
+        <% @user.pets.each do |pet| %>
+<%= link_to image_tag(pet.imageurl, width: "250px"), pet %><br>
+        <td><%= pet.name %></td>
+        <td><%= pet.description %></td>
+        <td><%= pet.user_id %></td>
+        <td><%= link_to 'Show', pet %></td>
+        <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
+        <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr><br>
+    <% end %>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+<h2>Adventure Log</h2>
+      </div>
+<div class="panel-body">
 <%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
 <%= f.hidden_field :user_id %>
 <%= f.label :content %>
@@ -34,3 +83,5 @@ Coin: <%= @user.coin %><br>
 <% @user.logs.each do |f| %>
 <p><strong><%= time_ago_in_words(f.created_at) %></strong> <%= f.content %></p>
 <% end %>
+  </div>
+</div>

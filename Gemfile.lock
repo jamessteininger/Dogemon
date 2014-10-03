@@ -29,6 +29,10 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    block_io (0.1.3)
+      connection_pool (~> 2.0, >= 2.0.0)
+      httpclient (~> 2.4, >= 2.4.0)
+      json (~> 1.8, >= 1.8.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     bootswatch-rails (3.2.4)
@@ -41,17 +45,20 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    connection_pool (2.0.0)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dogecoin_client (0.5.0)
     erubis (2.7.0)
     execjs (2.2.1)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     hike (1.2.3)
+    httpclient (2.4.0)
     i18n (0.6.11)
     jbuilder (2.1.3)
       activesupport (>= 3.0.0, < 5)
@@ -130,10 +137,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  block_io
   bootstrap-sass
   bootswatch-rails
   coffee-rails (~> 4.0.0)
   devise
+  dogecoin_client
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
