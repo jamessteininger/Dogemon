@@ -30,11 +30,12 @@
             <li>
     <%= link_to "Market", items_path %></li><li>
     <%= link_to "Colosseum", colusseums_path %></li><li>
-    <%= link_to "Guild", items_path %></li><li>
+            <%= link_to "Guild", users_path %></li><li>
     <%= link_to "World Map", towns_path %>
+            </li><li> <%= link_to wallet_path do %>Wallet<% end %>
             </li>
             <li>
-              <%= link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
+              <% link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
             </li>
           </ul>
         

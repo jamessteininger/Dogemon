@@ -1,0 +1,7 @@
+<% @users.each do |f| %>
+<h2>
+  <%= image_tag f.imageurl, width: 50 %>
+  <%= link_to f.dogetag, f %>
+<%= f.email %>
+</h2>
+<% end %>

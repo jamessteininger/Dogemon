@@ -1,0 +1,11 @@
+<h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
+<hr>
+<h2><span class="label label-primary">
+Balance: <%= @blockio["data"]["available_balance"].to_i %> 
+  </span>
+  </h2>
+
+<h2>
+Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio["data"]["address"] %> ';">
+
+</h2>

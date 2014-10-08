@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :aenemies
+  get 'static_pages/wallet', as: 'wallet'
 
   resources :battles do
     get 'spawn_aenemy'
@@ -20,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :enemies
 
-  resources :pets
+  resources :pets do
+    resources :item_insts
+  end
 
   resources :logs
 

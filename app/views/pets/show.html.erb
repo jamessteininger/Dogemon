@@ -21,6 +21,9 @@
   <strong>Owner:</strong>
   <%= @pet.user_id %>
 </p>
+<%= form_for [@pet, ItemInst.new] do |f| %>
+<%= f.collection_select :pet_id, @sales, :id, :name %>
+<% end %>
 
 <%= link_to 'Edit', edit_pet_path(@pet) %> |
 <%= link_to 'Back', pets_path %>

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
+<h1><i class="fa fa-shopping-cart"></i> Marketplace | <%= link_to "Workshop", votable_items_path %></h1>
 <div class="navbar -default">
 <ul class="nav navbar-nav">
   <li><%= link_to "All", items_path %></li>
@@ -7,6 +7,7 @@
   <li><%= link_to "Art", items_path %></li>
   <li><%= link_to "Weapons", items_path %></li>
   <li><%= link_to "Top Downloaded", items_path %></li>
+  <li><%= link_to "Factory", votable_items_path %></li>
   
 </ul>
 </div><hr>

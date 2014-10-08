@@ -9,6 +9,7 @@ gem 'devise'
 gem 'bootswatch-rails'
 gem 'font-awesome-rails'
 gem 'dogecoin_client'
+gem 'bootstrap-slider-rails'
 gem 'block_io'
 group :development do
   # Use sqlite3 as the database for Active Record

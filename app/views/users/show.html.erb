@@ -3,29 +3,10 @@
   <%= image_tag @user.imageurl %>
   <%= @user.dogetag %>
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
- <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %> </h1><h3>
-  <span class="label label-danger">Health: 50/50</span> 
-  <span class="label label-primary">Magic: 50/50</span>   
-  <span class="label label-warning">Coin: <%= current_user.coin %></span>
-  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"] %></span>
-<span class="label label-warning">Dogecoin: <%= @blockio["data"]["address"] %></span>
+ <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %> 
+  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span>
 
-</h3>
-
-<%= @user.email %> | 
-Coin: <%= @user.coin %><br>
-<strong>Location:</strong> <% if @user.town_id.presence %><%= Town.find(@user.town_id).name %><% end %> | 
-  <%= link_to "Pets", pets_path, class: "pull-right btn btn-primary" %>
-    <%= link_to "Enemies", enemies_path %></li><li>
-    <%= link_to "Battles", battles_path %></li><li>
-    <%= link_to "Factory", votable_items_path %></li><li>
-<%= link_to "Set Town 1", user_set_town_path(@user, town_id: 1) %> | 
-
-<%= form_for (@user), url: user_set_town_path(@user), method: :post do |f| %>
-<%= f.collection_select :town_id, Town.all, :id, :name %>
-<%= f.hidden_field :town_id, value: 5 %>
-<%= f.submit %>
-<% end %>
+</h1>
 <div class="row">
   <div class="col-md-6">
 <div class="panel panel-default">
@@ -41,18 +22,13 @@ Coin: <%= @user.coin %><br>
   <% end %>
 </p>
 <% end %>
-  <%= BlockIo.get_user_balance user_id: 1 %>
-  BALANCE: <%= @blockio["data"]["available_balance"] %>
-  <% BlockIo.get_my_addresses.each do |f| %>
-  A | 
-  <% end %>
 </div>
   </div>
   <div class="col-md-6">
     
     <div class="panel panel-default">
 <div class="panel-heading">
-<h2>Spirits</h2>
+<h2><%= link_to "Spirits", pets_path %></h2>
       </div>
       
       <div class="panel-body">

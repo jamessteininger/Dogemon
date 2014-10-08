@@ -10,6 +10,9 @@ class PetsController < ApplicationController
   # GET /pets/1
   # GET /pets/1.json
   def show
+    @pet = Pet.find(params[:id])
+    @user = @pet.user
+    @sales = @user.sales
   end
 
   # GET /pets/new

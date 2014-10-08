@@ -22,6 +22,36 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+ <input id="ex1" data-slider-id='ex1Slider' data-slider-tooltip="hide"  type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="12"/>
+<span id="ex1Var"><span id="ex6SliderVal">3</span></span><br>
+<input id="ex2" data-slider-id='ex1Slider' data-slider-tooltip="hide"  type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5"/>
+<span id="ex2Var"><span id="ex6SliderVal">3</span></span><br>
+<input id="ex3" data-slider-id='ex1Slider' data-slider-tooltip="hide"   type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
+<span id="ex3Var"><span id="ex6SliderVal">3</span></span><br>
+  <script>
+    // With JQuery
+$("#ex1").slider();
+    $("#ex2").slider();
+    $("#ex3").slider();
+    
+$("#ex1").on("slide", function(slideEvt) {
+	$("#ex1Var").text(slideEvt.value);
+  $("#ex2Var").text(20 - slideEvt.value);
+  $("#ex3Var").text(20 - slideEvt.value);
+  thing = $("#ex2").slider('getValue');
+  $("#ex2").slider('setValue', 20 - slideEvt.value);
+  $("#ex3").slider('setValue', 20 - slideEvt.value);
+});
+    
+$("#ex2").on("slide", function(slideEvt) {
+  $("#ex1Var").text(slideEvt.value);
+  $("#ex2Var").text(slideEvt.value);
+  $("#ex3Var").text(slideEvt.value);
+  $("#ex1").slider('setValue', (20 - slideEvt.value));
+  $("#ex3").slider('setValue', (20 - slideEvt.value));
+});
+
+</script>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
