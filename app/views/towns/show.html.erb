@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= image_tag(@town.image_url, width: "550px") %><br>
+  <strong>Image url:</strong>
+  <%= @town.image_url %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @town.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @town.description %>
+</p>
+
+<%= link_to 'Edit', edit_town_path(@town) %> |
+<%= link_to 'Back', towns_path %>

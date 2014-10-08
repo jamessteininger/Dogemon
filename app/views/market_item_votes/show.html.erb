@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @market_item_vote.user_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @market_item_vote.item_id %>
+</p>
+
+<%= link_to 'Edit', edit_market_item_vote_path(@market_item_vote) %> |
+<%= link_to 'Back', market_item_votes_path %>

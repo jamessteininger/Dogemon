@@ -1,0 +1,116 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_battle_path(@battle) %> |
+<%= link_to 'Back', battles_path %>
+<div class="row">
+  <div class="col-md-6">
+    <center><%= image_tag @user.imageurl, width: 100 %></center>
+  </div>
+    <div class="col-md-6">
+    <% @aenemies.each do |f| %>
+    <center>
+      <%= image_tag f.imageurl, width: 100 %><% end %></center>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <center>
+      <h3><%= link_to @user.dogetag, @user %></h3>
+    </center>
+    <div class="progress">
+      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%;">
+        <span class="sr-onl"><%= @user.health %>/<%= @user.total_health %></span>
+      </div>
+      <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%"></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <% @aenemies.each do |f| %>
+    <center>
+      <h3><%= link_to f.name, f %></h3>
+    </center>
+    <div class="progress">
+      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(f.health.to_f/@enemy.health.to_f * 100) %>%;">
+     <span class="sr-onl"><%= f.health %>/<%= @enemy.health %></span>
+    </div><div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(f.health.to_f/@enemy.health.to_f * 100) %>%"></div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <ul class="nav navbar-nav"><li>
+<%= form_for [@battle, BattleLog.new], class: "horizontal-", url: {controller: :battle_logs, battle_id: @battle.id, amount: 5 } do |f| %> 
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :description, value: @user.email + " attacks " + " for 5 damage" %>
+  <%= f.submit "Attack", class: "btn btn-lg btn-primary" %>
+    <% end %></li><li> 
+<%= form_for [@battle, BattleLog.new], class: "horizontal-", url: {controller: :battle_logs, battle_id: @battle.id, amount: 5 } do |f| %> 
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :description, value: @user.email + " attacks " + " for 5 damage" %>
+  <%= f.submit "Magic", class: "btn btn-lg btn-primary" %>
+<% end %></li><li> 
+<%= form_for [@battle, BattleLog.new], class: "horizontal-", url: {controller: :battle_logs, battle_id: @battle.id, amount: 5 } do |f| %>  
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :description, value: @user.email + " attacks " + " for 5 damage" %>
+  <%= f.submit "Item", class: "btn btn-lg btn-primary" %>
+<% end %></li><li> 
+<%= form_for [@battle, BattleLog.new], class: "horizontal-", url: {controller: :battle_logs, battle_id: @battle.id, amount: 5 } do |f| %> 
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :description, value: @user.email + " attacks " + " for 5 damage" %>
+<%= f.submit "Flee", class: "btn btn-lg btn-primary" %>
+    <% end %></li><li></ul>
+  </div>
+<br>
+
+  <p>
+  <%= form_for [@battle, Aenemy.new], url: {controller: :aenemies, battle_id: @battle.id } do |f| %>
+  <%= f.hidden_field :battle_id %>
+  <%= f.hidden_field :health, value: @enemy.health %>
+  <%= f.hidden_field :description, value: @enemy.description %>
+  <%= f.hidden_field :name, value: @enemy.name %>
+  <%= f.hidden_field :attack, value: @enemy.attack %>
+  <%= f.hidden_field :imageurl, value: @enemy.imageurl %>
+  <%= f.submit %>
+  <% end %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user.email %>
+  <br>
+  HP: 100 MP: 100
+</p>
+
+<p>
+  <strong>AEnemy:</strong>
+  <% @aenemies.each do |f| %>
+  <%= image_tag(f.imageurl) %>
+  <%= link_to "d", f, method: :delete %>
+  <%= f.enemy_id %>
+  <br>
+  <div class="col-md-3">
+<div class="progress">
+  <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(f.health.to_f/@enemy.health.to_f * 100) %>%;">
+    <span class="sr-onl"><%= f.health %>/<%= @enemy.health %></span>
+  </div>
+    </div>
+</div><br>
+<p>
+  <% end %>
+</p>
+  
+Force Enemy Move: 
+<%= link_to "Attack", @battle %> | 
+<%= link_to "Magic", @battle %> | 
+<%= link_to "Item", @battle %> | 
+<%= link_to "Flee", @battle %> | 
+<br>
+</strong>
+
+<p>Moves played:</p>
+<% @battle_logs.order("created_at desc").each do |f| %>
+  <p>
+    <%= f.created_at.strftime("%I:%M %p") %> | 
+    <strong><%= f.description %></strong>
+  </p>
+<% end %>

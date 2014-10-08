@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @battle_move.battle_id %>
+</p>
+
+<p>
+  <strong>Attacker:</strong>
+  <%= @battle_move.attacker_id %>
+</p>
+
+<p>
+  <strong>Defender:</strong>
+  <%= @battle_move.defender_id %>
+</p>
+
+<p>
+  <strong>Move type:</strong>
+  <%= @battle_move.move_type %>
+</p>
+
+<p>
+  <strong>Move amount:</strong>
+  <%= @battle_move.move_amount %>
+</p>
+
+<%= link_to 'Edit', edit_battle_move_path(@battle_move) %> |
+<%= link_to 'Back', battle_moves_path %>

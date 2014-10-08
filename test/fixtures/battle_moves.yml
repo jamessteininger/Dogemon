@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  battle_id: 1
+  attacker_id: 1
+  defender_id: 1
+  move_type: MyString
+  move_amount: 1
+
+two:
+  battle_id: 1
+  attacker_id: 1
+  defender_id: 1
+  move_type: MyString
+  move_amount: 1

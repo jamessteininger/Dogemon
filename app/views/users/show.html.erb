@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+<h1>
+  <%= image_tag @user.imageurl %>
+  <%= @user.dogetag %>
+<%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
+ <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %> 
+  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span>
+
+</h1>
+<div class="row">
+  <div class="col-md-6">
+<div class="panel panel-default">
+<div class="panel-heading">
+  <h2><i class="fa fa-suitcase"></i> Inventory</h2>
+</div class="panel-body">
+<% @sales.each do |f| %>
+<p>
+  <% if Item.exists?(id: f.item_id) %>
+    <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
+    <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | 
+<%= link_to "X", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
+  <% end %>
+</p>
+<% end %>
+</div>
+  </div>
+  <div class="col-md-6">
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+<h2><%= link_to "Spirits", pets_path %></h2>
+      </div>
+      
+      <div class="panel-body">
+        <% @user.pets.each do |pet| %>
+<%= link_to image_tag(pet.imageurl, width: "250px"), pet %><br>
+        <td><%= pet.name %></td>
+        <td><%= pet.description %></td>
+        <td><%= pet.user_id %></td>
+        <td><%= link_to 'Show', pet %></td>
+        <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
+        <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr><br>
+    <% end %>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+<h2>Adventure Log</h2>
+      </div>
+<div class="panel-body">
+<%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
+<%= f.hidden_field :user_id %>
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.submit %>
+<% end %>
+<% @user.logs.each do |f| %>
+<p><strong><%= time_ago_in_words(f.created_at) %></strong> <%= f.content %></p>
+<% end %>
+  </div>
+</div>

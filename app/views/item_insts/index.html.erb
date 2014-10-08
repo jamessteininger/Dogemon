@@ -1,0 +1,27 @@
+<h1>Listing item_insts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_insts.each do |item_inst| %>
+      <tr>
+        <td><%= item_inst.item_id %></td>
+        <td><%= item_inst.user_id %></td>
+        <td><%= link_to 'Show', item_inst %></td>
+        <td><%= link_to 'Edit', edit_item_inst_path(item_inst) %></td>
+        <td><%= link_to 'Destroy', item_inst, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item inst', new_item_inst_path %>

@@ -1,0 +1,40 @@
+<h1>Listing votable_items</h1>
+
+<table>
+  <thead>
+    <tr><th></th>
+      <th>Upvotes</th>
+      <th>Downvotes</th>
+      <th>Sumvotes</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Worth</th>
+      <th>Creator</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @votable_items.order("sumvotes desc").each do |votable_item| %>
+    
+    <tr><td><%= image_tag votable_item.imageurl, width: 50 %></td>
+        <td><%= votable_item.upvotes %></td>
+        <td><%= votable_item.downvotes %></td>
+      <td><%= votable_item.sumvotes %></td>
+        <td><%= votable_item.name %></td>
+        <td><%= votable_item.description %></td>
+        <td><%= votable_item.worth %></td>
+        <td><%= votable_item.creator_id %></td>
+        <td><%= link_to 'Show', votable_item %></td>
+        <td><%= link_to 'Edit', edit_votable_item_path(votable_item) %></td>
+        <td><%= link_to 'Destroy', votable_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Upvote', votable_item_upvote_path(votable_item) %></td>
+        <td><%= link_to 'Downvote', votable_item_downvote_path(votable_item) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Votable item', new_votable_item_path %>

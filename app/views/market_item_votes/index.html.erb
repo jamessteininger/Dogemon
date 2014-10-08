@@ -1,0 +1,27 @@
+<h1>Listing market_item_votes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @market_item_votes.each do |market_item_vote| %>
+      <tr>
+        <td><%= market_item_vote.user_id %></td>
+        <td><%= market_item_vote.item_id %></td>
+        <td><%= link_to 'Show', market_item_vote %></td>
+        <td><%= link_to 'Edit', edit_market_item_vote_path(market_item_vote) %></td>
+        <td><%= link_to 'Destroy', market_item_vote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Market item vote', new_market_item_vote_path %>

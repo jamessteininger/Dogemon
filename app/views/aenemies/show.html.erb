@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+<%= image_tag(@aenemy.imageurl) %><br>
+<p>
+  <strong>Health:</strong>
+  <%= @aenemy.health %>
+</p>
+
+<p>
+  <strong>Attack:</strong>
+  <%= @aenemy.attack %>
+</p>
+
+<p>
+  <strong>Defense:</strong>
+  <%= @aenemy.defense %>
+</p>
+
+<p>
+  <strong>Element:</strong>
+  <%= @aenemy.element %>
+</p>
+
+<p>
+  <strong>Coin:</strong>
+  <%= @aenemy.coin %>
+</p>
+
+<p>
+  <strong>Experience:</strong>
+  <%= @aenemy.experience %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @aenemy.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @aenemy.description %>
+</p>
+
+<p>
+  <strong>Imageurl:</strong>
+  <%= @aenemy.imageurl %>
+</p>
+<p>
+  <strong>Enemy:</strong>
+  <%= @aenemy.enemy_id %>
+</p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @aenemy.battle_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_aenemy_path(@aenemy) %> |
+<%= link_to 'Back', aenemies_path %>

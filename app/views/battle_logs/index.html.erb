@@ -1,0 +1,29 @@
+<h1>Listing battle_logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Battle</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @battle_logs.each do |battle_log| %>
+      <tr>
+        <td><%= battle_log.description %></td>
+        <td><%= battle_log.type %></td>
+        <td><%= battle_log.battle_id %></td>
+        <td><%= link_to 'Show', battle_log %></td>
+        <td><%= link_to 'Edit', edit_battle_log_path(battle_log) %></td>
+        <td><%= link_to 'Destroy', battle_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Battle log', new_battle_log_path %>
