@@ -33,16 +33,30 @@
 $("#ex1").slider();
     $("#ex2").slider();
     $("#ex3").slider();
+
+var ex1Val1 = 10;
+    var ex2Val = 10;
+    var ex3Val = 10;
     
 $("#ex1").on("slide", function(slideEvt) {
-	$("#ex1Var").text(slideEvt.value);
+
+  $("#ex1Var").text(slideEvt.value);
   $("#ex2Var").text(20 - slideEvt.value);
   $("#ex3Var").text(20 - slideEvt.value);
   thing = $("#ex2").slider('getValue');
   $("#ex2").slider('setValue', 20 - slideEvt.value);
   $("#ex3").slider('setValue', 20 - slideEvt.value);
+  
+  
+  $("#ex1Var").text(slideEvt.value);
+  ext1Val = $("#ex1").slider('getValue');
+  //alert(ext1Val);
+  var diff = $("#ex2").value / $("#ex3").value;
+  
 });
+
     
+  
 $("#ex2").on("slide", function(slideEvt) {
   $("#ex1Var").text(slideEvt.value);
   $("#ex2Var").text(slideEvt.value);
