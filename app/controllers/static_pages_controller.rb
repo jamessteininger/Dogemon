@@ -6,6 +6,9 @@ class StaticPagesController < ApplicationController
     @blockio = BlockIo.get_user_balance user_id: @user.id
   end
   
+  def home
+  end
+  
   def spirits
     @user = current_user
   end

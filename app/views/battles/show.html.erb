@@ -79,8 +79,10 @@
   <%= f.hidden_field :battle_id %>
   <%= f.hidden_field :health, value: @enemy.health %>
   <%= f.hidden_field :description, value: @enemy.description %>
+    <%= f.hidden_field :description, value: @enemy.element %>
   <%= f.hidden_field :name, value: @enemy.name %>
   <%= f.hidden_field :attack, value: @enemy.attack %>
+    <%= f.hidden_field :attack, value: @enemy.defense %>
   <%= f.hidden_field :imageurl, value: @enemy.imageurl %>
   <%= f.submit %>
   <% end %>

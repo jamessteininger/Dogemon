@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003085030) do
+ActiveRecord::Schema.define(version: 20141009024421) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(version: 20141003085030) do
     t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "element"
+    t.string   "category"
+    t.integer  "attack"
   end
 
   create_table "logs", force: true do |t|
