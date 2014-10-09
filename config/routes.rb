@@ -32,7 +32,8 @@ Rails.application.routes.draw do
   resources :colusseums
   root 'items#index'
   resources :sales
-
+  
+  get 'items/grid'
   resources :items do
     get 'upvote'
     member do

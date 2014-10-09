@@ -10,6 +10,11 @@
   <li><%= link_to "Factory", votable_items_path %></li>
   
 </ul>
+<ul class="nav navbar-nav navbar-right">
+  <li><%= link_to items_path do %><i class="fa fa-list"></i> <% end %></li>
+  <li><%= link_to items_grid_path do %><i class="fa fa-th"></i> <% end %></li>
+  
+</ul>
 </div><hr>
 <% @items.each do |item| %>
 <h4>

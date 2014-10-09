@@ -14,13 +14,13 @@
   <h2><i class="fa fa-suitcase"></i> Inventory</h2>
 </div class="panel-body">
 <% @sales.each do |f| %>
-<p>
   <% if Item.exists?(id: f.item_id) %>
-    <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
-    <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | 
-<%= link_to "X", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
+    <p>
+      <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
+      <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | 
+      <%= link_to "X", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
+    </p>
   <% end %>
-</p>
 <% end %>
 </div>
   </div>

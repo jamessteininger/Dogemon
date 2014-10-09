@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+              <%= value %>
+        </div>
+  <% end %>
 
 <%= link_to 'Edit', edit_battle_path(@battle) %> |
 <%= link_to 'Back', battles_path %>
@@ -19,7 +23,13 @@
     </center>
     <div class="progress">
       <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%;">
-        <span class="sr-onl"><%= @user.health %>/<%= @user.total_health %></span>
+        <span class="sr-onl">HP <%= @user.health %>/<%= @user.total_health %></span>
+      </div>
+      <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%"></div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%;">
+        <span class="sr-onl">MP <%= @user.health %>/<%= @user.total_health %></span>
       </div>
       <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(@user.health.to_f/@user.total_health.to_f * 100) %>%"></div>
     </div>
@@ -32,7 +42,9 @@
     <div class="progress">
       <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(f.health.to_f/@enemy.health.to_f * 100) %>%;">
      <span class="sr-onl"><%= f.health %>/<%= @enemy.health %></span>
-    </div><div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(f.health.to_f/@enemy.health.to_f * 100) %>%"></div>
+    </div>
+      <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(f.health.to_f/@enemy.health.to_f * 100) %>%"></div>
+      
     <% end %>
   </div>
 </div>
