@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :equipment
+
   resources :market_item_votes
 
   resources :battle_logs
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :pets do
     resources :item_insts
+    resources :equipment
   end
 
   resources :logs

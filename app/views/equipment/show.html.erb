@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @equipment.pet_id %>
+</p>
+
+<p>
+  <strong>Item inst:</strong>
+  <%= @equipment.item_inst_id %>
+</p>
+
+<%= link_to 'Edit', edit_equipment_path(@equipment) %> |
+<%= link_to 'Back', equipment_index_path %>

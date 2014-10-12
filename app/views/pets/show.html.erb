@@ -21,8 +21,16 @@
   <strong>Owner:</strong>
   <%= @pet.user_id %>
 </p>
-<%= form_for [@pet, ItemInst.new] do |f| %>
+<%= form_for [@pet, Equipment.new] do |f| %>
 <%= f.collection_select :pet_id, @sales, :id, :name %>
+ 
+<%= f.submit %>
+<% end %>
+<h4>Equiped</h4>
+<% @pet.item_insts.each do |f| %>
+<p>
+<%= f.name %>
+</p>
 <% end %>
 
 <%= link_to 'Edit', edit_pet_path(@pet) %> |
