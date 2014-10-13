@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home', to: 'static_pages#home'
+  
+  get 'index', to: 'static_pages#index', as: 'index'
+  
   resources :equipment
 
   resources :market_item_votes
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :aenemies
-  get 'static_pages/wallet', as: 'wallet'
+  get 'wallet', to: 'static_pages#wallet', as: 'wallet'
 
   resources :battles do
     get 'spawn_aenemy'
