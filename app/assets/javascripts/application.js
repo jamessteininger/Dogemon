@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require bootstrap-slider
 //= require_tree .
+//= require bootstrap-sprockets
