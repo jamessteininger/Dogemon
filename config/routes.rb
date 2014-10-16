@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :aenemies
   get 'static_pages/wallet', as: 'wallet'
+  get 'static_pages/about', as: 'about'
 
   resources :battles do
     get 'spawn_aenemy'

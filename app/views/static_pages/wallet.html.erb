@@ -9,3 +9,6 @@ Balance: <%= @blockio["data"]["available_balance"].to_i %>
 Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio["data"]["address"] %> ';">
 
 </h2>
+
+<hr>
+<%= link_to "Buy Dogecoin", "https://weselldoges.com/" %>
