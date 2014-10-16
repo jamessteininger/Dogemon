@@ -1,0 +1,33 @@
+<%= form_for(@pvp_battle) do |f| %>
+  <% if @pvp_battle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pvp_battle.errors.count, "error") %> prohibited this pvp_battle from being saved:</h2>
+
+      <ul>
+      <% @pvp_battle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :other_id %><br>
+    <%= f.number_field :other_id %>
+  </div>
+  <div class="field">
+    <%= f.label :battle_state %><br>
+    <%= f.text_field :battle_state %>
+  </div>
+  <div class="field">
+    <%= f.label :user1_turn %><br>
+    <%= f.check_box :user1_turn %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

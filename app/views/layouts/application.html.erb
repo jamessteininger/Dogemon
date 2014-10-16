@@ -30,10 +30,10 @@
             <li> <%= link_to "Profile", current_user %>
             </li>
             <li>
-    <%= link_to "Market", items_path %></li><li>
-    <%= link_to "Colosseum", colusseums_path %></li><li>
-            <%= link_to "Guild", users_path %></li><li>
-    <%= link_to "World Map", towns_path %>
+              <%= link_to "Market", items_grid_path %></li>
+            <li>
+              <%= link_to "Friends", users_path %></li><li>
+            <%= link_to "Battles", battles_path %>
             </li><li> <%= link_to wallet_path do %>Wallet<% end %>
             </li>
             <li>
@@ -56,6 +56,6 @@
 <%= yield %>
 <hr>
     <center>&copy; ProjectDoge, 2014 <br>
-      <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %>
+      <%= link_to "How to Play", how_to_play_path %> | <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %><br><br>
 </body>
 </html>

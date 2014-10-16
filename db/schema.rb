@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009195223) do
+ActiveRecord::Schema.define(version: 20141016081720) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 20141009195223) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
+    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(version: 20141009195223) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pvp_battles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "other_id"
+    t.string   "battle_state"
+    t.boolean  "user1_turn"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

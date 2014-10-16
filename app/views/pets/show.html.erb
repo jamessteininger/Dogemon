@@ -1,17 +1,30 @@
 <p id="notice"><%= notice %></p>
-<%= link_to image_tag(@pet.imageurl, width: "250px"), @pet %><br>
 
-<p>
-  <strong>Name:</strong>
-  <%= @pet.name %>
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <div class="well">
+      <%= link_to image_tag(@pet.imageurl, width: "225px"), @pet %><br>
+      <p>
+        <strong>Name:</strong>
+        <%= @pet.name %>
+      </p>
+      <p>
+        Attack:
+        <br>
+        Defense:
+        <br>
+      </p>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="well">
+      <h3>Scrolls</h3>
+    </div>
+  </div>
+</div>
 
-<p>
-  Attack:
-  <br>
-  Defense:
-  <br>
-</p>
+
+
 <p>
   <strong>Description:</strong>
   <%= @pet.description %>
@@ -21,15 +34,16 @@
   <strong>Owner:</strong>
   <%= @pet.user_id %>
 </p>
-<%= form_for [@pet, Equipment.new] do |f| %>
-<%= f.collection_select :pet_id, @sales, :id, :name %>
+<%= form_for [@pet, Equipment.new]  do |f| %>
+<%= f.hidden_field :pet_id, value: @pet.id %>
+<%= f.collection_select :item_inst_id, @sales, :id, :name %>
  
 <%= f.submit %>
 <% end %>
 <h4>Equiped</h4>
-<% @pet.item_insts.each do |f| %>
+<% @pet.equipments.each do |f| %>
 <p>
-<%= f.name %>
+  <%= f.sale.name %> <%= link_to "Unequip", f %>
 </p>
 <% end %>
 

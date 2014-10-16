@@ -1,19 +1,20 @@
 <h1>Listing battles</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
       <th>Enemy</th>
-      <th colspan="3"></th>
+      
+      <th colspan="6"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @battles.each do |battle| %>
       <tr>
-        <td><%= battle.user_id %></td>
-        <td><%= battle.enemy_id %></td>
+        <td><%= battle.user.dogetag %></td>
+        <td><%= Enemy.find(battle.enemy_id).name %></td>
         <td><%= link_to 'Show', battle %></td>
         <td><%= link_to 'Edit', edit_battle_path(battle) %></td>
         <td><%= link_to 'Destroy', battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>

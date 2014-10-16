@@ -9,6 +9,9 @@ class StaticPagesController < ApplicationController
   def index
   end
   
+  def how_to_play
+  end
+  
   def home
   end
   

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pvp_battle.user_id %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @pvp_battle.other_id %>
+</p>
+
+<p>
+  <strong>Battle state:</strong>
+  <%= @pvp_battle.battle_state %>
+</p>
+
+<p>
+  <strong>User1 turn:</strong>
+  <%= @pvp_battle.user1_turn %>
+</p>
+
+<%= link_to 'Edit', edit_pvp_battle_path(@pvp_battle) %> |
+<%= link_to 'Back', pvp_battles_path %>

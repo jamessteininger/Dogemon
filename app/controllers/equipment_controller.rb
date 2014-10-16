@@ -24,11 +24,12 @@ class EquipmentController < ApplicationController
   # POST /equipment
   # POST /equipment.json
   def create
-    @equipment = Equipment.new(equipment_params)
+    @pet = Pet.find(params[:pet_id])
+    @equipment = @pet.equipments.new(equipment_params)
 
     respond_to do |format|
       if @equipment.save
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
+        format.html { redirect_to @pet, notice: 'Equipment was successfully created.' }
         format.json { render :show, status: :created, location: @equipment }
       else
         format.html { render :new }

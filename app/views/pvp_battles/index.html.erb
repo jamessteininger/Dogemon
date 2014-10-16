@@ -1,0 +1,31 @@
+<h1>Listing pvp_battles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Other</th>
+      <th>Battle state</th>
+      <th>User1 turn</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pvp_battles.each do |pvp_battle| %>
+      <tr>
+        <td><%= pvp_battle.user_id %></td>
+        <td><%= pvp_battle.other_id %></td>
+        <td><%= pvp_battle.battle_state %></td>
+        <td><%= pvp_battle.user1_turn %></td>
+        <td><%= link_to 'Show', pvp_battle %></td>
+        <td><%= link_to 'Edit', edit_pvp_battle_path(pvp_battle) %></td>
+        <td><%= link_to 'Destroy', pvp_battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pvp battle', new_pvp_battle_path %>
