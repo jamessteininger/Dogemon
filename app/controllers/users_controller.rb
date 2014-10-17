@@ -30,13 +30,13 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
     @sales = @user.sales
 
-		if current_user.id == @user.id
+	#	if current_user.id == @user.id
 			render action: :show
-		elsif current_user.following?(@user)
-			render action: :show 
-		else
-			render file: 'public/denied', formats: [:html]
-		end
+		#elsif current_user.following?(@user)
+		#	render action: :show 
+		#else
+		#	render file: 'public/denied', formats: [:html]
+		#end
 	end
   
   private 
