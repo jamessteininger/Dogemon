@@ -69,6 +69,6 @@ class PvpBattlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pvp_battle_params
-      params.require(:pvp_battle).permit(:user_id, :other_id, :battle_state, :user1_turn)
+      params.require(:pvp_battle).permit(:pet1_id, :pet2_id, :winner_id, :user_id, :other_id, :battle_state, :user1_turn)
     end
 end

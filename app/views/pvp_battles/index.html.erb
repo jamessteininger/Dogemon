@@ -1,12 +1,15 @@
 <h1>Listing pvp_battles</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Other</th>
+      <th>User 1</th>
+      <th>User 2</th>
+      <th>Pet 1</th>
+      <th>Pet 2</th>
+      <th>Winner</th>
       <th>Battle state</th>
-      <th>User1 turn</th>
+      <th>Current Turn</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +17,11 @@
   <tbody>
     <% @pvp_battles.each do |pvp_battle| %>
       <tr>
-        <td><%= pvp_battle.user_id %></td>
-        <td><%= pvp_battle.other_id %></td>
+        <td><%= pvp_battle.user.dogetag %></td>
+        <td><%= pvp_battle.other.dogetag %></td>
+        <td><%= pvp_battle.pet1_id %></td>
+        <td><%= pvp_battle.pet2_id %></td>
+        <td><%= pvp_battle.winner_id %></td>
         <td><%= pvp_battle.battle_state %></td>
         <td><%= pvp_battle.user1_turn %></td>
         <td><%= link_to 'Show', pvp_battle %></td>

@@ -14,38 +14,31 @@
         Defense:
         <br>
       </p>
+      <p>
+  <strong>Description:</strong>
+  <%= @pet.description %>
+</p>
     </div>
   </div>
   <div class="col-md-9">
     <div class="well">
       <h3>Scrolls</h3>
-    </div>
-  </div>
-</div>
-
-
-
-<p>
-  <strong>Description:</strong>
-  <%= @pet.description %>
-</p>
-
-<p>
-  <strong>Owner:</strong>
-  <%= @pet.user_id %>
-</p>
-<%= form_for [@pet, Equipment.new]  do |f| %>
-<%= f.hidden_field :pet_id, value: @pet.id %>
-<%= f.collection_select :item_inst_id, @sales, :id, :name %>
- 
-<%= f.submit %>
-<% end %>
-<h4>Equiped</h4>
+      
 <% @pet.equipments.each do |f| %>
 <p>
   <%= f.sale.name %> <%= link_to "Unequip", f %>
 </p>
 <% end %>
+    </div>
+  </div>
+</div>
+<%= form_for [@pet, Equipment.new]  do |f| %>
+<%= f.hidden_field :pet_id, value: @pet.id %>
+<%= f.collection_select :item_inst_id, @sales, :id, :name %>
+ 
+<%= f.submit "Equip", class: 'btn btn-sm btn-primary' %>
+<% end %>
+<h4>Equiped</h4>
 
 <%= link_to 'Edit', edit_pet_path(@pet) %> |
 <%= link_to 'Back', pets_path %>

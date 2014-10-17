@@ -13,20 +13,28 @@
 
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.collection_select :user_id, User.all, :id, :dogetag %>
   </div>
+
   <div class="field">
     <%= f.label :other_id %><br>
-    <%= f.number_field :other_id %>
+    <%= f.collection_select :other_id, User.all, :id, :dogetag %>
   </div>
+
   <div class="field">
-    <%= f.label :battle_state %><br>
-    <%= f.text_field :battle_state %>
+    <%= f.label :pet1_id %><br>
+    <%= f.collection_select :pet1_id, Pet.all, :id, :name %>
   </div>
-  <div class="field">
-    <%= f.label :user1_turn %><br>
-    <%= f.check_box :user1_turn %>
+
+<div class="field">
+    <%= f.label :pet2_id %><br>
+    <%= f.collection_select :pet2_id, Pet.all, :id, :name %>
   </div>
+
+    <%= f.hidden_field :battle_state, value: "in_progress" %>
+
+    <%= f.hidden_field :user1_turn, value: true %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

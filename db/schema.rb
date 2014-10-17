@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016081720) do
+ActiveRecord::Schema.define(version: 20141017004909) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -133,6 +133,9 @@ ActiveRecord::Schema.define(version: 20141016081720) do
     t.boolean  "user1_turn"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pet1_id"
+    t.integer  "pet2_id"
+    t.integer  "winner_id"
   end
 
   create_table "sales", force: true do |t|
