@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'noauth/index'
+
   get 'home', to: 'static_pages#home'
   
   get 'index', to: 'static_pages#index', as: 'index'

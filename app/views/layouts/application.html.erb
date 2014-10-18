@@ -20,7 +20,7 @@
           </button>
           <%= link_to root_path, class: "navbar-brand" do %>
             <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
-          <%= image_tag "projectdoge.png" %>
+          <div class="img-responsive"><%= image_tag("projectdoge.png", :class => "img-responsive") %></div>
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
@@ -29,11 +29,13 @@
             <li> <%= link_to "Profile", current_user %>
             </li>
             <li>
-    <%= link_to "Market", items_path %></li><li>
+    <%= link_to "Market", items_path %></li>
+            <!--<li>
     <%= link_to "Colosseum", colusseums_path %></li><li>
             <%= link_to "Guild", users_path %></li><li>
     <%= link_to "World Map", towns_path %>
-            </li><li> <%= link_to wallet_path do %>Wallet<% end %>
+            </li> -->
+<li> <%= link_to wallet_path do %>Wallet<% end %>
             </li>
             <li>
               <% link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
