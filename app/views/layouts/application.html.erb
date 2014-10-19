@@ -21,7 +21,7 @@
           </button>
           <%= link_to root_path, class: "navbar-brand" do %>
             <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
-          <%= image_tag "projectdoge.png" %>
+          <div class="img-responsive"><%= image_tag("projectdoge.png", :class => "img-responsive") %></div>
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
@@ -35,9 +35,6 @@
               <%= link_to "Friends", users_path %></li><li>
             <%= link_to "Battles", pvp_battles_path %>
             </li><li> <%= link_to wallet_path do %>Wallet<% end %>
-            </li>
-            <li>
-              <% link_to "Add Coin", user_add_coin_path(current_user, amount: 50.0, user_id: current_user.id)  %>
             </li>
           </ul>
         

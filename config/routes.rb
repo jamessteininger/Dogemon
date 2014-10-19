@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pvp_battles
-
+  
+  root 'static_pages#home'
   get 'home', to: 'static_pages#home'
   
   get 'index', to: 'static_pages#index', as: 'index'
@@ -41,7 +42,6 @@ Rails.application.routes.draw do
   resources :towns
 
   resources :colusseums
-  root 'items#index'
   resources :sales
   
   get 'items/grid'
