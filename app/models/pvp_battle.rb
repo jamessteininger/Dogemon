@@ -10,4 +10,6 @@ class PvpBattle < ActiveRecord::Base
   
   belongs_to :pet1, class_name: 'Pet';
   belongs_to :pet2, class_name: 'Pet';
+  
+  has_many :battle_logs;
 end

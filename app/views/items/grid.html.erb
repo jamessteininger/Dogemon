@@ -2,37 +2,30 @@
 <h1><i class="fa fa-shopping-cart"></i> Marketplace | <%= link_to "Workshop", votable_items_path %></h1>
 <div class="navbar -default">
 <ul class="nav navbar-nav">
-  <li><%= link_to "All", items_path %></li>
-  <li><%= link_to "Music", items_path %></li>
-  <li><%= link_to "Art", items_path %></li>
-  <li><%= link_to "Weapons", items_path %></li>
-  <li><%= link_to "Top Downloaded", items_path %></li>
-  <li><%= link_to "Factory", votable_items_path %></li>
+  <li class="active"><%= link_to "All", items_path %></li>
+  <li><%= link_to "Votes", items_path %></li>
+  <li><%= link_to "Newest", items_path %></li>
+  <li><%= link_to "Price", items_path %></li>
+  <li><%= link_to "Downloads", items_path %></li>
   
 </ul>
 <ul class="nav navbar-nav navbar-right">
   <li><%= link_to items_path do %><i class="fa fa-list"></i> <% end %></li>
   <li><%= link_to items_grid_path do %><i class="fa fa-th"></i> <% end %></li>
-  
 </ul>
 </div><hr>
 <% @items.each do |item| %>
 <div class="col-md-3">
   <div class="well">
-    <h4><%= link_to item.name, item %><br><br>
-  <center>
-  
-    <%= link_to image_tag(item.imageurl, width: "120px"), item %><br>
+    <%= item_element_button(item.element, item.name, item) %><br>
+    <center><%= link_to image_tag(item.imageurl, height: "150px"), item %><br><br></center>
+    <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
-    <br></center>
-  <span class="label label-warning">D: <%= item.worth %></span> <%= link_to item_upvote_path(item, id: item.id), class: '' do %>
-    <span class="label label-info">
-      <%= item.market_item_votes.count %> <i class="fa fa-caret-up"> </i> Upvote
-    </span> 
-      <span class="label label-info">Attack: <%= item.worth %></span> 
-      <span class="label label-success">Category: <%= item.worth %></span>
-  <% end %>
-  </h4>
+   ATK: <%= item.attack %> | MGK: <%= item.magic %></h4>
+    <%= link_to item, class: 'btn btn- btn-warning' do %>
+    <i class='fa fa-tag'></i> <%= item.worth %> 
+    <% end %> <%= link_to item_upvote_path(item, id: item.id), class: "btn btn-default" do %><i class="fa fa-heart-o"></i> <%= item.market_item_votes.count %><% end %> 
+
   </div>
 </div>
 <% end %>

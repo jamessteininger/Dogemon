@@ -33,7 +33,7 @@
               <%= link_to "Market", items_grid_path %></li>
             <li>
               <%= link_to "Friends", users_path %></li><li>
-            <%= link_to "Battles", pvp_battles_path %>
+            <%= link_to pvp_battles_path do %>Battles <span class="badge"><%= PvpBattle.count %></span> <% end %>
             </li><li> <%= link_to wallet_path do %>Wallet<% end %>
             </li>
           </ul>

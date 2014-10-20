@@ -1,0 +1,11 @@
+<div class="well">
+  <%= element_icon(item.element) %> 
+  <%= item.name %>
+  <%= item.battle_cost %>
+  <% amount = item.attack %>
+  <%= form_for [@pvp_battle, BattleLog.new], class: "form form-inline  form-horizontal pull-right", url: {controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount } do |f| %> 
+    <%= f.hidden_field :pvp_battle_id %>
+  <%= f.hidden_field :description, value: equipment.pet.name + " attacks with " + item.name + " for " + amount.to_s + " damage, using " + item.magic.to_s + " magic." %>
+    <%= f.submit "Use", class: "btn btn-sm btn-default" %>
+  <% end %>
+</div>

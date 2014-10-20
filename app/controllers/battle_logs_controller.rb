@@ -14,7 +14,7 @@ class BattleLogsController < ApplicationController
 
   # GET /battle_logs/new
   def new
-    @battle_log = @battle.battle_logs.new
+    @battle_log = @pvp_battle.battle_logs.new
   end
 
   # GET /battle_logs/1/edit
@@ -25,16 +25,16 @@ class BattleLogsController < ApplicationController
   # POST /battle_logs.json
   def create
     amount = params[:amount]
-    @battle = Battle.find(params[:battle_id])
+    @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
     #@user = User.find(@battle.user_id)
-    @aenemy = @battle.aenemies.first
-    @aenemy.take_damage(Integer(amount))
+   # @aenemy = @battle.aenemies.first
+    #@aenemy.take_damage(Integer(amount))
     #@battle = Battle.find(params[:battle_id])
-    @battle_log = @battle.battle_logs.new(battle_log_params)
+    @battle_log = @pvp_battle.battle_logs.new(battle_log_params)
 
     respond_to do |format|
       if @battle_log.save
-        format.html { redirect_to @battle, notice: 'Battle log was successfully created.' }
+        format.html { redirect_to @pvp_battle, notice: 'Battle log was successfully created.' }
         format.json { render :show, status: :created, location: @battle_log }
       else
         format.html { render :new }
@@ -75,6 +75,6 @@ class BattleLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def battle_log_params
-      params.require(:battle_log).permit(:description, :type, :battle_id)
+      params.require(:battle_log).permit(:pvp_battle_id, :description, :type, :battle_id)
     end
 end

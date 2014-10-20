@@ -1,6 +1,15 @@
 class PvpBattlesController < ApplicationController
   before_action :set_pvp_battle, only: [:show, :edit, :update, :destroy]
 
+  def attack
+    amount = params[:amount]
+    @battle = Battle.find(params[:battle_id])
+    @user = User.find(@battle.user_id)
+    @aenemy = @battle.aenemies.first
+    @aenemy.take_damage(Integer(amount))
+    redirect_to @battle, notice: @user.email + " attacks " + " for " + amount + " damage"
+  end
+  
   # GET /pvp_battles
   # GET /pvp_battles.json
   def index
@@ -10,6 +19,8 @@ class PvpBattlesController < ApplicationController
   # GET /pvp_battles/1
   # GET /pvp_battles/1.json
   def show
+    @pvp_battle = PvpBattle.find(params[:id])
+    @battle_logs = @pvp_battle.battle_logs
   end
 
   # GET /pvp_battles/new
