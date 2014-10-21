@@ -1,18 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row">
+<div class="row"><center>Current Regen: 10</center><br>
   <div class="col-md-6">
     <center><h3><%= @pvp_battle.user.dogetag %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet1 } %>    </center>
-      <p>Equipments:<br>
+      <p>Your Equipments:<br>
         <% @pvp_battle.pet1.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
         <% end %>
       </p>
   </div>
   <div class="col-md-6">
+    
     <center><h3><%= @pvp_battle.other.dogetag %></h3>
        <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet2 } %>    </center>
+    <br><br>
+<div class="well">
+  <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
+Battle Log:
+  <% @battle_logs.order("created_at desc").each do |f| %>
+  <p>
+    <%= f.created_at.strftime("%I:%M %p") %> | 
+    <strong><%= f.description %></strong>
+  </p>
+<% end %>
+</div>
       <p>Equipments:<br>
         <% @pvp_battle.pet2.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>

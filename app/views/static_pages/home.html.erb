@@ -1,8 +1,14 @@
+<% if user_signed_in? %>
+
+<%= render 'user_home' %>
+
+<% else %>
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
 
-<h1>Project Doge</h1>
+<h1>Project Doge</h1><center>
 <%= image_tag("Dogecoin.png", :class => "img-responsive main-image wow rubberBand") %>
-
+</center>
 <div class="well wow bounceIn"><h1>Such Exciting. Much Wow. How Spend. Much Battle.</h1></div>
 <h3 class="wow shake">ProjectDoge is an online marketplace for user created content which is bought or sold with Dogecoin.
 
@@ -26,3 +32,5 @@ These items can then be used in the battle area, where pets/avatars can fight ag
 <script>
  new WOW().init();
 </script>
+
+<% end %>
