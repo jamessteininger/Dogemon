@@ -3,9 +3,10 @@
 
     <% @pets.each do |pet| %>
 <%= link_to image_tag(pet.imageurl, width: "250px"), pet %><br>
-        <td><%= pet.namse %></td>
+        <td><%= pet.name %></td>
         <td><%= pet.description %></td>
         <td><%= pet.user_id %></td>
+<td>Battle: <%= pet.pvp_battle_id %></td>
         <td><%= link_to 'Show', pet %></td>
         <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
         <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

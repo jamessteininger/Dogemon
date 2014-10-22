@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020211632) do
+ActiveRecord::Schema.define(version: 20141022033313) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 20141020211632) do
     t.integer  "magic"
     t.integer  "turns"
     t.float    "boost"
+    t.integer  "creator_id"
+    t.integer  "downloads"
   end
 
   create_table "logs", force: true do |t|

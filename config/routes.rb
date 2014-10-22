@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :pvp_battles
+  resources :pvp_battles do
+    get 'apply_regen'
+    get 'restore_health'
+  end
   
   root 'static_pages#home'
   

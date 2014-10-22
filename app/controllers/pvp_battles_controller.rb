@@ -1,6 +1,19 @@
 class PvpBattlesController < ApplicationController
   before_action :set_pvp_battle, only: [:show, :edit, :update, :destroy]
 
+  def apply_regen
+    amount = params[:amount]
+    @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
+    @pvp_battle.apply_regen(Float(amount))
+    redirect_to @pvp_battle, notice: 'apply_regen'
+  end
+  
+  def restore_health
+    @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
+    @pvp_battle.restore_health
+    redirect_to @pvp_battle, notice: 'restore_health'
+  end
+  
   def attack
     amount = params[:amount]
     @battle = Battle.find(params[:battle_id])
@@ -36,7 +49,7 @@ class PvpBattlesController < ApplicationController
   # POST /pvp_battles.json
   def create
     @pvp_battle = PvpBattle.new(pvp_battle_params)
-
+    Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
     respond_to do |format|
       if @pvp_battle.save
         format.html { redirect_to @pvp_battle, notice: 'Pvp battle was successfully created.' }

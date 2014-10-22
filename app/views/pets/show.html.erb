@@ -21,16 +21,12 @@
     </div>
   </div>
   <div class="col-md-9">
-    <div class="well">
-      <h3>Scrolls</h3>
+      <h3>Spells</h3>
       
 <% @pet.equipments.each do |f| %>
-<p>
-  <%= f.sale.name %> <%= link_to "Unequip", f %>
-</p>
+      <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
 <% end %>
     </div>
-  </div>
 </div>
 <%= form_for [@pet, Equipment.new]  do |f| %>
 <%= f.hidden_field :pet_id, value: @pet.id %>
