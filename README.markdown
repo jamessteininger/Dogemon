@@ -1,4 +1,3 @@
-#Project Doge
 ![logo](/app/assets/images/projectdoge_big.png)
 
 ProjectDoge is an online marketplace for user created content which is bought or sold with Dogecoin.
