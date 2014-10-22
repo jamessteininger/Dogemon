@@ -1,7 +1,6 @@
-== Project Doge
+![logo](/app/assets/images/projectdoge_big.png)
 
 ProjectDoge is an online marketplace for user created content which is bought or sold with Dogecoin.
-
 
 These items can then be used in the battle area, where pets/avatars can fight against other players or raid-like bosses.
 
@@ -10,12 +9,9 @@ Please take a look at our wiki to install or learn more about ProjectDoge!
 https://github.com/neraken/ProjectDoge/wiki
 
 
+##Install Document
 
-
-==Install Document
-
-This is a simple installation document which gives you a basic idea who to get the project up and 
-running on your local machine
+This is a simple installation document which gives you a basic idea who to get the project up and  running on your local machine
 
 - Ruby installed
 The latest version of Ruby (2.1 or newer)
@@ -30,28 +26,30 @@ You can find more information about Ruby here: http://rubyonrails.org/
 	With Ruby installed, you can install all of Rails and its dependencies through 
 	RubyGems on the command line:
 		
-		<tt>gem install rails</tt>
+		gem install rails
 		
 	You can find more information about Rails here: http://rubyonrails.org/
 	
-- Download project
+- Download the project
 	Clone the repo and run: 
-		<tt>bundle install</tt>
+	
+		bundle install
+	
 	This installs the gem packages
 	
 - Database initialization
 	 creates local testing SQL tables (SQLite), type in the following command:
 		
-		<tt>rake db:migrate</tt>
+		rake db:migrate
 		
 - Start rails server
 	To run the rails server, type in the following command:
 		
-		<tt>rails server</tt>
+		rails server
 
 	 Optionally, you can choose another port with:
 
-		<tt>rails s -p 4000</tt>
+		rails s -p 4000
 
 	(this will run on port 4000)
 	
@@ -59,7 +57,5 @@ You can find more information about Ruby here: http://rubyonrails.org/
 	To run the Rails app, go to your browser and open: http://localhost:3000
 
 
-
-
-==Gems used 
+##Gems used 
 devise, font-awesome, postgres, bootstrap, sass, block.io
