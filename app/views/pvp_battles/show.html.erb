@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-<div class="row"><center>Current Regen: 10</center><br>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+<div class="row"><center>Current Regen: 10  | <%= link_to 'Restore Health', pvp_battles_path %> | <%= link_to 'Force Regen', pvp_battles_path %></center><br>
   <div class="col-md-6">
     <center><h3><%= @pvp_battle.user.dogetag %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet1 } %>    </center>
-      <p>Your Equipments:<br>
+
         <% @pvp_battle.pet1.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
         <% end %>
-      </p>
+
   </div>
   <div class="col-md-6">
     
@@ -32,16 +32,6 @@ Battle Log:
       </p>
   </div>
 </div>
-<div class="well">
-  <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
-Battle Log:
-  <% @battle_logs.order("created_at desc").each do |f| %>
-  <p>
-    <%= f.created_at.strftime("%I:%M %p") %> | 
-    <strong><%= f.description %></strong>
-  </p>
-<% end %>
-</div>
 <br>
 
 <p>
@@ -55,4 +45,8 @@ Battle Log:
 </p>
 
 <%= link_to 'Edit', edit_pvp_battle_path(@pvp_battle) %> |
-<%= link_to 'Back', pvp_battles_path %> | <%= link_to 'Restore Health', pvp_battles_path %> | <%= link_to 'Force Regen', pvp_battles_path %>
+<%= link_to 'Back', pvp_battles_path %>
+<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>

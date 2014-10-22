@@ -25,7 +25,6 @@
     <%= link_to item, class: 'btn btn- btn-warning' do %>
     <i class='fa fa-tag'></i> <%= item.worth %> 
     <% end %> <%= link_to item_upvote_path(item, id: item.id), class: "btn btn-default" do %><i class="fa fa-heart-o"></i> <%= item.market_item_votes.count %><% end %> 
-
   </div>
 </div>
 <% end %>

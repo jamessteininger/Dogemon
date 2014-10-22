@@ -28,7 +28,10 @@ class BattleLogsController < ApplicationController
     @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
     #@user = User.find(@battle.user_id)
    # @aenemy = @battle.aenemies.first
-    #@aenemy.take_damage(Integer(amount))
+    @pet1 = Pet.find(@pvp_battle.pet1_id)
+    @pet2 = Pet.find(@pvp_battle.pet2_id)
+    @pet2.take_damage(Integer(amount))
+    @pet1.use_magic(Integer(amount))
     #@battle = Battle.find(params[:battle_id])
     @battle_log = @pvp_battle.battle_logs.new(battle_log_params)
 

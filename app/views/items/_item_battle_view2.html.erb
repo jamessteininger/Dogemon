@@ -1,0 +1,18 @@
+<div class="well row">
+  <%= image_tag(Item.find(item.item_id).imageurl, height: "50px") %>
+  <%= element_icon(item.element) %> 
+  <%= item.name %>
+  <%= item.battle_cost %>
+  <% amount = item.attack %>
+  <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id'+item.name.to_s } , class: "form form-inline  form-horizontal pull-right", url: {controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount } do |f| %> 
+    <%= f.hidden_field :pvp_battle_id %>
+    <%= f.hidden_field :description, value: equipment.pet.name + " attacks with " + item.name + " for " + amount.to_s + " damage, using " + item.magic.to_s + " magic." %>
+    <%= f.submit "dsad", class: "btn btn-sm btn-default" %>
+  <%= link_to "#", :onclick => "$('#form_id#{item.name.to_s}').submit()", class: 'btn btn-default' do %>
+      <%= image_tag(Item.find(item.item_id).imageurl, height: "50px") %>
+      <%= element_icon(item.element) %> 
+      <%= item.name %>
+      <%= item.battle_cost %>
+    <% end %>
+  <% end %>
+</div>    

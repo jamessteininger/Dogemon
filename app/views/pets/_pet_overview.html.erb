@@ -1,4 +1,18 @@
-<%= link_to image_tag(pet.imageurl, height: "180px"), pet %><br>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+<%= link_to image_tag(pet.imageurl, height: "180px", class: "wow wobble"), pet, class: "wow wobble" %><br>
 <%= pet.name %> <br> 
-Health: <%= pet.health %> / 100<br> 
-Magic: <%= pet.magic %> / 100<br> 
+<div class="progress">
+  <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.health.to_f/100 * 100) %>%;">
+    <span class="sr-onl">HP <%= pet.health %>/100</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.health.to_f/100 * 100) %>%"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.magic.to_f/100 * 100) %>%;">
+    <span class="sr-onl">MP <%= pet.health %>/100</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.magic.to_f/100 * 100) %>%"></div>
+</div>
+<script>
+ new WOW().init();
+</script>
