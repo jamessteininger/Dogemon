@@ -1,7 +1,6 @@
 #Project Doge
-![logo](https://raw.githubusercontent.com/ZiyiChen/ProjectDoge/master/app/assets/images/projectdoge.png)
+![logo](/app/assets/images/projectdoge_big.png)
 
----------------
 ProjectDoge is an online marketplace for user created content which is bought or sold with Dogecoin.
 
 These items can then be used in the battle area, where pets/avatars can fight against other players or raid-like bosses.
@@ -11,8 +10,6 @@ Please take a look at our wiki to install or learn more about ProjectDoge!
 https://github.com/neraken/ProjectDoge/wiki
 
 
-
-----------------
 ##Install Document
 
 This is a simple installation document which gives you a basic idea who to get the project up and  running on your local machine
@@ -60,8 +57,6 @@ You can find more information about Ruby here: http://rubyonrails.org/
 - Run the app
 	To run the Rails app, go to your browser and open: http://localhost:3000
 
-
--------------
 
 ##Gems used 
 devise, font-awesome, postgres, bootstrap, sass, block.io
