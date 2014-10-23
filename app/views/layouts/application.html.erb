@@ -36,6 +36,12 @@
             <%= link_to pvp_battles_path do %>Battles <span class="badge"><%= PvpBattle.count %></span> <% end %>
             </li><li> <%= link_to wallet_path do %>Wallet<% end %>
             </li>
+			<li>
+            <h2 class="balance"><span class="label label-primary">
+              Balance: <%= @blockio["data"]["available_balance"].to_i %> 
+              </span>
+            </h2>
+            </li>
           </ul>
         
 <% else %>
