@@ -13,6 +13,8 @@ class PvpBattle < ActiveRecord::Base
   
   has_many :battle_logs;
   
+  accepts_nested_attributes_for :user, :other, :pet1, :pet2
+  
   def whose_turn
     if (self.user1_turn)
       return "It is " + user.dogetag + "'s turn."

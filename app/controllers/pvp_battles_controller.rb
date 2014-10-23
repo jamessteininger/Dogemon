@@ -49,9 +49,10 @@ class PvpBattlesController < ApplicationController
   # POST /pvp_battles.json
   def create
     @pvp_battle = PvpBattle.new(pvp_battle_params)
-    Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
     respond_to do |format|
       if @pvp_battle.save
+        Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
+        Pet.find(@pvp_battle.pet2_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
         format.html { redirect_to @pvp_battle, notice: 'Pvp battle was successfully created.' }
         format.json { render :show, status: :created, location: @pvp_battle }
       else

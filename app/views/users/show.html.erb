@@ -1,12 +1,26 @@
 <p id="notice"><%= notice %></p>
 <h1>
-  <%= image_tag @user.imageurl %>
+  <%= image_tag(@user.imageurl, height: 55) %>
   <%= @user.dogetag %>
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
- <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %> 
+ <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><i class="fa fa-arrow-left"></i> Log out<% end %> 
   <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span>
 
-</h1>
+</h1><br>
+<div class="row"><div class="panel panel-default">
+  <div class="panel-heading"><h2><%= link_to "Spirits", pets_path %></h2></div><div class="panel-body">
+  <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= pet.name %></h4><br>
+  <%= link_to image_tag(pet.imageurl, height: "150px"), pet %><br>
+  <%= truncate(pet.description, length: 12) %><p><% if pet.pvp_battle.presence %><h4><%= link_to pet.pvp_battle do %>In battle with <%= pet.pvp_battle.other.dogetag %><% end %><% else %><h3><span class="label label-success">Relaxing<% end %></h3></p>
+        <td><%= link_to 'Show', pet %></td>
+        <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
+        <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </div>
+  </div>
+    <% end %>
+  <% if @user.pets.count == 0 %><center><h4>Looks like you have no spirits in your pack. <%= link_to "Click here to discover a new spirit!", new_pet_path %><% end %>
+</div>
+    </div>
 <div class="row">
   <div class="col-md-6">
 <div class="panel panel-default">
@@ -26,25 +40,6 @@
   </div>
   <div class="col-md-6">
     
-    <div class="panel panel-default">
-<div class="panel-heading">
-<h2><%= link_to "Spirits", pets_path %></h2>
-      </div>
-      
-      <div class="panel-body">
-        <% @user.pets.each do |pet| %>
-<%= link_to image_tag(pet.imageurl, width: "250px"), pet %><br>
-        <td><%= pet.name %></td>
-        <td>Battle: <%= pet.pvp_battle_id %></td>
-        <td><%= pet.description %></td>
-        <td><%= pet.user_id %></td>
-        <td><%= link_to 'Show', pet %></td>
-        <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
-        <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr><br>
-    <% end %>
-      </div>
-    </div>
     
     <div class="panel panel-default">
 <div class="panel-heading">

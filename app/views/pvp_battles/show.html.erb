@@ -5,16 +5,22 @@
     <center><h3><%= @pvp_battle.user.dogetag %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet1 } %>    </center>
 
-        <% @pvp_battle.pet1.equipments.each do |f| %>
+    <% if @pvp_battle.user1_turn && current_user == @pvp_battle.user %>
+      <% @pvp_battle.pet1.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
-        <% end %>
+      <% end %>
+    <% end %>
 
   </div>
   <div class="col-md-6">
     
     <center><h3><%= @pvp_battle.other.dogetag %></h3>
        <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet2 } %>    </center>
-    <br><br>
+    <br><br><% if !@pvp_battle.user1_turn && current_user == @pvp_battle.other %>
+        <% @pvp_battle.pet2.equipments.each do |f| %>
+    <%= render partial: "items/item_battle_view_user2", locals: { item: f.sale, equipment: f } %>
+        <% end %>
+    <% end %>
 <div class="well">
   <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
 Battle Log:
@@ -25,11 +31,6 @@ Battle Log:
   </p>
 <% end %>
 </div>
-      <p>Equipments:<br>
-        <% @pvp_battle.pet2.equipments.each do |f| %>
-        <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
-        <% end %>
-      </p>
   </div>
 </div>
 <br>

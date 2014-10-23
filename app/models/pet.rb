@@ -4,6 +4,8 @@ class Pet < ActiveRecord::Base
   belongs_to :pvp_battle
   has_many :item_insts, through: :equipments
   
+  accepts_nested_attributes_for :pvp_battle
+  
   def take_damage(amount)
     update_attribute(:health, self.health-amount)
   end
