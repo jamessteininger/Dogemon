@@ -47,7 +47,6 @@
                 <i class="fa fa-group fa-2x"></i>
               <% end %>
             </li>
-<<<<<<< HEAD
             <li> 
               <%= link_to wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-money fa-2x"></i>
@@ -60,14 +59,6 @@
             </li>
             
 		
-=======
-			<li>
-				<h2 class="balance"><span class="label label-primary">
-				  Balance: <%= @blockio["data"]["available_balance"].to_i %> 
-				  </span>
-				</h2>
-            </li>
->>>>>>> b6848092397cd3bb53d032ddd8afa70f3c752b64
           </ul>
         
 <% else %>
@@ -95,7 +86,8 @@
     </div>
     </div>
     </div>
-  <div class="container">
+    </div>
+  </div>
 <%= yield %>
 <hr>
     <center>&copy; ProjectDoge, 2014 <br>
