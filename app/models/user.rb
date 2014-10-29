@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :logs
   has_many :pets
   has_many :item_insts
+  has_many :items, foreign_key: 'creator_id'
   #has_one :town
   has_many :market_item_votes, dependent: :destroy
   has_many :upvoted_items, through: :market_item_votes, source: :item

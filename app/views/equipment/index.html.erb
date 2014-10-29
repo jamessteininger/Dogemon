@@ -13,7 +13,7 @@
     <% @equipment.each do |equipment| %>
       <tr>
         <td><%= equipment.pet_id %></td>
-        <td><%= equipment.item_inst_id %></td>
+        <td><%= equipment.sale_id %></td>
         <td><%= link_to 'Show', equipment %></td>
         <td><%= link_to 'Edit', edit_equipment_path(equipment) %></td>
         <td><%= link_to 'Destroy', equipment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

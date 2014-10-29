@@ -4,4 +4,5 @@ class BattleLog < ActiveRecord::Base
   validates :pvp_battle_id, presence: true
   belongs_to :battle
   belongs_to :pvp_battle
+  belongs_to :user
 end

@@ -31,10 +31,10 @@ class ItemsController < ApplicationController
 
     if @item.market_item_votes.create(user_id: current_user.id)
       flash[:notice] =  "Thank you for upvoting!"
-      redirect_to(items_path)
+      redirect_to(items_grid_path)
     else 
       flash[:notice] =  "You have already upvoted this!"
-      redirect_to(items_path)
+      redirect_to(items_grid_path)
     end
   end
 
@@ -73,7 +73,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to items_grid_path, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

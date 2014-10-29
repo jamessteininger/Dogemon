@@ -21,28 +21,65 @@
           </button>
           <%= link_to root_path, class: "navbar-brand" do %>
             <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
-          <div class="img-"><%= image_tag("projectdoge.png", style: "margin: 0", :class => "img-") %></div>
+          <div class="img-">ProjectDoge</div>
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <li> <%= link_to "Profile", current_user %>
+            <li> 
+              <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Profile", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-user fa-2x"></i>
+              <% end %>
             </li>
-            <li>
-              <%= link_to "Market", items_grid_path %></li>
-            <li>
-              <%= link_to "Friends", users_path %></li><li>
-            <%= link_to pvp_battles_path do %>Battles <span class="badge"><%= PvpBattle.count %></span> <% end %>
-            </li><li> <%= link_to wallet_path do %>Wallet<% end %>
+            <li> 
+              <%= link_to items_grid_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Market", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-tag fa-2x"></i>
+              <% end %>
             </li>
+            <li> 
+              <%= link_to pvp_battles_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Battles", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-bomb fa-2x"></i> <span class="badge"><%= PvpBattle.count %></span>
+              <% end %>
+            </li>
+            <li> 
+              <%= link_to users_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Friends", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-group fa-2x"></i>
+              <% end %>
+            </li>
+            <li> 
+              <%= link_to wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-money fa-2x"></i>
+              <% end %>
+            </li>
+            <li> 
+              <%= link_to how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
+                <i class="fa fa-question fa-2x"></i>
+              <% end %>
+            </li>
+            
+		
           </ul>
         
 <% else %>
-    <ul class="nav navbar-nav">
-    <li>
-      <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %></li><li><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default" %>
-      </li>
+          <ul class="nav navbar-nav">
+          <li>
+            <%= link_to "How to Play", how_to_play_path %>
+            </li>
+            <li>
+              <%= link_to "About", about_path %>
+            </li>
+            
+            <li>
+              
+            </li>
+          
+          </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <form class="navbar-form form-right">
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      </form>
+     <form class
     </ul>
    <% end %>
    </div>

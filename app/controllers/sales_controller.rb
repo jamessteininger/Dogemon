@@ -35,6 +35,8 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       if @sale.save
+        @item.update_attribute(:downloads, @item.downloads += 1)
+        @user.update_attribute(:coin, @user.coin -= @item.worth)
         format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }
       else

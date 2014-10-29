@@ -55,9 +55,10 @@ class EquipmentController < ApplicationController
   # DELETE /equipment/1
   # DELETE /equipment/1.json
   def destroy
+    @pet = Pet.find(@equipment.pet_id)
     @equipment.destroy
     respond_to do |format|
-      format.html { redirect_to equipment_index_url, notice: 'Equipment was successfully destroyed.' }
+      format.html { redirect_to @pet, notice: 'Equipment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +71,6 @@ class EquipmentController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
-      params.require(:equipment).permit(:pet_id, :item_inst_id)
+      params.require(:equipment).permit(:sale_id, :pet_id, :item_inst_id)
     end
 end

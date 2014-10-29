@@ -15,12 +15,20 @@ class PvpBattle < ActiveRecord::Base
   
   accepts_nested_attributes_for :user, :other, :pet1, :pet2
   
-  def whose_turn
+  def whose_turn(current_user_id)
     if (self.user1_turn)
-      return "It is " + user.dogetag + "'s turn."
+      if (self.user.id == current_user_id)
+        return "It is your turn."
+      else
+        return "It is " + user.dogetag + "'s turn."
+      end
     end
     if (!self.user1_turn)
-      return "It is " + other.dogetag + "'s turn."
+      if (self.other.id == current_user_id)
+        return "It is your turn."
+      else
+        return "It is " + other.dogetag + "'s turn."
+      end
     end
   end
   

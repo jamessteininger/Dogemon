@@ -6,8 +6,16 @@ Balance: <%= @blockio["data"]["available_balance"].to_i %>
   </h2>
 
 <h2>
-Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio["data"]["address"] %> ';">
+My Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio["data"]["address"] %> ';">
 
+</h2>
+<hr>
+<h2>
+  Send: <input type="text" size="20" > <br><br>
+  To:
+  <input type="text" size="40" >
+  <br><br>
+  <%= link_to "Send", wallet_path, class: 'btn btn-success btn-lg' %>
 </h2>
 
 <hr>

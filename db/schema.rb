@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022033313) do
+ActiveRecord::Schema.define(version: 20141029001942) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20141022033313) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pvp_battle_id"
+    t.integer  "user_id"
   end
 
   create_table "battle_moves", force: true do |t|
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20141022033313) do
     t.integer  "item_inst_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sale_id"
   end
 
   create_table "item_insts", force: true do |t|
@@ -133,6 +135,7 @@ ActiveRecord::Schema.define(version: 20141022033313) do
     t.integer  "health"
     t.integer  "magic"
     t.integer  "pvp_battle_id"
+    t.string   "element"
   end
 
   create_table "pvp_battles", force: true do |t|
@@ -152,6 +155,7 @@ ActiveRecord::Schema.define(version: 20141022033313) do
     t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "equipment_id"
   end
 
   create_table "towns", force: true do |t|

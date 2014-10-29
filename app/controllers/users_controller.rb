@@ -8,6 +8,12 @@ class UsersController < ApplicationController
     redirect_to @user, notice: 'Got coin.'
   end
   
+  def sell_all
+    @user = User.find(params[:user_id])
+    @user.sales.destroy_all
+    redirect_to @user
+  end
+  
   def set_town
    # town = params[:town_id]
     @user = User.find(params[:user_id])

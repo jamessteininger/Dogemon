@@ -15,6 +15,10 @@
         <br>
       </p>
       <p>
+  <strong>Element:</strong>
+        <%= element_icon(@pet.element) %>
+</p>
+      <p>
   <strong>Description:</strong>
   <%= @pet.description %>
 </p>
@@ -30,7 +34,7 @@
 </div>
 <%= form_for [@pet, Equipment.new]  do |f| %>
 <%= f.hidden_field :pet_id, value: @pet.id %>
-<%= f.collection_select :item_inst_id, @sales, :id, :name %>
+<%= f.collection_select :sale_id, @sales, :id, :name, {prompt: "Select an item"}, {class: "form-control"} %>
  
 <%= f.submit "Equip", class: 'btn btn-sm btn-primary' %>
 <% end %>

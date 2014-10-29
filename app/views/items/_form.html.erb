@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+<%= f.hidden_field :creator_id, value: current_user.id %>
+<% if @item.downloads == nil %>
+<%= f.hidden_field :downloads, value: 0 %>
+<% end %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -21,15 +24,15 @@
   </div>
 <div class="field">
     <%= f.label :element %><br>
-  <%= f.select :element, ["Sol", "Luna", "Terra"] %>
+  <%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select a element"}, {class: "input-large form-control"} %>
   </div>
 <div class="field">
     <%= f.label :attack %><br>
-    <%= f.select :attack, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]  %>
+    <%= f.select :attack, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], {prompt: "Select a attack"}, {class: "input-large form-control"}  %>
   </div>
 <div class="field">
     <%= f.label :magic %><br>
-    <%= f.select :magic, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]  %>
+    <%= f.select :magic, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], {prompt: "Select a magic"}, {class: "input-large form-control"}  %>
   </div>
   <div class="field">
     <%= f.label :worth %><br>

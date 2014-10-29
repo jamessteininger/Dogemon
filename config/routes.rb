@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   
   root 'static_pages#home'
   
+  
   get 'home', to: 'static_pages#home'
   
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
   get 'how_to_play', to: 'static_pages#how_to_play'
+  get 'top_sellers', to: 'static_pages#top_sellers'
   
   resources :equipment
 
@@ -49,6 +51,9 @@ Rails.application.routes.draw do
   resources :sales
   
   get 'items/grid'
+  get 'items/most_downloaded'
+  get 'items/most_likes'
+  get 'items/favorited'
   resources :items do
     get 'upvote'
     member do
@@ -78,6 +83,7 @@ Rails.application.routes.draw do
   end
 resources :users do
   get 'add_coin'
+  get 'sell_all'
   post 'set_town'
   get 'set_town'
   resources :item_insts

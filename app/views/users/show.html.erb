@@ -4,7 +4,8 @@
   <%= @user.dogetag %>
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
  <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><i class="fa fa-arrow-left"></i> Log out<% end %> 
-  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span>
+  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
+  <span class="label label-success">Fauxcoin: <%= @user.coin %></span>
 
 </h1><br>
 <div class="row"><div class="panel panel-default">
@@ -21,12 +22,15 @@
   <% if @user.pets.count == 0 %><center><h4>Looks like you have no spirits in your pack. <%= link_to "Click here to discover a new spirit!", new_pet_path %><% end %>
 </div>
     </div>
+  
+  
 <div class="row">
   <div class="col-md-6">
 <div class="panel panel-default">
 <div class="panel-heading">
-  <h2><i class="fa fa-magic"></i> Magic Scrolls</h2>
-</div class="panel-body">
+  <h2><i class="fa fa-magic"></i> Magic Scrolls</h2><%= link_to 'sell all', user_sell_all_path(@user) %>
+  </div>
+<div class="panel-body">
 <% @sales.each do |f| %>
   <% if Item.exists?(id: f.item_id) %>
     <p>
@@ -37,6 +41,21 @@
   <% end %>
 <% end %>
 </div>
+  </div>
+    
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+  <h2><i class="fa fa-magic"></i> Creator of these magic scrolls</h2>
+  </div>
+<div class="panel-body">
+  <% @user.items.each do |f| %>
+  <p>
+    Creator of <%= f.name %>
+  </p>
+  <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-md-6">
     

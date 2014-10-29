@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-3">
   <div class="well">
     <%= item_element_button(Item.find(item.item_id).element, Item.find(item.item_id).name, Item.find(item.item_id)) %><br>
     <center><%= link_to image_tag(Item.find(item.item_id).imageurl, height: "150px"), item %><br><br></center>
@@ -8,7 +8,7 @@
     
     <% amount = item.attack %>
     <% magic_amount = item.magic %>
-    <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , class: "form form-inline  form-horizontal pull-right", url: {controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount, magic_amount: magic_amount, attacker: 2, defender: 2 } do |f| %> 
+    <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , class: "form form-inline  form-horizontal pull-right", url: {bMessage: true, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount, magic_amount: magic_amount, attacker: 2, defender: 2 } do |f| %> 
     <%= f.hidden_field :pvp_battle_id %>
     <%= f.hidden_field :description, value: equipment.pet.name + " attacks with " + item.name + " for " + amount.to_s + " damage, using " + item.magic.to_s + " magic." %>
     <%= f.submit "Use", class: "btn btn-block btn-default" %>

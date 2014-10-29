@@ -22,9 +22,11 @@
     <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
    ATK: <%= item.attack %> | MGK: <%= item.magic %></h4>
-    <%= link_to item, class: 'btn btn- btn-warning' do %>
+    <%= link_to item, class: 'tag-tooltip btn btn- btn-warning', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
     <i class='fa fa-tag'></i> <%= item.worth %> 
-    <% end %> <%= link_to item_upvote_path(item, id: item.id), class: "btn btn-default" do %><i class="fa fa-heart-o"></i> <%= item.market_item_votes.count %><% end %> 
+    <% end %><span> </span><%= link_to item, class: 'tag-tooltip btn btn- btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Downloads", 'data-placement' => 'bottom' do %>
+    <i class='fa fa-download'></i> <%= item.downloads %> 
+    <% end %><span> </span><%= link_to item_upvote_path(item, id: item.id), class: "tag-tooltip btn btn-default", data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Favorites", 'data-placement' => 'bottom' do %><i class="fa fa-heart-o"></i> <%= item.market_item_votes.count %><% end %> 
   </div>
 </div>
 <% end %>

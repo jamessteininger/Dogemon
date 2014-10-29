@@ -20,6 +20,10 @@
     <%= f.text_field :name %>
   </div>
 <div class="field">
+    <%= f.label :element %><br>
+  <%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select a element"}, {class: "input-large form-control"} %>
+  </div>
+<div class="field">
   <%= f.label :health %><br>
     <%= f.text_field :health %>
   </div>

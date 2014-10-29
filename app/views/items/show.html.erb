@@ -8,11 +8,16 @@
 <p>
   <strong>Description:</strong>
   <%= @item.description %>
-</p>
-
+</p><% if @item.creator.presence %>
+Made by: <%= @item.creator.dogetag %>
+<% end %>
 <p>
   <strong>Worth:</strong>
   <%= @item.worth %>
+</p>
+<p>
+  <strong>Downloads:</strong>
+  <%= @item.downloads %>
 </p>
 
 <p>

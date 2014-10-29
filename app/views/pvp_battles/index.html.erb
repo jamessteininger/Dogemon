@@ -1,5 +1,11 @@
-<h1>Listing pvp_battles</h1>
-
+<h1>Battles</h1>
+<hr>
+<% @pvp_battles.each do |f| %>
+<p>
+  <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
+  <%= f.whose_turn(current_user.id) %>
+</p>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -33,5 +39,13 @@
 </table>
 
 <br>
+<div class="col-md-4">
+  <%= link_to 'Start a new random battle', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
+<br>
+</div>
+<div class="col-md-4">
+  <%= link_to 'Battle against a friend', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
+  <br>
+</div>
+</div>
 
-<%= link_to 'New Pvp battle', new_pvp_battle_path %>

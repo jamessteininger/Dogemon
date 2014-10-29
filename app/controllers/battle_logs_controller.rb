@@ -24,22 +24,27 @@ class BattleLogsController < ApplicationController
   # POST /battle_logs
   # POST /battle_logs.json
   def create
-    amount = params[:amount]
-    magic_amount = params[:magic_amount]
-    attacker = params[:attacker]
-    defender = params[:defender]
+    bMessage = params[:bMessage]
     @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
-    @pvp_battle.update_attribute(:user1_turn, !@pvp_battle.user1_turn)
-    #@user = User.find(@battle.user_id)
-   # @aenemy = @battle.aenemies.first
-    @pet1 = Pet.find(@pvp_battle.pet1_id)
-    @pet2 = Pet.find(@pvp_battle.pet2_id)
-    if (attacker.to_i < 2)
-      @pet2.take_damage(Integer(amount))
-      @pet1.use_magic(Integer(magic_amount))
-    elsif (attacker.to_i > 1)
-      @pet1.take_damage(Integer(amount))
-      @pet2.use_magic(Integer(magic_amount))
+    if (!bMessage)
+      amount = params[:amount]
+      magic_amount = params[:magic_amount]
+      attacker = params[:attacker]
+      defender = params[:defender]
+      @pvp_battle.update_attribute(:user1_turn, !@pvp_battle.user1_turn)
+      #@user = User.find(@battle.user_id)
+     # @aenemy = @battle.aenemies.first
+      @pet1 = Pet.find(@pvp_battle.pet1_id)
+      @pet2 = Pet.find(@pvp_battle.pet2_id)
+      if (attacker.to_i < 2)
+        @pet2.take_damage(Integer(amount))
+        @pet1.use_magic(Integer(magic_amount))
+      elsif (attacker.to_i > 1)
+        @pet1.take_damage(Integer(amount))
+        @pet2.use_magic(Integer(magic_amount))
+      end
+    else
+      
     end
     #@pvp_battle.apply_regen(10)
     #@battle = Battle.find(params[:battle_id])
@@ -47,6 +52,7 @@ class BattleLogsController < ApplicationController
 
     respond_to do |format|
       if @battle_log.save
+        @battle_log.update_attribute(:user_id, params[:user_id])
         format.html { redirect_to @pvp_battle, notice: 'Battle log was successfully created.' }
         format.json { render :show, status: :created, location: @battle_log }
       else

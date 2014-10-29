@@ -11,31 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :dogetag %>
-  </div>
+<%= f.hidden_field :user_id, value: current_user.id %>
+
 
   <div class="field">
-    <%= f.label :other_id %><br>
-    <%= f.collection_select :other_id, User.all, :id, :dogetag %>
+    Choose a foe
+    <%= f.collection_select :other_id, User.where.not(id: current_user.id), :id, :dogetag, {prompt: "Select a foe"}, {class: "input-large form-control"} %>
   </div>
 
   <div class="field">
-    <%= f.label :pet1_id %><br>
-    <%= f.collection_select :pet1_id, Pet.all, :id, :name %>
+    Choose a spirit to battle with
+    <%= f.collection_select :pet1_id, current_user.pets.all, :id, :name, {prompt: "Select an spirit"}, {class: "input-large form-control"} %>
   </div>
 
-<div class="field">
-    <%= f.label :pet2_id %><br>
-    <%= f.collection_select :pet2_id, Pet.all, :id, :name %>
-  </div>
 
-    <%= f.hidden_field :battle_state, value: "in_progress" %>
+    <%= f.hidden_field :battle_state, value: "setting_up_the_battle" %>
 
     <%= f.hidden_field :user1_turn, value: true %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions"><br>
+    <%= f.submit class: 'btn btn-lg btn-primary'  %>
   </div>
 <% end %>
