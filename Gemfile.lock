@@ -179,7 +179,7 @@ DEPENDENCIES
   bootstrap-slider-rails
   bootswatch-rails
   coffee-rails (~> 4.0.0)
-  devise (~> 3.2)
+  devise
   dogecoin_client
   faye-rails
   font-awesome-rails

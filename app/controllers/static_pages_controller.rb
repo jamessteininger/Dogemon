@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
    # if user_signed_in?
  #   @user = current_user
   #  @blockio = BlockIo.get_user_balance user_id: @user.id
-    end
+   # end
   end
   
   def spirits
