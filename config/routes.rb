@@ -1,4 +1,26 @@
 Rails.application.routes.draw do
+  
+  as :user do
+    get '/register', to: 'devise/registrations#new', as: :register
+    get '/login', to: 'devise/sessions#new', as: :login
+    get '/logout', to: 'devise/sessions#destroy', as: :logout
+  end
+
+  devise_for :users, skip: [:sessions]
+
+  as :user do
+    get "/login" => 'devise/sessions#new', as: :new_user_session
+    post "/login" => 'devise/sessions#create', as: :user_session
+    delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
+  end
+
+  devise_for :users, skip: [:sessions] do
+    get 'set_town'
+    members do
+      get 'set_town'
+      patch :edit, 'set_town'
+    end
+  end
   resources :pvp_battles do
     get 'apply_regen'
     get 'restore_health'
@@ -51,39 +73,18 @@ Rails.application.routes.draw do
   resources :sales
   
   get 'items/grid'
-  get 'items/most_downloaded'
-  get 'items/most_likes'
-  get 'items/favorited'
+ # get 'items/most_downloaded'
+  #get 'items/most_favorites'
   resources :items do
     get 'upvote'
     member do
       post 'upvote'
     end
   end
-  as :user do
-    get '/register', to: 'devise/registrations#new', as: :register
-    get '/login', to: 'devise/sessions#new', as: :login
-    get '/logout', to: 'devise/sessions#destroy', as: :logout
-  end
-
-  devise_for :users, skip: [:sessions]
-
-  as :user do
-    get "/login" => 'devise/sessions#new', as: :new_user_session
-    post "/login" => 'devise/sessions#create', as: :user_session
-    delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
-  end
-
-  devise_for :users, skip: [:sessions] do
-    get 'set_town'
-    members do
-      get 'set_town'
-      patch :edit, 'set_town'
-    end
-  end
+  
 resources :users do
   get 'add_coin'
-  get 'sell_all'
+#  get 'sell_all'
   post 'set_town'
   get 'set_town'
   resources :item_insts

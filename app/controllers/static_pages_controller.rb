@@ -18,9 +18,9 @@ class StaticPagesController < ApplicationController
   end
   
   def home
-    if user_signed_in?
-    @user = current_user
-    @blockio = BlockIo.get_user_balance user_id: @user.id
+   # if user_signed_in?
+ #   @user = current_user
+  #  @blockio = BlockIo.get_user_balance user_id: @user.id
     end
   end
   
