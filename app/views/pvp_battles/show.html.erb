@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
-
+<% if @pvp_battle.battle_state == "in_progress" %>
 <center><%= @pvp_battle.whose_turn(current_user.id) %> | Current Regen: 10  | <%= link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> | <%= link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
   <div class="well">
     <div class="row">
@@ -34,6 +34,7 @@
 </div>
   <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
 <center><h3>Battle Log</h3></center>
+<% if current_user == @pvp_battle.user or current_user == @pvp_battle.other %>
   <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , url: {user_id: current_user.id, bMessage: true, controller: :battle_logs, pvp_battle_id: @pvp_battle.id } do |f| %> 
     <%= f.hidden_field :pvp_battle_id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
@@ -45,6 +46,7 @@
     <%= f.created_at.strftime("%I:%M %p") %> |<%= f.user_id %>
     <strong><%= f.description %></strong>
   </p>
+<% end %>
 <% end %>
 <br>
 
@@ -58,9 +60,19 @@
   <%= @pvp_battle.user1_turn %>
 </p>
 
-<%= link_to 'Edit', edit_pvp_battle_path(@pvp_battle) %> |
-<%= link_to 'Back', pvp_battles_path %>
 <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
 <script>
  new WOW().init();
 </script>
+
+<% else %>
+
+<!-- logic for other using picking their pet or whatever -->
+Request for battle from <%= @pvp_battle.user.dogetag %> against <%= @pvp_battle.other.dogetag %>
+<br>
+<%= @pvp_battle.user.dogetag %> has chosen <%= @pvp_battle.pet1.name %> to fight with<br>
+
+<%= @pvp_battle.battle_state %>
+
+
+<% end %>

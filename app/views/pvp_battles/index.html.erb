@@ -1,9 +1,13 @@
-<h1>Battles</h1>
+<h1>Battles (<%= PvpBattle.count %> total battles occuring in DogeLand )</h1>
 <hr>
-<% @pvp_battles.each do |f| %>
+<% current_user.pvp_battles.each do |f| %>
 <p>
+  <% if !f.other.presence or !f.pet2.presence %>
+  <%= link_to "Pending", f %>
+  <% else %>
   <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
   <%= f.whose_turn(current_user.id) %>
+  <% end %>
 </p>
 <% end %>
 <table class="table">
@@ -21,7 +25,7 @@
   </thead>
 
   <tbody>
-    <% @pvp_battles.each do |pvp_battle| %>
+    <% current_user.pvp_battles.each do |pvp_battle| %>
       <tr>
         <td><%= pvp_battle.user.dogetag %></td>
         <td><%= pvp_battle.other.dogetag %></td>
@@ -38,6 +42,9 @@
   </tbody>
 </table>
 
+<% if current_user.pets.count == 0 %>
+<center><h4>Looks like you have no spirits in your pack. <br>You can start battling once you have a spirit pet! <br><%= link_to "Click here to discover a new spirit!", new_pet_path %>
+  <% else %>
 <br>
 <div class="col-md-4">
   <%= link_to 'Start a new random battle', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
@@ -47,5 +54,6 @@
   <%= link_to 'Battle against a friend', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
   <br>
 </div>
+  <% end %>
 </div>
 

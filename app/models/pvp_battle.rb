@@ -1,11 +1,11 @@
 class PvpBattle < ActiveRecord::Base
   validates :user_id, presence: true
-  validates :other_id, presence: true
+ # validates :other_id, presence: true
   
   validates :pet1_id, presence: true
-  validates :pet2_id, presence: true
+ # validates :pet2_id, presence: true
   
-  belongs_to :user;
+  belongs_to :user, class_name: 'User';
   belongs_to :other, class_name: 'User'
   
   belongs_to :pet1, class_name: 'Pet';

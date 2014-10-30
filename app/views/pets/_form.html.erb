@@ -10,7 +10,11 @@
       </ul>
     </div>
   <% end %>
-
+<div class="field">
+  <%= f.label :template_pet_id %>
+  <%= f.select :element, ["Transistor", "Doge", "Cat"], {prompt: "Select a spirit"}, {class: "input-large form-control"} %>
+<div id="custom_pet_field">
+<p id="custom_pet_field">
   <div class="field">
     <%= f.label :imageurl %><br>
     <%= f.text_field :imageurl %>
@@ -20,17 +24,17 @@
     <%= f.text_field :name %>
   </div>
 <div class="field">
-    <%= f.label :element %><br>
-  <%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select a element"}, {class: "input-large form-control"} %>
+  
+  <%= f.radio_button :element, 'Sol', checked: true %>
+  <%= f.label :element_sol %>
+  <%= f.radio_button :element, 'Luna' %>
+  <%= f.label :element_luna %>
   </div>
-<div class="field">
-  <%= f.label :health %><br>
-    <%= f.text_field :health %>
-  </div>
-<div class="field">
-    <%= f.label :magic %><br>
-    <%= f.text_field :magic %>
-  </div>
+
+  <%= f.hidden_field :health, value: 100 %>
+
+  <%= f.hidden_field :magic, value: 100, id: 'magic' %>
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
@@ -38,7 +42,77 @@
   <div class="field">
     <%= f.hidden_field :user_id %>
   </div>
+
+</p>
+<p id="template1_pet">
+</p>
+</div>
+<div id="template_pet1_field">
+  <h3>Transistor</h3>
+  <p class="lead"><i>"He is smoking hot!"</i></p>
+  <%= f.hidden_field :name, value: "Transistor" %>
+  <%= f.hidden_field :description, value: "He is smoking hot!" %>
+  <%= f.hidden_field :element, value: "Sol" %>
+  <%= f.hidden_field :imageurl, value: "http://s3files.core77.com/blog/images/gg_highlight_powerhog.jpg" %>
+  <%= f.hidden_field :health, value: 100 %>
+  <%= f.hidden_field :magic, value: 100 %>
+  <%= f.hidden_field :user_id %>
+</div>
+<div id="template_pet2_field">
+  <h3>Doge</h3>
+  <p class="lead"><i>"To the moon!"</i></p>
+  <%= f.hidden_field :name, value: "Transistor" %>
+  <%= f.hidden_field :description, value: "He is smoking hot!" %>
+  <%= f.hidden_field :element, value: "Sol" %>
+  <%= f.hidden_field :imageurl, value: "http://s3files.core77.com/blog/images/gg_highlight_powerhog.jpg" %>
+  <%= f.hidden_field :health, value: 100 %>
+  <%= f.hidden_field :magic, value: 100 %>
+  <%= f.hidden_field :user_id %>
+</div>
+<div id="template_pet3_field">
+  <h3>Intense Cat</h3>
+  <p class="lead"><i>"Pressure intensifies!"</i></p>
+  <%= f.hidden_field :name, value: "Transistor" %>
+  <%= f.hidden_field :description, value: "He is smoking hot!" %>
+  <%= f.hidden_field :element, value: "Sol" %>
+  <%= f.hidden_field :imageurl, value: "http://s3files.core77.com/blog/images/gg_highlight_powerhog.jpg" %>
+  <%= f.hidden_field :health, value: 100 %>
+  <%= f.hidden_field :magic, value: 100 %>
+  <%= f.hidden_field :user_id %>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+  $('select').change(alert_me_test);
+
+  function alert_me_test(){
+    var template_pet_choice = $(this).val(); 
+    if (template_pet_choice == 0) {
+      $('#custom_pet_field').show();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').hide();
+    }  
+    if (template_pet_choice == "Transistor") {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').show();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').hide();
+    }  
+    if (template_pet_choice == "Doge") {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').show();
+      $('#template_pet3_field').hide();
+    } 
+    if (template_pet_choice == "Cat")  {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').show();
+    }
+  }
+
+</script>

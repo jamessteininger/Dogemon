@@ -51,7 +51,7 @@
 <div class="panel-body">
   <% @user.items.each do |f| %>
   <p>
-    Creator of <%= f.name %>
+    Creator of <%= link_to f.name, f %>
   </p>
   <% end %>
       </div>

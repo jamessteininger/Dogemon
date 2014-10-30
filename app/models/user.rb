@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   
   has_many :sales, dependent: :destroy
   has_many :logs
+  has_many :pvp_battles, class_name: 'PvpBattle', foreign_key: 'user_id'
+  has_many :pvp_battles_p2, class_name: 'PvpBattle', foreign_key: 'other_id'
   has_many :pets
   has_many :item_insts
   has_many :items, foreign_key: 'creator_id'

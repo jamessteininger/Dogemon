@@ -6,6 +6,12 @@ class Pet < ActiveRecord::Base
   
   accepts_nested_attributes_for :pvp_battle
   
+  validates :health, presence: true
+  validates :magic, presence: true
+  validates :name, presence: true
+  validates :imageurl, presence: true
+  validates :description, presence: true
+  
   def take_damage(amount)
     update_attribute(:health, self.health-amount)
   end

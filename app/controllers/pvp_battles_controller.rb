@@ -52,7 +52,8 @@ class PvpBattlesController < ApplicationController
     respond_to do |format|
       if @pvp_battle.save
         Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
-        Pet.find(@pvp_battle.pet2_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
+       # Pet.find(@pvp_battle.pet2_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
+        User.find(@pvp_battle.other_id).pvp_battles.new
         format.html { redirect_to @pvp_battle, notice: 'Pvp battle was successfully created.' }
         format.json { render :show, status: :created, location: @pvp_battle }
       else
