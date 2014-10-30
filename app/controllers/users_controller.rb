@@ -8,6 +8,13 @@ class UsersController < ApplicationController
     redirect_to @user, notice: 'Got coin.'
   end
   
+  def make_wallet
+    @user = User.find(params[:user_id])
+    wallet_id = BlockIo.get_new_address :label => 'LABEL'
+    @user.update_attribute(:block_io_wallet_id, wallet_id["data"]["user_id"].to_i)
+    redirect_to wallet_path
+  end
+  
  # def sell_all
    # @user = User.find(params[:user_id])
   ##  @user.sales.destroy_all

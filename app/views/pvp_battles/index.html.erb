@@ -39,14 +39,14 @@
 <% current_user.pvp_battles.each do |f| %>
 <p>
   <% if f.battle_state == 'completed' %>
-  <%= link_to "Completed", f %>
+  <%= link_to "Completed", f %> (The winner was <%= User.find(f.winner_id).dogetag %>)
   <% end %>
 </p>
 <% end %>
 <% current_user.pvp_battles_p2.each do |f| %>
 <p>
   <% if f.battle_state == 'completed' %>
-  <%= link_to "Completed", f %>
+  <%= link_to "Completed", f %> (The winner was <%= User.find(f.winner_id).dogetag %>)
   <% end %>
 </p>
 <% end %>

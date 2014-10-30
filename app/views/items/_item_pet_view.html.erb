@@ -2,7 +2,7 @@
   <div class="well">
     <% if item.presence %>
     <%= item_element_button(Item.find(item.item_id).element, Item.find(item.item_id).name, Item.find(item.item_id)) %><br>
-    <center><%= link_to image_tag(Item.find(item.item_id).imageurl, height: "150px"), item %><br><br></center>
+    <center><%= image_tag(Item.find(item.item_id).imageurl, height: "150px") %><br><br></center>
     <p class=""><i>"<%= truncate(Item.find(item.item_id).description, length: 23) %>"</i></p><h4>
 
    ATK: <%= Item.find(item.item_id).attack %> | MGK: <%= Item.find(item.item_id).magic %></h4>

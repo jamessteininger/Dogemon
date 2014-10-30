@@ -80,6 +80,7 @@ Rails.application.routes.draw do
 resources :users do
   get 'sell_all'
   get 'add_coin'
+  get 'make_wallet'
   post 'set_town'
   get 'set_town'
   resources :pvp_battles

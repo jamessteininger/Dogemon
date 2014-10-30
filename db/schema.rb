@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030102509) do
+ActiveRecord::Schema.define(version: 20141030121138) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20141030102509) do
     t.integer  "magic"
     t.integer  "attack"
     t.float    "coin_made"
+    t.integer  "block_io_wallet_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

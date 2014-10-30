@@ -1,5 +1,9 @@
 <h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
 <hr>
+<%= @user.block_io_wallet_id %>
+<% if !@user.block_io_wallet_id.presence %>
+<%= link_to "Init wallet", user_make_wallet_path(@user) %>
+<% end %>
 <h2><span class="label label-primary">
 Balance: <%= @blockio["data"]["available_balance"].to_i %> 
   </span>
