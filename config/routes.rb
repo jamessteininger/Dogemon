@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     end
   end
 resources :users do
+  get 'sell_all'
   get 'add_coin'
   post 'set_town'
   get 'set_town'
