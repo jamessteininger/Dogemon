@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
   def set_town(town)
     update_attribute(:town_id, town)
   end 
+  
+  def num_active_turns
+    return self.pvp_battles.where("battle_state = 'in_progress' or user1_turn = 'true'").count + self.pvp_battles_p2.where("battle_state = 'in_progress'").count
+  end
 end

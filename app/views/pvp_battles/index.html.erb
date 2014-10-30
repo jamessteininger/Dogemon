@@ -1,59 +1,61 @@
 <h1>Battles (<%= PvpBattle.count %> total battles occuring in DogeLand )</h1>
-<hr>
+<hr><div class="">
+  <%= link_to 'Start a new battle', new_pvp_battle_path, class: 'btn btn- btn-primary' %>
+<br>
+</div>
+<h3>On Going Battles</h3>
 <% current_user.pvp_battles.each do |f| %>
 <p>
-  <% if !f.other.presence or !f.pet2.presence %>
-  <%= link_to "Pending", f %>
-  <% else %>
+  <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
   <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
   <%= f.whose_turn(current_user.id) %>
   <% end %>
 </p>
 <% end %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>User 1</th>
-      <th>User 2</th>
-      <th>Pet 1</th>
-      <th>Pet 2</th>
-      <th>Winner</th>
-      <th>Battle state</th>
-      <th>Current Turn</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% current_user.pvp_battles.each do |pvp_battle| %>
-      <tr>
-        <td><%= pvp_battle.user.dogetag %></td>
-        <td><%= pvp_battle.other.dogetag %></td>
-        <td><%= pvp_battle.pet1_id %></td>
-        <td><%= pvp_battle.pet2_id %></td>
-        <td><%= pvp_battle.winner_id %></td>
-        <td><%= pvp_battle.battle_state %></td>
-        <td><%= pvp_battle.user1_turn %></td>
-        <td><%= link_to 'Show', pvp_battle %></td>
-        <td><%= link_to 'Edit', edit_pvp_battle_path(pvp_battle) %></td>
-        <td><%= link_to 'Destroy', pvp_battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% current_user.pvp_battles_p2.each do |f| %>
+<p>
+  <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
+  <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
+  <%= f.whose_turn(current_user.id) %>
+  <% end %>
+</p>
+<% end %>
+<h3>Pending Battle Requests</h3>
+<% current_user.pvp_battles.each do |f| %>
+<p>
+  <% if !f.other.presence or !f.pet2.presence %>
+  <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %>
+  <% end %>
+</p>
+<% end %>
+<% current_user.pvp_battles_p2.each do |f| %>
+<p>
+  <% if !f.other.presence or !f.pet2.presence %>
+  <%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %>
+  <% end %>
+</p>
+<% end %>
+<h3>Completed Battles</h3>
+<% current_user.pvp_battles.each do |f| %>
+<p>
+  <% if f.battle_state == 'completed' %>
+  <%= link_to "Completed", f %>
+  <% end %>
+</p>
+<% end %>
+<% current_user.pvp_battles_p2.each do |f| %>
+<p>
+  <% if f.battle_state == 'completed' %>
+  <%= link_to "Completed", f %>
+  <% end %>
+</p>
+<% end %>
 
 <% if current_user.pets.count == 0 %>
 <center><h4>Looks like you have no spirits in your pack. <br>You can start battling once you have a spirit pet! <br><%= link_to "Click here to discover a new spirit!", new_pet_path %>
   <% else %>
 <br>
-<div class="col-md-4">
-  <%= link_to 'Start a new random battle', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
-<br>
-</div>
-<div class="col-md-4">
-  <%= link_to 'Battle against a friend', new_pvp_battle_path, class: 'btn btn-block btn-primary' %>
-  <br>
-</div>
+
   <% end %>
 </div>
 

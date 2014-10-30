@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
-<% if @pvp_battle.battle_state == "in_progress" %>
-<center><%= @pvp_battle.whose_turn(current_user.id) %> | Current Regen: 10  | <%= link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> | <%= link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
+<% if @pvp_battle.battle_state == "in_progress" or @pvp_battle.battle_state == "completed" %>
+<center>Current Regen: 10  | <%= link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> | <%= link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
   <div class="well">
     <div class="row">
   <div class="col-md-6">
-    <center><h3><%= @pvp_battle.user.dogetag %></h3>
+    <center><h3><%= @pvp_battle.user.dogetag %><% if current_user.id == @pvp_battle.user_id %> (you) <% end %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet1 } %>    </center>
 
    
@@ -13,52 +13,55 @@
   </div>
   <div class="col-md-6">
     
-    <center><h3><%= @pvp_battle.other.dogetag %></h3>
+    <center><h3><%= @pvp_battle.other.dogetag %><% if current_user.id == @pvp_battle.other_id %> (you) <% end %></h3>
        <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet2 } %>    </center>
    
     </div>
   </div>
 </div>
-
+<% if @pvp_battle.battle_state == "completed" %>
+<div class="well col-md-6 col-md-offset-3"><h3><center>The winner is <%= User.find(@pvp_battle.winner_id).dogetag %>!</center></h3></div>
+</div>
+<% end %>
+<% if @pvp_battle.battle_state != "completed" %>
+<div class="row">
+  <div class="well col-md-6 col-md-offset-3"><h3><center><%= @pvp_battle.whose_turn(current_user.id) %></center></h3></div>
+</div>
 <div class="row">
  <% if @pvp_battle.user1_turn && current_user == @pvp_battle.user %>
+
       <% @pvp_battle.pet1.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
       <% end %>
     <% end %>
-   <% if !@pvp_battle.user1_turn && current_user == @pvp_battle.other %>
+<% if !@pvp_battle.user1_turn && current_user == @pvp_battle.other %>
        <% @pvp_battle.pet2.equipments.each do |f| %>
            <%= render partial: "items/item_battle_view_user2", locals: { item: f.sale, equipment: f } %>
         <% end %>
+ 
     <% end %>
 </div>
+
+
   <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
 <center><h3>Battle Log</h3></center>
 <% if current_user == @pvp_battle.user or current_user == @pvp_battle.other %>
-  <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , url: {user_id: current_user.id, bMessage: true, controller: :battle_logs, pvp_battle_id: @pvp_battle.id } do |f| %> 
+  <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , url: {user_id: current_user.id,  controller: :battle_logs, pvp_battle_id: @pvp_battle.id } do |f| %> 
     <%= f.hidden_field :pvp_battle_id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.text_field :description, class: "form-control" %>
+    <%= f.hidden_field :bMessage, value: 'true' %>
   <%= f.submit "Send", class: "btn btn-block btn-default" %>
   <% end %>
   <% @battle_logs.order("created_at desc").each do |f| %>
   <p>
-    <%= f.created_at.strftime("%I:%M %p") %> |<%= f.user_id %>
-    <strong><%= f.description %></strong>
+    <%= f.created_at.strftime("%I:%M %p") %> - <% if f.user_id.presence %><%= User.find(f.user_id).dogetag %>: <% end %>
+    <%= f.description %>
   </p>
 <% end %>
 <% end %>
 <br>
-
-<p>
-  <strong>Battle state:</strong>
-  <%= @pvp_battle.battle_state %>
-</p>
-
-<p>
-  <strong>User1 turn:</strong>
-  <%= @pvp_battle.user1_turn %>
-</p>
+<% end %>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
 <script>
@@ -72,7 +75,16 @@ Request for battle from <%= @pvp_battle.user.dogetag %> against <%= @pvp_battle.
 <br>
 <%= @pvp_battle.user.dogetag %> has chosen <%= @pvp_battle.pet1.name %> to fight with<br>
 
-<%= @pvp_battle.battle_state %>
+<%= @pvp_battle.battle_state %><br>
 
+<% if @pvp_battle.other == current_user %>
+<%= @pvp_battle.other.dogetag %>, choose a spirit:
+<%= form_for @pvp_battle, url: pvp_battle_set_pet2_path(@pvp_battle), method: :update do |f| %>
+<%= f.collection_select :pet2_id, current_user.pets.all, :id, :name, {prompt: "Select an spirit"}, {class: "input-large form-control"} %>
+<%= f.submit %>
+<% end %>
+<br>CHOSEN: <%= @pvp_battle.pet2_id %><br>
 
+Or, <%= link_to "Decline", @pvp_battle %>
+<% end %>
 <% end %>

@@ -39,7 +39,7 @@
             </li>
             <li> 
               <%= link_to pvp_battles_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Battles", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-bomb fa-2x"></i> <span class="badge"><%= PvpBattle.count %></span>
+              <i class="fa fa-bomb fa-2x"></i> <span class="badge"><%= current_user.num_active_turns %></span>
               <% end %>
             </li>
             <li> 

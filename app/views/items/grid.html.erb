@@ -9,20 +9,16 @@
   <li><%= link_to "Downloads", items_path %></li>
   
 </ul>
-<ul class="nav navbar-nav navbar-right">
-  <li><%= link_to items_path do %><i class="fa fa-list"></i> <% end %></li>
-  <li><%= link_to items_grid_path do %><i class="fa fa-th"></i> <% end %></li>
-</ul>
 </div><hr>
 <% @items.each do |item| %>
 <div class="col-md-3">
   <div class="well">
     <%= item_element_button(item.element, item.name, item) %><br>
-    <center><%= link_to image_tag(item.imageurl, height: "150px"), item %><br><br></center>
+    <center><%= link_to image_tag(item.imageurl, class: 'btn- btn', height: "150px"), item %><br><br></center>
     <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
    ATK: <%= item.attack %> | MGK: <%= item.magic %></h4>
-    <%= link_to item, class: 'tag-tooltip btn btn- btn-warning', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
+    <%= link_to item, class: 'tag-tooltip btn btn- btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
     <i class='fa fa-tag'></i> <%= item.worth %> 
     <% end %><span> </span><%= link_to item, class: 'tag-tooltip btn btn- btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Downloads", 'data-placement' => 'bottom' do %>
     <i class='fa fa-download'></i> <%= item.downloads %> 

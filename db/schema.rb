@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029001942) do
+ActiveRecord::Schema.define(version: 20141030102509) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -29,15 +29,8 @@ ActiveRecord::Schema.define(version: 20141029001942) do
     t.integer  "battle_id"
   end
 
-  create_table "battle_logs", force: true do |t|
-    t.string   "description"
-    t.string   "type"
-    t.integer  "battle_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "pvp_battle_id"
-    t.integer  "user_id"
-  end
+# Could not dump table "battle_logs" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "battle_moves", force: true do |t|
     t.integer  "battle_id"
@@ -189,6 +182,7 @@ ActiveRecord::Schema.define(version: 20141029001942) do
     t.integer  "total_health"
     t.integer  "magic"
     t.integer  "attack"
+    t.float    "coin_made"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

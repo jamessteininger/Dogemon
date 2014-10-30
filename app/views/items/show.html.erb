@@ -1,42 +1,27 @@
 <p id="notice"><%= notice %></p>
+<div class="col-md-6 col-md-offset-3">
+<div class="well">
 
-<p><%= image_tag(@item.imageurl, width: "150px") %><br>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @item.description %>
-</p><% if @item.creator.presence %>
-Made by: <%= @item.creator.dogetag %>
+<div class="row"><div class="col-md-6">
+  <h2><%= element_icon(@item.element) %> <%= @item.name %> </h2><h5>By <%= link_to @item.creator.dogetag, @item.creator %></h5>
+ <center> <%= image_tag(@item.imageurl, class: 'img-responsive' ) %></div><div class="col-md-6"><h3><div class="pull-right"><span class="pull- label label-warning"><i class='fa fa-tag'></i> <%= @item.worth %></span> <span class="label label-default pull-"><i class='fa fa-download'></i> <%= @item.downloads %></span> </div>
+  </h3></div>
+  </div>
+<center>
+  <p class="lead"><i>"<%= @item.description %>"</i></p><% if @item.creator.presence %>
 <% end %>
-<p>
-  <strong>Worth:</strong>
-  <%= @item.worth %>
-</p>
-<p>
-  <strong>Downloads:</strong>
-  <%= @item.downloads %>
-</p>
 
-<p>
-  <strong>Element:</strong>
-  <%= element_icon(@item.element) %>
-</p>
 
-<p>
-  <strong>Imageurl:</strong>
-  <%= @item.imageurl %>
-</p>
 <% if user_signed_in? %>
 <p>
   <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id} do |f| %>
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :item_id %>
-  <%= f.submit "Buy" %>  
-  <% end %><button>+ Wishlist</button>
+  <%= f.submit "Buy", class: 'btn btn-success btn-raised btn-lg btn-block' %>  
+  <% end %>
 </p>
 <% end %>
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
+
+</div>

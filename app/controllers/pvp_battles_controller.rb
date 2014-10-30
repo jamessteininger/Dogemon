@@ -35,10 +35,25 @@ class PvpBattlesController < ApplicationController
     @pvp_battle = PvpBattle.find(params[:id])
     @battle_logs = @pvp_battle.battle_logs
   end
+  
+  def set_pet2
+    @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
+    @pvp_battle.update(pvp_battle_params)
+   # @pvp_battle.update_attribute(:pet2_id, params[:pet2_id])
+    @pvp_battle.update_attribute(:battle_state, "in_progress")
+    @pvp_battle.pet1.update_attribute(:health, 100)
+    @pvp_battle.pet1.update_attribute(:magic, 100)
+    @pvp_battle.pet2.update_attribute(:health, 100)
+    @pvp_battle.pet2.update_attribute(:magic, 100)
+    
+    redirect_to @pvp_battle
+  end
 
   # GET /pvp_battles/new
   def new
     @pvp_battle = PvpBattle.new
+    @user = current_user
+    
   end
 
   # GET /pvp_battles/1/edit
@@ -49,11 +64,14 @@ class PvpBattlesController < ApplicationController
   # POST /pvp_battles.json
   def create
     @pvp_battle = PvpBattle.new(pvp_battle_params)
+    @other = User.find(@pvp_battle.other_id)
+    @other.pvp_battles.build(pvp_battle_params)
+    
     respond_to do |format|
       if @pvp_battle.save
         Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
        # Pet.find(@pvp_battle.pet2_id).update_attribute(:pvp_battle_id, @pvp_battle.id)
-        User.find(@pvp_battle.other_id).pvp_battles.new
+        User.find(@pvp_battle.other_id).pvp_battles.build(pvp_battle_params)
         format.html { redirect_to @pvp_battle, notice: 'Pvp battle was successfully created.' }
         format.json { render :show, status: :created, location: @pvp_battle }
       else

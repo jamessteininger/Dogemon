@@ -24,9 +24,8 @@ class BattleLogsController < ApplicationController
   # POST /battle_logs
   # POST /battle_logs.json
   def create
-    bMessage = params[:bMessage]
     @pvp_battle = PvpBattle.find(params[:pvp_battle_id])
-    if (!bMessage)
+    if (params[:bMessage] == 'false')
       amount = params[:amount]
       magic_amount = params[:magic_amount]
       attacker = params[:attacker]
@@ -46,6 +45,14 @@ class BattleLogsController < ApplicationController
     else
       
     end
+    
+    if (@pvp_battle.pet1.health <= 0)
+      @pvp_battle.update_attribute(:winner_id, @pvp_battle.other.id)
+      @pvp_battle.update_attribute(:battle_state, "completed")
+    elsif (@pvp_battle.pet2.health <= 0)
+      @pvp_battle.update_attribute(:winner_id, @pvp_battle.user.id)
+      @pvp_battle.update_attribute(:battle_state, "completed")
+    end
     #@pvp_battle.apply_regen(10)
     #@battle = Battle.find(params[:battle_id])
     @battle_log = @pvp_battle.battle_logs.new(battle_log_params)
@@ -53,7 +60,7 @@ class BattleLogsController < ApplicationController
     respond_to do |format|
       if @battle_log.save
         @battle_log.update_attribute(:user_id, params[:user_id])
-        format.html { redirect_to @pvp_battle, notice: 'Battle log was successfully created.' }
+        format.html { redirect_to @pvp_battle }
         format.json { render :show, status: :created, location: @battle_log }
       else
         format.html { render :new }
@@ -94,6 +101,6 @@ class BattleLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def battle_log_params
-      params.require(:battle_log).permit(:pvp_battle_id, :description, :type, :battle_id)
+      params.require(:battle_log).permit(:pvp_battle_id, :description, :type, :battle_id, :bMessage)
     end
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pvp_battles do
     get 'apply_regen'
+    post 'set_pet2'
     get 'restore_health'
   end
   
@@ -81,6 +82,7 @@ resources :users do
   get 'add_coin'
   post 'set_town'
   get 'set_town'
+  resources :pvp_battles
   resources :item_insts
   resources :sales
 end

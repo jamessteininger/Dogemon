@@ -35,8 +35,8 @@
   <% if Item.exists?(id: f.item_id) %>
     <p>
       <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
-      <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | 
-      <%= link_to "X", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
+      <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> | Equipped by: <% if f.equipment.presence %><%= f.equipment.pet.name %><% end %> | 
+      <%= link_to "Toss", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
     </p>
   <% end %>
 <% end %>
@@ -46,7 +46,7 @@
     
     <div class="panel panel-default">
 <div class="panel-heading">
-  <h2><i class="fa fa-magic"></i> Creator of these magic scrolls</h2>
+  <h2><i class="fa fa-magic"></i> Creator of these magic scrolls</h2><br>Coin made: <%= @user.coin_made %>
   </div>
 <div class="panel-body">
   <% @user.items.each do |f| %>

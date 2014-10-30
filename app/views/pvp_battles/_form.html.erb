@@ -1,4 +1,4 @@
-<%= form_for(@pvp_battle) do |f| %>
+<%= form_for [current_user, @other, @pvp_battle] do |f| %>
   <% if @pvp_battle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@pvp_battle.errors.count, "error") %> prohibited this pvp_battle from being saved:</h2>

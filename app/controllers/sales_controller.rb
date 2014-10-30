@@ -32,11 +32,14 @@ class SalesController < ApplicationController
     @user = User.find(params[:user_id])
     @item = Item.find(params[:item_id])
     @sale = @user.sales.new(sale_params.merge(item_id: params[:item_id]))
-
+    
     respond_to do |format|
       if @sale.save
         @item.update_attribute(:downloads, @item.downloads += 1)
         @user.update_attribute(:coin, @user.coin -= @item.worth)
+        @creator = User.find(@item.creator_id)
+        @creator.update_attribute(:coin_made, @creator.coin_made += @item.worth)
+        @creator.update_attribute(:coin, @creator.coin += @item.worth)
         format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }
       else
