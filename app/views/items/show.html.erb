@@ -15,12 +15,13 @@
 
 
 <% if user_signed_in? %>
-  <% if current_user.coin >= @item.worth %>
+    <% user_dogecoin = BlockIo.get_user_balance user_id: current_user.block_io_wallet_id %>
+    <% if user_dogecoin['data']['available_balance'].to_i > @item.worth %>
 <p>
   <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id} do |f| %>
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :item_id %>
-  <%= f.submit "Buy", class: 'btn btn-success btn-raised btn-lg btn-block' %>  
+  <%= f.submit "Buy", class: 'btn btn-success btn-raised btn-lg btn-block' %>
   <% end %>
 </p>
   <% else %>

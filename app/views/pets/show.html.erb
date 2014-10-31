@@ -11,8 +11,9 @@
   <%= @pet.description %>
 </p>
     </div>
-    
-    <div class="well"><h3>Unequipped Items</h3>
+    <% if !@pet.pvp_battle.presence %>
+    <div class="well">
+      <h3>Unequipped Items</h3>
 <% @sales.each do |f| %>
       <% if !f.equipment.presence %>
 <p>
@@ -36,8 +37,7 @@
       
 <% @pet.equipments.each do |f| %>
       <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
-<% end %>
+    <% end %><% else %>Right now your Dogemon is in a battle, but come back later to equip and unequip items. 
+    <% end %>
     </div>
 </div>
-
-

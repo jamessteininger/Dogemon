@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p><div class="pull-right"><%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %></div>
+<p id="notice"><%= notice %></p>
+<% if current_user.block_io_wallet_id.presence %>
+<div class="pull-right"><%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %></div>
 <h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
 <!--
 <div class="navbar -default">
@@ -30,3 +32,6 @@
 <% end %>
 <p><%= will_paginate @items %></p>
 </div>
+<% else %>
+<%= link_to 'Go get your wallet!', wallet_path %>
+<% end %>

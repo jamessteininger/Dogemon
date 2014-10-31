@@ -8,10 +8,19 @@ class UsersController < ApplicationController
     redirect_to @user, notice: 'Got coin.'
   end
   
+  def send_doge
+    amount = params[:amount]
+    address = params[:address]
+    @user = User.find(params[:user_id])
+    my_address = BlockIo.get_user_address user_id: @user.block_io_wallet_id
+    BlockIo.withdraw_from_user user_id: @user.block_io_wallet_id, payment_address: address.to_s, amount: amount.to_i
+    redirect_to wallet_path
+  end
+  
   def make_wallet
     @user = User.find(params[:user_id])
-    wallet_id = BlockIo.get_new_address :label => @user.email
-    @user.update_attribute(:block_io_wallet_id, wallet_id["data"]["user_id"].to_i)
+    wallet_id = BlockIo.get_new_address :label => 'LABEL'
+    current_user.update_attribute(:block_io_wallet_id, wallet_id["data"]["user_id"].to_i)
     redirect_to wallet_path
   end
   
@@ -47,8 +56,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.block_io_wallet_id.presence)
-    @blockio_balance = BlockIo.get_address_balance label: @user.email
-    @blockio_address = BlockIo.get_address_by_label label: @user.email
+      @blockio = BlockIo.get_user_balance user_id: @user.id
+    #@blockio_address = BlockIo.get_address_by_label label: @user.email
     end
     @sales = @user.sales
 

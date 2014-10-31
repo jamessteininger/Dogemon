@@ -3,8 +3,6 @@ class SalesController < ApplicationController
 before_filter :authenticate_user!
   # GET /sales
   # GET /sales.json
- 
-  
   
   def index
     @sales = Sale.all
@@ -33,13 +31,21 @@ before_filter :authenticate_user!
     @item = Item.find(params[:item_id])
     @sale = @user.sales.new(sale_params.merge(item_id: params[:item_id]))
     
+    
+    
     respond_to do |format|
       if @sale.save
         @item.update_attribute(:downloads, @item.downloads += 1)
         @user.update_attribute(:coin, @user.coin -= @item.worth)
         @creator = User.find(@item.creator_id)
-        @creator.update_attribute(:coin_made, @creator.coin_made += @item.worth)
+        @creator.update_attribute(:coin_made, @creator.coin_made += (@item.worth.to_f * 0.95))
         @creator.update_attribute(:coin, @creator.coin += @item.worth)
+        
+        percent_creator = (@item.worth.to_f * 0.95)
+        percent_company = (@item.worth.to_f * 0.05)
+        pay_to = BlockIo.get_user_address user_id: @creator.block_io_wallet_id
+        BlockIo.withdraw_from_user user_id: @user.block_io_wallet_id, payment_address: pay_to['data']['address'], amount: percent_creator
+        
         format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }
       else

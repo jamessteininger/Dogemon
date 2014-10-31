@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   validates :dogetag, presence: true
-  
+  has_many :transactions
   has_many :sales, dependent: :destroy
   has_many :logs
   has_many :pvp_battles, class_name: 'PvpBattle', foreign_key: 'user_id'

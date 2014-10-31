@@ -83,6 +83,8 @@ resources :users do
   get 'sell_all'
   get 'add_coin'
   get 'make_wallet'
+  post 'send_doge'
+  resources :transactions
   post 'set_town'
   get 'set_town'
   resources :pvp_battles

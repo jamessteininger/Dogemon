@@ -1,2 +1,2 @@
 require 'block_io'
-BlockIo.set_options api_key: '91e6-04a6-1bea-2571', pin: 'js13js13js', version: 2
+BlockIo.set_options api_key: 'e4ad-9b22-3cb2-f79c', pin: 'js13js13js'

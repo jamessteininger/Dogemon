@@ -9,27 +9,25 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %><div class="col-md-8 col-md-offset-2">
+<p class="lead">You get to choose everything about your new Dogemon! Go find a cute image (a square image works best) and paste the link below. You two are about to start a beautiful adventure together! :D  (You will not be able to change these attributes later)</p>
 <div class="field">
-  <%= f.label :template_pet_id %>
-  <%= f.select :element, ["Transistor", "Doge", "Cat"], {prompt: "Select a spirit"}, {class: "input-large form-control"} %>
+  <% f.label :template_pet_id %>
+  <% f.select :element, ["Transistor", "Doge", "Cat"], {prompt: "Select a spirit"}, {class: "input-large form-control"} %>
 <div id="custom_pet_field">
 <p id="custom_pet_field">
-  <div class="field">
-    <%= f.label :imageurl %><br>
-    <%= f.text_field :imageurl %>
-  </div>
+ 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+   <div class="field">
+    <%= f.label :imageurl %><br>
+    <%= f.text_field :imageurl, class: 'form-control' %>
   </div>
 <div class="field">
   
-  <%= f.radio_button :element, 'Sol', checked: true %>
-  <%= f.label :element_sol %>
-  <%= f.radio_button :element, 'Luna' %>
-  <%= f.label :element_luna %>
-  </div>
+  </div><%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select an element"}, {class: "input-large form-control"} %>
 
   <%= f.hidden_field :health, value: 100 %>
 
@@ -44,48 +42,12 @@
   </div>
 
 </p>
-<p id="template1_pet">
-</p>
-</div>
-<div id="template_pet1_field">
-  <h3>Transistor</h3>
-  <p class="lead"><i>"He is smoking hot!"</i></p>
-  <%= f.hidden_field :name, value: "Transistor" %>
-  <%= f.hidden_field :description, value: "He is smoking hot!" %>
-  <%= f.hidden_field :element, value: "Sol" %>
-  <%= f.hidden_field :imageurl, value: "http://cdn.zmescience.com/wp-content/uploads/2014/09/bc635-transistor.png" %>
-  <%= f.hidden_field :health, value: 100 %>
-  <%= f.hidden_field :magic, value: 100 %>
-  <%= f.hidden_field :user_id %>
-</div>
-<div id="template_pet2_field">
-  <h3>Doge</h3>
-  <p class="lead"><i>"To the moon!"</i></p>
-  <%= f.hidden_field :name, value: "Doge" %>
-  <%= f.hidden_field :description, value: "To the moon!" %>
-  <%= f.hidden_field :element, value: "Luna" %>
-  <%= f.hidden_field :imageurl, value: "http://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg" %>
-  <%= f.hidden_field :health, value: 100 %>
-  <%= f.hidden_field :magic, value: 100 %>
-  <%= f.hidden_field :user_id %>
-</div>
-<div id="template_pet3_field">
-  <h3>Intense Breathing Cat</h3>
-  <p class="lead"><i>"Pressure intensifies!"</i></p>
-  <%= f.hidden_field :name, value: "Intense Breathing Cat" %>
-  <%= f.hidden_field :description, value: "Pressure intensifies!" %>
-  <%= f.hidden_field :element, value: "Terra" %>
-  <%= f.hidden_field :imageurl, value: "http://images-cdn.9gag.com/photo/aKzNmOO_460s.jpg" %>
-  <%= f.hidden_field :health, value: 100 %>
-  <%= f.hidden_field :magic, value: 100 %>
-  <%= f.hidden_field :user_id %>
-</div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Discover new pet!", class: 'btn btn-success btn-lg' %>
   </div>
 <% end %>
 <script>
-  $('select').change(alert_me_test);
+ /* $('select').change(alert_me_test);
 
   function alert_me_test(){
     var template_pet_choice = $(this).val(); 
@@ -113,6 +75,7 @@
       $('#template_pet2_field').hide();
       $('#template_pet3_field').show();
     }
-  }
+  }*/
 
 </script>
+</div>
