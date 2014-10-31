@@ -23,6 +23,20 @@ before_filter :authenticate_user!
   # GET /sales/1/edit
   def edit
   end
+  
+  def give_booster
+    @user = User.find(params[:user_id])
+    @item1 = Item.find(rand(0..Item.all.count))
+    @item2 = Item.find(rand(0..Item.all.count))
+    @item3 = Item.find(rand(0..Item.all.count))
+    @item4 = Item.find(rand(0..Item.all.count))
+    @item5 = Item.find(rand(0..Item.all.count))
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale2 = @user.sales.new(user_id: @user.id, item_id: @item2.id)
+    @sale3 = @user.sales.new(user_id: @user.id, item_id: @item3.id)
+    @sale4 = @user.sales.new(user_id: @user.id, item_id: @item4.id)
+    @sale5 = @user.sales.new(user_id: @user.id, item_id: @item5.id)
+  end
 
   # POST /sales
   # POST /sales.json

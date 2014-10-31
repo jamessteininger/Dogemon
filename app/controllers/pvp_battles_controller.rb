@@ -99,6 +99,10 @@ class PvpBattlesController < ApplicationController
   # DELETE /pvp_battles/1
   # DELETE /pvp_battles/1.json
   def destroy
+    Pet.find(@pvp_battle.pet1_id).update_attribute(:pvp_battle_id, nil)
+    if(@pvp_battle.pet2_id.presence)
+    Pet.find(@pvp_battle.pet2_id).update_attribute(:pvp_battle_id, nil)
+    end
     @pvp_battle.destroy
     respond_to do |format|
       format.html { redirect_to pvp_battles_url, notice: 'Pvp battle was successfully destroyed.' }

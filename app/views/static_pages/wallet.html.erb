@@ -1,5 +1,5 @@
 <h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
-<hr><%= link_to "Make my Dogemon wallet!", user_make_wallet_path(@user), class: 'btn btn-primary btn-lg' %>
+<hr>
 <% if !@user.block_io_wallet_id.presence %><h3>Set up your wallet now! This will create a Dogecoin wallet tied to your Dogemon account. You can add or withdrawl funds at any time.
 <br><%= link_to "Make my Dogemon wallet!", user_make_wallet_path(@user), class: 'btn btn-primary btn-lg' %></h3>
 <% else %>

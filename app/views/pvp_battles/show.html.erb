@@ -97,20 +97,30 @@
 <% elsif @pvp_battle.battle_state != "completed" %>
 
 <!-- logic for other using picking their pet or whatever -->
-Request for battle from <%= @pvp_battle.user.dogetag %> against <%= @pvp_battle.other.dogetag %>
-<br>
-<%= @pvp_battle.user.dogetag %> has chosen <%= @pvp_battle.pet1.name %> to fight with<br>
-
-<%= @pvp_battle.battle_state %><br>
+<h2>
+<%= image_tag(@pvp_battle.pet1.imageurl, width: "225px") %><br>Request for battle from <strong><%= @pvp_battle.user.dogetag %></strong> against <strong><%= @pvp_battle.other.dogetag %></strong><br>
+  <strong><%= @pvp_battle.user.dogetag %></strong> has chosen their Dogemon named <strong><%= @pvp_battle.pet1.name %></strong> to fight with<br>
 
 <% if @pvp_battle.other == current_user %>
-<%= @pvp_battle.other.dogetag %>, choose a spirit:
-<%= form_for @pvp_battle, url: pvp_battle_set_pet2_path(@pvp_battle), method: :update do |f| %>
-<%= f.collection_select :pet2_id, current_user.pets.all, :id, :name, {prompt: "Select an spirit"}, {class: "input-large form-control"} %>
-<%= f.submit %>
-<% end %>
-<br>CHOSEN: <%= @pvp_battle.pet2_id %><br>
+  <%= @pvp_battle.other.dogetag %>, choose a spirit:
+    <% @pvp_battle.other.pets.each do |a| %>
+      <% if a.pvp_battle == nil or a.pvp_battle == 0 %>
+        <%= form_for @pvp_battle, url: pvp_battle_set_pet2_path(@pvp_battle), method: :update do |f| %>
+        <div class="well"><%= image_tag(a.imageurl, width: "100px") %> <%= a.name %>
+            <%= f.hidden_field :pet2_id, value: a.id %>
+        <%= f.submit "Commence battle" %>
+          </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% form_for @pvp_battle, url: pvp_battle_set_pet2_path(@pvp_battle), method: :update do |f| %>
+  <% f.collection_select :pet2_id, current_user.pets.all, :id, :name, {prompt: "Select an spirit"}, {class: "input-large form-control"} %>
+  <% f.submit %>
+  <% end %>
 
-Or, <%= link_to "Decline", @pvp_battle %>
-<% end %>
+
+    <br><%= @pvp_battle.pet2_id %><br>
+
+    Or, <%= link_to "Decline", @pvp_battle, method: :delete, data: {confirm: 'Are you sure, shibe? No moon for you.'} %>
+  <% end %>
 <% end %>

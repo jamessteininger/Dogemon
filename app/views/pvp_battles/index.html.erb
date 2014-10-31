@@ -28,7 +28,7 @@
 <% current_user.pvp_battles.each do |f| %>
 <p>
   <% if !f.other.presence or !f.pet2.presence %><div class="well">
-  <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %>
+<%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
   <% end %>
 </p>
@@ -36,7 +36,7 @@
 <% current_user.pvp_battles_p2.each do |f| %>
 <p>
   <% if !f.other.presence or !f.pet2.presence %><div class="well">
-  <%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %>
+  <%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
  </div>
   <% end %>
 </p>

@@ -1,6 +1,26 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   
+  def get_booster
+    @user = User.find(params[:user_id])
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+     @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+     @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    redirect_to @user
+  end
+  
   def add_coin
     amount = params[:amount]
     @user = User.find(params[:user_id])

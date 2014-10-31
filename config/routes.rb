@@ -84,6 +84,7 @@ resources :users do
   get 'add_coin'
   get 'make_wallet'
   post 'send_doge'
+  get 'get_booster'
   resources :transactions
   post 'set_town'
   get 'set_town'

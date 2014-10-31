@@ -8,8 +8,12 @@ class Pet < ActiveRecord::Base
   
   validates :health, presence: true
   validates :magic, presence: true
+  validates :element, presence: true
   validates :name, presence: true
-  validates :imageurl, presence: true
+  validates :imageurl, format: {
+    :with => %r{\.(gif|jpe?g|png)$}i, multiline: true, 
+  message: 'must be a url for gif, jpg, or png image.'
+}
   validates :description, presence: true
   
   def take_damage(amount)
