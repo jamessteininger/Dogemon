@@ -58,7 +58,7 @@ before_filter :authenticate_user!
         percent_creator = (@item.worth.to_f * 0.95)
         percent_company = (@item.worth.to_f * 0.05)
         pay_to = BlockIo.get_user_address user_id: @creator.block_io_wallet_id
-        BlockIo.withdraw_from_user user_id: @user.block_io_wallet_id, payment_address: pay_to['data']['address'], amount: percent_creator
+        BlockIo.withdraw_from_user user_id: current_user.block_io_wallet_id, payment_address: pay_to['data']['address'], amount: percent_creator
         
         format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }
