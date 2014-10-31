@@ -7,7 +7,7 @@
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
  <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><i class="fa fa-arrow-left"></i> Log out<% end %> 
   <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
-  <span class="label label-success">Fauxcoin: <%= @user.coin %></span>
+  
   <% end %>
 </h1><br>
 <div class="row"><div class="panel panel-default">
