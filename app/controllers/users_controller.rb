@@ -31,9 +31,9 @@ class UsersController < ApplicationController
   def send_doge
     amount = params[:amount]
     address = params[:address]
-    @user = User.find(params[:user_id])
-    my_address = BlockIo.get_user_address user_id: @user.block_io_wallet_id
-    BlockIo.withdraw_from_user user_id: @user.block_io_wallet_id, payment_address: address.to_s, amount: amount.to_i
+   # @user = User.find(params[:user_id])
+   # my_address = BlockIo.get_user_address user_id: @user.block_io_wallet_id
+    BlockIo.withdraw_from_user user_id: current_user.block_io_wallet_id, payment_address: address.to_s, amount: amount.to_i
     redirect_to wallet_path
   end
   
