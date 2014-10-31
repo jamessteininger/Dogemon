@@ -1,6 +1,7 @@
 class PvpBattlesController < ApplicationController
   before_action :set_pvp_battle, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
+  
   def apply_regen
     amount = params[:amount]
     @pvp_battle = PvpBattle.find(params[:pvp_battle_id])

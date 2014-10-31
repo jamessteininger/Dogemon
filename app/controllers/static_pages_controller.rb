@@ -3,12 +3,22 @@ class StaticPagesController < ApplicationController
   
    def user_home
      @user = current_user
-     @blockio = BlockIo.get_user_balance user_id: @user.id
+     if (@user.block_io_wallet_id.presence)
+     @blockio_balance = BlockIo.get_address_balance label: @user.email
+     @blockio_address = BlockIo.get_address_by_label label: @user.email
+     end
    end
   
   def wallet
     @user = current_user 
-    @blockio = BlockIo.get_user_balance user_id: @user.id
+    if (@user.block_io_wallet_id.presence)
+    @blockio_balance = BlockIo.get_address_balance label: @user.email
+    @blockio_address = BlockIo.get_address_by_label label: @user.email
+    end
+  end
+  
+  def roadmap
+    
   end
   
   def index

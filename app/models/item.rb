@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
   validates :name, presence: true
   validates :element, presence: true
   validates :attack, presence: true
+  validates :utility_type, presence: true
   validates :magic, presence: true
   validates :description, presence: true
   validates :imageurl, presence: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030121138) do
+ActiveRecord::Schema.define(version: 20141031001843) do
 
   create_table "aenemies", force: true do |t|
     t.integer  "health"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20141030121138) do
     t.integer  "sale_id"
   end
 
+  create_table "feedbacks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "feedback_type"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "item_insts", force: true do |t|
     t.integer  "item_id"
     t.integer  "user_id"
@@ -102,6 +110,7 @@ ActiveRecord::Schema.define(version: 20141030121138) do
     t.float    "boost"
     t.integer  "creator_id"
     t.integer  "downloads"
+    t.string   "utility_type"
   end
 
   create_table "logs", force: true do |t|

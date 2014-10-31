@@ -10,9 +10,15 @@ class UsersController < ApplicationController
   
   def make_wallet
     @user = User.find(params[:user_id])
-    wallet_id = BlockIo.get_new_address :label => 'LABEL'
+    wallet_id = BlockIo.get_new_address :label => @user.email
     @user.update_attribute(:block_io_wallet_id, wallet_id["data"]["user_id"].to_i)
     redirect_to wallet_path
+  end
+  
+  def withdrawl
+    amount = params[:amount]
+    address = params[:address]
+    BlockIo.withdraw :amounts => amount, :to_addresses => address
   end
   
  # def sell_all
@@ -39,8 +45,11 @@ class UsersController < ApplicationController
 	end
   
   def show
-    @blockio = BlockIo.get_user_balance user_id: params[:id]
-		@user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if (@user.block_io_wallet_id.presence)
+    @blockio_balance = BlockIo.get_address_balance label: @user.email
+    @blockio_address = BlockIo.get_address_by_label label: @user.email
+    end
     @sales = @user.sales
 
 	#	if current_user.id == @user.id

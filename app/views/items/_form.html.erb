@@ -27,17 +27,17 @@
   <%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select a element"}, {class: "input-large form-control"} %>
   </div>
 <div class="field">
-    <%= f.label :attack %><br>
-    <%= f.select :attack, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], {prompt: "Select a attack"}, {class: "input-large form-control"}  %>
+  <%= f.label :utility_type %><br>
+  <%= f.select :utility_type, ["Attack", "Drain", "Heal"], {prompt: "Select a utility"}, {class: "input-large form-control"} %>
   </div>
 <div class="field">
-    <%= f.label :magic %><br>
-    <%= f.select :magic, [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], {prompt: "Select a magic"}, {class: "input-large form-control"}  %>
+  <%= f.label :power %><br>
+    <%= f.select :attack, [5, 10, 15, 20, 25, 30, 40, 50], {prompt: "Select a power"}, {class: "input-large form-control"}  %>
   </div>
-  <div class="field">
-    <%= f.label :worth %><br>
-    <%= f.text_field :worth %>
-  </div>
+
+    <%= f.hidden_field :magic %>
+    <%= f.hidden_field :worth %>
+
   <div class="field">
     <%= f.label :imageurl %><br>
     <%= f.text_field :imageurl %>

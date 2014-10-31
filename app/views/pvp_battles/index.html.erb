@@ -1,37 +1,43 @@
-<h1>Battles (<%= PvpBattle.count %> total battles occuring in DogeLand )</h1>
+<h1>Battles (<%= PvpBattle.count %> total battles occuring in ProjectDoge )</h1>
 <hr><div class="">
   <%= link_to 'Start a new battle', new_pvp_battle_path, class: 'btn btn- btn-primary' %>
 <br>
 </div>
 <h3>On Going Battles</h3>
 <% current_user.pvp_battles.each do |f| %>
-<p>
+
   <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
+<div class="well">
   <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
-  <%= f.whose_turn(current_user.id) %>
+<%= f.whose_turn(current_user.id) %>
+</div>
   <% end %>
-</p>
+
 <% end %>
 <% current_user.pvp_battles_p2.each do |f| %>
 <p>
   <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
+  <div class="well">
   <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
   <%= f.whose_turn(current_user.id) %>
+    </div>
   <% end %>
 </p>
 <% end %>
 <h3>Pending Battle Requests</h3>
 <% current_user.pvp_battles.each do |f| %>
 <p>
-  <% if !f.other.presence or !f.pet2.presence %>
+  <% if !f.other.presence or !f.pet2.presence %><div class="well">
   <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %>
+</div>
   <% end %>
 </p>
 <% end %>
 <% current_user.pvp_battles_p2.each do |f| %>
 <p>
-  <% if !f.other.presence or !f.pet2.presence %>
+  <% if !f.other.presence or !f.pet2.presence %><div class="well">
   <%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %>
+ </div>
   <% end %>
 </p>
 <% end %>

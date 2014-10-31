@@ -5,7 +5,7 @@
     <center><%= image_tag(Item.find(item.item_id).imageurl, height: "150px") %><br><br></center>
     <p class=""><i>"<%= truncate(Item.find(item.item_id).description, length: 23) %>"</i></p><h4>
 
-   ATK: <%= Item.find(item.item_id).attack %> | MGK: <%= Item.find(item.item_id).magic %></h4>
+   <%= Item.find(item.item_id).utility_type %> <%= Item.find(item.item_id).attack %> / Magic <%= Item.find(item.item_id).magic %></h4>
     
     <% amount = item.attack %>
     <% end %>

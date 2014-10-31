@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   
   get 'home', to: 'static_pages#home'
+  get 'roadmap', to: 'static_pages#roadmap'
   
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :enemies
+  resources :feedbacks
 
   resources :pets do
     resources :item_insts

@@ -1,7 +1,15 @@
 <p id="notice"><%= notice %></p>
+<% if @pvp_battle.battle_state == "completed" %>
+<div class="row">
+<div class="well col-md-6 col-md-offset-3">
+  <h3><center>The winner is <%= User.find(@pvp_battle.winner_id).dogetag %>!</center></h3>
+  Last move: <%= @pvp_battle.battle_logs.last.description %>
+</div>
+</div>
+<% end %>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
-<% if @pvp_battle.battle_state == "in_progress" or @pvp_battle.battle_state == "completed" %>
-<center>Current Regen: 10  | <%= link_to "Refresh Page", @pvp_battle %> | <%= link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> | <%= link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
+<% if @pvp_battle.battle_state == "in_progress"  %>
+<center>Current Regen: 10  | <%= link_to "Refresh Page", @pvp_battle %> <% link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> <% link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
   <div class="well">
     <div class="row">
   <div class="col-md-6">
@@ -19,28 +27,46 @@
     </div>
   </div>
 </div>
-<% if @pvp_battle.battle_state == "completed" %>
-<div class="well col-md-6 col-md-offset-3"><h3><center>The winner is <%= User.find(@pvp_battle.winner_id).dogetag %>!</center></h3></div>
-</div>
-<% end %>
+
 <% if @pvp_battle.battle_state != "completed" %>
 <div class="row">
   <div class="well col-md-6 col-md-offset-3"><h3><center><%= @pvp_battle.whose_turn(current_user.id) %></center></h3></div>
 </div>
-<div class="row">
- <% if @pvp_battle.user1_turn && current_user == @pvp_battle.user %>
 
+ <% if @pvp_battle.user1_turn && current_user == @pvp_battle.user %>
+<div class="row">
       <% @pvp_battle.pet1.equipments.each do |f| %>
         <%= render partial: "items/item_battle_view", locals: { item: f.sale, equipment: f } %>
       <% end %>
+</div>
+        <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
+          <%= f.hidden_field :pvp_battle_id %>
+          <%= f.hidden_field :description, value: @pvp_battle.pet1.name + " skips its turn. " %>
+          <%= f.hidden_field :bMessage, value: 'false' %>
+          <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
+        <% end %>
     <% end %>
+
 <% if !@pvp_battle.user1_turn && current_user == @pvp_battle.other %>
+  <div class="row">
        <% @pvp_battle.pet2.equipments.each do |f| %>
            <%= render partial: "items/item_battle_view_user2", locals: { item: f.sale, equipment: f } %>
         <% end %>
- 
+    </div>
+        <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id2' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
+          <%= f.hidden_field :pvp_battle_id %>
+          <%= f.hidden_field :description, value: @pvp_battle.pet2.name + " skips its turn. " %>
+          <%= f.hidden_field :bMessage, value: 'false' %>
+          <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
+        <% end %>
     <% end %>
-</div>
+        <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id5' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2, forfeit: 1, forfeit_id: current_user.id } do |f| %>
+          <%= f.hidden_field :pvp_battle_id %>
+<%= f.hidden_field :description, value: current_user.dogetag + " forfeits. " %>
+          <%= f.hidden_field :bMessage, value: 'false' %>
+          <%= f.submit "Forfeit the game?", class: "btn btn-block btn-default", data: { confirm: 'Are you sure you want to forfeit the battle? It will count as a loss. No moon for you, shibe.' } %>
+        <% end %>
+
 
 
   <!-- previously, the entire history of the battle could be seen. I think the log should only show the most recent log, but after the battle is over, you can see the entire history -->
@@ -68,7 +94,7 @@
  new WOW().init();
 </script>
 
-<% else %>
+<% elsif @pvp_battle.battle_state != "completed" %>
 
 <!-- logic for other using picking their pet or whatever -->
 Request for battle from <%= @pvp_battle.user.dogetag %> against <%= @pvp_battle.other.dogetag %>

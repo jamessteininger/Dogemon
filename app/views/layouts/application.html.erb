@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ProjectDoge</title>
+  <title>Dogemon</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -19,9 +19,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to root_path, class: "navbar-brand" do %>
+          <%= link_to root_path, style: 'padding-top: 19px;', class: "navbar-brand" do %>
             <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
-          <div class="img-">ProjectDoge</div>
+            DOGEMON
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
@@ -76,7 +76,7 @@
           
           </ul>
     <ul class="nav navbar-nav navbar-right">
-    <form class="navbar-form form-right">
+    <form class="navbar-forform-">
       <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
       </form>
     </ul>
@@ -91,6 +91,6 @@
 <%= yield %>
 <hr>
     <center>&copy; ProjectDoge, 2014 <br>
-      <%= link_to "How to Play", how_to_play_path %> | <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %><br><br>
+      <%= link_to "How to Play", how_to_play_path %> | <%= link_to "Roadmap", roadmap_path %> | <%= link_to "Feedback", new_feedback_path %> | <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %><br><br>
 </body>
 </html>

@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   before_action :set_sale, only: [:show, :edit, :update, :destroy]
-
+before_filter :authenticate_user!
   # GET /sales
   # GET /sales.json
  

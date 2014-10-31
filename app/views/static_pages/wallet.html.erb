@@ -1,16 +1,15 @@
 <h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
 <hr>
-<%= @user.block_io_wallet_id %>
-<% if !@user.block_io_wallet_id.presence %>
-<%= link_to "Init wallet", user_make_wallet_path(@user) %>
-<% end %>
+<% if !@user.block_io_wallet_id.presence %><h3>Set up your wallet now! This will create a Dogecoin wallet tied to your Dogemon account. You can add or withdrawl funds at any time.
+<br><%= link_to "Make my Dogemon wallet!", user_make_wallet_path(@user), class: 'btn btn-primary btn-lg' %></h3>
+<% else %>
 <h2><span class="label label-primary">
-Balance: <%= @blockio["data"]["available_balance"].to_i %> 
+Balance: <%= @blockio_balance["data"]["available_balance"].to_i %> 
   </span>
   </h2>
 
 <h2>
-My Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio["data"]["address"] %> ';">
+My Address: <input type="text" size="40" value="<%= @blockio_address["data"]["address"] %> " onclick="this.select();" onchange="this.value='<%= @blockio_address["data"]["address"] %> ';">
 
 </h2>
 <hr>
@@ -24,3 +23,4 @@ My Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] 
 
 <hr>
 <%= link_to "Buy Dogecoin", "https://weselldoges.com/" %>
+<% end %>

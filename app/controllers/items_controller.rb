@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+before_filter :authenticate_user!
   # GET /items
   # GET /items.json
   def index
@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   end
   
   def grid
-    @items = Item.all
+    @items = Item.paginate(:page => params[:page], :per_page => 16)
   end
 
   # GET /items/1
@@ -42,7 +42,8 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
+    @item.update_attribute(:magic, @item.attack * 1.5)
+    @item.update_attribute(:worth, @item.attack * 10)
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -86,6 +87,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:downloads, :creator_id, :id, :name, :description, :worth, :imageurl, :element, :category, :attack, :magic, :turns, :boost)
+      params.require(:item).permit(:utility_type, :downloads, :creator_id, :id, :name, :description, :worth, :imageurl, :element, :category, :attack, :magic, :turns, :boost)
     end
 end

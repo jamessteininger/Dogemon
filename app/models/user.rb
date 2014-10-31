@@ -26,6 +26,32 @@ class User < ActiveRecord::Base
   end 
   
   def num_active_turns
-    return self.pvp_battles.where("battle_state = 'in_progress' or user1_turn = 'true'").count + self.pvp_battles_p2.where("battle_state = 'in_progress'").count
+    numTurns = 0
+    self.pvp_battles.where("battle_state = 'in_progress'").each do |f|
+      if (f.user_id == self.id)
+        if (f.user1_turn)
+          numTurns += 1
+        end
+      end
+      if (f.other_id == self.id)
+        if (!f.user1_turn)
+          numTurns += 1
+        end
+      end
+    end
+    self.pvp_battles_p2.where("battle_state = 'in_progress'").each do |f|
+      if (f.user_id == self.id)
+        if (f.user1_turn)
+          numTurns += 1
+        end
+      end
+      if (f.other_id == self.id)
+        if (!f.user1_turn)
+          numTurns += 1
+        end
+      end
+    end
+    #return self.pvp_battles.where("battle_state = 'in_progress' and user1_turn = 'true'").count + self.pvp_battles_p2.where("battle_state = 'in_progress'").count
+    return numTurns
   end
 end
