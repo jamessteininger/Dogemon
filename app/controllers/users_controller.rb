@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.block_io_wallet_id.presence)
-      @blockio = BlockIo.get_user_balance user_id: @user.id
+      @blockio = BlockIo.get_user_balance user_id: @user.block_io_wallet_id
     #@blockio_address = BlockIo.get_address_by_label label: @user.email
     end
     @sales = @user.sales
