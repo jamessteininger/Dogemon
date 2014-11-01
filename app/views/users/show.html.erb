@@ -86,11 +86,15 @@
   <div class="row"><div class="panel panel-default">
   <div class="panel-heading">
     <h2>Dogemon</h2></div><div class="panel-body">
-  <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= pet.name %></h4><br>
+  <% @user.pets.each do |pet| %>
+    <div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= pet.name %></h4><br>
   <%= image_tag(pet.imageurl, class: 'btn', height: "150px") %><br>
   <%= truncate(pet.description, length: 12) %><p></h3></p>
-        
-  </div>
+   
+    
+  </div></div>
+    <% end %>
+    </div>
   </div>
     
     
