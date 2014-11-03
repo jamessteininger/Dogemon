@@ -16,7 +16,10 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'  %></div>
-
+  
+  <%= f.hidden_field :imageurl, value:"http://i1.kym-cdn.com/entries/icons/square/000/013/564/aP2dv.gif" %> 
+  <%= f.hidden_field :coin, value: 2000 %>
+  <%= f.hidden_field :coin_made, value: 0 %>
   <div><br><%= f.submit "Sign up", class: 'btn btn-primary btn-block' %></div>
 <% end %>
 

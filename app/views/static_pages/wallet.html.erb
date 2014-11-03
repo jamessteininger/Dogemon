@@ -1,7 +1,10 @@
 <h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
 <hr>
+<% if !@user.block_io_wallet_id.presence %><h3>Set up your wallet now! This will create a Dogecoin wallet tied to your Dogemon account. You can add or withdrawl funds at any time.
+<br><%= link_to "Make my Dogemon wallet!", user_make_wallet_path(@user), class: 'btn btn-primary btn-lg' %></h3>
+<% else %>
 <h2><span class="label label-primary">
-Balance: <%= @blockio["data"]["available_balance"].to_i %> 
+Balance: <%= @blockio["data"]["available_balance"].to_i %>
   </span>
   </h2>
 
@@ -10,13 +13,20 @@ My Address: <input type="text" size="40" value="<%= @blockio["data"]["address"] 
 
 </h2>
 <hr>
-<h2>
-  Send: <input type="text" size="20" > <br><br>
-  To:
-  <input type="text" size="40" >
-  <br><br>
-  <%= link_to "Send", wallet_path, class: 'btn btn-success btn-lg' %>
+
+<%= form_for [@user, Transaction.new] do |f| %><h2>
+<%= f.hidden_field :user_id, value: current_user.id %>
+Send an amount:
+<%= f.text_field :amount, size: 40 %><br><br>
+To: 
+<%= f.text_field :address, size: 40 %><br><br>
+<%= f.submit "Send", class: 'btn btn-lg btn-success' %>
+<% end %>
 </h2>
+<% @user.transactions.each do |f| %>
+
+<% end %>
 
 <hr>
-<%= link_to "Buy Dogecoin", "https://weselldoges.com/" %>
+<%= link_to "Buy Dogecoin", "https://weselldoges.com/" %> | <%= link_to "Dogecoin withdrawls?", roadmap_path %>
+<% end %>

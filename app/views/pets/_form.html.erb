@@ -9,28 +9,30 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :imageurl %><br>
-    <%= f.text_field :imageurl %>
-  </div>
+  <% end %><div class="col-md-8 col-md-offset-2">
+<p class="lead">You get to choose everything about your new Dogemon! Go find a cute image (a square image works best) and paste the link below. You two are about to start a beautiful adventure together! :D  (You will not be able to change these attributes later)</p>
+<div class="field">
+  <% f.label :template_pet_id %>
+  <% f.select :element, ["Transistor", "Doge", "Cat"], {prompt: "Select a spirit"}, {class: "input-large form-control"} %>
+<div id="custom_pet_field">
+<p id="custom_pet_field">
+ 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+   <div class="field">
+    <%= f.label :imageurl %><br>
+    <%= f.text_field :imageurl, class: 'form-control' %>
   </div>
 <div class="field">
-    <%= f.label :element %><br>
-  <%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select a element"}, {class: "input-large form-control"} %>
-  </div>
-<div class="field">
-  <%= f.label :health %><br>
-    <%= f.text_field :health %>
-  </div>
-<div class="field">
-    <%= f.label :magic %><br>
-    <%= f.text_field :magic %>
-  </div>
+  
+  </div><%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select an element"}, {class: "input-large form-control"} %>
+
+  <%= f.hidden_field :health, value: 100 %>
+
+  <%= f.hidden_field :magic, value: 100, id: 'magic' %>
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
@@ -38,7 +40,42 @@
   <div class="field">
     <%= f.hidden_field :user_id %>
   </div>
+
+</p>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Discover new pet!", class: 'btn btn-success btn-lg' %>
   </div>
 <% end %>
+<script>
+ /* $('select').change(alert_me_test);
+
+  function alert_me_test(){
+    var template_pet_choice = $(this).val(); 
+    if (template_pet_choice == 0) {
+      $('#custom_pet_field').show();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').hide();
+    }  
+    if (template_pet_choice == "Transistor") {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').show();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').hide();
+    }  
+    if (template_pet_choice == "Doge") {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').show();
+      $('#template_pet3_field').hide();
+    } 
+    if (template_pet_choice == "Cat")  {
+      $('#custom_pet_field').hide();
+      $('#template_pet1_field').hide();
+      $('#template_pet2_field').hide();
+      $('#template_pet3_field').show();
+    }
+  }*/
+
+</script>
+</div>

@@ -7,9 +7,12 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'bootswatch-rails'
 gem 'font-awesome-rails'
+gem 'activeadmin', github: 'activeadmin'
 gem 'dogecoin_client'
 gem 'bootstrap-slider-rails'
-gem 'block_io'
+gem 'bootstrap-material-design'
+gem 'block_io', '0.1.3'
+gem 'will_paginate', '~> 3.0'
 group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

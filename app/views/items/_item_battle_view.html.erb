@@ -1,18 +1,25 @@
 <div class="col-md-3">
   <div class="well">
     <%= item_element_button(Item.find(item.item_id).element, Item.find(item.item_id).name, Item.find(item.item_id)) %><br>
-    <center><%= link_to image_tag(Item.find(item.item_id).imageurl, height: "150px"), item %><br><br></center>
+    <center><%= image_tag(Item.find(item.item_id).imageurl, height: "150px") %><br><br></center>
     <p class=""><i>"<%= truncate(Item.find(item.item_id).description, length: 23) %>"</i></p><h4>
 
-   ATK: <%= Item.find(item.item_id).attack %> | MGK: <%= Item.find(item.item_id).magic %></h4>
+   <% theItem = Item.find(item.item_id) %>
+  <%= theItem.utility_type %> <%= theItem.attack %> / Magic <%= theItem.magic %></h4>
     
-    <% amount = item.attack %>
-    <% magic_amount = item.magic %>
-    <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , class: "form form-inline  form-horizontal pull-right", url: {bMessage: true, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount, magic_amount: magic_amount, attacker: 1, defender: 2 } do |f| %> 
+    <% amount = theItem.attack %>
+    <% magic_amount = theItem.magic %>
+    <% utility_type = theItem.utility_type %>
+    <% if @pvp_battle.pet1.magic >= magic_amount %>
+    <%= form_for [@pvp_battle, BattleLog.new], html: { id: 'form_id' } , class: "form form-inline  form-horizontal pull-right", url: {bMessage: false, controller: :battle_logs, pvp_battle_id: @pvp_battle.id, amount: amount, utility_type: utility_type, magic_amount: magic_amount, attacker: 1, defender: 2 } do |f| %> 
     <%= f.hidden_field :pvp_battle_id %>
     <%= f.hidden_field :description, value: equipment.pet.name + " attacks with " + item.name + " for " + amount.to_s + " damage, using " + item.magic.to_s + " magic." %>
+    <%= f.hidden_field :bMessage, value: 'false' %>
     <%= f.submit "Use", class: "btn btn-block btn-default" %>
   <% end %>
+    <% else %>
+    <center>Cannot use, need more magic<br>
+    <% end %>
   </div>
 </div>
                                                                                                                                                                                          

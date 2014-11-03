@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :pvp_battles do
     get 'apply_regen'
+    post 'set_pet2'
     get 'restore_health'
   end
   
   root 'static_pages#home'
   
   get 'home', to: 'static_pages#home'
+  get 'roadmap', to: 'static_pages#roadmap'
   
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
@@ -35,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :enemies
+  resources :feedbacks
 
   resources :pets do
     resources :item_insts
@@ -79,8 +84,13 @@ Rails.application.routes.draw do
 resources :users do
   get 'sell_all'
   get 'add_coin'
+  get 'make_wallet'
+  post 'send_doge'
+  get 'get_booster'
+  resources :transactions
   post 'set_town'
   get 'set_town'
+  resources :pvp_battles
   resources :item_insts
   resources :sales
 end

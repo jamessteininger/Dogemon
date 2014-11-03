@@ -10,10 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+*= require bootstrap-material-design
  *= require_self
 
  */
-@import "bootswatch/lumen/variables";
+//@import "bootswatch/lumen/variables";
 @import "bootstrap";
 @import "font-awesome";
 body {
@@ -41,5 +42,5 @@ body {
 
  .input-mini { width: 60px; } .input-small { width: 90px; } .input-medium { width: 150px; } .input-large { width: 210px; } .input-xlarge { width: 270px; } .input-xxlarge { width: 530px; }
 
-@import "bootswatch/lumen/bootswatch";
+//@import "bootswatch/lumen/bootswatch";
 

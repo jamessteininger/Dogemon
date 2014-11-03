@@ -1,11 +1,53 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   
+  def get_booster
+    @user = User.find(params[:user_id])
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+     @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+     @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    @item1 = Item.order("RANDOM()").first
+    @sale1 = @user.sales.new(user_id: @user.id, item_id: @item1.id)
+    @sale1.save
+    redirect_to @user
+  end
+  
   def add_coin
     amount = params[:amount]
     @user = User.find(params[:user_id])
     @user.add_coin(Float(amount))
     redirect_to @user, notice: 'Got coin.'
+  end
+  
+  def send_doge
+    amount = params[:amount]
+    address = params[:address]
+   # @user = User.find(params[:user_id])
+   # my_address = BlockIo.get_user_address user_id: @user.block_io_wallet_id
+    BlockIo.withdraw_from_user user_id: current_user.block_io_wallet_id, payment_address: address.to_s, amount: amount.to_i
+    redirect_to wallet_path
+  end
+  
+  def make_wallet
+    @user = User.find(params[:user_id])
+    wallet_id = BlockIo.get_new_address :label => 'LABEL'
+    current_user.update_attribute(:block_io_wallet_id, wallet_id["data"]["user_id"].to_i)
+    redirect_to wallet_path
+  end
+  
+  def withdrawl
+    amount = params[:amount]
+    address = params[:address]
+    BlockIo.withdraw :amounts => amount, :to_addresses => address
   end
   
  # def sell_all
@@ -32,8 +74,11 @@ class UsersController < ApplicationController
 	end
   
   def show
-    @blockio = BlockIo.get_user_balance user_id: params[:id]
-		@user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if (@user.block_io_wallet_id.presence)
+      @blockio = BlockIo.get_user_balance user_id: @user.block_io_wallet_id
+    #@blockio_address = BlockIo.get_address_by_label label: @user.email
+    end
     @sales = @user.sales
 
 	#	if current_user.id == @user.id

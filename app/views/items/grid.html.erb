@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1><i class="fa fa-shopping-cart"></i> Marketplace | <%= link_to "Workshop", votable_items_path %></h1>
+<% if current_user.block_io_wallet_id.presence %>
+<div class="pull-right"><%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %></div>
+<h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
+<!--
 <div class="navbar -default">
 <ul class="nav navbar-nav">
   <li class="active"><%= link_to "All", items_path %></li>
@@ -9,20 +12,17 @@
   <li><%= link_to "Downloads", items_path %></li>
   
 </ul>
-<ul class="nav navbar-nav navbar-right">
-  <li><%= link_to items_path do %><i class="fa fa-list"></i> <% end %></li>
-  <li><%= link_to items_grid_path do %><i class="fa fa-th"></i> <% end %></li>
-</ul>
-</div><hr>
+</div>-->
+<hr>
 <% @items.each do |item| %>
 <div class="col-md-3">
   <div class="well">
     <%= item_element_button(item.element, item.name, item) %><br>
-    <center><%= link_to image_tag(item.imageurl, height: "150px"), item %><br><br></center>
+    <center><%= link_to image_tag(item.imageurl, class: 'btn- btn', height: "150px"), item %><br><br></center>
     <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
-   ATK: <%= item.attack %> | MGK: <%= item.magic %></h4>
-    <%= link_to item, class: 'tag-tooltip btn btn- btn-warning', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
+   <%= item.utility_type %> <%= item.attack %> / Magic <%= item.magic %></h4>
+    <%= link_to item, class: 'tag-tooltip btn btn- btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
     <i class='fa fa-tag'></i> <%= item.worth %> 
     <% end %><span> </span><%= link_to item, class: 'tag-tooltip btn btn- btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Downloads", 'data-placement' => 'bottom' do %>
     <i class='fa fa-download'></i> <%= item.downloads %> 
@@ -30,6 +30,8 @@
   </div>
 </div>
 <% end %>
-
-<%= link_to 'New Item', new_item_path %>
+<p><%= will_paginate @items %></p>
 </div>
+<% else %>
+<%= link_to 'Go get your wallet!', wallet_path %>
+<% end %>

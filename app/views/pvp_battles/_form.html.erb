@@ -1,35 +1,32 @@
-<%= form_for(@pvp_battle) do |f| %>
-  <% if @pvp_battle.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pvp_battle.errors.count, "error") %> prohibited this pvp_battle from being saved:</h2>
 
-      <ul>
-      <% @pvp_battle.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<% current_user.pets.each do |f| %>
+  <% if f.pvp_battle_id == nil or 0 %>
+<div class="col-md-3">
+  <div class="well">
+    <%= image_tag(f.imageurl, width: "225px") %>
+    Battle with <%= f.name %> against 
+    <%= form_for [current_user, @other, @pvp_battle] do |g| %>
+      <% if @pvp_battle.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@pvp_battle.errors.count, "error") %> prohibited this pvp_battle from being saved:</h2>
+
+        <ul>
+        <% @pvp_battle.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
       <% end %>
-      </ul>
-    </div>
+      <%= g.collection_select :other_id, User.where.not(id: current_user.id), :id, :dogetag, {prompt: "Select a foe"}, {class: "input-large form-control"} %>
+      <%= g.hidden_field :battle_state, value: "setting_up_the_battle" %>
+      <%= g.hidden_field :user1_turn, value: true %>
+      <%= g.hidden_field :user_id, value: current_user.id %>
+      <%= g.hidden_field :pet1_id, value: f.id %>
+      <%= g.submit "Send battle request", class: 'btn btn- btn-primary'  %>
+    <% end %>
+  </div>
+</div>
   <% end %>
-
-<%= f.hidden_field :user_id, value: current_user.id %>
-
-
-  <div class="field">
-    Choose a foe
-    <%= f.collection_select :other_id, User.where.not(id: current_user.id), :id, :dogetag, {prompt: "Select a foe"}, {class: "input-large form-control"} %>
-  </div>
-
-  <div class="field">
-    Choose a spirit to battle with
-    <%= f.collection_select :pet1_id, current_user.pets.all, :id, :name, {prompt: "Select an spirit"}, {class: "input-large form-control"} %>
-  </div>
-
-
-    <%= f.hidden_field :battle_state, value: "setting_up_the_battle" %>
-
-    <%= f.hidden_field :user1_turn, value: true %>
-
-  <div class="actions"><br>
-    <%= f.submit class: 'btn btn-lg btn-primary'  %>
-  </div>
 <% end %>
+
+<br>(If there are no battle request forms, you either don't have any Dogemon or all of your Dogemon are already in a battle.')

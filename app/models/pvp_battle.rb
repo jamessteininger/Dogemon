@@ -1,15 +1,15 @@
 class PvpBattle < ActiveRecord::Base
   validates :user_id, presence: true
-  validates :other_id, presence: true
+ # validates :other_id, presence: true
   
   validates :pet1_id, presence: true
-  validates :pet2_id, presence: true
+ # validates :pet2_id, presence: true
   
-  belongs_to :user;
-  belongs_to :other, class_name: 'User'
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :other, class_name: 'User', foreign_key: 'other_id'
   
-  belongs_to :pet1, class_name: 'Pet';
-  belongs_to :pet2, class_name: 'Pet';
+  belongs_to :pet1, class_name: 'Pet'
+  belongs_to :pet2, class_name: 'Pet'
   
   has_many :battle_logs;
   
@@ -18,14 +18,14 @@ class PvpBattle < ActiveRecord::Base
   def whose_turn(current_user_id)
     if (self.user1_turn)
       if (self.user.id == current_user_id)
-        return "It is your turn."
+        return "It is your turn. Make a move!"
       else
         return "It is " + user.dogetag + "'s turn."
       end
     end
     if (!self.user1_turn)
       if (self.other.id == current_user_id)
-        return "It is your turn."
+        return "It is your turn. Make a move!"
       else
         return "It is " + other.dogetag + "'s turn."
       end

@@ -1,7 +1,7 @@
 <% @users.each do |f| %>
 <h2>
-  <%= image_tag f.imageurl, width: 50 %>
-  <%= link_to f.dogetag, f %>
-<%= f.email %>
+  <div data-toggle="tooltip" data-placement="left" title="<%= f.email %>"><%= image_tag f.imageurl, width: 50 %>
+    <%= link_to f.dogetag, f %></div>
+
 </h2>
 <% end %>
