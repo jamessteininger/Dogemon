@@ -48,19 +48,22 @@
               <% end %>
             </li>
             <li> 
-              <%= link_to wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
+             <%= link_to wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-money fa-2x"></i>
               <% end %>
-            </li>
+            </li> 
             <li> 
               <%= link_to how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-question fa-2x"></i>
               <% end %>
             </li>
             
-		
           </ul>
-        
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to  logout_path, class: "tag-tooltip",  data: {:toggle=>"tooltip"}, 'data-original-title' => "Log out", 'data-placement' => 'bottom' do %> Log out<% end %>  
+            </li>
+          </ul>
 <% else %>
           <ul class="nav navbar-nav">
           <li>
@@ -69,25 +72,19 @@
             <li>
               <%= link_to "About", about_path %>
             </li>
-            
-            <li>
-              
-            </li>
-          
           </ul>
     <ul class="nav navbar-nav navbar-right">
     <form class="navbar-forform-">
       <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
       </form>
+     <form class
     </ul>
    <% end %>
    </div>
     </div>
     </div>
     </div>
-    </div>
-  </div>
-<div class="container">
+  <div class="container">
 <%= yield %>
 <hr>
     <center>&copy; Dogemon, 2014 <br>

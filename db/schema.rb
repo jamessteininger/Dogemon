@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 20141031105558) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
-    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
