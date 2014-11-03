@@ -7,7 +7,7 @@
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
  <%= link_to  logout_path, class: "btn btn-sm btn-default pull-right", :method => :delete do %><i class="fa fa-arrow-left"></i> Log out<% end %> 
   <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
-  
+    </h1>
   <% end %>
 </h1><br>
 <div class="row"><div class="panel panel-default">
@@ -80,5 +80,34 @@
   </div>
 </div>
 </div>
-</div>
-  <% end %></h1>
+  </div></h1>
+  <% else %>
+  </h1>
+  <div class="panel panel-default">
+  <div class="panel-heading"><h2>Dogemon</h2></div>
+    <div class="panel-body">
+      <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %><%= pet.name %></h4><br>
+  <%= image_tag(pet.imageurl, class: '', height: "150px") %><br>
+  <%= pet.description %><p></p>  
+  </div>
+  </div>  
+   <% end %>
+  </div>
+  </div>
+    <!--    END OF DOGEMON CONTAINER -->
+    
+    <div class="panel panel-default">
+<div class="panel-heading">
+  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2>
+  </div>
+<div class="panel-body">
+  <% @user.items.each do |f| %>
+  <p>
+    Creator of <%= link_to f.name, f %>
+  </p>
+  <% end %>
+      </div>
+    </div>
+  </div>
+  
+    <% end %>
