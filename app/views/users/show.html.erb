@@ -49,7 +49,7 @@
     
     <div class="panel panel-default">
 <div class="panel-heading">
-  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2><br>Coin made: <%= @user.coin_made %>
+  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2><br>Coin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
   </div>
 <div class="panel-body">
   <% if @user.items.count == 0 %>
