@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031105558) do
+ActiveRecord::Schema.define(version: 20141103084230) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 20141031105558) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
-    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(version: 20141031105558) do
     t.integer  "attack"
     t.float    "coin_made"
     t.integer  "block_io_wallet_id"
+    t.string   "channel_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
