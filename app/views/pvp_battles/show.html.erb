@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
 <% if @pvp_battle.battle_state == "in_progress"  %>
 <center>Current Regen: 10  | <%= link_to "Refresh Page", @pvp_battle %> <% link_to 'Restore Health', pvp_battle_restore_health_path(@pvp_battle) %> <% link_to 'Force Regen', pvp_battle_apply_regen_path(@pvp_battle, amount: 10.0) %></center><br>
-  <div class="well">
+<div class="well">
     <div class="row">
   <div class="col-md-6">
     <center><h3><%= @pvp_battle.user.dogetag %><% if current_user.id == @pvp_battle.user_id %> (you) <% end %></h3>

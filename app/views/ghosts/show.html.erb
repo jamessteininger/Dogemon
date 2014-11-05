@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @ghost.pet_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ghost.name %>
+</p>
+
+<p>
+  <strong>Health:</strong>
+  <%= @ghost.health %>
+</p>
+
+<p>
+  <strong>Magic:</strong>
+  <%= @ghost.magic %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ghost.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ghost.user_id %>
+</p>
+
+<p>
+  <strong>Element:</strong>
+  <%= @ghost.element %>
+</p>
+
+<p>
+  <strong>Imageurl:</strong>
+  <%= @ghost.imageurl %>
+</p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @ghost.battle_id %>
+</p>
+
+<%= link_to 'Edit', edit_ghost_path(@ghost) %> |
+<%= link_to 'Back', ghosts_path %>

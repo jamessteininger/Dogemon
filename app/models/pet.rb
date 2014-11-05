@@ -2,6 +2,7 @@ class Pet < ActiveRecord::Base
   belongs_to :user
   has_many :equipments, dependent: :destroy
   belongs_to :pvp_battle, dependent: :destroy
+  belongs_to :battle, dependent: :destroy
   has_many :item_insts, through: :equipments
   
   accepts_nested_attributes_for :pvp_battle

@@ -1,6 +1,6 @@
 
 <% current_user.pets.each do |f| %>
-  <% if f.pvp_battle_id == nil or 0 %>
+  <% if f.pvp_battle_id == nil or f.pvp_battle_id == 0  %>
 <div class="col-md-3">
   <div class="well">
     <%= image_tag(f.imageurl, width: "225px") %>
