@@ -11,8 +11,8 @@
   <% current_user.pets.order('created_at DESC').each do |p| %>
   <% p.battles.order('created_at DESC').each do |b| %>
   <% if b.battle_state == 'in_progress' %>
-  <% if b.ghost.presence %><p>
-  <%= link_to b.ghost.name, b %>
+  <% if b.ghost.presence %><p class="well">
+  Ghost battle against <%= link_to b.ghost.name, b %>
   </p>
   <% end %>
   <% end %>
