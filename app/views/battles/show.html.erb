@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<% if @battle.b_pet_turn == 'true' && current_user == @battle.user %>
+  <% if @battle.b_pet_turn == 'true' and current_user.id == Pet.find(@battle.pet_id).user.id %>
 <div class="row"><center><h3>Your turn!</h3></center>
       <% @battle.pet.equipments.each do |f| %>
         <%= render partial: "items/item_ghost_view", locals: { item: f.sale, equipment: f } %>

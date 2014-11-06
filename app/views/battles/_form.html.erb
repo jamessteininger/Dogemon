@@ -14,7 +14,7 @@
     </div>
   <% end %>
 <%= g.hidden_field :battle_state, value: "in_progress" %>
-<%= g.hidden_field :b_pet_turn, value: true %>
+<%= g.hidden_field :b_pet_turn, value: 'true' %>
 <%= g.hidden_field :user_id, value: current_user.id %> 
 <%= g.hidden_field :pet_id, value: f.id %>
   <%= g.submit "Battle with  " + f.name, class: 'btn btn- btn-primary'  %>
