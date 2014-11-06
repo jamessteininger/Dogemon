@@ -33,7 +33,7 @@
   </div>
   <div class="col-md-6">
     
-    <center><h3><%= Pet.find(2).sales.count %> <%= link_to @battle.ghost.user.dogetag, @battle.ghost.user %></h3>
+    <center><h3><%= link_to @battle.ghost.user.dogetag, @battle.ghost.user %></h3>
        <%= render partial: "ghosts/ghost_overview", locals: { pet: @battle.ghost } %>    </center>
    
     </div>

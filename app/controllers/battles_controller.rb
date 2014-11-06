@@ -8,7 +8,7 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:battle_id])
     @ghost = Ghost.find(@battle.ghost_id)
     @pet = Pet.find(@battle.pet_id)
-    @pet_archetype = Pet.find(2)  # MAKE REAL ID
+    @pet_archetype = Pet.find(@ghost.pet_id)  # MAKE REAL ID
     @potentials = @pet_archetype.sales.select { |r| r.magic <= @ghost.magic}
     @ghost_log = GhostLog.new
     if @potentials == nil or @potentials == []
