@@ -10,7 +10,7 @@
 <% else %>
 <% if @ghost_logs.last.presence %>
 <div class="well">
-  <% if @battle.b_pet_turn == 'false' %>
+  <% if @battle.b_pet_turn == false %>
   <div class="pull-right">
     <%= link_to "Next Turn", battle_ghost_attack_path(@battle), class: 'btn btn-lg btn-primary' %>
     <%= link_to "?", "#", class: 'btn btn-lg btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Your turn has ended, so click Next Turn to have the enemy Dogemon play their move", 'data-placement' => 'bottom' %>
