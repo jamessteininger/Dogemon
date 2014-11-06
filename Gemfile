@@ -15,6 +15,7 @@ gem 'block_io', '0.1.3'
 gem 'will_paginate', '~> 3.0'
 gem 'redis'
 gem 'websocket-rails'
+gem 'monologue'
 group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
