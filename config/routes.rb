@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   
   get 'home', to: 'static_pages#home'
   get 'roadmap', to: 'static_pages#roadmap'
+  get 'leaderboard', to: 'static_pages#leaderboard'
   
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :battles do
     get 'spawn_aenemy'
+    get 'ghost_attack'
     get 'attack_enemy'
     resources :users
     resources :enemies

@@ -2,6 +2,7 @@ class Sale < ActiveRecord::Base
   validates :user_id, presence: true
   validates :item_id, presence: true
   has_one :equipment, dependent: :destroy
+  belongs_to :item
   belongs_to :user
   
   def name

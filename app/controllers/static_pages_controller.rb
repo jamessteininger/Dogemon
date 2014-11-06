@@ -9,6 +9,10 @@ class StaticPagesController < ApplicationController
      end
    end
   
+  def leaderboard
+    @top_doge = Pet.order('ghost_wins DESC').limit(10)
+  end
+  
   def wallet
     @user = current_user 
     if (@user.block_io_wallet_id.presence)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106045619) do
+ActiveRecord::Schema.define(version: 20141106115115) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20141106045619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "utility_type"
+    t.integer  "ghost_id"
   end
 
   create_table "ghosts", force: true do |t|
@@ -125,6 +126,10 @@ ActiveRecord::Schema.define(version: 20141106045619) do
     t.integer  "battle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "item1_id"
+    t.integer  "item2_id"
+    t.integer  "item3_id"
+    t.integer  "item4_id"
   end
 
   create_table "item_insts", force: true do |t|
@@ -216,6 +221,12 @@ ActiveRecord::Schema.define(version: 20141106045619) do
     t.integer  "battle_id"
     t.integer  "ghost_wins"
     t.integer  "ghost_losses"
+    t.integer  "player_wins"
+    t.integer  "player_losses"
+    t.string   "favorite_activity"
+    t.string   "disposition"
+    t.integer  "against_ghost_wins"
+    t.integer  "against_ghost_losses"
   end
 
   create_table "pvp_battles", force: true do |t|

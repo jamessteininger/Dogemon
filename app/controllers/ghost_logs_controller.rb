@@ -25,7 +25,7 @@ class GhostLogsController < ApplicationController
     magic_amount = params[:magic_amount]
     attacker = params[:attacker]
     defender = params[:defender]
-    @battle.update_attribute(:b_pet_turn, !@battle.b_pet_turn)
+    @battle.update_attribute(:b_pet_turn, 'false')
     #@user = User.find(@battle.user_id)
     # @aenemy = @battle.aenemies.first
     if (attacker.to_i < 2)
@@ -51,20 +51,22 @@ class GhostLogsController < ApplicationController
       end
       @ghost.use_magic(Integer(magic_amount))
     end
-      
+    
     if (@battle.pet.health <= 0)
-      @battle.update_attribute(:winner_id, @battle.other.id)
-      @battle.update_attribute(:battle_state, "completed")
-      Pet.find(@battle.pet_id).update_attribute(:battle_id, nil)
-      Pet.find(@battle.ghost_id).update_attribute(:battle_id, nil)
-    elsif (@battle.ghost.health <= 0)
-      @battle.update_attribute(:winner_id, @battle.user.id)
-      @battle.update_attribute(:battle_state, "completed")
-      Pet.find(@battle.pet_id).update_attribute(:pvp_battle_id, nil)
-      Pet.find(@battle.ghost_id).update_attribute(:pvp_battle_id, nil)
-    else
-      @battle.apply_regen(10)
-    end
+        @battle.update_attribute(:b_pet_winner, false)
+        @battle.update_attribute(:battle_state, "completed")
+        @pet.update_attribute(:against_ghost_losses, @pet.against_ghost_losses + 1)
+        Pet.find(@ghost.pet_id).update_attribute(:ghost_wins, Pet.find(@ghost.pet_id).ghost_wins + 1)
+        @pet.update_attribute(:battle_id, nil)
+      elsif (@battle.ghost.health <= 0)
+        @battle.update_attribute(:b_pet_winner, true)
+        @battle.update_attribute(:battle_state, "completed")
+        Pet.find(@ghost.pet_id).update_attribute(:ghost_losses, Pet.find(@ghost.pet_id).ghost_losses + 1)
+        @pet.update_attribute(:against_ghost_wins, @pet.against_ghost_wins + 1)
+        Pet.find(@battle.pet_id).update_attribute(:battle_id, nil)
+      else
+        @battle.apply_regen(10)
+      end
     #@battle = Battle.find(params[:battle_id])
     @ghost_log = @battle.ghost_logs.new(ghost_log_params)
 

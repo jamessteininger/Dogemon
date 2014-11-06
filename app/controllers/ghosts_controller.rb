@@ -59,7 +59,7 @@ class GhostsController < ApplicationController
   private
 
     def ghost_params
-      params.require(:ghost).permit(:pet_id, :name, :health, :magic, :description, :user_id, :element, :imageurl, :battle_id)
+      params.require(:ghost).permit(:item1_id, :item2_id, :item3_id, :item4_id, :pet_id, :name, :health, :magic, :description, :user_id, :element, :imageurl, :battle_id)
     end
 end
 

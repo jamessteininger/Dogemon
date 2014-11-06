@@ -69,8 +69,8 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		@users = User.all
-		@user = current_user
+    @users = User.paginate(:page => params[:page], :per_page => 40).order('dogetag ASC')
+		#@user = current_user
 	end
   
   def show

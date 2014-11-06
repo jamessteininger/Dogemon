@@ -15,10 +15,15 @@
 
  */
 //@import "bootswatch/lumen/variables";
+//$navbar-default-color: white;
+//$navbar-default-link-color: white;
+//$navbar-inverse-color: white;
+//$navbar-inverse-bg: #CFD8DC;
+//$navbar-inverse-link-color: white;
 @import "bootstrap";
 @import "font-awesome";
 body {
-  padding-top: 70px;
+  padding-top: 80px;
 }
 
 .navbar-brand{

@@ -1,9 +1,27 @@
-<% flash.each do |key, value| %>
-<div class="<%= flash_class(key) %>">
-  <%= value %>
+<% if @battle.battle_state == "completed" %>
+<h2><center><% if @battle.b_pet_winner == true %>
+  <%= image_tag @battle.pet.imageurl %> <%= link_to @battle.pet.name, @battle.pet %> WINS!
+  <% else %>
+  <%= image_tag @battle.ghost.imageurl %> <%= link_to @battle.ghost.name, @battle.ghost %> WINS!
+  <% end %>
+  </h2><center>
+  <%= link_to "Back to Battle Arena", pvp_battles_path %>
+  </center>
+<% else %>
+<% if @ghost_logs.last.presence %>
+<div class="well">
+  <% if @battle.b_pet_turn == 'false' %>
+  <div class="pull-right">
+    <%= link_to "Next Turn", battle_ghost_attack_path(@battle), class: 'btn btn-lg btn-primary' %>
+    <%= link_to "?", "#", class: 'btn btn-lg btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Your turn has ended, so click Next Turn to have the enemy Dogemon play their move", 'data-placement' => 'bottom' %>
+  </div>
+  <% end %>
+  <h2>
+    <%= image_tag @last_pet.imageurl, width: 100 %> <%= @last_log.description %> <% if @last_log.item_id.presence %><%= @last_pet.name %> uses <%= image_tag @last_item.imageurl, width: 100 %> "<%=  @last_item.name %>" for  
+    <%= @last_item.attack %> <%= @last_item.utility_type %> <% end %>
+  </h2>
 </div>
 <% end %>
-
 <div class="well">
     <div class="row">
   <div class="col-md-6">
@@ -15,34 +33,25 @@
   </div>
   <div class="col-md-6">
     
-    <center><h3><%= link_to @battle.ghost.user.dogetag, @battle.ghost.user %></h3>
+    <center><h3><%= Pet.find(2).sales.count %> <%= link_to @battle.ghost.user.dogetag, @battle.ghost.user %></h3>
        <%= render partial: "ghosts/ghost_overview", locals: { pet: @battle.ghost } %>    </center>
    
     </div>
   </div>
 </div>
 
-<% if @battle.b_pet_turn && current_user == @battle.user %>
-<div class="row">
+<% if @battle.b_pet_turn == 'true' && current_user == @battle.user %>
+<div class="row"><center><h3>Your turn!</h3></center>
       <% @battle.pet.equipments.each do |f| %>
         <%= render partial: "items/item_ghost_view", locals: { item: f.sale, equipment: f } %>
       <% end %>
 </div>
-        <%= form_for [@battle, GhostLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :battle_logs, battle: @battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
-          <%= f.hidden_field :battle_id %>
-          <%= f.hidden_field :description, value: @battle.pet.name + " skips its turn. " %>
+        <%= form_for [@battle, GhostLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :ghost_logs, battle_id: @battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
+<%= f.hidden_field :battle_id, value: @battle.id %>
+<%= f.hidden_field :pet_id, value: @battle.pet_id %>
+<%= f.hidden_field :description, value: Pet.find(@battle.pet_id).name + " skips its turn. " %>
           <%= f.hidden_field :bMessage, value: 'false' %>
           <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
         <% end %>
     <% end %>
-<center><h3>Battle Log</h3></center>
-<% if @ghost_logs.last.presence %>
-Last Move:<br> <h2><%= image_tag @last_pet.imageurl, width: 100 %> <%= @last_pet.name %> uses <%= image_tag @last_item.imageurl, width: 100 %> "<%= image_tag @last_item.name %>" for <%= @last_item.attack %> <%= @last_item.utility_type %></h2>
-<%= @ghost_logs.last.description %>
-<br>
-  <% @ghost_logs.order("created_at desc").each do |f| %>
-  <p>
-    <%= f.created_at.strftime("%I:%M %p") %> - <%= f.description %>
-  </p>
-<% end %>
 <% end %>

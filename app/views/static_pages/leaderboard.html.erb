@@ -1,0 +1,19 @@
+<div class="pull-right"><%= link_to "?", "#", class: 'btn btn-lg btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Currently sorted by the Top 10 with the most Ghost Wins", 'data-placement' => 'bottom' %></div>
+<h1><center><strong>Top Dogemon</strong></center></h1>
+<% i = 1 %>
+<% @top_doge.each do |f| %>
+  <div class="row well">
+    <div class="col-md-3">
+      <h1><strong><%= i.ordinalize %> <%= image_tag f.imageurl,  style: "max-height: 140px; max-width: 140px;" %></strong></h1>
+      
+    </div>
+    <div class="col-md-9">
+      <h1><strong>
+        <%= link_to f.name, f %>
+        </strong></h1><h3 class="text-primary">
+        WINS <%= f.ghost_wins %>
+      </h3>
+</div>
+</div>
+<% i += 1 %>
+<% end %>

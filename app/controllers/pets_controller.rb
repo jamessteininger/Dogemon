@@ -75,6 +75,6 @@ before_filter :authenticate_user!
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pet_params
-      params.require(:pet).permit(:element, :health, :magic, :pvp_battle_id, :imageurl, :name, :description, :user_id)
+      params.require(:pet).permit(:against_ghost_losses, :against_ghost_wins, :element, :health, :magic, :pvp_battle_id, :imageurl, :name, :description, :user_id, :ghost_wins, :ghost_losses, :player_wins, :player_losses, :favorite_activity, :disposition)
     end
 end

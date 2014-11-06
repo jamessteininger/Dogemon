@@ -10,7 +10,7 @@
 
   <body>
     
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar- navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -88,8 +88,10 @@
     </div>
   </div>
 <div class="container">
+  <%= render 'layouts/messages' %>
 <%= yield %>
 <hr>
+  <strong>
     <center>&copy; Dogemon, 2014 <br>
       <%= link_to "How to Play", how_to_play_path %> | <%= link_to "Roadmap", roadmap_path %> | <%= link_to "Feedback", new_feedback_path %> | <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %><br><br>
 </body>
