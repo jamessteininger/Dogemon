@@ -8,7 +8,20 @@ before_filter :authenticate_user!
   end
   
   def grid
-    @items = Item.paginate(:page => params[:page], :per_page => 16)
+    sort_type = params[:sort_type]
+    if (sort_type == "Newest")
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at DESC')
+    elsif (sort_type == "Oldest")
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at ASC')
+    elsif (sort_type == "Most Downloads")
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('downloads DESC')
+    elsif (sort_type == "Highest Price")
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('worth DESC')
+    elsif (sort_type == "Lowest Price")
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('worth ASC')
+    else
+      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at ASC')
+    end
   end
 
   # GET /items/1

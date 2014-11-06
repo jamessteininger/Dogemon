@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ghosts
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :pvp_battles do

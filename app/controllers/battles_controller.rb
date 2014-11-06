@@ -1,5 +1,6 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
   #before_action :find_user
   # GET /battles
   # GET /battles.json
@@ -27,12 +28,12 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @user = User.find(@battle.user_id)
-    @enemy = Enemy.find(@battle.enemy_id)
-    @aenemies = @battle.aenemies
+   # @enemy = Pet.find(@battle.enemy_id)
+   # @aenemies = @battle.aenemies
     @battle_logs = @battle.battle_logs
-    if (@battle.aenemies.any?)
+    #if (@battle.aenemies.any?)
     #  @aenemy = Aenemy.find(@battle.aenemy_id)
-    end
+   # end
   end
 
   # GET /battles/new
@@ -47,10 +48,24 @@ class BattlesController < ApplicationController
   # POST /battles
   # POST /battles.json
   def create
+    @ghost_archetype = Pet.order("RANDOM()").first
     @battle = Battle.new(battle_params)
-
+    @ghost = Ghost.new
+    @battle.update_attribute(:ghost_id, @ghost.id)
+    @ghost.update_attribute(:name, @ghost_archetype.name)
+    @ghost.update_attribute(:imageurl, @ghost_archetype.imageurl)
+    @ghost.update_attribute(:element, @ghost_archetype.element)
+    @ghost.update_attribute(:user_id, @ghost_archetype.user_id)
+    @pet = Pet.find(@battle.pet_id)
+    @pet.update_attribute(:health, 100)
+    @pet.update_attribute(:magic, 100)
+    @ghost.update_attribute(:health, 100)
+    @ghost.update_attribute(:magic, 100)
+    @ghost.save
+    @battle.ghost = @ghost
     respond_to do |format|
       if @battle.save
+        Pet.find(@battle.pet_id).update_attribute(:battle_id, @battle.id)
         format.html { redirect_to @battle, notice: 'Battle was successfully created.' }
         format.json { render :show, status: :created, location: @battle }
       else
@@ -95,6 +110,6 @@ class BattlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def battle_params
-      params.require(:battle).permit(:user_id, :enemy_id)
+      params.require(:battle).permit(:user_id, :enemy_id, :pet_id, :b_pet_turn, :battle_state, :b_pet_winner)
     end
 end

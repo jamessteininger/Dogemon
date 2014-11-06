@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pet_id: 1
+  name: MyString
+  health: 1.5
+  magic: 1.5
+  description: MyText
+  user_id: 1
+  element: MyString
+  imageurl: MyString
+  battle_id: 1
+
+two:
+  pet_id: 1
+  name: MyString
+  health: 1.5
+  magic: 1.5
+  description: MyText
+  user_id: 1
+  element: MyString
+  imageurl: MyString
+  battle_id: 1

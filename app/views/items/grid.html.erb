@@ -2,6 +2,10 @@
 <% if current_user.block_io_wallet_id.presence %>
 <div class="pull-right"><%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %></div>
 <h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
+<%= form_tag items_grid_path, method: 'get' do %>
+<%= select_tag  :sort_type, options_for_select(['Newest', 'Oldest', 'Most Downloads', 'Highest Price', 'Lowest Price']) %>
+ <%= submit_tag "Search", :name => nil %>
+<% end %>
 <!--
 <div class="navbar -default">
 <ul class="nav navbar-nav">

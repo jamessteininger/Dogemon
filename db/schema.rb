@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141105081220) do
+=======
+ActiveRecord::Schema.define(version: 20141105190703) do
+>>>>>>> 0a40914215dbeb0873df4c2007556b1f85b06ff5
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -60,13 +64,8 @@ ActiveRecord::Schema.define(version: 20141105081220) do
     t.datetime "updated_at"
   end
 
-  create_table "battles", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "enemy_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "aenemy_id"
-  end
+# Could not dump table "battles" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "colusseums", force: true do |t|
     t.string   "name"
@@ -101,6 +100,20 @@ ActiveRecord::Schema.define(version: 20141105081220) do
     t.integer  "user_id"
     t.string   "feedback_type"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ghosts", force: true do |t|
+    t.integer  "pet_id"
+    t.string   "name"
+    t.float    "health"
+    t.float    "magic"
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "element"
+    t.string   "imageurl"
+    t.integer  "battle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -191,6 +204,9 @@ ActiveRecord::Schema.define(version: 20141105081220) do
     t.integer  "magic"
     t.integer  "pvp_battle_id"
     t.string   "element"
+    t.integer  "battle_id"
+    t.integer  "ghost_wins"
+    t.integer  "ghost_losses"
   end
 
   create_table "pvp_battles", force: true do |t|

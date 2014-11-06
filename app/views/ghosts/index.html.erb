@@ -1,0 +1,41 @@
+<h1>Listing ghosts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pet</th>
+      <th>Name</th>
+      <th>Health</th>
+      <th>Magic</th>
+      <th>Description</th>
+      <th>User</th>
+      <th>Element</th>
+      <th>Imageurl</th>
+      <th>Battle</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ghosts.each do |ghost| %>
+      <tr>
+        <td><%= ghost.pet_id %></td>
+        <td><%= ghost.name %></td>
+        <td><%= ghost.health %></td>
+        <td><%= ghost.magic %></td>
+        <td><%= ghost.description %></td>
+        <td><%= ghost.user_id %></td>
+        <td><%= ghost.element %></td>
+        <td><%= ghost.imageurl %></td>
+        <td><%= ghost.battle_id %></td>
+        <td><%= link_to 'Show', ghost %></td>
+        <td><%= link_to 'Edit', edit_ghost_path(ghost) %></td>
+        <td><%= link_to 'Destroy', ghost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ghost', new_ghost_path %>
