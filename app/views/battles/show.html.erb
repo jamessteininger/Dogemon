@@ -39,7 +39,7 @@
     </div>
   </div>
 </div>
-  <%= @battle.b_pet_turn %>
+  <% if @battle.b_pet_turn == 'true' %>
   <% if current_user.id == @battle.user_id %>
 <div class="row"><center><h3>Your turn!</h3></center>
       <% @battle.pet.equipments.each do |f| %>
@@ -54,4 +54,4 @@
           <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
         <% end %>
     <% end %>
-<% end %>
+  <% end %><% end %>
