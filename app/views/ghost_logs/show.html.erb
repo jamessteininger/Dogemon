@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Battle:</strong>
+  <%= @ghost_log.battle_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ghost_log.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @ghost_log.type %>
+</p>
+
+<p>
+  <strong>Bmessage:</strong>
+  <%= @ghost_log.bMessage %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @ghost_log.item_id %>
+</p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @ghost_log.pet_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ghost_log.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_ghost_log_path(@ghost_log) %> |
+<%= link_to 'Back', ghost_logs_path %>

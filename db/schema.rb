@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105190703) do
+ActiveRecord::Schema.define(version: 20141106045619) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 20141105190703) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
+    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
@@ -98,6 +98,19 @@ ActiveRecord::Schema.define(version: 20141105190703) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "ghost_logs", force: true do |t|
+    t.integer  "battle_id"
+    t.string   "description"
+    t.string   "type"
+    t.boolean  "bMessage"
+    t.integer  "item_id"
+    t.integer  "pet_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "utility_type"
   end
 
   create_table "ghosts", force: true do |t|

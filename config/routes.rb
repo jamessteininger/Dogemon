@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ghost_logs
+
   resources :ghosts
 
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-material-design
+
 $(document).on("ready page:change", function() {
     $('.tag-tooltip').tooltip();
 });

@@ -15,9 +15,6 @@
   <div class="col-md-6">
     <center><h3><%= @pvp_battle.user.dogetag %><% if current_user.id == @pvp_battle.user_id %> (you) <% end %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @pvp_battle.pet1 } %>    </center>
-
-   
-
   </div>
   <div class="col-md-6">
     

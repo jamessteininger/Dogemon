@@ -1,0 +1,37 @@
+<h1>Listing ghost_logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Battle</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Bmessage</th>
+      <th>Item</th>
+      <th>Pet</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ghost_logs.each do |ghost_log| %>
+      <tr>
+        <td><%= ghost_log.battle_id %></td>
+        <td><%= ghost_log.description %></td>
+        <td><%= ghost_log.type %></td>
+        <td><%= ghost_log.bMessage %></td>
+        <td><%= ghost_log.item_id %></td>
+        <td><%= ghost_log.pet_id %></td>
+        <td><%= ghost_log.user_id %></td>
+        <td><%= link_to 'Show', ghost_log %></td>
+        <td><%= link_to 'Edit', edit_ghost_log_path(ghost_log) %></td>
+        <td><%= link_to 'Destroy', ghost_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ghost log', new_ghost_log_path %>

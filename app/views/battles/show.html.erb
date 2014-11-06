@@ -7,7 +7,7 @@
 <div class="well">
     <div class="row">
   <div class="col-md-6">
-    <center><h3><%= @battle.user.dogetag %><% if current_user.id == @battle.user_id %> (you) <% end %></h3>
+    <center><h3><%= link_to @battle.user.dogetag, @battle.user %><% if current_user.id == @battle.user_id %> (you) <% end %></h3>
       <%= render partial: "pets/pet_overview", locals: { pet: @battle.pet } %>    </center>
 
    
@@ -15,9 +15,34 @@
   </div>
   <div class="col-md-6">
     
-    <center><h3><%= @battle.ghost.user.dogetag %></h3>
-       <%= render partial: "pets/pet_overview", locals: { pet: @battle.ghost } %>    </center>
+    <center><h3><%= link_to @battle.ghost.user.dogetag, @battle.ghost.user %></h3>
+       <%= render partial: "ghosts/ghost_overview", locals: { pet: @battle.ghost } %>    </center>
    
     </div>
   </div>
 </div>
+
+<% if @battle.b_pet_turn && current_user == @battle.user %>
+<div class="row">
+      <% @battle.pet.equipments.each do |f| %>
+        <%= render partial: "items/item_ghost_view", locals: { item: f.sale, equipment: f } %>
+      <% end %>
+</div>
+        <%= form_for [@battle, GhostLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :battle_logs, battle: @battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
+          <%= f.hidden_field :battle_id %>
+          <%= f.hidden_field :description, value: @battle.pet.name + " skips its turn. " %>
+          <%= f.hidden_field :bMessage, value: 'false' %>
+          <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
+        <% end %>
+    <% end %>
+<center><h3>Battle Log</h3></center>
+<% if @ghost_logs.last.presence %>
+Last Move:<br> <h2><%= image_tag @last_pet.imageurl, width: 100 %> <%= @last_pet.name %> uses <%= image_tag @last_item.imageurl, width: 100 %> "<%= image_tag @last_item.name %>" for <%= @last_item.attack %> <%= @last_item.utility_type %></h2>
+<%= @ghost_logs.last.description %>
+<br>
+  <% @ghost_logs.order("created_at desc").each do |f| %>
+  <p>
+    <%= f.created_at.strftime("%I:%M %p") %> - <%= f.description %>
+  </p>
+<% end %>
+<% end %>

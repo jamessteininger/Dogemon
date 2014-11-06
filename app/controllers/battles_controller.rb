@@ -30,7 +30,12 @@ class BattlesController < ApplicationController
     @user = User.find(@battle.user_id)
    # @enemy = Pet.find(@battle.enemy_id)
    # @aenemies = @battle.aenemies
-    @battle_logs = @battle.battle_logs
+    @ghost_logs = @battle.ghost_logs
+    if @ghost_logs.any?
+      @last_log = @ghost_logs.last
+      @last_item = Item.find(@last_log.item_id)
+      @last_pet = Pet.find(@last_log.pet_id)
+    end
     #if (@battle.aenemies.any?)
     #  @aenemy = Aenemy.find(@battle.aenemy_id)
    # end
@@ -56,6 +61,7 @@ class BattlesController < ApplicationController
     @ghost.update_attribute(:imageurl, @ghost_archetype.imageurl)
     @ghost.update_attribute(:element, @ghost_archetype.element)
     @ghost.update_attribute(:user_id, @ghost_archetype.user_id)
+    @ghost.update_attribute(:pet_id, @ghost_archetype.id)
     @pet = Pet.find(@battle.pet_id)
     @pet.update_attribute(:health, 100)
     @pet.update_attribute(:magic, 100)
