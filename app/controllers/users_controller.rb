@@ -69,7 +69,11 @@ class UsersController < ApplicationController
 	end
 
 	def index
-    @users = User.paginate(:page => params[:page], :per_page => 40).order('dogetag ASC')
+    if params[:search]
+      @users = User.where(['dogetag LIKE ?', "%#{params[:search]}%"]).paginate(:page => params[:page], :per_page => 30).order('dogetag ASC')
+    else
+      @users = User.paginate(:page => params[:page], :per_page => 30).order('dogetag ASC')
+    end
 		#@user = current_user
 	end
   
