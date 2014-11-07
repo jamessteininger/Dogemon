@@ -17,10 +17,10 @@ class StaticPagesController < ApplicationController
       if f.ghost_losses == nil 
         f.update_attribute(:ghost_losses, 0)
       end
-      if f.ghost_wins == nil 
+      if f.against_ghost_wins == nil 
         f.update_attribute(:against_ghost_wins, 0)
       end
-      if f.ghost_losses == nil 
+      if f.against_ghost_losses == nil 
         f.update_attribute(:against_ghost_losses, 0)
       end
     end
