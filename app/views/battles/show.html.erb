@@ -10,7 +10,7 @@
 <% else %>
 <% if @ghost_logs.last.presence %>
 <div class="well">
-  <% if @battle.b_pet_turn == false %>
+  <% if @battle.b_pet_turn == false or @battle.b_pet_turn == 'false' %>
   <div class="pull-right">
     <%= link_to "Next Turn", battle_ghost_attack_path(@battle), class: 'btn btn-lg btn-primary' %>
     <%= link_to "?", "#", class: 'btn btn-lg btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Your turn has ended, so click Next Turn to have the enemy Dogemon play their move", 'data-placement' => 'bottom' %>
@@ -18,7 +18,7 @@
   <% end %>
   <h2>
     <%= image_tag @last_pet.imageurl, width: 100 %> <%= @last_log.description %> <% if @last_log.item_id.presence %><%= @last_pet.name %> uses <%= image_tag @last_item.imageurl, width: 100 %> "<%=  @last_item.name %>" for  
-    <%= @last_item.attack %> <%= @last_item.utility_type %> <% end %>
+    <%= @last_item.attack %><% if @last_log.rand_amount.presence %>+<%= @last_log.rand_amount %><% end %> <%= @last_item.utility_type %> <% end %>
   </h2>
 </div>
 <% end %>
@@ -39,7 +39,7 @@
     </div>
   </div>
 </div>
-  <% if @battle.b_pet_turn == true %>
+  <% if @battle.b_pet_turn == true or @battle.b_pet_turn == 'true' %>
   <% if current_user.id == @battle.user_id %>
 <div class="row"><center><h3>Your turn!</h3></center>
       <% @battle.pet.equipments.each do |f| %>

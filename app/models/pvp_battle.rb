@@ -64,5 +64,17 @@ class PvpBattle < ActiveRecord::Base
     if (pet2.magic < 0)
       pet2.update_attribute(:magic, 0)
     end
+    if (pet1.health > 100)
+      pet1.update_attribute(:health, 100)
+    end
+    if (pet2.health > 100)
+      pet2.update_attribute(:health, 100)
+    end
+    if (pet1.health < 0)
+      pet1.update_attribute(:health, 0)
+    end
+    if (pet2.health < 0)
+      pet2.update_attribute(:health, 0)
+    end
   end
 end

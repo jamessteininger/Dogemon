@@ -29,5 +29,17 @@ class Battle < ActiveRecord::Base
     if (ghost.magic < 0)
       ghost.update_attribute(:magic, 0)
     end
+    if (pet.health > 100)
+      pet.update_attribute(:health, 100)
+    end
+    if (ghost.health > 100)
+      ghost.update_attribute(:health, 100)
+    end
+    if (pet.health < 0)
+      pet.update_attribute(:health, 0)
+    end
+    if (ghost.health < 0)
+      ghost.update_attribute(:health, 0)
+    end
   end
 end

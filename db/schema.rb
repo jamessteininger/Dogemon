@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106224512) do
+ActiveRecord::Schema.define(version: 20141107020248) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20141106224512) do
     t.datetime "updated_at"
     t.string   "utility_type"
     t.integer  "ghost_id"
+    t.integer  "rand_amount"
   end
 
   create_table "ghosts", force: true do |t|

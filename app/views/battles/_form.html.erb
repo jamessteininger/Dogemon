@@ -1,7 +1,7 @@
 <% current_user.pets.each do |f| %>
 <% if f.pvp_battle_id == nil or f.pvp_battle_id == 0 %>
 <%= image_tag(f.imageurl, width: "225px") %>
-<%= form_for(@battle) do |g| %>
+<%= form_for (@battle), url: {controller: :battles,  ghost_pet_id: 0 } do |g| %>
   <% if @battle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@battle.errors.count, "error") %> prohibited this battle from being saved:</h2>
@@ -15,6 +15,7 @@
   <% end %>
 <%= g.hidden_field :battle_state, value: "in_progress" %>
 <%= g.hidden_field :b_pet_turn, value: 'true' %>
+<%= g.hidden_field :ghost_pet_id, value: 0 %>
 <%= g.hidden_field :user_id, value: current_user.id %> 
 <%= g.hidden_field :pet_id, value: f.id %>
   <%= g.submit "Battle with  " + f.name, class: 'btn btn- btn-primary'  %>

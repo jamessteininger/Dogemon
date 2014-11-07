@@ -11,6 +11,8 @@ class BattlesController < ApplicationController
     @pet_archetype = Pet.find(@ghost.pet_id)  # MAKE REAL ID
     @potentials = @pet_archetype.sales.select { |r| r.magic <= @ghost.magic}
     @ghost_log = GhostLog.new
+    rand_amount = rand(0..4)
+    
     if @potentials == nil or @potentials == []
       @ghost_log.update_attribute(:description, 'The enemy had to skip a turn')
       @ghost_log.update_attribute(:pet_id, @ghost.id)
@@ -19,18 +21,19 @@ class BattlesController < ApplicationController
       @ghost_log.update_attribute(:battle_id, @battle.id)
       @ghost_log.update_attribute(:ghost_id, @battle.ghost_id)
       @ghost_log.update_attribute(:item_id, @sale.item.id)
+      @ghost_log.update_attribute(:rand_amount, rand_amount)
       @ghost_log.update_attribute(:utility_type, @sale.item.utility_type)
       utility_type = @sale.item.utility_type
       amount = @sale.item.attack
       magic_amount = @sale.item.magic
       if (utility_type == 'Attack')
-        @pet.take_damage(Integer(amount))
+        @pet.take_damage(Integer(amount) + rand_amount)
       end
       if (utility_type == 'Drain')
-        @pet.take_magic_damage(Integer(amount))
+        @pet.take_magic_damage(Integer(amount) + rand_amount)
       end
       if (utility_type == 'Heal')
-        @ghost.heal_health(Integer(amount))
+        @ghost.heal_health(Integer(amount) + rand_amount)
       end
       
       @ghost.use_magic(Integer(magic_amount))
@@ -111,7 +114,7 @@ class BattlesController < ApplicationController
   # POST /battles
   # POST /battles.json
   def create
-    if params[:ghost_pet_id] == 0
+    if params[:ghost_pet_id] == 0 or params[:ghost_pet_id] == '0'
       @ghost_archetype = Pet.order("RANDOM()").first
     else
       @ghost_archetype = Pet.find(params[:ghost_pet_id])
