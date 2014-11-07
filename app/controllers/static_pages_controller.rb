@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
    end
   
   def leaderboard
-    @top_doge = Pet.order('ghost_wins DESC').limit(10)
+    @top_doge = Pet.order('ghost_wins ASC').limit(10)
   end
   
   def wallet
