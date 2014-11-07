@@ -1,10 +1,10 @@
-<div class='col-md-6 col-md-offset-3'><h1>Dogemon Blog</h1>
+<div class='col-md-6 col-md-offset-3'><h1>Dogemon Blog</h1><% if current_user.presence %>
   <% if current_user.email == 'jesteininger@gmail.com' %>
 <%= render 'form' %><br>
-  <% end %>
+  <% end %><% end %>
     <% @posts.each do |post| %>
 <p>
-  <%= post.created_at.to_formatted_s(:long) %>  <% if current_user.email == 'jesteininger@gmail.com' %><%= link_to 'Edit', edit_post_path(post), class: 'pull-right' %> <%= link_to 'Delete', post_path(post), method: :delete, class: 'pull-right' %><% end %><hr>
+  <%= post.created_at.to_formatted_s(:long) %>  <% if current_user.presence %><% if current_user.email == 'jesteininger@gmail.com' %><%= link_to 'Edit', edit_post_path(post), class: 'pull-right' %> <%= link_to 'Delete', post_path(post), method: :delete, class: 'pull-right' %><% end %><% end %><hr>
        <%= post.description %>
 <%= post.description %>
 </p>
