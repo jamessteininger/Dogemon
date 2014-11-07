@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
    end
   
   def leaderboard
-    Pet.each do |f|
+    Pet.all.each do |f|
       if f.ghost_wins == nil 
         f.update_attribute(:ghost_wins, 0)
       end
