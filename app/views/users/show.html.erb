@@ -91,7 +91,7 @@
   <div class="panel-heading"><h2>Dogemon</h2></div>
     <div class="panel-body">
       <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %><%= pet.name %></h4><br>
-  <%= image_tag(pet.imageurl, class: '', height: "150px") %><br>
+      <%= link_to image_tag(pet.imageurl, class: 'btn', height: "150px"), pet %><br>
   <%= pet.description %><p></p>  
   </div>
   </div>  

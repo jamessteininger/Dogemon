@@ -16,6 +16,7 @@
         <h4><strong>Age: </strong><%= time_ago_in_words(@pet.created_at) %> old (b. <%= @pet.created_at.strftime("%B %d, %Y") %>)</h4>
         <h4><strong>Element: </strong><%= @pet.element %></h4>
       <h4><strong>Owner: </strong><%= link_to @pet.user.dogetag, @pet.user %></h4>
+    <h4><strong>Equipped Items: </strong><%= @pet.equipments.count %></h4>
         <% if @pet.favorite_activity.presence %><h4><strong>Favorite Activity: </strong><%= @pet.favorite_activity %></h4><% end %>
         <% if @pet.disposition.presence %><h4><strong>Disposition: </strong><%= @pet.favorite_activity %></h4><% end %>
     </div>
@@ -58,8 +59,8 @@
     <% end %>
     </div>
     <%= link_to 'Release', @pet, method: :delete, data: { confirm: 'Are you sure you want to release this Dogemon? Remember the Red Wedding. Also be sure to unequip all items first. ' } %> 
-  <% end  %>
-
+  <% else  %>
+  <%= link_to "challenge?", pet_challenge_path(@pet), class: 'btn btn- btn-warning' %><% end %>
 </div>  
 
 </div>
