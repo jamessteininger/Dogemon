@@ -1,0 +1,9 @@
+<h1>Editing post</h1>
+  <% if current_user.email == 'jesteininger@gmail.com' %>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', posts_path %>
+<% else %> Not allowed
+<% end %>

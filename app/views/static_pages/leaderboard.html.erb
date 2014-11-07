@@ -7,11 +7,11 @@
       <h1><strong><%= i.ordinalize %> <%= image_tag f.imageurl,  style: "max-height: 140px; max-width: 140px;" %></strong></h1>
       
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9"><div class="pull-right"><%= link_to "challenge?", pet_challenge_path(f), class: 'btn btn- btn-warning' %></div>
       <h1><strong>
         <%= link_to f.name, f %>
         </strong></h1><h3 class="text-primary">
-        WINS <%= f.ghost_wins %>
+      WINS <%= f.ghost_wins %>
       </h3>
 </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106115115) do
+ActiveRecord::Schema.define(version: 20141106224512) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(version: 20141106115115) do
 
 # Could not dump table "battles" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
+
+  create_table "blogs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "colusseums", force: true do |t|
     t.string   "name"
@@ -227,6 +235,14 @@ ActiveRecord::Schema.define(version: 20141106115115) do
     t.string   "disposition"
     t.integer  "against_ghost_wins"
     t.integer  "against_ghost_losses"
+  end
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pvp_battles", force: true do |t|

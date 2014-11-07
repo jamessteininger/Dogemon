@@ -19,7 +19,7 @@
   </div>
   </div>
     <% end %>
-  <% if @user.pets.count == 0 %><center><h4>Looks like you have no spirits in your pack. <%= link_to "Click here to discover a new spirit!", new_pet_path %><% end %>
+  <% if @user.pets.count == 0 %><center><h4>Looks like you have no Dogemon. <%= link_to "Click here to discover a new Dogemon!", new_pet_path %><% end %>
 </div>
     </div>
   
@@ -32,7 +32,7 @@
   </div>
 <div class="panel-body">
   <% if @user.sales.count == 0 %>
-  <%= link_to "Open my booster pack!", user_get_booster_path(@user), class: 'btn btn-primary btn-lg' %>
+  <%= link_to "Open my booster pack!", user_get_booster_path(@user), class: 'btn btn-primary btn-lg tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "This will grant you 5 free random items from the marketplace!", 'data-placement' => 'bottom' %>
   <% end %>
 <% @sales.each do |f| %>
   <% if Item.exists?(id: f.item_id) %>
@@ -49,7 +49,7 @@
     
     <div class="panel panel-default">
 <div class="panel-heading">
-  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2><br>Coin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
+  <h2><i class="fa fa-paint-brush"></i> Creator of these items</h2><br>Total Dogecoin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
   </div>
 <div class="panel-body">
   <% if @user.items.count == 0 %>

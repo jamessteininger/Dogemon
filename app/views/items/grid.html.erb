@@ -37,5 +37,6 @@
 <p><%= will_paginate @items %></p>
 </div>
 <% else %>
-<%= link_to 'Go get your wallet!', wallet_path %>
+<h2>You're almost there!</h2>
+<p class="lead">The Market has a ton of great content made entirely by the community! You can buy and sell items that help Dogemon in battle. In order to get started, you first need to <%= link_to 'get your wallet', wallet_path %>.
 <% end %>

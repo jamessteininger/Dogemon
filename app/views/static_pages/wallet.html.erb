@@ -1,10 +1,10 @@
 <h1><i class="fa fa-money"></i> Wallet of <%= @user.dogetag %></h1>
 <hr>
-<% if !@user.block_io_wallet_id.presence %><h3>Set up your wallet now! This will create a Dogecoin wallet tied to your Dogemon account. You can add or withdrawl funds at any time.
+<% if !@user.block_io_wallet_id.presence %><h3>Set up your wallet now! This will create a Dogecoin wallet tied to your Dogemon account, which will allow you to buy and sell in the Market. Don't know what Dogecoin is? <%= link_to "Go to Dogecoin.com", "http://dogecoin.com/" %> to find out more about Dogecoin and the cryptocurrency revolution.
 <br><%= link_to "Make my Dogemon wallet!", user_make_wallet_path(@user), class: 'btn btn-primary btn-lg' %></h3>
 <% else %>
 <h2><span class="label label-primary">
-Balance: <%= @blockio["data"]["available_balance"].to_i %>
+Dogecoin Balance: <%= @blockio["data"]["available_balance"].to_i %>
   </span>
   </h2>
 
@@ -28,7 +28,7 @@ To:
 <% end %>
 
 <hr>
-What are Dogecoin, and how do they work? | <%= link_to "Buy Dogecoin", "https://weselldoges.com/" %> 
+<%= link_to "How do Dogecoin work?", "http://dogecoin.com/" %> | <%= link_to "Buy Dogecoin", "https://weselldoges.com/" %> 
 <% end %>
 
 

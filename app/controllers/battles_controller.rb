@@ -111,8 +111,11 @@ class BattlesController < ApplicationController
   # POST /battles
   # POST /battles.json
   def create
-    
-    @ghost_archetype = Pet.order("RANDOM()").first
+    if params[:ghost_pet_id] == 0
+      @ghost_archetype = Pet.order("RANDOM()").first
+    else
+      @ghost_archetype = Pet.find(params[:ghost_pet_id])
+    end
     @battle = Battle.new(battle_params)
     @ghost = Ghost.new
     @battle.update_attribute(:ghost_id, @ghost.id)

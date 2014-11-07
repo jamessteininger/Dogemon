@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :posts
+
+  resources :blogs
+
   resources :ghost_logs
 
   resources :ghosts
@@ -49,6 +53,7 @@ Rails.application.routes.draw do
 
   resources :pets do
     resources :item_insts
+    get 'challenge'
     resources :equipment
   end
 

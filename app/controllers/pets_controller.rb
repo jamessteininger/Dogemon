@@ -6,7 +6,11 @@ before_filter :authenticate_user!
   def index
     @pets = current_user.pets.all
   end
-
+  def challenge
+    @pet = Pet.find(params[:pet_id])
+    @user = @pet.user
+    @sales = @user.sales
+  end
   # GET /pets/1
   # GET /pets/1.json
   def show
