@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
   get 'how_to_play', to: 'static_pages#how_to_play'
+  get 'legal', to: 'static_pages#legal', as: 'legal'
   
   resources :equipment
 
