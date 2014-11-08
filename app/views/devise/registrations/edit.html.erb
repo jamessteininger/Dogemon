@@ -14,14 +14,24 @@
   <%= f.text_field :dogetag %></div>
 
 <%= f.label :profile_icon %><br />
-    <%= f.radio_button(:imageurl, "http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif" ) %>
-     <%= image_tag("http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif",height:55) %> 
-    <%= f.radio_button(:imageurl, "http://i1.kym-cdn.com/entries/icons/square/000/013/564/aP2dv.gif") %>
-     <%= image_tag("http://i1.kym-cdn.com/entries/icons/square/000/013/564/aP2dv.gif",height:55) %>
-    <%= f.radio_button(:imageurl, "http://i.imgur.com/NUyttbn.gif") %>
-    <%= image_tag("http://i.imgur.com/NUyttbn.gif",height:55) %>
-    <%= f.radio_button(:imageurl, "http://www.stuffcoins.com/images/items/2765.gif") %>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default active">
+        <%= f.radio_button(:imageurl, "http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif" ) %>
+         <%= image_tag("http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif",height:55) %> 
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button(:imageurl, "http://i1.kym-cdn.com/entries/icons/square/000/013/564/aP2dv.gif") %>
+         <%= image_tag("http://i1.kym-cdn.com/entries/icons/square/000/013/564/aP2dv.gif",height:55) %>
+      </label>
+      <label class="btn btn-default">
+       <%= f.radio_button(:imageurl, "http://i.imgur.com/NUyttbn.gif") %>
+        <%= image_tag("http://i.imgur.com/NUyttbn.gif",height:55) %>
+      </label>
+      <label class="btn btn-default">
+       <%= f.radio_button(:imageurl, "http://www.stuffcoins.com/images/items/2765.gif") %>
     <%= image_tag("http://www.stuffcoins.com/images/items/2765.gif",height:55) %>
+      </label>
+    </div>
 
 <div><%= f.label :bio %> <i>(write a little something about yourself)</i><br />
   <%= f.text_field :bio %></div>
