@@ -1,4 +1,4 @@
-<% current_user.pets.each do |f| %>
+<div class="row"><% current_user.pets.each do |f| %><div class="col-md-3">
 <% if f.pvp_battle_id == nil or f.pvp_battle_id == 0 %>
 <%= image_tag(f.imageurl, width: "225px") %>
 <%= form_for (@battle), url: {controller: :battles,  ghost_pet_id: 0 } do |g| %>
@@ -23,5 +23,8 @@
 <% end %>
 
 <% end %>
+</div>
 <% end %>
+</div>
+<br><hr>
 <p>If there are no Dogemon here, that means you either have not created any, or they are all currently in a battle. Go to your <%= link_to "profile page", current_user %> to make a new Dogemon, or go back to the <%= link_to "battles page", pvp_battles_path %> to check on your current battles. </p>

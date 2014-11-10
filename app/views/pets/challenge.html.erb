@@ -1,7 +1,7 @@
 <h2><strong><%= element_icon(@pet.element) %>  <%= @pet.name %></strong></h2>
       <%= link_to image_tag(@pet.imageurl, width: "225px"), @pet %><br>
 <% if current_user.id != @pet.user_id %>
-<div class="well">Challenge to a ghost battle?
+<div class="well">Challenge to a battle?
 <% current_user.pets.each do |f| %>
   <%= form_for (Battle.new), url: { controller: :battles, ghost_pet_id: @pet.id } do |g| %>
     <%= g.hidden_field :pet_id, value: f.id %>

@@ -24,12 +24,8 @@
   <div class="col-md-5">
     <div class="well">
       <h2><strong>Battle Stats</strong></h2><hr>
-      <h3>As Ghost</h3>
-      <h4 class="text-primary"><strong>WINS <%= @pet.ghost_wins %></strong></h4>
-      <h4 class="text-danger"><strong>LOSSES <%= @pet.ghost_losses %></strong></h4>
-      <h3>Against Ghosts</h3>
-      <h4 class="text-primary"><strong>WINS <%= @pet.against_ghost_wins %></strong></h4>
-      <h4 class="text-danger"><strong>LOSSES <%= @pet.against_ghost_losses %></strong></h4>
+      <h4 class="text-primary"><strong>WINS <%= @pet.ghost_wins + @pet.against_ghost_wins %></strong></h4>
+      <h4 class="text-danger"><strong>LOSSES <%= @pet.ghost_losses + @pet.against_ghost_losses %></strong></h4>
     </div>
   </div>
 </div>

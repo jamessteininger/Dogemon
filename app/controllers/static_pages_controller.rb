@@ -24,7 +24,7 @@ class StaticPagesController < ApplicationController
         f.update_attribute(:against_ghost_losses, 0)
       end
     end
-    @top_doge = Pet.order('ghost_wins DESC').limit(10)
+    @top_doge = Pet.order('ghost_wins + against_ghost_wins DESC').limit(10)
     @top_against_doge = Pet.order('against_ghost_wins DESC').limit(10)
   end
   

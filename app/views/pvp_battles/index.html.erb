@@ -1,18 +1,19 @@
-<h1><strong><center>Battle Arena</h1><h5><center>(<%= PvpBattle.count %> Player Battles / <%= Battle.count %> Ghost Battles in the Dogemon Universe )</h5></strong></center>
+<h1><strong><center>Battle Arena</h1><h5><center>- <%= PvpBattle.count + Battle.count %> battles have been fought -</h5></strong></center>
 <hr><div class="">
-<%= link_to 'Start a player new battle', new_pvp_battle_path, class: 'btn btn-lg btn-primary tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Player battles work well when you are in direct communication with the other player", 'data-placement' => 'bottom' %>
-<%= link_to 'Start a new ghost battle', new_battle_path, class: 'btn btn-lg btn-success tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Ghost battles work great when you want to jump into the action, because they are powered by AI", 'data-placement' => 'bottom' %>
-<%= link_to 'See the TOP Dogemon leaderboard', leaderboard_path, class: 'btn btn-lg btn-warning tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' %>
+  <%= link_to 'Start a random battle', new_battle_path, class: 'btn btn-lg btn-block btn-success tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Start here if you are new. Random battles work great when you want to jump into the action, because the opposing Dogemon is powered by AI", 'data-placement' => 'bottom' %><br>
+  <%= link_to 'Request a player to battle', new_pvp_battle_path, class: 'btn btn-block btn-lg btn-primary tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Player battles work well in real life, so you know whose turn it is", 'data-placement' => 'bottom' %>
+  <br>
+<%= link_to 'See the TOP Dogemon leaderboard', leaderboard_path, class: 'btn btn-block btn-lg btn-warning tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' %>
 <br>
 </div><div class="row">
 <div class="col-md-6">
-  <h2><center><strong>My Ghost Battles</h2></center></strong>
+  <h2><center><strong>My Battles</h2></center></strong>
   <hr>
   <% current_user.pets.order('created_at DESC').each do |p| %>
   <% p.battles.order('created_at DESC').each do |b| %>
   <% if b.battle_state == 'in_progress' %>
   <% if b.ghost.presence %><p class="well">
-  Ghost battle against <%= link_to b.ghost.name, b %>
+  <%= image_tag(b.ghost.imageurl, width: 50 ) %> <%= link_to "Battle against " + b.ghost.name, b %>
   </p>
   <% end %>
   <% end %>
@@ -22,7 +23,6 @@
 <div class="col-md-6">
   <h2><center><strong>My Player Battles</h2></center></strong>
   <hr>
-<h3>On Going Battles</h3>
 <% current_user.pvp_battles.each do |f| %>
 
   <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
@@ -43,10 +43,9 @@
   <% end %>
 </p>
 <% end %>
-<h3>Pending Battle Requests</h3>
 <% current_user.pvp_battles.each do |f| %>
 <p>
-  <% if !f.other.presence or !f.pet2.presence %><div class="well">
+  <% if !f.other.presence or !f.pet2.presence %><div class="well"><h4>Battle Request</h4>
 <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
   <% end %>
@@ -60,27 +59,5 @@
   <% end %>
 </p>
 <% end %>
-<h3>Completed Battles</h3>
-<% current_user.pvp_battles.each do |f| %>
-<p>
-  <% if f.battle_state == 'completed' %>
-  <%= link_to "Completed", f %> (The winner was <%= User.find(f.winner_id).dogetag %>)
-  <% end %>
-</p>
-<% end %>
-<% current_user.pvp_battles_p2.each do |f| %>
-<p>
-  <% if f.battle_state == 'completed' %>
-  <%= link_to "Completed", f %> (The winner was <%= User.find(f.winner_id).dogetag %>)
-  <% end %>
-</p>
-<% end %>
-
-<% if current_user.pets.count == 0 %>
-<center><h4>Looks like you have no spirits in your pack. <br>You can start battling once you have a spirit pet! <br><%= link_to "Click here to discover a new spirit!", new_pet_path %>
-  <% else %>
-<br>
-
-  <% end %>
 </div>
   </div>
