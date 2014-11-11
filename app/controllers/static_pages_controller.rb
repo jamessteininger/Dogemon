@@ -56,4 +56,7 @@ class StaticPagesController < ApplicationController
   def spirits
     @user = current_user
   end
+  def legal
+    
+  end
 end
