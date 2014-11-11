@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   validates :dogetag, presence: true
   validates :imageurl, presence: true
+  validates :if_accepted_terms, presence: true
   has_many :transactions
   has_many :sales, dependent: :destroy
   has_many :logs

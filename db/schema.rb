@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107020248) do
+ActiveRecord::Schema.define(version: 20141111035430) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(version: 20141107020248) do
     t.float    "coin_made"
     t.integer  "block_io_wallet_id"
     t.string   "channel_key"
+    t.boolean  "if_accepted_terms"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
