@@ -11,7 +11,7 @@
 </head>
 
   <body>
-    
+
     <div class="navbar navbar-default navbar- navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -30,38 +30,38 @@
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
             <li> 
-              <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Profile", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.user_path(current_user), class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Profile", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-user fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to items_grid_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Market", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.items_grid_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Market", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-tag fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to pvp_battles_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Battle Arena", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.pvp_battles_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Battle Arena", 'data-placement' => 'bottom' do %>
               <i class="fa fa-bomb fa-2x"></i> 
               <!--<span class="badge"><% current_user.num_active_turns %></span>-->
               <% end %>
             </li>
             <li> 
-              <%= link_to leaderboard_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Leaderboard", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.leaderboard_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Leaderboard", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-list fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to users_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Players", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.users_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Players", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-group fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-money fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
+              <%= link_to main_app.how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
                 <i class="fa fa-question fa-2x"></i>
               <% end %>
             </li>
@@ -72,10 +72,10 @@
 <% else %>
           <ul class="nav navbar-nav">
           <li>
-            <%= link_to "How to Play", how_to_play_path %>
+            <%= link_to "How to Play", main_app.how_to_play_path %>
             </li>
             <li>
-              <%= link_to "About", about_path %>
+              <%= link_to "About", main_app.about_path %>
             </li>
             
             <li>
@@ -85,7 +85,7 @@
           </ul>
     <ul class="nav navbar-nav navbar-right">
     <form class="navbar-forform-">
-      <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "Sign In", main_app.new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", main_app.new_user_registration_path, class: "btn btn-primary" %>
       </form>
     </ul>
    <% end %>
@@ -95,12 +95,12 @@
     </div>
     </div>
   </div>
-<div class="container">
+
   <%= render 'layouts/messages' %>
 <%= yield %>
 <hr>
   <strong>
     <center>&copy; Dogemon, 2014 <br>
-      <%= link_to "How to Play", how_to_play_path %> | <%= link_to "Blog & Updates", posts_path %> | <%= link_to "Roadmap", roadmap_path %> | <%= link_to "Feedback", new_feedback_path %> | <%= link_to "About", about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %> | <%= link_to "Terms & Conditions", legal_path %><br><br>
+      <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
 </body>
 </html>
