@@ -12,7 +12,8 @@
  *
 *= require bootstrap-material-design
  *= require_self
-
+*= require 'forem/base'
+*= require "forem-bootstrap"
  */
 //@import "bootswatch/lumen/variables";
 //$navbar-default-color: white;
