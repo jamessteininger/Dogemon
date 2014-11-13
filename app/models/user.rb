@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   has_many :market_item_votes, dependent: :destroy
   has_many :upvoted_items, through: :market_item_votes, source: :item
   
+  def forem_name
+    dogetag
+end
+  
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)
   end
