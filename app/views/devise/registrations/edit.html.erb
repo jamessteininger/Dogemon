@@ -1,22 +1,24 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
+<div class=" col-md-4 col-md-offset-4">
+<div  style="width:360px; margin-left: 60px" class="panel panel-primary">
+  <div class="panel-heading">Edit
+  </div><div class="panel-body">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= f.email_field :email, autofocus: true, class: 'form-control' %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
 <div><%= f.label :dogetag %> <i>(this will be your gamer tag)</i><br />
-  <%= f.text_field :dogetag %></div>
+  <%= f.text_field :dogetag, class: 'form-control' %></div>
 
-<%= f.label :profile_icon %><br />
+<div class="profile"><%= f.label :profile_icon %><br />
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default active">
-        <%= f.radio_button(:imageurl, "http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif" ) %>
+        <%= f.radio_button :imageurl, "http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif", :checked => true  %>
          <%= image_tag("http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif",height:55) %> 
       </label>
       <label class="btn btn-default">
@@ -34,17 +36,21 @@
     </div>
 
 <div><%= f.label :bio %> <i>(write a little something about yourself)</i><br />
-  <%= f.text_field :bio %></div>
+  <%= f.text_area :bio, class: 'form-control', rows: "2" %></div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+  <div><%= f.label :new_password %> <br /><i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <div><%= f.label :new_password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
+  <div><%= f.label :current_password %> <br /><i>(enter your current password to confirm changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %></div>
 
   
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.submit "Update", class: 'btn btn-primary btn-block' %></div>
 <% end %>
+
+ <br>
+  </div></div></div>
+
