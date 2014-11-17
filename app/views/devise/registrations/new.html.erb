@@ -16,7 +16,8 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'  %></div>
-   <div class="profile"><%= f.label :profile_icon %><br />
+   
+  <div class="profile"><%= f.label :profile_icon %><br />
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default active">
         <%= f.radio_button :imageurl, "http://i2.kym-cdn.com/entries/icons/original/000/002/691/Naamloos-1.gif", :checked => true  %>
