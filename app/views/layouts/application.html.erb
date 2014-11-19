@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to root_path, style: 'padding-top: 19px; height:70px', class: "navbar-brand" do %>
+          <%= link_to root_path, style: 'padding-top: 19px; height:60px', class: "navbar-brand" do %>
             <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
           <strong class='text-'>DOGE</strong><span class='text-default'>MON</span> - <span class='text-primary'>BETA</span>
           <% end %>
@@ -95,12 +95,12 @@
     </div>
     </div>
   </div>
-
+<div class="container">
   <%= render 'layouts/messages' %>
 <%= yield %>
 <hr>
   <strong>
     <center>&copy; Dogemon, 2014 <br>
-      <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
+      <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Forum", forem.root_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
 </body>
 </html>

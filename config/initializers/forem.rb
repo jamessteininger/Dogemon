@@ -7,7 +7,7 @@ Forem.user_profile_links = true
  #Rails.application.config.to_prepare do
 #   If you want to change the layout that Forem uses, uncomment and customize the next line:
    #Forem::ApplicationController.layout "forem"
-   #Forem::ApplicationController.layout "application"
+   Forem::ApplicationController.layout "application"
    #Forem.layout = "application"
 #
 #   If you want to add your own cancan Abilities to Forem, uncomment and customize the next line:
