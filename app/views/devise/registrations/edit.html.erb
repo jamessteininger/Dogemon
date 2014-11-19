@@ -30,7 +30,7 @@
       <label class="btn btn-default">
        <%= f.radio_button(:imageurl, "http://www.stuffcoins.com/images/items/2765.gif") %>
     <%= image_tag("http://www.stuffcoins.com/images/items/2765.gif",height:55) %>
-      </label>
+      </label><%= f.hidden_field :if_accepted_terms, value: true%> 
     </div>
 
 <div><%= f.label :bio %> <i>(write a little something about yourself)</i><br />
