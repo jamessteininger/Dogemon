@@ -1,4 +1,4 @@
-![logo](/app/assets/images/projectdoge_big.png)
+![logo](/app/assets/images/DogemonLogo.jpg)
 
 Dogemon (previously ProjectDoge) is an online marketplace for user created content which is bought or sold with Dogecoin.
 
