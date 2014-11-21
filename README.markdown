@@ -1,10 +1,10 @@
 ![logo](/app/assets/images/projectdoge_big.png)
 
-ProjectDoge is an online marketplace for user created content which is bought or sold with Dogecoin.
+Dogemon (previously ProjectDoge) is an online marketplace for user created content which is bought or sold with Dogecoin.
 
 These items can then be used in the battle area, where pets/avatars can fight against other players or raid-like bosses.
 
-Please take a look at our wiki to install or learn more about ProjectDoge!
+Please take a look at our wiki to install or learn more about Dogemon!
 
 https://github.com/neraken/ProjectDoge/wiki
 
