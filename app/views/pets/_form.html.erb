@@ -27,7 +27,24 @@
   </div>
 <div class="field">
   
-  </div><%= f.select :element, ["Sol", "Luna", "Terra"], {prompt: "Select an element"}, {class: "input-large form-control"} %>
+  </div>
+  <div class="field">
+    <%= f.label :element %><br>
+  <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary btn-item active">
+    <div><i class="fa fa-sun-o"></i></div>
+    <%= f.radio_button :element, "Sol", :checked => true %>Sol
+  </label>
+  <label class="btn btn-primary btn-item">
+    <div><i class="fa fa-moon-o"></i></div>
+    <%= f.radio_button:element, "Luna" %>Luna
+  </label>
+  <label class="btn btn-item btn-primary">
+    <div><i class="fa fa-globe"></i></div>
+    <%= f.radio_button :element, "Terra" %>Terra
+  </label>
+  </div>
+  </div>
 
   <%= f.hidden_field :health, value: 100 %>
 
