@@ -21,7 +21,7 @@
 <% @items.each do |item| %>
 <div class="col-md-3">
   <div class="well">
-    <%= item_element_button(item.element, item.name, item) %><br>
+    <%= item_element_button(item.element, truncate(item.name, length: 15), item) %><br>
     <center><div style="height: 160px;"><%= link_to image_tag(item.imageurl, class: 'btn- btn', style: 'max-height: 160px; max-width: 160px;'), item, style: 'height: 160px; max-width: 160px;' %></div><br><br></center>
     <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
