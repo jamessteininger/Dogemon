@@ -6,8 +6,8 @@
   <% end %><hr>
 <% @users.each do |f| %>
 <h2>
-  <div data-toggle="tooltip" data-placement="left" title="<%= f.email %>"><%= image_tag f.imageurl, width: 50 %>
-    <%= link_to f.dogetag, f %></div>
+  <div><%= image_tag f.imageurl, width: 50 %>
+    <%= link_to f.dogetag, f %> <div class="btn btn-primary" style="float:right" >Add Friend</div></div>
 
 </h2>
 <% end %>

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h1>
+<div class="panel panel-default row" style="padding:15px"><h1>
   <%= image_tag(@user.imageurl, height: 55) %>
   <%= @user.dogetag %>
   <% if current_user == @user %>
@@ -7,7 +7,7 @@
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
   <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
    &nbsp;&nbsp;<a href="/dogecoin_intro"><i class="fa fa-question-circle"></i></a>
-    </h1>
+    </h1></div>
   <% end %>
 </h1><br>
 <div class="row"><div class="panel panel-default">
