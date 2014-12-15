@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :ghost_logs
 
   resources :ghosts
+  
+  resources :wallpapers
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

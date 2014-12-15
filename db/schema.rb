@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112081275) do
+ActiveRecord::Schema.define(version: 20141215210257) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -423,6 +423,14 @@ ActiveRecord::Schema.define(version: 20141112081275) do
     t.text     "description"
     t.float    "worth"
     t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wallpapers", force: true do |t|
+    t.string   "imageurl"
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
