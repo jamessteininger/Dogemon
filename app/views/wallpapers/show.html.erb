@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Imageurl:</strong>
+  <%= @wallpaper.imageurl %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @wallpaper.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @wallpaper.description %>
+</p>
+
+<%= link_to 'Edit', edit_wallpaper_path(@wallpaper) %> |
+<%= link_to 'Back', wallpapers_path %>

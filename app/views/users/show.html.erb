@@ -6,6 +6,7 @@
 
 <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
   <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
+   &nbsp;&nbsp;<a href="/dogecoin_intro"><i class="fa fa-question-circle"></i></a>
     </h1>
   <% end %>
 </h1><br>
