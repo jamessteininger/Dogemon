@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about'
   get 'how_to_play', to: 'static_pages#how_to_play'
   get 'legal', to: 'static_pages#legal', as: 'legal'
+  get 'dogecoin_intro', to: 'static_pages#dogecoin_intro', as: 'dogecoin_intro'
   
   resources :equipment
 
