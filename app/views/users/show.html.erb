@@ -12,8 +12,8 @@
 </h1><br>
 <div class="row"><div class="panel panel-default">
   <div class="panel-heading"><div class="pull-right"><% if @user.pets.count < 4 %><%= link_to "find a new dogemon", new_pet_path, class: 'pull- btn btn-default' %><% end %></div><h2>Dogemon</h2></div><div class="panel-body">
-  <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= pet.name %></h4><br>
-  <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 200px; max-width: 200px;'), pet %><br>
+  <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= truncate(pet.name, length: 15) %></h4><br>
+  <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 160px; max-width: 160px;'), pet %><br>
   <%= truncate(pet.description, length: 12) %><p><% if pet.pvp_battle.presence %><h4><%= link_to pet.pvp_battle do %>In battle with <%= pet.pvp_battle.other.dogetag %><% end %><% else %><h3><span class="label label-success">Relaxing<% end %></h3></p>
         
   </div>

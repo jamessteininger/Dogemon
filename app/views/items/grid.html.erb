@@ -21,8 +21,8 @@
 <% @items.each do |item| %>
 <div class="col-md-3">
   <div class="well">
-    <%= item_element_button(item.element, item.name, item) %><br>
-    <center><div style="height: 160px;"><%= link_to image_tag(item.imageurl, class: 'btn- btn', style: 'max-height: 190px; max-width: 200px;'), item, style: 'height: 200px; max-width: 200px;' %></div><br><br></center>
+    <%= item_element_button(item.element, truncate(item.name, length: 15), item) %><br>
+    <center><div style="height: 160px;"><%= link_to image_tag(item.imageurl, class: 'btn- btn', style: 'max-height: 160px; max-width: 160px;'), item, style: 'height: 160px; max-width: 160px;' %></div><br><br></center>
     <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
 
    <%= item.utility_type %> <%= item.attack %> / Magic <%= item.magic %></h4>
