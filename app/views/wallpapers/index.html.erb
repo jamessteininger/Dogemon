@@ -6,6 +6,7 @@
       <th>Imageurl</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Price</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= wallpaper.imageurl %></td>
         <td><%= wallpaper.name %></td>
         <td><%= wallpaper.description %></td>
+        <td><%= wallpaper.price %></td>
         <td><%= link_to 'Show', wallpaper %></td>
         <td><%= link_to 'Edit', edit_wallpaper_path(wallpaper) %></td>
         <td><%= link_to 'Destroy', wallpaper, method: :delete, data: { confirm: 'Are you sure?' } %></td>
