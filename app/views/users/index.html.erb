@@ -8,11 +8,23 @@
 <h2>
   <div><%= image_tag f.imageurl, width: 50 %>
     <%= link_to f.dogetag, f %> 
+    <div style="float:right">
+      
+    <% if current_user.friend?(f.id) %>
     <%= form_for(Friendship.new) do |k| %>
     <%= k.hidden_field :user_id, value: current_user.id %>
-    <%= k.hidden_field :friend_id, value: f.user_id %>
+    <%= k.hidden_field :friend_id, value: f.id %>
     <%= k.submit "Add Friend", class: 'btn btn-success' %>
     <% end %>
+    
+  <% elsif (current_user.id == f.id) %>
+  <% else %>
+
+  <div style="float:right" class="btn btn-primary">Friend</div>
+
+  <% end %>
+  </div>
+    
 
 </h2>
 <% end %>

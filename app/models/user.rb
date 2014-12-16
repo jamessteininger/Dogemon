@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :battles, class_name: 'Battle', foreign_key: 'user_id'
   has_many :pets
   has_many :item_insts
+  has_many :friendships
   has_many :items, foreign_key: 'creator_id'
   #has_one :town
   has_many :market_item_votes, dependent: :destroy
@@ -23,6 +24,9 @@ class User < ActiveRecord::Base
   def forem_name
     dogetag
 end
+  def friend?(friend_id)
+    User.find(id).friendships.find_by friend_id(friend_id)
+  end
   
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)
