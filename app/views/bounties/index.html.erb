@@ -1,0 +1,33 @@
+<h1>Listing bounties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Pet</th>
+      <th>Ghost</th>
+      <th>Number of bounties</th>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bounties.each do |bounty| %>
+      <tr>
+        <td><%= bounty.user_id %></td>
+        <td><%= bounty.pet_id %></td>
+        <td><%= bounty.ghost_id %></td>
+        <td><%= bounty.number_of_bounties %></td>
+        <td><%= bounty.amount %></td>
+        <td><%= link_to 'Show', bounty %></td>
+        <td><%= link_to 'Edit', edit_bounty_path(bounty) %></td>
+        <td><%= link_to 'Destroy', bounty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bounty', new_bounty_path %>

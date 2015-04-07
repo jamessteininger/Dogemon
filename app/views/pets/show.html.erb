@@ -24,8 +24,8 @@
   <div class="col-md-5">
     <div class="well">
       <h2><strong>Battle Stats</strong></h2><hr>
-      <h4 class="text-primary"><strong>WINS <%= if @pet.has_attribute?(:ghost_wins) then @pet.ghost_wins + @pet.against_ghost_wins %></strong></h4>
-      <h4 class="text-danger"><strong>LOSSES <%= if @pet.has_attribute?(:ghost_losses) then  @pet.ghost_losses + @pet.against_ghost_losses %></strong></h4>
+      <h4 class="text-primary"><strong>WINS <%= if @pet.ghost_wins.presence then (@pet.ghost_wins + @pet.against_ghost_wins) end %></strong></h4>
+      <h4 class="text-danger"><strong>LOSSES <%= if @pet.ghost_losses.presence then  @pet.ghost_losses + @pet.against_ghost_losses end %></strong></h4>
     </div>
   </div>
 </div>
