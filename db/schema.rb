@@ -87,9 +87,9 @@ ActiveRecord::Schema.define(version: 20141215234654) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
+    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
@@ -274,31 +274,6 @@ ActiveRecord::Schema.define(version: 20141215234654) do
   create_table "logs", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "mad_chatter_messages", force: true do |t|
-    t.string   "text"
-    t.string   "html"
-    t.integer  "room_id"
-    t.integer  "author_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "mad_chatter_rooms", force: true do |t|
-    t.string   "name"
-    t.integer  "owner_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "mad_chatter_users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "username"
-    t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

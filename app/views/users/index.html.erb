@@ -6,26 +6,24 @@
   <% end %><hr>
 <% @users.each do |f| %>
 <h2>
-  <div><%= image_tag f.imageurl, width: 50 %>
+  <div>
+    <%= image_tag f.imageurl, width: 50 %>
     <%= link_to f.dogetag, f %> 
     <div style="float:right">
-      
-    <% if current_user.friend?(f.id) %>
-    <%= form_for(Friendship.new) do |k| %>
-    <%= k.hidden_field :user_id, value: current_user.id %>
-    <%= k.hidden_field :friend_id, value: f.id %>
-    <%= k.submit "Add Friend", class: 'btn btn-success' %>
-    <% end %>
-    
-  <% elsif (current_user.id == f.id) %>
-  <% else %>
-
-  <div style="float:right" class="btn btn-primary">Friend</div>
-
-  <% end %>
+      <% if current_user.friend?(f) %>
+      <%= form_for(current_user.friendships.find_by_friend_id(f),
+  html: { method: :delete }) do |f| %>
+      <%= f.submit "Unfriend", class: "btn btn-danger" %>
+      <% end %>
+      <% elsif (current_user.id == f.id) %>
+      <% else %>
+      <%= form_for(Friendship.new) do |k| %>
+      <%= k.hidden_field :user_id, value: current_user.id %>
+      <%= k.hidden_field :friend_id, value: f.id %>
+      <%= k.submit "Add Friend", class: 'btn btn-success' %>
+      <% end %>
+      <% end %>
   </div>
-    
-
 </h2>
 <% end %>
 <%= will_paginate @user %>

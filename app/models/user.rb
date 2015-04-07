@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
   
   def forem_name
     dogetag
-end
-  def friend?(friend_id)
-    User.find(id).friendships.find_by friend_id(friend_id)
+  end
+  
+  def friend?(other_user)
+    friendships.find_by_friend_id(other_user.id)
   end
   
   def add_coin(amount)
