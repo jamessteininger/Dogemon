@@ -13,12 +13,12 @@
   <div class="col-md-4">
     <div class="well">
       <h2><strong>Info</strong></h2><hr>
-        <h4><strong>Age: </strong><%= time_ago_in_words(@pet.created_at) %> old (b. <%= @pet.created_at.strftime("%B %d, %Y") %>)</h4>
-        <h4><strong>Element: </strong><%= @pet.element %></h4>
+      <h4><strong>Age: </strong><%= time_ago_in_words(@pet.created_at) %> old (b. <%= @pet.created_at.strftime("%B %d, %Y") %>)</h4>
+      <h4><strong>Element: </strong><%= @pet.element %></h4>
       <h4><strong>Owner: </strong><%= link_to @pet.user.dogetag, @pet.user %></h4>
-    <h4><strong>Equipped Items: </strong><%= @pet.equipments.count %></h4>
-        <% if @pet.favorite_activity.presence %><h4><strong>Favorite Activity: </strong><%= @pet.favorite_activity %></h4><% end %>
-        <% if @pet.disposition.presence %><h4><strong>Disposition: </strong><%= @pet.favorite_activity %></h4><% end %>
+      <h4><strong>Equipped Items: </strong><%= @pet.equipments.count %></h4>
+      <% if @pet.favorite_activity.presence %><h4><strong>Favorite Activity: </strong><%= @pet.favorite_activity %></h4><% end %>
+      <% if @pet.disposition.presence %><h4><strong>Disposition: </strong><%= @pet.favorite_activity %></h4><% end %>
     </div>
   </div>
   <div class="col-md-5">
@@ -26,6 +26,15 @@
       <h2><strong>Battle Stats</strong></h2><hr>
       <h4 class="text-primary"><strong>WINS <%= if @pet.ghost_wins.presence then (@pet.ghost_wins + @pet.against_ghost_wins) end %></strong></h4>
       <h4 class="text-danger"><strong>LOSSES <%= if @pet.ghost_losses.presence then  @pet.ghost_losses + @pet.against_ghost_losses end %></strong></h4>
+      <h2><b>Bounties</b></h2>
+      <% @pet.bounties.each do |f| %>
+      <h4 class="text-success">
+        <b> Amount: </b><%= f.amount %>
+        <br>
+        <b>  Challenges:  </b> <%= f.number_of_bounties %>/<%= f.number_of_bounties %>
+
+      </h4>
+      <% end %>
     </div>
   </div>
 </div>
@@ -36,38 +45,38 @@
     <div class="well">
       <h3>Unequipped Items</h3>
       <% if @pet.equipments.count < 4 %>
-        <% @sales.each do |f| %>
-          <% if !f.equipment.presence %>
-            <p>
-             <div class="pull-right">
-               <%= form_for [@pet, Equipment.new]  do |g| %>
-               <%= g.hidden_field :pet_id, value: @pet.id %>
-               <%= g.hidden_field :sale_id, value: f.id %>
-               <%= g.submit "Equip", class: 'btn btn-sm btn-primary' %>
-               
-               <% end %>
-              </div>
-            <%=  image_tag(Item.find(f.item_id).imageurl, width: "50px")  %>
-          <%= Item.find(f.item_id).name %>
-          </p>
-         <% end %>
-      <% end %>
+      <% @sales.each do |f| %>
+      <% if !f.equipment.presence %>
+      <p>
+      <div class="pull-right">
+        <%= form_for [@pet, Equipment.new]  do |g| %>
+        <%= g.hidden_field :pet_id, value: @pet.id %>
+        <%= g.hidden_field :sale_id, value: f.id %>
+        <%= g.submit "Equip", class: 'btn btn-sm btn-primary' %>
+
+        <% end %>
+      </div>
+      <%=  image_tag(Item.find(f.item_id).imageurl, width: "50px")  %>
+      <%= Item.find(f.item_id).name %>
+      </p>
     <% end %>
-    </div>
-    <%= link_to 'Release', @pet, method: :delete, data: { confirm: 'Are you sure you want to release this Dogemon? Remember the Red Wedding. Also be sure to unequip all items first. ' } %> 
+    <% end %>
+    <% end %>
+  </div>
+  <%= link_to 'Release', @pet, method: :delete, data: { confirm: 'Are you sure you want to release this Dogemon? Remember the Red Wedding. Also be sure to unequip all items first. ' } %> 
   <% else  %>
   <%= link_to "challenge?", pet_challenge_path(@pet), class: 'btn btn- btn-warning' %><% end %>
 </div>  
 
 </div>
-  <% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
-  <div class="col-md-9">
-    <h3>Equipped Items (4 max)</h3>
-    <% @pet.equipments.each do |f| %>
-      <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
-    <% end %>
-  </div>
+<% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
+<div class="col-md-9">
+  <h3>Equipped Items (4 max)</h3>
+  <% @pet.equipments.each do |f| %>
+  <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
+  <% end %>
+</div>
 <% elsif current_user.id == @pet.user_id %>
-      Right now your Dogemon is in a battle, but come back later to equip and unequip items. 
+Right now your Dogemon is in a battle, but come back later to equip and unequip items. 
 <% end %>
 </div>

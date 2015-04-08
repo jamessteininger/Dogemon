@@ -5,6 +5,7 @@ class Pet < ActiveRecord::Base
   has_many :battles
   belongs_to :battle, dependent: :destroy
   has_many :sales, through: :equipments
+  has_many :bounties
   
   accepts_nested_attributes_for :pvp_battle
   

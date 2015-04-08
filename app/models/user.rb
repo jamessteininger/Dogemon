@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :imageurl, presence: true
   validates :if_accepted_terms, presence: true
   has_many :transactions
+  has_many :bounties
   has_many :sales, dependent: :destroy
   has_many :logs
   has_many :pvp_battles, class_name: 'PvpBattle', foreign_key: 'user_id'
