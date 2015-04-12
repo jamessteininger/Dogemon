@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       u.permit(:coin_made, :guild_id, :attack, :health, :total_health, :magic, :bio, :imageurl, :dogetag, :email, :password, :password_confirmation, :current_password, :coin, :if_accepted_terms)
   	end
   	devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:coin_made, :guild_id, :bio, :imageurl, :coin, :dogetag,  :email, :password, :password_confirmation, :current_password)
+      u.permit(:coin_made, :guild_id, :bio, :imageurl, :coin, :dogetag,  :email, :password, :password_confirmation, :current_password, :if_accepted_terms)
   	end
   end
 end
