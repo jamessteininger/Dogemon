@@ -12,6 +12,10 @@
 <div class="jumbotron" style="background-size:cover; background-image: url(<%= @guild.imageurl %>);">
   <h1><%= @guild.name %> </h1>
   <p><%= @guild.description %></p>
+  <h3>
+    <span class='label label-success'>Rank: #<%= Guild.all.sort_by(&:guild_wins).reverse.index(@guild) + 1 %></span>
+    <span class='label label-info'>Guild Wins: <%= @guild.guild_wins %></span>
+  </h3>
 </div>
 
 <div class="row">
@@ -43,14 +47,13 @@
   <div class="col-md-4">
     <h2>Stats</h2>
     <hr>
-    <h3><span class='label label-success'>Rank: <%= Guild.all.sort_by(&:guild_wins).reverse.index(@guild) + 1 %></span></h3>
+    
     <h4>
       <strong>Age: </strong><%= time_ago_in_words(@guild.created_at) %> old (birthday: <%= @guild.created_at.strftime("%B %d, %Y") %>) <br>
       <b>Element:</b> <%= @guild.element %><br>
       <b>Guild Wins:</b> <%= @guild.guild_wins %>
       </h3>
 
-    <%= link_to "Buy Booster Pack", @guild, class: 'btn btn-success btn-block' %>
   </div>
   <div class="col-md-4">
     <h2>Members (<%= @guild.users.count %>)</h2>
