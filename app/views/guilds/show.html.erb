@@ -10,8 +10,8 @@
   <% end %>
 </p>
 <div class="jumbotron" style="background-size:cover; background-image: url(<%= @guild.imageurl %>);">
-  <h1><%= @guild.name %> </h1>
-  <p><%= @guild.description %></p>
+  <h1 style="color: #fff; text-shadow: 2px 2px #000;"><%= @guild.name %> </h1>
+  <p style="color: #fff; text-shadow: 2px 2px #000;"><%= @guild.description %></p>
   <h3>
     <span class='label label-success'>Rank: #<%= Guild.all.sort_by(&:guild_wins).reverse.index(@guild) + 1 %></span>
     <span class='label label-info'>Guild Wins: <%= @guild.guild_wins %></span>

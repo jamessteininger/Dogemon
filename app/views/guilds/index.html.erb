@@ -16,11 +16,11 @@
 </div><br>
 <% @guilds.each do |guild| %>
 <div class="well" style="background-size:cover; background-image: url(<%= guild.imageurl %>);">
-  <h3>
+  <h3 style="color: #fff; text-shadow: 2px 2px #000;">
     <%= link_to guild.name, guild %> <span class='label label-primary'>Members: <%= guild.users.count %></span> <span class='label label-success'>Rank: <%= Guild.all.sort_by(&:guild_wins).reverse.index(guild) + 1 %></span>
     <% if current_user.guild_id.presence and current_user.guild_id == guild.id %> <span class='label label-info'><%= fa_icon 'home' %> </span><% end %>
   </h3>
-  <p><%= guild.description %></p>
+  <p style="color: #fff; text-shadow: 2px 2px #000;"><%= guild.description %></p>
 </div>
 <% end %>
 
