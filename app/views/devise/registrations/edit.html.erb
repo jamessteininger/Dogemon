@@ -3,8 +3,7 @@
   <div class="panel-heading">Edit
   </div><div class="panel-body">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :if_accepted_terms, value: true %>
+  <%= devise_error_messages! %> 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true, class: 'form-control' %></div>
 
@@ -48,6 +47,7 @@
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %></div>
 
   
+  <%= f.hidden_field :if_accepted_terms, value: true %>
   <div><%= f.submit "Update", class: 'btn btn-primary btn-block' %></div>
 <% end %>
 
