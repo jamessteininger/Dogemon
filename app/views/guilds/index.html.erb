@@ -1,0 +1,22 @@
+<h1>
+<%= link_to 'Start a New Guild', new_guild_path, class: 'btn btn-success btn-lg pull-right' %>Guilds <% if current_user.guild_id.presence %>
+  <%= link_to guild_path(Guild.find(current_user.guild_id)), class: 'btn btn-primary btn-lg pull-' do %><%= fa_icon 'home' %> Go to my Guild <% end %><% end %>
+  
+  <%= form_tag guilds_path, :method => 'get', class: 'form-inline pull-right', style: 'padding-right: 10px;' do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Find a guild', class: 'form-control', style: 'width: 150px;' %>
+  <%= submit_tag "Search", class: 'btn btn-default', style: 'padding-right: 10px;' %>
+  <% end %>
+</h1><br>
+<% @guilds.each do |guild| %>
+<div class="well" style="background-size:cover; background-image: url(<%= guild.imageurl %>);">
+  <h3>
+    <%= link_to guild.name, guild %> <span class='label label-primary'>Members: <%= guild.users.count %></span> <span class='label label-success'>Rank: <%= Guild.all.sort_by(&:guild_wins).reverse.index(guild) + 1 %></span>
+    <% if current_user.guild_id.presence and current_user.guild_id == guild.id %> <span class='label label-info'><%= fa_icon 'home' %> </span><% end %>
+  </h3>
+  <p><%= guild.description %></p>
+</div>
+<% end %>
+
+<%= will_paginate @guild %>
+<br>
+

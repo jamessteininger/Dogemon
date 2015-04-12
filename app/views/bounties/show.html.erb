@@ -1,29 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="row"><div class="col-md-6 col-md-offset-3">
+  <%= link_to "Back to Battle Arena", pvp_battles_path, class: 'btn btn-primary btn-' %><br><br>
 
-<p>
-  <strong>User:</strong>
-  <%= @bounty.user_id %>
-</p>
+  <% if user_signed_in? %>
+  <% user_dogecoin = BlockIo.get_user_balance user_id: current_user.block_io_wallet_id %>
+  <% if user_dogecoin['data']['available_balance'].to_i > @bounty.amount %>
+  <div class="well">
+    <h1>
+      <center>
+        <%= link_to image_tag(@bounty.pet.imageurl, height: 140), @bounty.pet %><br>
+        Bounty for <%= @bounty.pet.name %> 
+      </center>
+    </h1>
+    <h2>
+      <span class='label label-success'><%= fa_icon 'tag' %> <%= @bounty.amount %></span>    <span class='label label-primary'>Rank: #<%= @bounty.pet.rank %></span>
+      <span class='label label-danger'><b>  Challenges:  </b> <%= @bounty.number_of_bounties %>/<%= @bounty.number_of_bounties %></span>
+    </h2>
+  </div>
+<div class="alert alert-success">Please note: Bounty Battles will be functional by April 18, 2015. Come back soon!</div>
+  <% form_for (@battle), url: {controller: :battles,  ghost_pet_id: @bounty.pet.id, bounty_id: @bounty.id} do |g| %>
+  <% if @battle.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@battle.errors.count, "error") %> prohibited this battle from being saved:</h2>
 
-<p>
-  <strong>Pet:</strong>
-  <%= @bounty.pet_id %>
-</p>
+    <ul>
+      <% @battle.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= g.hidden_field :battle_state, value: "in_progress" %>
+  <%= g.hidden_field :b_pet_turn, value: 'true' %>
+  <%= g.hidden_field :user_id, value: current_user.id %> 
+  <%= g.collection_select :pet_id, current_user.pets.all, :id, :name, class: 'form-control' %>
+  <%= g.submit "Challenge? (Match with " + @bounty.amount.to_s + ")", class: 'btn btn-lg btn-block btn-success'  %>
 
-<p>
-  <strong>Ghost:</strong>
-  <%= @bounty.ghost_id %>
-</p>
+  <% end %>
 
-<p>
-  <strong>Number of bounties:</strong>
-  <%= @bounty.number_of_bounties %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @bounty.amount %>
-</p>
-
-<%= link_to 'Edit', edit_bounty_path(@bounty) %> |
-<%= link_to 'Back', bounties_path %>
+  <p>
+    Note: Winner takes all. The winner of this Bounty Challenge will receive <%= @bounty.amount * 2 %> minus 2% tip to the house. The total winnings are: <%= (@bounty.amount * 2) - ((@bounty.amount * 2) * 0.02) %>
+  </p>
+  </div>
+  <% else %>
+  <%= link_to "Insufficient Dogecoin for Bounty", wallet_path, class: 'btn btn-danger btn-lg btn-block btn-raised' %>
+  <% end %>
+  <% end %>
+</div>
+</div>

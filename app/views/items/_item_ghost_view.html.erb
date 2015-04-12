@@ -1,28 +1,31 @@
-<div class="col-md-3">
-  <div class="well">
-    <%= item_element_button(Item.find(item.item_id).element, Item.find(item.item_id).name, Item.find(item.item_id)) %><br>
-    <center><%= image_tag(Item.find(item.item_id).imageurl, height: "150px") %><br><br></center>
-    <p class=""><i>"<%= truncate(Item.find(item.item_id).description, length: 23) %>"</i></p><h4>
 
-   <% theItem = Item.find(item.item_id) %>
-  <%= theItem.utility_type %> <%= theItem.attack %> / Magic <%= theItem.magic %></h4>
-    
-    <% amount = theItem.attack %>
-    <% magic_amount = theItem.magic %>
-    <% utility_type = theItem.utility_type %>
+<div class="well">
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag(Item.find(item.item_id).imageurl, width: "50px") %>
+    </div>
+    <div class="col-md-9">
+      <p class=""><%= Item.find(item.item_id).name %><br><i>"<%= truncate(Item.find(item.item_id).description, length: 23) %>"</i></p><h4>
+
+      <% theItem = Item.find(item.item_id) %>
+      <%= theItem.utility_type %> <%= theItem.attack %> / Magic <%= theItem.magic %></h4>
+
+      <% amount = theItem.attack %>
+      <% magic_amount = theItem.magic %>
+      <% utility_type = theItem.utility_type %>
+    </div>
     <% if @battle.pet.magic >= magic_amount %>
     <%= form_for [@battle, GhostLog.new], html: { id: 'form_id' } , class: "form form-inline  form-horizontal pull-right", url: {bMessage: false, controller: :ghost_logs, battle_id: @battle.id, amount: amount, utility_type: utility_type, magic_amount: magic_amount, attacker: 1, defender: 2 } do |f| %> 
     <%= f.hidden_field :battle_id, value: @battle.id %>
     <%= f.hidden_field :pet_id, value: @battle.pet.id %>
     <%= f.hidden_field :item_id, value: theItem.id %>
     <%= f.hidden_field :utility_type, value: theItem.utility_type %>
-    
+
     <%= f.hidden_field :bMessage, value: 'false' %>
     <%= f.submit "Use", class: "btn btn-block btn-default" %>
-  <% end %>
+    <% end %>
     <% else %>
-    <center>Cannot use, need more magic<br>
+    <center>Cannot use, need more magic<br></center>
     <% end %>
   </div>
 </div>
-                                                                                                                                                                                         

@@ -7,7 +7,7 @@
       <h1><strong><%= i.ordinalize %><br> <%= image_tag f.imageurl,  style: "max-height: 120px; max-width: 120px;" %></strong></h1>
       
     </div>
-    <div class="col-md-9"><div class="pull-right"><%= link_to "challenge?", pet_challenge_path(f), class: 'btn btn- btn-warning' %></div>
+    <div class="col-md-9"><div class="pull-right"><%= link_to "Challenge?", pet_challenge_path(f), class: 'btn btn- btn-warning' %></div>
       <h1><strong>
         <%= link_to truncate(f.name, length:30), f %>
         </strong></h1><h3 class="text-primary">

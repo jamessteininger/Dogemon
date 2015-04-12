@@ -1,5 +1,10 @@
 class BountiesController < InheritedResources::Base
 
+  def show
+    @bounty = Bounty.find(params[:id])
+    @battle = Battle.new
+  end
+  
   private
 
     def bounty_params

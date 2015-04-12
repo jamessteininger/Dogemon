@@ -1,0 +1,41 @@
+<%= form_for(@guild) do |f| %>
+  <% if @guild.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@guild.errors.count, "error") %> prohibited this guild from being saved:</h2>
+
+      <ul>
+      <% @guild.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :owner_id %><br>
+    <%= f.number_field :owner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :b_public %><br>
+    <%= f.check_box :b_public %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :element %><br>
+    <%= f.text_field :element %>
+  </div>
+  <div class="field">
+    <%= f.label :imageurl %><br>
+    <%= f.text_field :imageurl %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

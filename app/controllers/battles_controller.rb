@@ -12,7 +12,7 @@ class BattlesController < ApplicationController
     @potentials = @pet_archetype.sales.select { |r| r.magic <= @ghost.magic}
     @ghost_log = GhostLog.new
     rand_amount = rand(0..4)
-    
+
     if @potentials == nil or @potentials == []
       @ghost_log.update_attribute(:description, 'The enemy had to skip a turn')
       @ghost_log.update_attribute(:pet_id, @ghost.id)
@@ -35,7 +35,7 @@ class BattlesController < ApplicationController
       if (utility_type == 'Heal')
         @ghost.heal_health(Integer(amount) + rand_amount)
       end
-      
+
       @ghost.use_magic(Integer(magic_amount))
       if (@battle.pet.health <= 0)
         @battle.update_attribute(:b_pet_winner, false)
@@ -57,7 +57,7 @@ class BattlesController < ApplicationController
     @battle.update_attribute(:b_pet_turn, 'true')
     redirect_to @battle
   end
-  
+
   def attack_enemy
     amount = params[:amount]
     @battle = Battle.find(params[:battle_id])
@@ -66,13 +66,13 @@ class BattlesController < ApplicationController
     @aenemy.take_damage(Integer(amount))
     redirect_to @battle, notice: @user.email + " attacks " + " for " + amount + " damage"
   end
-  
+
   def spawn_aenemy
     @battle = Battle.find(params[:battle_id])
     @aenemy = @battle.aenemies.new
     redirect_to @battle
   end
-  
+
   def index
     @battles = Battle.all
   end
@@ -82,8 +82,8 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @user = User.find(@battle.user_id)
-   # @enemy = Pet.find(@battle.enemy_id)
-   # @aenemies = @battle.aenemies
+    # @enemy = Pet.find(@battle.enemy_id)
+    # @aenemies = @battle.aenemies
     @ghost_logs = @battle.ghost_logs
     if @ghost_logs.any?
       @last_log = @ghost_logs.last
@@ -99,7 +99,7 @@ class BattlesController < ApplicationController
     end
     #if (@battle.aenemies.any?)
     #  @aenemy = Aenemy.find(@battle.aenemy_id)
-   # end
+    # end
   end
 
   # GET /battles/new
@@ -114,12 +114,19 @@ class BattlesController < ApplicationController
   # POST /battles
   # POST /battles.json
   def create
+    @battle = Battle.new(battle_params)
     if params[:ghost_pet_id] == 0 or params[:ghost_pet_id] == '0'
       @ghost_archetype = Pet.order("RANDOM()").first
     else
       @ghost_archetype = Pet.find(params[:ghost_pet_id])
     end
-    @battle = Battle.new(battle_params)
+    if params[:bounty_id] != nil
+      @bounty = Bounty.find(params[:bounty_id])
+      @battle.update_attribute(:bounty_id, @bounty.id)
+      @bounty.update_attribute(:number_of_bounties, @bounty.number_of_bounties -= 1)
+      pay_from = BlockIo.get_user_address user_id: current_user.block_io_wallet_id
+      BlockIo.withdraw_from_user from_addresses: pay_from['data']['address'], payment_address: 'DQmRmDRsvPNteofRBPwktTSdmB3NPjkvMd', amount: @bounty.amount
+    end
     @ghost = Ghost.new
     @battle.update_attribute(:ghost_id, @ghost.id)
     @ghost.update_attribute(:name, @ghost_archetype.name)
@@ -136,21 +143,21 @@ class BattlesController < ApplicationController
     @ghost.save
     @battle.ghost = @ghost
     @battle.update_attribute(:b_pet_turn, 'true')
-    
-     if @pet.against_ghost_losses == nil
-       @pet.update_attribute(:against_ghost_losses, 0)
+
+    if @pet.against_ghost_losses == nil
+      @pet.update_attribute(:against_ghost_losses, 0)
     end
     if @pet.against_ghost_wins == nil
       @pet.update_attribute(:against_ghost_wins, 0)
     end
     if @pet.ghost_losses == nil
-     @pet.update_attribute(:ghost_losses, 0)
+      @pet.update_attribute(:ghost_losses, 0)
     end
     if @pet.ghost_wins == nil
       @pet.update_attribute(:ghost_wins, 0)
     end
-      
-       if Pet.find(@ghost.pet_id).against_ghost_losses == nil
+
+    if Pet.find(@ghost.pet_id).against_ghost_losses == nil
       Pet.find(@ghost.pet_id).update_attribute(:against_ghost_losses, 0)
     end
     if Pet.find(@ghost.pet_id).against_ghost_wins == nil
@@ -162,12 +169,12 @@ class BattlesController < ApplicationController
     if Pet.find(@ghost.pet_id).ghost_wins == nil
       Pet.find(@ghost.pet_id).update_attribute(:ghost_wins, 0)
     end
-    
+
     respond_to do |format|
       if @battle.save
         Pet.find(@battle.pet_id).update_attribute(:battle_id, @battle.id)
         flash[:notice] = 'Welcome!'
-        format.html { redirect_to @battle, notice: 'Battle was successfully created.' }
+        format.html { redirect_to @battle, notice: 'A new battle has begun! Time to play your first move!' }
         format.json { render :show, status: :created, location: @battle }
       else
         format.html { render :new }
@@ -201,16 +208,16 @@ class BattlesController < ApplicationController
   end
 
   private
-    def find_user
-      @user = User.find(params[:user_id])
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_battle
-      @battle = Battle.find(params[:id])
-    end
+  def find_user
+    @user = User.find(params[:user_id])
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_battle
+    @battle = Battle.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def battle_params
-      params.require(:battle).permit(:user_id, :enemy_id, :pet_id, :b_pet_turn, :battle_state, :b_pet_winner)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def battle_params
+    params.require(:battle).permit(:user_id, :enemy_id, :pet_id, :bounty_id, :b_pet_turn, :battle_state, :b_pet_winner)
+  end
 end

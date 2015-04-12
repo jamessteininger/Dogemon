@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407221329) do
+ActiveRecord::Schema.define(version: 20150410091149) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -255,6 +255,17 @@ ActiveRecord::Schema.define(version: 20150407221329) do
     t.integer  "item4_id"
   end
 
+  create_table "guilds", force: true do |t|
+    t.integer  "owner_id"
+    t.boolean  "b_public"
+    t.string   "name"
+    t.text     "description"
+    t.string   "element"
+    t.string   "imageurl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "item_insts", force: true do |t|
     t.integer  "item_id"
     t.integer  "user_id"
@@ -426,6 +437,7 @@ ActiveRecord::Schema.define(version: 20150407221329) do
     t.boolean  "forem_admin",            default: false
     t.string   "forem_state",            default: "pending_review"
     t.boolean  "forem_auto_subscribe",   default: false
+    t.integer  "guild_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

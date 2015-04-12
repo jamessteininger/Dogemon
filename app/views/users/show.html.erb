@@ -1,122 +1,154 @@
+<div class="well">
+  <h1>
+    <%= image_tag(@user.imageurl, height: 55) %>
+    <%= @user.dogetag %>
+    <% if current_user == @user %>
 
-<div class="panel panel-default row" style="padding:15px"><h1>
-  <%= image_tag(@user.imageurl, height: 55) %>
-  <%= @user.dogetag %>
-  <% if current_user == @user %>
-
-  <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
-  <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
-  &nbsp;&nbsp;<a href="/dogecoin_intro"><i class="fa fa-question-circle"></i></a>
-  </h1></div>
-<% end %>
-</h1><br>
-<div class="row"><div class="panel panel-default">
-  <div class="panel-heading"><div class="pull-right"><% if @user.pets.count < 4 %><%= link_to "find a new dogemon", new_pet_path, class: 'pull- btn btn-default' %><% end %></div><h2>Dogemon</h2></div><div class="panel-body">
-  <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= truncate(pet.name, length: 15) %></h4><br>
-  <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 160px; max-width: 160px;'), pet %><br>
-  <%= truncate(pet.description, length: 12) %><p><% if pet.pvp_battle.presence %><h4><%= link_to pet.pvp_battle do %>In battle with <%= pet.pvp_battle.other.dogetag %><% end %><% else %><h3><span class="label label-success">Relaxing<% end %></h3></p>
-
-  </div>
-  </div>
-  <% end %>
-  <% if @user.pets.count == 0 %><center><h4>Looks like you have no Dogemon. <%= link_to "Click here to discover a new Dogemon!", new_pet_path %><% end %>
-  </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2><i class="fa fa-suitcase"></i> Inventory</h2>
-        </div>
-        <div class="panel-body">
-          <% if @user.sales.count == 0 %>
-          <%= link_to "Open my booster pack!", user_get_booster_path(@user), class: 'btn btn-primary btn-lg tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "This will grant you 5 free random items from the marketplace!", 'data-placement' => 'bottom' %>
-          <% end %>
-          <% @sales.each do |f| %>
-          <% if Item.exists?(id: f.item_id) %>
-          <p>
-            <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
-            <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> <% if f.equipment.presence and f.equipment.pet.presence %>| Equipped by: <%= f.equipment.pet.name %><% end %> | 
-            <%= link_to "Toss", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
-          </p>
-          <% end %>
-          <% end %>
-        </div>
-      </div>
-
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2><i class="fa fa-paint-brush"></i> Creator of these items</h2><br>Total Dogecoin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
-        </div>
-        <div class="panel-body">
-          <% if @user.items.count == 0 %>
-          No Items created yet. <%= link_to "Create a new item", new_item_path %>
-          <% else %>
-          <% @user.items.each do |f| %>
-          <p>
-            Creator of <%= link_to f.name, f %>
-          </p>
-          <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2><%= fa_icon 'flag' %> Guild</h2>
-        </div>
-        <div class="panel-body">
-          No guild set. <%= link_to "Find a guild to join!", users_path %>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2><%= fa_icon 'book' %> Adventure Log</h2>
-        </div>
-        <div class="panel-body">
-          <%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
-          <%= f.hidden_field :user_id %>
-          <%= f.text_area :content, rows: 4, class: 'form-control', placeholder: 'Click here to start a journal entry about your adventures...' %>
-          <%= f.submit "Finish Adventure Log", class: 'btn btn-primary btn-block' %>
-          <% end %>
-          <% @user.logs.each do |f| %>
-          <p><strong><%= time_ago_in_words(f.created_at) %></strong> <%= f.content %></p>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div></h1>
-  <% else %>
+    <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
+    <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
+    &nbsp;&nbsp;<a href="/dogecoin_intro"><i class="fa fa-question-circle"></i></a>
   </h1>
-  <div class="panel panel-default">
-    <div class="panel-heading"><h2>Dogemon</h2></div>
-    <div class="panel-body">
-      <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %><%= pet.name %></h4><br>
-      <%= link_to image_tag(pet.imageurl, class: 'btn', height: "150px"), pet %><br>
-      <%= pet.description %><p></p>  
-      </div>
-      </div>  
-      <% end %>
-      </div>
-    </div>
-    <!--    END OF DOGEMON CONTAINER -->
+  <% end %>
+  </h1>
+</div>
+<br>
 
-    <div class="panel panel-default">
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-primary">
       <div class="panel-heading">
-        <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2>
+        <h2><% if @user.pets.count < 4 %><%= link_to "Click here to discover a new Dogemon!", new_pet_path, class: 'pull-right btn btn-primary' %><% end %> <%= fa_icon 'home' %> Dogemon Den</h2>
       </div>
       <div class="panel-body">
+        <% @user.pets.each do |pet| %>
+        <div class="col-md-4">
+          <div class="well">
+            <center>
+              <h4 style="margin: 0">
+                <%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= truncate(pet.name, length: 15) %>
+              </h4>
+              <br>
+              <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 160px; max-width: 160px;'), pet %><br>
+              <%= truncate(pet.description, length: 12) %>
+              <p><% if pet.pvp_battle.presence or pet.battles.include?(:bounty_id) %></p>
+              <h4>
+                <%= link_to pet.pvp_battle do %>In battle with <%= pet.pvp_battle.other.dogetag %><% end %><% else %>
+              </h4>
+              <h3><span class="label label-success">Relaxing<% end %></span></h3>
+
+            </center>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2><%= fa_icon 'suitcase' %> Inventory</h2>
+          </div>
+          <div class="panel-body">
+            <% if @user.sales.count == 0 %>
+            <%= link_to "Open my booster pack!", user_get_booster_path(@user), class: 'btn btn-primary btn-lg tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "This will grant you 5 free random items from the marketplace!", 'data-placement' => 'bottom' %>
+            <% end %>
+            <% @sales.each do |f| %>
+            <% if Item.exists?(id: f.item_id) %>
+            <p>
+              <%= link_to image_tag(Item.find(f.item_id).imageurl, width: "50px"), Item.find(f.item_id) %>
+              <%= link_to Item.find(f.item_id).name, Item.find(f.item_id) %> <% if f.equipment.presence and f.equipment.pet.presence %>| Equipped by: <%= f.equipment.pet.name %><% end %> | 
+              <%= link_to "Toss", sale_path(f, user_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }  %>
+            </p>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">
+        <h2><%= fa_icon 'paint-brush' %> Marketplace Creations</h2>
+      </div>
+      <div class="panel-body">
+        Total Dogecoin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
+        <hr>
+        <% if @user.items.count == 0 %>
+        No Items created yet. <br><%= link_to "Create a new item", new_item_path, class: 'btn btn-block btn-primary' %>
+        <% else %>
         <% @user.items.each do |f| %>
         <p>
-          Creator of <%= link_to f.name, f %>
+          Creator of  <%= link_to image_tag(f.imageurl, width: "50px"), f %> <%= link_to f.name, f %>
         </p>
+        <% end %>
         <% end %>
       </div>
     </div>
   </div>
 
+
+  <div class="col-md-4">
+
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2><%= fa_icon 'flag' %> Guild</h2>
+      </div>
+      <div class="panel-body">
+        <% @user.owned_guilds.each do |f| %><h3>
+        Owner of <%= link_to f.name, f %></h3>
+        <% end %>
+        <% if @user.guild_id.presence %><h3>
+        Member of <%= link_to Guild.find(@user.guild_id).name, Guild.find(@user.guild_id) %></h3>
+        <% else %>
+        No guild set. <%= link_to "Find a guild to join!", guilds_path %>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2><%= fa_icon 'book' %> Adventure Log</h2>
+      </div>
+      <div class="panel-body">
+        <%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.text_area :content, rows: 4, class: 'form-control', placeholder: 'Click here to start a journal entry about your adventures...' %>
+        <%= f.submit "Finish Adventure Log", class: 'btn btn-primary btn-block' %>
+        <% end %><br>
+        <% @user.logs.each do |f| %>
+        <div class='well'><strong><%= time_ago_in_words(f.created_at) %></strong> <%= f.content %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  </h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h2>Dogemon</h2></div>
+  <div class="panel-body">
+    <% @user.pets.each do |pet| %><div class="col-md-3"><div class="well"><center><h4 style="margin: 0"><%= element_icon(pet.element) %><%= pet.name %></h4><br>
+    <%= link_to image_tag(pet.imageurl, class: 'btn', height: "150px"), pet %><br>
+    <%= pet.description %><p></p>  
+    </div>
+    </div>  
+    <% end %>
+    </div>
+  </div>
+  <!--    END OF DOGEMON CONTAINER -->
+
+  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2>
+
+  <% @user.items.each do |f| %>
+  <p>
+    Creator of <%= link_to image_tag(f.imageurl, width: "50px"), f %> <%= link_to f.name, f %>
+  </p>
   <% end %>
+
+  <% end %>
+
+
+</div>

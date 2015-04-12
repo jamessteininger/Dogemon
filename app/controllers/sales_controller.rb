@@ -50,15 +50,16 @@ before_filter :authenticate_user!
     respond_to do |format|
       if @sale.save
         @item.update_attribute(:downloads, @item.downloads += 1)
-        @user.update_attribute(:coin, @user.coin -= @item.worth)
+        #@user.update_attribute(:coin, @user.coin -= @item.worth)
         @creator = User.find(@item.creator_id)
         @creator.update_attribute(:coin_made, @creator.coin_made += (@item.worth.to_f * 0.95))
-        @creator.update_attribute(:coin, @creator.coin += @item.worth)
+        #@creator.update_attribute(:coin, @creator.coin += @item.worth)
         
         percent_creator = (@item.worth.to_f * 0.95)
         percent_company = (@item.worth.to_f * 0.05)
         pay_to = BlockIo.get_user_address user_id: @creator.block_io_wallet_id
-        BlockIo.withdraw_from_user user_id: current_user.block_io_wallet_id, payment_address: pay_to['data']['address'], amount: percent_creator
+        pay_from = BlockIo.get_user_address user_id: current_user.block_io_wallet_id
+        BlockIo.withdraw_from_addresses from_addresses: pay_from['data']['address'], payment_address: pay_to['data']['address'], amount: percent_creator
         
         format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
         format.json { render :show, status: :created, location: @sale }

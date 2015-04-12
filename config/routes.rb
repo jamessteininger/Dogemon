@@ -16,7 +16,22 @@ Rails.application.routes.draw do
 
   resources :ghost_logs
 
-  resources :ghosts
+  resources :ghosts 
+  
+  
+  resources :guilds do
+    collection do
+      get :user
+    end
+    resources :users do
+      collection do
+        get :pet
+      end
+      resources :pets do
+        resources :battles
+      end
+    end
+  end
   
   resources :wallpapers
 
@@ -113,6 +128,7 @@ resources :users do
   get 'make_wallet'
   post 'send_doge'
   get 'get_booster'
+  get 'join_guild'
   resources :transactions
   post 'set_town'
   get 'set_town'

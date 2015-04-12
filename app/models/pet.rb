@@ -19,6 +19,10 @@ class Pet < ActiveRecord::Base
 }
   validates :description, presence: true
   
+  def rank
+    return Pet.count
+  end
+  
   def take_damage(amount)
     update_attribute(:health, self.health-amount)
   end

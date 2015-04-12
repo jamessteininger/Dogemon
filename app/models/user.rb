@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates :imageurl, presence: true
   validates :if_accepted_terms, presence: true
   has_many :transactions
+  has_one :guild
+  has_many :owned_guilds, class_name: 'Guild', foreign_key: 'owner_id'
   has_many :bounties
   has_many :sales, dependent: :destroy
   has_many :logs

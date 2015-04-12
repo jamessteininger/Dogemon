@@ -1,0 +1,64 @@
+<p>
+  <%= link_to 'Back to All Guilds', guilds_path, class: 'btn btn-default btn-' %>
+  <% if user_signed_in? and current_user.id == @guild.owner_id %>
+  <%= link_to 'Guild Settings', edit_guild_path(@guild), class: 'btn btn-primary pull-' %>
+  <% end %>
+  <% if current_user.guild_id != @guild.id %>
+  <%= link_to 'Join Guild', user_join_guild_path(current_user, guild_id: @guild.id), class: 'btn btn-success pull-right' %>
+  <% else %>
+  <span class='pull-right'>Welcome, member of <%= @guild.name %>!</span>
+  <% end %>
+</p>
+<div class="jumbotron" style="background-size:cover; background-image: url(<%= @guild.imageurl %>);">
+  <h1><%= @guild.name %> </h1>
+  <p><%= @guild.description %></p>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <h2>Activity</h2>
+    <hr>
+
+    <% if @guild_battles %>
+    <% @guild_battles.each do |f| %>
+    <% if f.ghost.presence %>
+    <div class="well">
+      <h4>
+        <%= f.pet.user.dogetag %>'s <%= link_to f.pet.name, f.pet %> 
+        <% if f.b_pet_winner %><span class="label label-success">won a battle against </span><% elsif f.battle_state == 'completed' %><span class="label label-default">lost a battle a</span><% else %><span class="label label-info"><%= link_to 'is in a battle against ', f %></span><% end %> 
+        <br><%= link_to f.ghost.name, f.ghost.pet %>  - 
+        - <%= time_ago_in_words(f.created_at) %> ago
+      </h4>
+      <p><center><%= link_to image_tag(f.pet.imageurl, width: "40px"), f.pet %> vs <%= link_to image_tag(f.ghost.imageurl, height: "40px", style: 'padding-left: 10px; padding-right: 10px;'), f.ghost %></center></p>
+    </div>
+    <% end %>
+    <% end %>
+
+    <% else %>
+    No guild activity to show. 
+    <% end %>
+
+  </div>
+  <div class="col-md-4">
+    <h2>Stats</h2>
+    <hr>
+    <h3><span class='label label-success'>Rank: <%= Guild.all.sort_by(&:guild_wins).reverse.index(@guild) + 1 %></span></h3>
+    <h4>
+      <strong>Age: </strong><%= time_ago_in_words(@guild.created_at) %> old (birthday: <%= @guild.created_at.strftime("%B %d, %Y") %>) <br>
+      <b>Element:</b> <%= @guild.element %><br>
+      <b>Guild Wins:</b> <%= @guild.guild_wins %>
+      </h3>
+
+    <%= link_to "Buy Booster Pack", @guild, class: 'btn btn-success btn-block' %>
+  </div>
+  <div class="col-md-4">
+    <h2>Members (<%= @guild.users.count %>)</h2>
+    <hr>
+    <h3>Founder: <%= link_to User.find(@guild.owner_id).dogetag, User.find(@guild.owner_id) %></h3>
+    <% @guild.users.each do |f| %>
+    <%= render 'users/mini', f: f  %>
+    <% end %>
+  </div>
+
+</div>

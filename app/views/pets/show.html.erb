@@ -19,6 +19,7 @@
       <h4><strong>Equipped Items: </strong><%= @pet.equipments.count %></h4>
       <% if @pet.favorite_activity.presence %><h4><strong>Favorite Activity: </strong><%= @pet.favorite_activity %></h4><% end %>
       <% if @pet.disposition.presence %><h4><strong>Disposition: </strong><%= @pet.favorite_activity %></h4><% end %>
+      <%= link_to 'Release', @pet, method: :delete, data: { confirm: 'Are you sure you want to release this Dogemon? Remember the Red Wedding. Also be sure to unequip all items first. ' } %> 
     </div>
   </div>
   <div class="col-md-5">
@@ -38,13 +39,12 @@
     </div>
   </div>
 </div>
+  <div class="row">
 
-<div class="row">
-  <div class="col-md-3">
-    <% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
-    <div class="well">
-      <h3>Unequipped Items</h3>
-      <% if @pet.equipments.count < 4 %>
+    <div class="col-md-3">
+      <% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
+      <h3>Innventory</h3>
+<hr>
       <% @sales.each do |f| %>
       <% if !f.equipment.presence %>
       <p>
@@ -52,31 +52,43 @@
         <%= form_for [@pet, Equipment.new]  do |g| %>
         <%= g.hidden_field :pet_id, value: @pet.id %>
         <%= g.hidden_field :sale_id, value: f.id %>
+        <% if @pet.equipments.count < 4 %>
         <%= g.submit "Equip", class: 'btn btn-sm btn-primary' %>
 
         <% end %>
-      </div>
-      <%=  image_tag(Item.find(f.item_id).imageurl, width: "50px")  %>
-      <%= Item.find(f.item_id).name %>
-      </p>
+        <% end %>
+      </div></p><p>
+    <%=  image_tag(Item.find(f.item_id).imageurl, width: "50px", style: 'padding-right: 10px;', class: 'pull-left')  %>
+      <%= Item.find(f.item_id).name %><br><%= Item.find(f.item_id).utility_type %> <%= Item.find(f.item_id).attack %> / Magic <%= Item.find(f.item_id).magic %>
+      </p><br>
     <% end %>
     <% end %>
+    
+    <% else  %>
+    <%= link_to "Challenge?", pet_challenge_path(@pet), class: 'btn btn- btn-warning' %><% end %>
+  </div>  
+
+  <% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
+  <div class="col-md-9">
+    <h3>Equipped Items (4 max)</h3><hr>
+    <% @pet.equipments.each do |f| %>
+    <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
     <% end %>
   </div>
-  <%= link_to 'Release', @pet, method: :delete, data: { confirm: 'Are you sure you want to release this Dogemon? Remember the Red Wedding. Also be sure to unequip all items first. ' } %> 
-  <% else  %>
-  <%= link_to "challenge?", pet_challenge_path(@pet), class: 'btn btn- btn-warning' %><% end %>
-</div>  
-
-</div>
-<% if !@pet.pvp_battle.presence and current_user.id == @pet.user_id %>
-<div class="col-md-9">
-  <h3>Equipped Items (4 max)</h3>
-  <% @pet.equipments.each do |f| %>
-  <%= render partial: "items/item_pet_view", locals: { item: f.sale, equipment: f } %>
+  <% elsif current_user.id == @pet.user_id %>
+  Right now your Dogemon is in a battle, but come back later to equip and unequip items. 
   <% end %>
 </div>
-<% elsif current_user.id == @pet.user_id %>
-Right now your Dogemon is in a battle, but come back later to equip and unequip items. 
-<% end %>
+<h2>Battle History</h2>
+<% @pet.battles.reverse.each do |f| %>
+<% if f.ghost.presence %>
+<div class="well">
+  <h4>
+    <%= link_to image_tag(@pet.imageurl, width: "40px"), @pet %> <%= link_to @pet.name, @pet %> 
+    <% if f.b_pet_winner %><span class="label label-success">won a battle against </span><% elsif f.battle_state == 'completed' %><span class="label label-default">lost a battle a</span><% else %><span class="label label-info"><%= link_to 'is in a battle against ', f %></span><% end %> 
+    <%= link_to image_tag(f.ghost.imageurl, height: "40px", style: 'padding-left: 10px; padding-right: 10px;'), f.ghost %><%= element_icon(f.ghost.element) %> <%= link_to f.ghost.name, f.ghost.pet %>  - 
+     - <%= time_ago_in_words(f.created_at) %> ago
+  </h4>
 </div>
+<% end %>
+<% end %>

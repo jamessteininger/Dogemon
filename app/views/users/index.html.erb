@@ -1,30 +1,31 @@
-<div class="well"><div class="pull-right"><h4><%= User.count %> people playing Dogemon</h4></div><%= form_tag users_path, :method => 'get' do %>
- <p>Find a player 
-  <%= text_field_tag :search, params[:search] %>
-   <%= submit_tag "Search", :dogetag => nil %>
+<div class="well"><div class="pull-right"><h4><%= User.count %> people playing Dogemon</h4></div>
+  <%= form_tag users_path, :method => 'get' do %>
+  <p>Find a player 
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :dogetag => nil %>
   </p>
   <% end %><hr>
-<% @users.each do |f| %>
-<h2>
-  <div>
-    <%= image_tag f.imageurl, width: 50 %>
-    <%= link_to f.dogetag, f %> 
-    <div style="float:right">
-      <% if current_user.friend?(f) %>
-      <%= form_for(current_user.friendships.find_by_friend_id(f),
+  <% @users.each do |f| %>
+  <h2>
+    <div>
+      <%= image_tag f.imageurl, width: 50 %>
+      <%= link_to f.dogetag, f %> 
+      <div style="float:right">
+        <% if current_user.friend?(f) %>
+        <%= form_for(current_user.friendships.find_by_friend_id(f),
   html: { method: :delete }) do |f| %>
-      <%= f.submit "Unfriend", class: "btn btn-danger" %>
-      <% end %>
-      <% elsif (current_user.id == f.id) %>
-      <% else %>
-      <%= form_for(Friendship.new) do |k| %>
-      <%= k.hidden_field :user_id, value: current_user.id %>
-      <%= k.hidden_field :friend_id, value: f.id %>
-      <%= k.submit "Add Friend", class: 'btn btn-success' %>
-      <% end %>
-      <% end %>
-  </div>
-</h2>
-<% end %>
-<%= will_paginate @user %>
-</div>
+        <%= f.submit "Unfriend", class: "btn btn-danger" %>
+        <% end %>
+        <% elsif (current_user.id == f.id) %>
+        <% else %>
+        <% form_for(Friendship.new) do |k| %>
+        <%= k.hidden_field :user_id, value: current_user.id %>
+        <%= k.hidden_field :friend_id, value: f.id %>
+        <%= k.submit "Add Friend", class: 'btn btn-success' %>
+        <% end %>
+        <% end %>
+      </div>
+      </h2>
+    <% end %>
+    <%= will_paginate @user %>
+    </div>

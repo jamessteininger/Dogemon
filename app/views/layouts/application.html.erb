@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Dogemon</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= stylesheet_link_tag "forem" %>
-  <%= javascript_include_tag "forem" %>
-  <%= csrf_meta_tags %>
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-</head>
+  <head>
+    <title>Dogemon</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag "forem" %>
+    <%= javascript_include_tag "forem" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
 
   <body>
 
@@ -21,22 +21,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to root_path, style: 'padding-top: 19px; height:60px', class: "navbar-brand" do %>
-            <!--<i class="fa fa-bitcoin"></i> <strong>ProjectDoge</strong> v0.01 -->
-          <strong class='text-'>DOGE</strong><span class='text-default'>MON</span> - <span class='text-primary'>BETA</span>
+          <%= link_to root_path, style: 'padding-top: ; height:', class: "navbar-brand" do %>
+          <%= image_tag "DogemonNavbarWhite.png", width: 36, style: 'margin-top: -5px;' %>
+          <strong class='text-'>DOGE</strong><span class='text-default'>MON</span> - <span class='text-'>BETA</span>
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
-        <% if user_signed_in? %>
+          <% if user_signed_in? %>
           <ul class="nav navbar-nav">
             <li> 
               <%= link_to main_app.user_path(current_user), class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Profile", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-user fa-2x"></i>
+              <i class="fa fa-user fa-2x"></i>
               <% end %>
             </li>
             <li> 
               <%= link_to main_app.items_grid_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Market", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-tag fa-2x"></i>
+              <i class="fa fa-tag fa-2x"></i>
               <% end %>
             </li>
             <li> 
@@ -47,64 +47,96 @@
             </li>
             <li> 
               <%= link_to main_app.leaderboard_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Leaderboard", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-list fa-2x"></i>
+              <i class="fa fa-list fa-2x"></i>
               <% end %>
             </li>
             <li> 
-              <%= link_to main_app.users_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Players", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-group fa-2x"></i>
+              <%= link_to main_app.guilds_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Players", 'data-placement' => 'bottom' do %>
+              <i class="fa fa-group fa-2x"></i>
               <% end %>
             </li>
             <li> 
               <%= link_to main_app.wallet_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Wallet", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-money fa-2x"></i>
+              <i class="fa fa-money fa-2x"></i>
               <% end %>
             </li>
             <li> 
               <%= link_to main_app.how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
-                <i class="fa fa-question fa-2x"></i>
+              <i class="fa fa-question fa-2x"></i>
               <% end %>
             </li>
+            
           </ul>
+          
           <ul class="nav navbar-nav navbar-right">
-           
-            <%= link_to  main_app.logout_path, class: "btn btn-default", style: 'margin-top: 18px', :method => :delete do %><i class="fa fa-arrow-left"></i> Log out<% end %> 
+<li class="dropdown">
+            <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+              <span style=""><%= current_user.dogetag %> <%= fa_icon 'chevron-down  ' %></span> 
+            </a>
+            <ul class="dropdown-menu dropdown-menu-left" style="">
+              <li>
+                <%= link_to main_app.user_path(current_user) do %><%= fa_icon "user" %> Show Profile <% end %>
+              </li>  
+              </li>  
+              <li class="divider"></li>
+              <li>
+                <%= link_to  main_app.logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
+              </li>
+            </ul>
+          </li>
 
-		
+
           </ul>
-        
-<% else %>
+
+          <% else %>
           <ul class="nav navbar-nav">
-          <li>
-            <%= link_to "How to Play", main_app.how_to_play_path %>
+            <li>
+              <%= link_to "How to Play", main_app.how_to_play_path %>
             </li>
             <li>
               <%= link_to "About", main_app.about_path %>
             </li>
-            
+
             <li>
-              
+
             </li>
-          
+
           </ul>
-    <ul class="nav navbar-nav navbar-right">
-    <form class="navbar-forform-">
-      <%= link_to "Sign In", main_app.new_user_session_path, class: "btn btn-default" %> | <%= link_to "Sign Up", main_app.new_user_registration_path, class: "btn btn-primary" %>
-      </form>
-    </ul>
-   <% end %>
-   </div>
-    </div>
-    </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to main_app.new_user_registration_path do %><i class="fa fa- fax"></i> Sign Up<% end %>
+            </li>
+            <li>
+              <%= link_to main_app.new_user_session_path do %><i class="fa fa-sign-in fax"></i> Log In<% end %>
+            </li>
+
+          </ul>
+          <% end %>
+        </div>
+      </div>
     </div>
     </div>
   </div>
+</div>
+
 <div class="container">
   <%= render 'layouts/messages' %>
-<%= yield %>
-<hr>
+  <%= yield %>
+  <hr>
   <strong>
     <center>&copy; Dogemon, 2014 <br>
       <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Forum", forem.root_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", "https://twitter.com/JamesSteininger" %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
-</body>
-</html>
+      </body>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-41312073-5', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    </html>

@@ -1,6 +1,5 @@
-<h1><strong><center>Battle Arena</h1><h5><center>- <%= PvpBattle.count + Battle.count %> battles have been fought -</h5></strong></center>
+<div class="well" style="background-size:cover; background-image: url();"><h1><strong><center>Battle Arena</h1><h5><center>- <%= PvpBattle.count + Battle.count %> battles have been fought -</h5></strong></center></div>
   <div class="row">
-    <hr>
     <div class="col-md-4">
       <%= link_to new_battle_path, class: 'btn btn-lg btn-block btn-success tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Start here if you are new. Random battles work great when you want to jump into the action, because the opposing Dogemon is powered by AI", 'data-placement' => 'bottom' do %><%= fa_icon 'bomb 2x' %><br>Start a Random Battle<% end %>
       <%= link_to 'Request a player to battle', new_pvp_battle_path, class: 'btn btn-block btn-lg btn-primary tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Player battles work well in real life, so you know whose turn it is", 'data-placement' => 'bottom' %>
@@ -10,70 +9,82 @@
       <%= link_to 'See the TOP Dogemon leaderboard', leaderboard_path, class: 'btn btn-block btn-lg btn-warning tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' %> 
     </div>
   </div>
-  </div>
-<div class="row">
-  <div class="col-md-4">
-    <h2><center><strong>Bounty Board</h2></center></strong>
-    <% Bounty.all.each do |f| %>
-    <div class="well">
-    <b> Amount: </b><%= f.amount %>
-        <br>
-        <b>  Challenges:  </b> <%= f.number_of_bounties %>/<%= f.number_of_bounties %>
+  
+  
+  <div class="row">
+    
+    
+    <div class="col-md-4">
+      <h2><center><strong>Bounty Board</h2></center></strong>
+      <hr>
+      <% Bounty.all.each do |f| %>
+      <div class="well">
+        <h4>
+          <%= link_to image_tag(f.pet.imageurl, height: 40), f.pet %> <%= link_to f.pet.name, f.pet%> 
+        </h4>
+        <h4>
+        <span class='label label-success'><%= fa_icon 'tag' %> <%= f.amount %></span>    <span class='label label-primary'>Rank: #<%= f.pet.rank %></span>
+        <span class='label label-danger'><b>  Challenges:  </b> <%= f.number_of_bounties %>/<%= f.number_of_bounties %></span>
+        </h4>
+        <%= link_to "View Bounty", f, class: 'btn btn-primary btn-block' %>
+      </div>
+      <% end %>
     </div>
-    <% end %>
-  </div>
-  <div class="col-md-4">
-    <h2><center><strong>My Battles</h2></center></strong>
-    <hr>
-    <% current_user.pets.order('created_at DESC').each do |p| %>
-    <% p.battles.order('created_at DESC').each do |b| %>
-    <% if b.battle_state == 'in_progress' %>
-    <% if b.ghost.presence %><p class="well">
-    <%= image_tag(b.ghost.imageurl, width: 50 ) %> <%= link_to "Battle against " + b.ghost.name, b %>
-    </p>
-    <% end %>
-    <% end %>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-4">
-    <h2><center><strong>My Player Battles</h2></center></strong>
-    <hr>
-    <% current_user.pvp_battles.each do |f| %>
-
-    <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
-    <div class="well">
-      <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
-      <%= f.whose_turn(current_user.id) %>
+    
+    
+    <div class="col-md-4">
+      <h2><center><strong>My Battles</h2></center></strong>
+      <hr>
+      <% current_user.pets.order('created_at DESC').each do |p| %>
+      <% p.battles.order('created_at DESC').each do |b| %>
+      <% if b.battle_state == 'in_progress' %>
+      <% if b.ghost.presence %><p class="well">
+      <%= image_tag(b.ghost.imageurl, width: 50 ) %> <%= link_to "Battle against " + b.ghost.name, b %>
+      <% if b.bounty_id.presence %>Bounty<% end %>
+      </p>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
     </div>
-    <% end %>
+    <div class="col-md-4">
+      <h2><center><strong>My Player Battles</h2></center></strong>
+      <hr>
+      <% current_user.pvp_battles.each do |f| %>
 
-    <% end %>
-    <% current_user.pvp_battles_p2.each do |f| %>
-    <p>
       <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
-    <div class="well">
-      <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
-      <%= f.whose_turn(current_user.id) %>
+      <div class="well">
+        <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
+        <%= f.whose_turn(current_user.id) %>
+      </div>
+      <% end %>
+
+      <% end %>
+      <% current_user.pvp_battles_p2.each do |f| %>
+      <p>
+        <% if f.other.presence and f.pet2.presence and f.battle_state != 'completed' %>
+      <div class="well">
+        <%= link_to f.user.dogetag + "'s " + f.pet1.name + " against " + f.other.dogetag + "'s " + f.pet2.name, f %><br>
+        <%= f.whose_turn(current_user.id) %>
+      </div>
+      <% end %>
+      </p>
+    <% end %>
+    <% current_user.pvp_battles.each do |f| %>
+    <p>
+      <% if !f.other.presence or !f.pet2.presence %><div class="well"><h4>Battle Request</h4>
+    <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
     <% end %>
     </p>
   <% end %>
-  <% current_user.pvp_battles.each do |f| %>
+  <% current_user.pvp_battles_p2.each do |f| %>
   <p>
-    <% if !f.other.presence or !f.pet2.presence %><div class="well"><h4>Battle Request</h4>
-  <%= link_to "Pending", f %> request with <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if !f.other.presence or !f.pet2.presence %><div class="well">
+  <%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <% end %>
   </p>
-<% end %>
-<% current_user.pvp_battles_p2.each do |f| %>
-<p>
-  <% if !f.other.presence or !f.pet2.presence %><div class="well">
-<%= link_to "Respond to a request to battle from", f %> <%= link_to f.other.dogetag, f.other %> | <%= link_to "Cancel", f, method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
-<% end %>
-</p>
 <% end %>
 </div>
 </div>
