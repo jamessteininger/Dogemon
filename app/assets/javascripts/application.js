@@ -14,6 +14,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require forem
-$(function () {
-  $("[rel='tooltip']").tooltip();
-});
