@@ -21,6 +21,31 @@
 <div class="row">
 
   <div class="col-md-4">
+    <h2>Stats</h2>
+    <hr>
+    
+    <h4>
+      <strong>Age: </strong><%= time_ago_in_words(@guild.created_at) %> old (birthday: <%= @guild.created_at.strftime("%B %d, %Y") %>) <br>
+      <b>Element:</b> <%= @guild.element %><br>
+      <b>Guild Wins:</b> <%= @guild.guild_wins %>
+      </h3>
+
+  </div>
+  
+  
+  
+  <div class="col-md-4">
+    <h2>Members (<%= @guild.users.count %>)</h2>
+    <hr>
+    <h3>Founder: <%= link_to User.find(@guild.owner_id).dogetag, User.find(@guild.owner_id) %></h3>
+    <% @guild.users.each do |f| %>
+    <%= render 'users/mini', f: f  %>
+    <% end %>
+  </div>
+  
+  
+  
+  <div class="col-md-4">
     <h2>Activity</h2>
     <hr>
 
@@ -44,24 +69,7 @@
     <% end %>
 
   </div>
-  <div class="col-md-4">
-    <h2>Stats</h2>
-    <hr>
-    
-    <h4>
-      <strong>Age: </strong><%= time_ago_in_words(@guild.created_at) %> old (birthday: <%= @guild.created_at.strftime("%B %d, %Y") %>) <br>
-      <b>Element:</b> <%= @guild.element %><br>
-      <b>Guild Wins:</b> <%= @guild.guild_wins %>
-      </h3>
-
-  </div>
-  <div class="col-md-4">
-    <h2>Members (<%= @guild.users.count %>)</h2>
-    <hr>
-    <h3>Founder: <%= link_to User.find(@guild.owner_id).dogetag, User.find(@guild.owner_id) %></h3>
-    <% @guild.users.each do |f| %>
-    <%= render 'users/mini', f: f  %>
-    <% end %>
-  </div>
+  
+  
 
 </div>
