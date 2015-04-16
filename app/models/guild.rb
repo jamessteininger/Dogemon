@@ -4,16 +4,18 @@ class Guild < ActiveRecord::Base
   validates :name, presence: true
   validates :description, presence: true
   validates :element, presence: true
-  
+
   has_many :users
   has_many :pets, through: :users
   has_many :battles, through: :pets
-  
+
   def guild_wins
     guild_wins = 0
     self.users.each do |f|
       f.pets.each do |p|
-        guild_wins = guild_wins + (p.ghost_wins + p.against_ghost_wins)
+        if p.battles.any? 
+          guild_wins = guild_wins + (p.ghost_wins + p.against_ghost_wins)
+        end
       end
     end
     return guild_wins
