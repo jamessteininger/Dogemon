@@ -1,4 +1,4 @@
-<% if current_user.block_io_wallet_id.presence %>
+
 <div class="col-md-6 col-md-offset-3">
 <div class="well">
 
@@ -27,10 +27,9 @@
   <% else %>
   <%= link_to "Insufficient Dogecoin", wallet_path, class: 'btn btn-danger btn- btn-block btn-raised' %>
   <% end %>
+    <br>
+    <p><%= link_to 'Back to Marketplace', items_grid_path, class: 'btn btn-default btn-block' %></p></center>
+This is a product information page where you can buy more of this item if you have the funds. To see if you already own this item, go into your <%= link_to 'inventory', current_user %> to check. 
 <% end %>
     
-  <%= link_to 'Back', items_grid_path %>
-
-    </div>This is a product information page where you can buy more of this item if you have the funds. To see if you already own this item, go into your <%= link_to 'inventory', current_user %> to check. <% else %>
-<%= link_to 'Go get your wallet!', wallet_path %>
-<% end %>
+    </div>

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<% if current_user.block_io_wallet_id.presence %>
+<% if user_signed_in? and current_user.block_io_wallet_id.presence %>
 <div class="pull-right"><%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %></div>
 <h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
 <%= form_tag items_grid_path, method: 'get' do %><span>
