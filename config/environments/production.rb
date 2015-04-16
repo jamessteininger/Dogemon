@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { :host => 'projectdoge.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'godogemon.com' }
   #Rails.application.routes.default_url_options[:host] = 'projectdoge.herokuapp.com'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
