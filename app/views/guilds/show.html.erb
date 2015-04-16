@@ -9,7 +9,7 @@
   <span class='pull-right'>Welcome, member of <%= @guild.name %>!</span>
   <% end %>
 </p>
-<div class="jumbotron" style="background-size:cover; background-image: url(<%= @guild.imageurl %>);">
+<div class=" animated fadeIn jumbotron" style="background-size:cover; background-image: url(<%= @guild.imageurl %>);">
   <h1 style="color: #fff; text-shadow: 2px 2px #000;"><%= @guild.name %> </h1>
   <p style="color: #fff; text-shadow: 2px 2px #000;"><%= @guild.description %></p>
   <h3>
@@ -52,7 +52,7 @@
     <% if @guild_battles %>
     <% @guild_battles.each do |f| %>
     <% if f.ghost.presence %>
-    <div class="well">
+    <div class="well animated fadeIn ">
       <h4>
         <%= f.pet.user.dogetag %>'s <%= link_to f.pet.name, f.pet %> 
         <% if f.b_pet_winner %><span class="label label-success">won a battle against </span><% elsif f.battle_state == 'completed' %><span class="label label-default">lost a battle a</span><% else %><span class="label label-info"><%= link_to 'is in a battle against ', f %></span><% end %> 

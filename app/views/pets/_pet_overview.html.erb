@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
-<h3 class='wow wobble'><%= element_icon(pet.element) %> <%= link_to pet.name, pet %></h3>
-<%= link_to image_tag(pet.imageurl, height: "180px", class: "wow rubberBand"), pet, class: "wow wobble" %><br><br>
+<h3 class=' wow wobble fadeIn '><%= element_icon(pet.element) %> <%= link_to pet.name, pet %></h3>
+<%= link_to image_tag(pet.imageurl, height: "180px", class: " "), pet, class: " " %><br><br>
 <div class="progress">
   <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.health.to_f/100 * 100) %>%;">
     <span class="sr-onl">HP <%= pet.health %>/100</span>

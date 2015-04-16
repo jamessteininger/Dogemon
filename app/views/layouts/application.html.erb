@@ -5,8 +5,8 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag "forem" %>
-    <%= javascript_include_tag "forem" %>
-    <%= csrf_meta_tags %>
+    <%= javascript_include_tag "forem" %><script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
+    <%= csrf_meta_tags %><link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.2.6/animate.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
 
@@ -121,7 +121,10 @@
 
 <div class="container">
   <%= render 'layouts/messages' %>
-  <%= yield %>
+  <%= yield %><script>
+ new WOW().init();
+</script>
+
   <hr>
   <strong>
     <center>&copy; Dogemon, 2014 <br>
