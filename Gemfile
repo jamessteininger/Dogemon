@@ -26,9 +26,14 @@ group :development do
 end
 
 group :production do
-   gem 'rails_12factor'
+  gem 'rails_12factor'
   gem 'pg'
 end
+
+group :development, :test do
+  gem 'foreman'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
