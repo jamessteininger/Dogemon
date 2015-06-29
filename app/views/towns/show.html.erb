@@ -15,5 +15,11 @@
   <%= @town.description %>
 </p>
 
+<h3>Routes</h3>
+North: <%= if @town.north_id.presence then link_to @town.north_town.name, @town.north_town, class: 'btn btn-sm btn-primary' end %><br>
+East: <%= if @town.east_id.presence then link_to @town.east_town.name, @town.east_town, class: 'btn btn-sm btn-primary' end %><br>
+South: <%= if @town.south_id.presence then link_to @town.south_town.name, @town.south_town, class: 'btn btn-sm btn-primary' end %><br>
+West: <%= if @town.west_id.presence then link_to @town.west_town.name, @town.west_town, class: 'btn btn-sm btn-primary' end %><br>
+
 <%= link_to 'Edit', edit_town_path(@town) %> |
 <%= link_to 'Back', towns_path %>

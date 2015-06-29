@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410091149) do
+ActiveRecord::Schema.define(version: 20150428211321) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -84,6 +84,13 @@ ActiveRecord::Schema.define(version: 20150410091149) do
   create_table "colusseums", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "doge_elements", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -290,6 +297,10 @@ ActiveRecord::Schema.define(version: 20150410091149) do
     t.integer  "creator_id"
     t.integer  "downloads"
     t.string   "utility_type"
+    t.string   "animation_name"
+    t.integer  "sound_file_id"
+    t.float    "influence_amount"
+    t.boolean  "b_original_art"
   end
 
   create_table "logs", force: true do |t|
@@ -341,6 +352,17 @@ ActiveRecord::Schema.define(version: 20150410091149) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "other_id"
+    t.string   "content"
+    t.string   "notification_url"
+    t.string   "image_url"
+    t.boolean  "b_read"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pets", force: true do |t|
     t.string   "imageurl"
     t.string   "name"
@@ -361,6 +383,8 @@ ActiveRecord::Schema.define(version: 20150410091149) do
     t.string   "disposition"
     t.integer  "against_ghost_wins"
     t.integer  "against_ghost_losses"
+    t.string   "animation_name"
+    t.integer  "sound_file_id"
   end
 
   create_table "posts", force: true do |t|
@@ -397,6 +421,12 @@ ActiveRecord::Schema.define(version: 20150410091149) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "north_id"
+    t.integer  "south_id"
+    t.integer  "west_id"
+    t.integer  "east_id"
+    t.string   "background_url"
+    t.integer  "sound_file_id"
   end
 
   create_table "transactions", force: true do |t|
@@ -438,6 +468,7 @@ ActiveRecord::Schema.define(version: 20150410091149) do
     t.string   "forem_state",            default: "pending_review"
     t.boolean  "forem_auto_subscribe",   default: false
     t.integer  "guild_id"
+    t.boolean  "b_sound_on"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

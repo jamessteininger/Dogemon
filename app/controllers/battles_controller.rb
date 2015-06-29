@@ -129,6 +129,7 @@ class BattlesController < ApplicationController
     end
     @ghost = Ghost.new
     @battle.update_attribute(:ghost_id, @ghost.id)
+    @battle.update_attribute(:background_url, Guild.order("RANDOM()").first.imageurl)
     @ghost.update_attribute(:name, @ghost_archetype.name)
     @ghost.update_attribute(:imageurl, @ghost_archetype.imageurl)
     @ghost.update_attribute(:element, @ghost_archetype.element)
@@ -218,6 +219,6 @@ class BattlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def battle_params
-    params.require(:battle).permit(:user_id, :enemy_id, :pet_id, :bounty_id, :b_pet_turn, :battle_state, :b_pet_winner)
+    params.require(:battle).permit(:background_url, :user_id, :enemy_id, :pet_id, :bounty_id, :b_pet_turn, :battle_state, :b_pet_winner)
   end
 end

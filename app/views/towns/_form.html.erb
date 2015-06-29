@@ -1,29 +1,47 @@
 <%= form_for(@town) do |f| %>
-  <% if @town.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@town.errors.count, "error") %> prohibited this town from being saved:</h2>
+<% if @town.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@town.errors.count, "error") %> prohibited this town from being saved:</h2>
 
-      <ul>
-      <% @town.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @town.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :image_url %><br>
-    <%= f.text_field :image_url %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :image_url %><br>
+  <%= f.text_field :image_url %>
+</div>
+<h3>Routes</h3>
+<div class="field">
+  <%= f.label :north %><br>
+  <%= f.collection_select :north_id, Town.all, :id, :name, {prompt: "Select a location"}, {class: "form-control"} %>
+</div>
+<div class="field">
+  <%= f.label :south %><br>
+  <%= f.collection_select :south_id, Town.all, :id, :name, {prompt: "Select a location"}, {class: "form-control"} %>
+</div>
+<div class="field">
+  <%= f.label :east %><br>
+  <%= f.collection_select :east_id, Town.all, :id, :name, {prompt: "Select a location"}, {class: "form-control"} %>
+</div>
+<div class="field">
+  <%= f.label :west %><br>
+  <%= f.collection_select :west_id, Town.all, :id, :name, {prompt: "Select a location"}, {class: "form-control"} %>
+</div>
+
+<div class="field">
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :description %><br>
+  <%= f.text_area :description %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>

@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   
+  resources :notifications
+
+  resources :doge_elements
+
   resources :bounties
 
   resources :friendships
+  resources :doge_elements
 
   # This line mounts Forem's routes at /forums by default.
   # This means, any requests to the /forums URL of your application will go to Forem::ForumsController#index.

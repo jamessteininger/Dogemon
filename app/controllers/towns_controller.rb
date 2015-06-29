@@ -69,6 +69,6 @@ class TownsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def town_params
-      params.require(:town).permit(:image_url, :name, :description)
+      params.require(:town).permit(:image_url, :name, :description, :north_id, :south_id, :east_id, :west_id, :sound_file_id)
     end
 end

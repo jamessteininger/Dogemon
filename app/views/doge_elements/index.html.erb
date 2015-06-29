@@ -1,0 +1,27 @@
+<h1>Listing doge_elements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @doge_elements.each do |doge_element| %>
+      <tr>
+        <td><%= doge_element.name %></td>
+        <td><%= doge_element.user_id %></td>
+        <td><%= link_to 'Show', doge_element %></td>
+        <td><%= link_to 'Edit', edit_doge_element_path(doge_element) %></td>
+        <td><%= link_to 'Destroy', doge_element, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Doge element', new_doge_element_path %>

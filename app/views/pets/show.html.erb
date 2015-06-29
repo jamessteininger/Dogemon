@@ -83,7 +83,7 @@
   <% end %>
 </div>
 <h2>Battle History</h2>
-<% @pet.battles.reverse.each do |f| %>
+<% @battles.reverse.each do |f| %>
 <% if f.ghost.presence %>
 <div class="well">
   <h4>
@@ -95,3 +95,5 @@
 </div>
 <% end %>
 <% end %>
+
+<p><%= will_paginate @battles %></p>

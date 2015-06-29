@@ -1,73 +1,76 @@
 <%= form_for(@item) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+<% if @item.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 <%= f.hidden_field :creator_id, value: current_user.id %>
 <% if @item.downloads == nil %>
 <%= f.hidden_field :downloads, value: 0 %>
 <% end %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
 <div class="field">
-    <%= f.label :element %><br>
-  <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary btn-item active">
-    <div><i class="fa fa-sun-o"></i></div>
-    <%= f.radio_button :element, "Sol", :checked => true %>Sol
-  </label>
-  <label class="btn btn-primary btn-item">
-    <div><i class="fa fa-moon-o"></i></div>
-    <%= f.radio_button:element, "Luna" %>Luna
-  </label>
-  <label class="btn btn-item btn-primary">
-    <div><i class="fa fa-globe"></i></div>
-    <%= f.radio_button :element, "Terra" %>Terra
-  </label>
+  <%= f.label :name %><br>
+  <%= f.text_field :name, class: 'form-control' %>
 </div>
+<div class="field">
+  <%= f.label :description %><br>
+  <%= f.text_area :description, class: 'form-control' %>
+</div>
+<div class="field">
+  <%= f.label :element %><br>
+  <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary btn-item active">
+      <div><i class="fa fa-sun-o"></i></div>
+      <%= f.radio_button :element, "Sol", :checked => true %>Sol
+    </label>
+    <label class="btn btn-primary btn-item">
+      <div><i class="fa fa-moon-o"></i></div>
+      <%= f.radio_button:element, "Luna" %>Luna
+    </label>
+    <label class="btn btn-item btn-primary">
+      <div><i class="fa fa-globe"></i></div>
+      <%= f.radio_button :element, "Terra" %>Terra
+    </label>
   </div>
+</div>
 <div class="field">
   <%= f.label :utility_type %><br>
   <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary btn-item active">
-    <div><i class="fa fa-crosshairs"></i></div>
-    <%= f.radio_button :utility_type, "Attack", :checked => true %>Attack
-  </label>
-  <label class="btn btn-item btn-primary">
-    <div><i class="fa fa-star-half-o"></i></div>
-    <%= f.radio_button :utility_type, "Drain" %>Drain
-  </label>
-  <label class="btn btn-item btn-primary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-    <div><i class="fa fa-medkit"></i></div>
-    <%= f.radio_button :utility_type, "Heal" %>Heal
-  </label>
+    <label class="btn btn-primary btn-item active">
+      <div><i class="fa fa-crosshairs"></i></div>
+      <%= f.radio_button :utility_type, "Attack", :checked => true %>Attack
+    </label>
+    <label class="btn btn-item btn-primary">
+      <div><i class="fa fa-star-half-o"></i></div>
+      <%= f.radio_button :utility_type, "Drain" %>Drain
+    </label>
+    <label class="btn btn-item btn-primary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+      <div><i class="fa fa-medkit"></i></div>
+      <%= f.radio_button :utility_type, "Heal" %>Heal
+    </label>
   </div>
-<div class="field">
-  <%= f.label :power %><br>
+  <div class="field">
+    <%= f.label :power %><br>
     <%= f.select :attack, [5, 10, 15, 20, 25, 30, 40, 50], {prompt: "Select a power"}, {class: "input-large form-control"}  %>
   </div>
 
-    <%= f.hidden_field :magic %>
-    <%= f.hidden_field :worth %>
+  <%= f.hidden_field :magic %>
+  <%= f.hidden_field :worth %>
 
   <div class="field">
     <%= f.label :imageurl %><br>
-    <%= f.text_field :imageurl %>
-  </div>
+    <%= f.text_field :imageurl, class: 'form-control' %>
+  </div><br>
+<div class="field">
+  <%= f.check_box :b_original_art %> check if original art
+</div><br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-block btn-success btn-lg' %>
   </div>
-<% end %>
+  <% end %>

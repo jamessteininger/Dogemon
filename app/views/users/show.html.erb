@@ -92,7 +92,15 @@
 
   <div class="col-md-4">
 
-
+    <div class="panel panel-primary animated fadeIn ">
+      <div class="panel-heading">
+        <h2><%= fa_icon 'home' %> Town</h2>
+      </div>
+      <div class="panel-body">
+        <%= link_to 'Towns', towns_path, class: 'btn btn-primary' %>
+        <%= @user.town_id %>
+      </div>
+    </div>
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
         <h2><%= fa_icon 'flag' %> Guild</h2>

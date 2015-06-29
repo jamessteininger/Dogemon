@@ -17,6 +17,7 @@ class PetsController < ApplicationController
     @pet = Pet.find(params[:id])
     @user = @pet.user
     @sales = @user.sales
+    @battles = @pet.battles.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /pets/new

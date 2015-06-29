@@ -82,6 +82,7 @@ GEM
       sass (~> 3.2)
     bootstrap-slider-rails (1.9.0)
       railties (>= 3.2, < 5.0)
+    bootstrap_form (2.1.1)
     bootswatch-rails (3.2.4)
       railties (>= 3.1)
     bourbon (3.2.3)
@@ -284,6 +285,7 @@ DEPENDENCIES
   bootstrap-material-design
   bootstrap-sass
   bootstrap-slider-rails
+  bootstrap_form
   bootswatch-rails
   coffee-rails (~> 4.0.0)
   devise
