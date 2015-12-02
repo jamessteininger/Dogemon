@@ -1,4 +1,7 @@
 <div class="col-md-6 col-md-offset-3">
+  <% if @item.b_mod_blocked %>
+  <p class='lead text-warning'>This item blocked for moderation</p>
+  <% end %>
   <div class="well">
     <div class="row">
       <div class="col-md-6">
@@ -16,7 +19,7 @@
     </div>
     <center> 
       <%= image_tag(@item.imageurl, class: 'img-responsive' ) %> 
-      <% if @item.b_original_art %><h3><span class="label label-primary"><i class='fa fa-star'></i> Original Artwork</span></h3><% end %>
+      <% if @item.b_original_art %><h4><span class="label label-primary"><i class='fa fa-star'></i> Original Artwork</span></h4><% end %>
     </center>
     <center> <h2><%= @item.utility_type %> <%= @item.attack %> / Magic <%= @item.magic %></h2>
       <p class="lead"><i>"<%= @item.description %>"</i></p><% if @item.creator.presence %>
@@ -34,8 +37,15 @@
       <% else %>
       <%= link_to "Insufficient Dogecoin", wallet_path, class: 'btn btn-danger btn- btn-block btn-raised' %>
       <% end %>
-      <% if user_signed_in? and @item.user == current_user %><center>You are the creator of this item.</center>
-      <%= link_to "Update Item", wallet_path, class: 'btn btn-danger btn- btn-block btn-raised' %>
+      <% if user_signed_in? and @item.creator == current_user %><center>You are the creator of this item.</center>
+      <%= link_to "Update Item", edit_item_path(@item), class: 'btn btn-primary btn- btn-block btn-raised' %><br>
+      <% end %>
+      <% if user_signed_in? and current_user.b_mod %>
+      <% if @item.b_mod_blocked == nil or @item.b_mod_blocked == false %>
+      <%= link_to item_mod_block_path(@item), class: 'btn btn-warning btn-block' do %><%= fa_icon "ban" %> Ban (Hide From Site) <% end %>
+      <% else %>
+      <%= link_to item_mod_block_path(@item), class: 'btn btn-warning btn-block' do %><%= fa_icon "eye" %> Un-ban (Show On Site) <% end %>
+      <% end %><br>
       <% end %>
       <br>
       <p><%= link_to 'Back to Marketplace', items_grid_path, class: 'btn btn-default btn-block' %></p></center>

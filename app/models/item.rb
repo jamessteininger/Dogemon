@@ -1,4 +1,7 @@
 class Item < ActiveRecord::Base
+  scope :mod_blocked, -> { where(b_mod_blocked: true) } 
+  scope :not_mod_blocked, -> { where("b_mod_blocked = nil OR b_mod_blocked = false") }
+  
   has_many :sales
   has_many :market_item_votes, dependent: :destroy
   has_many :upvoted_users, through: :market_item_votes, source: :user

@@ -1,9 +1,8 @@
-<div class="well   ">
+<div class="well">
   <h1>
     <%= image_tag(@user.imageurl, height: 55) %>
     <%= @user.dogetag %>
     <% if current_user == @user %>
-
     <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-sm btn-default pull-right" %> 
     <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
   </h1>
@@ -92,6 +91,7 @@
 
   <div class="col-md-4">
 
+    <% if user_signed_in? and current_user.b_mod %>
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
         <h2><%= fa_icon 'home' %> Town</h2>
@@ -101,6 +101,8 @@
         <%= @user.town_id %>
       </div>
     </div>
+    <% end %>
+    
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
         <h2><%= fa_icon 'flag' %> Guild</h2>

@@ -12,7 +12,7 @@ class AddBattleAnimationAndArt < ActiveRecord::Migration
     add_column :pets, :sound_file_id, :integer
     add_column :battles, :sound_file_id, :integer
     add_column :towns, :sound_file_id, :integer
-    add_column :users, :b_sound_on, :booleans
+    add_column :users, :b_sound_on, :boolean
     add_column :items, :influence_amount, :float
   end
 end

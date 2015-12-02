@@ -4,23 +4,30 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.all.where.not(:b_mod_blocked, true)
+  end
+  
+  def mod_block 
+    @item = Item.find(params[:item_id])
+    @item.update_attribute(:b_mod_blocked, !@item.b_mod_blocked)
+    redirect_to @item 
   end
   
   def grid
+    @valid_items = Item.where("b_mod_blocked IS NULL OR b_mod_blocked = ?", false)
     sort_type = params[:sort_type]
     if (sort_type == "Newest")
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at DESC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('created_at DESC')
     elsif (sort_type == "Oldest")
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at ASC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('created_at ASC')
     elsif (sort_type == "Most Downloads")
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('downloads DESC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('downloads DESC')
     elsif (sort_type == "Highest Price")
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('worth DESC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('worth DESC')
     elsif (sort_type == "Lowest Price")
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('worth ASC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('worth ASC')
     else
-      @items = Item.paginate(:page => params[:page], :per_page => 16).order('created_at ASC')
+      @items = @valid_items.paginate(:page => params[:page], :per_page => 16).order('created_at DESC')
     end
   end
 

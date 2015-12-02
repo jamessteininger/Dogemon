@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   
+  def mod
+    @user = User.find(params[:user_id])
+  end
+  
   def join_guild
     current_user.update_attribute(:guild_id, params[:guild_id])
     redirect_to Guild.find(params[:guild_id])

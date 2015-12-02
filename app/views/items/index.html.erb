@@ -49,22 +49,6 @@
   </tbody>
 </table>
 
-<% @items.each do |item| %>
-<h4>
-  <%= link_to item_upvote_path(item, id: item.id), class: 'pull-right' do %><span class="label label-default">
-  <%= item.market_item_votes.count %> <i class="fa fa-caret-up"> </i> Upvote
-  </span>
-  <% end %>
-  <%= image_tag(item.imageurl, width: "60px") %>
-  <%= link_to item, class: "btn btn-lg btn-default" do %>
-  <span class="label label-default"><strong><%= item.name %>: </strong><%= item.worth %></span>
-  <span class="label label-default"><%= item.utility_type %> <%= item.attack %> / Magic <%= item.magic %></span>
-  <span class="label label-default"><i class='fa fa-download'></i> <%= item.downloads %> </span>
-  <span class="label label-default"><strong><%= item.name %>: </strong><%= item.worth %></span>
-
-  <% end %>
-  </h4>
-<% end %>
 
 <br>
 

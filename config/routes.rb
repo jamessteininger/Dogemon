@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   get 'items/grid'
   resources :items do
     get 'upvote'
+    get 'mod_block'
     member do
       post 'upvote'
     end
@@ -131,6 +132,7 @@ resources :users do
   get 'sell_all'
   get 'add_coin'
   get 'make_wallet'
+  get 'mod'
   post 'send_doge'
   get 'get_booster'
   get 'join_guild'

@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
   	devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:coin_made, :guild_id, :attack, :health, :total_health, :magic, :bio, :imageurl, :dogetag, :email, :password, :password_confirmation, :current_password, :coin, :if_accepted_terms)
+      u.permit(:coin_made, :guild_id, :attack, :health, :total_health, :magic, :bio, :imageurl, :dogetag, :email, :password, :password_confirmation, :current_password, :coin, :if_accepted_terms, :b_mod)
   	end
   	devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:coin_made, :guild_id, :bio, :imageurl, :coin, :dogetag,  :email, :password, :password_confirmation, :current_password, :if_accepted_terms)
+      u.permit(:coin_made, :guild_id, :bio, :imageurl, :coin, :dogetag,  :email, :password, :password_confirmation, :current_password, :if_accepted_terms, :b_mod)
   	end
   end
 end

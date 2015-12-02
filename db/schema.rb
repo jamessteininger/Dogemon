@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428211321) do
+ActiveRecord::Schema.define(version: 20151202033804) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "b_mod_blocked"
   end
 
   create_table "doge_elements", force: true do |t|
@@ -104,9 +105,9 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.integer  "experience"
     t.string   "name"
     t.string   "description"
-    t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imageurl"
   end
 
   create_table "equipment", force: true do |t|
@@ -271,6 +272,7 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.string   "imageurl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "b_mod_blocked"
   end
 
   create_table "item_insts", force: true do |t|
@@ -301,6 +303,7 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.integer  "sound_file_id"
     t.float    "influence_amount"
     t.boolean  "b_original_art"
+    t.boolean  "b_mod_blocked"
   end
 
   create_table "logs", force: true do |t|
@@ -385,6 +388,7 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.integer  "against_ghost_losses"
     t.string   "animation_name"
     t.integer  "sound_file_id"
+    t.boolean  "b_mod_blocked"
   end
 
   create_table "posts", force: true do |t|
@@ -427,6 +431,7 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.integer  "east_id"
     t.string   "background_url"
     t.integer  "sound_file_id"
+    t.boolean  "b_mod_blocked"
   end
 
   create_table "transactions", force: true do |t|
@@ -469,6 +474,8 @@ ActiveRecord::Schema.define(version: 20150428211321) do
     t.boolean  "forem_auto_subscribe",   default: false
     t.integer  "guild_id"
     t.boolean  "b_sound_on"
+    t.boolean  "b_mod"
+    t.boolean  "b_mod_blocked"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

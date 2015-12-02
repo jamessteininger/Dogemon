@@ -2,38 +2,20 @@
   <div class="row">
     <div class="col-md-4">
       <%= link_to new_battle_path, class: 'btn btn-lg btn-block btn-success tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Start here if you are new. Random battles work great when you want to jump into the action, because the opposing Dogemon is powered by AI", 'data-placement' => 'bottom' do %><%= fa_icon 'bomb 2x' %><br>Start a Random Battle<% end %>
-      <%= link_to 'Request a player to battle', new_pvp_battle_path, class: 'btn btn-block btn-lg btn-primary tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Player battles work well in real life, so you know whose turn it is", 'data-placement' => 'bottom' %>
     </div>
-    <div class="col-md-8">
-      <%= link_to  new_bounty_path, class: 'btn btn-block btn-lg btn-danger tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' do %><%= fa_icon 'trophy 2x' %><br>Set a Battle Bounty<% end %>
-      <%= link_to 'See the TOP Dogemon leaderboard', leaderboard_path, class: 'btn btn-block btn-lg btn-warning tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' %> 
+    <div class="col-md-4">
+      <%= link_to new_pvp_battle_path, class: 'btn btn-block btn-lg btn-primary tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Player battles work well in real life, so you know whose turn it is", 'data-placement' => 'bottom' do %><%= fa_icon 'external-link 2x' %><br>Request a player to battle<% end %> 
+    </div>
+    <div class="col-md-4">
+      <%= link_to leaderboard_path, class: 'btn btn-block btn-lg btn-warning tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "See who are the best Dogemon!", 'data-placement' => 'bottom' do %><%= fa_icon 'list 2x' %><br>See the TOP Dogemon leaderboard<% end %> 
     </div>
   </div>
-  
-  
+
+
   <div class="row">
-    
-    
-    <div class="col-md-4">
-      <h2><center><strong>Bounty Board</h2></center></strong>
-      <hr>
-      <% Bounty.all.each do |f| %>
-      <div class="well">
-        <h4>
-          <%= link_to image_tag(f.pet.imageurl, height: 40), f.pet %> <%= link_to f.pet.name, f.pet%> 
-        </h4>
-        <h4>
-        <span class='label label-success'><%= fa_icon 'tag' %> <%= f.amount %></span>    <span class='label label-primary'>Rank: #<%= f.pet.rank %></span>
-        <span class='label label-danger'><b>  Challenges:  </b> <%= f.number_of_bounties %>/<%= f.number_of_bounties %></span>
-        </h4>
-        <%= link_to "View Bounty", f, class: 'btn btn-primary btn-block' %>
-      </div>
-      <% end %>
-    </div>
-    
-    
-    <div class="col-md-4">
-      <h2><center><strong>My Battles</h2></center></strong>
+
+    <div class="col-md-8">
+      <h2><center><strong>My Ongoing Battles</h2></center></strong>
       <hr>
       <% current_user.pets.order('created_at DESC').each do |p| %>
       <% p.battles.order('created_at DESC').each do |b| %>
@@ -48,7 +30,7 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <h2><center><strong>My Player Battles</h2></center></strong>
+      <h2><center><strong>My PVP Battles</h2></center></strong>
       <hr>
       <% current_user.pvp_battles.each do |f| %>
 
