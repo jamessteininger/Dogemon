@@ -1,25 +1,51 @@
+<!-- Town Show -->
+<!-- Town Show -->
+<!-- Town Show -->
+
 <p id="notice"><%= notice %></p>
 
-<p><%= image_tag(@town.image_url, width: "550px") %><br>
-  <strong>Image url:</strong>
-  <%= @town.image_url %>
-</p>
+<div class='row'>
+  <div class='col-md-4'>
 
-<p>
-  <strong>Name:</strong>
-  <%= @town.name %>
-</p>
-
+<%= link_to "All Towns", towns_path, class: 'btn btn-primary' %><br>
+<h1><%= @town.name %></h1>
+    <%= image_tag(@town.image_url, class: 'img-responsive') %><br>
+  </div>
+  <div class='col-md-4'>
 <p>
   <strong>Description:</strong>
   <%= @town.description %>
+  <br>
+  X: <%= @town.x_coordinate %> Y: <%= @town.y_coordinate %><br>
 </p>
 
 <h3>Routes</h3>
-North: <%= if @town.north_id.presence then link_to @town.north_town.name, @town.north_town, class: 'btn btn-sm btn-primary' end %><br>
-East: <%= if @town.east_id.presence then link_to @town.east_town.name, @town.east_town, class: 'btn btn-sm btn-primary' end %><br>
-South: <%= if @town.south_id.presence then link_to @town.south_town.name, @town.south_town, class: 'btn btn-sm btn-primary' end %><br>
-West: <%= if @town.west_id.presence then link_to @town.west_town.name, @town.west_town, class: 'btn btn-sm btn-primary' end %><br>
+North: <% if Town.where(x_coordinate: @town.y_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
+    <%= Town.where(x_coordinate: @town.y_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %>
+    <% else %>
+    <%= link_to "Discover New Location", new_town_path(@town) %><br>
+    <% end %>
+East: <% if Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
+    <%= Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %>
+    <% else %>
+    <%= link_to "Discover New Location", new_town_path(@town) %><br>
+    <% end %>
+   
+South:
+West:
+    <% if Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.presence %>
+    <%= link_to Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.name, Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary' %><br>
+    <% end %>
 
 <%= link_to 'Edit', edit_town_path(@town) %> |
 <%= link_to 'Back', towns_path %>
+    
+  </div>
+  <div class='col-md-4'>
+    Current Users At Location<br>
+    <% @residing_users = User.where(town_id: @town.id) %>
+    <% @residing_users.each do |f| %>
+    <%= link_to f.dogetag, f %><br>
+    <% end %>
+  </div>
+</div>

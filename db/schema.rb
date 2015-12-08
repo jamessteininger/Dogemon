@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202033804) do
+ActiveRecord::Schema.define(version: 20151203200434) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -432,6 +432,8 @@ ActiveRecord::Schema.define(version: 20151202033804) do
     t.string   "background_url"
     t.integer  "sound_file_id"
     t.boolean  "b_mod_blocked"
+    t.integer  "x_coordinate"
+    t.integer  "y_coordinate"
   end
 
   create_table "transactions", force: true do |t|

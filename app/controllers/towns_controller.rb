@@ -1,4 +1,5 @@
 class TownsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_town, only: [:show, :edit, :update, :destroy]
 
   # GET /towns
@@ -69,6 +70,6 @@ class TownsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def town_params
-      params.require(:town).permit(:image_url, :name, :description, :north_id, :south_id, :east_id, :west_id, :sound_file_id)
+      params.require(:town).permit(:x_coordinate, :y_coordinate, :image_url, :name, :description, :north_id, :south_id, :east_id, :west_id, :sound_file_id)
     end
 end
