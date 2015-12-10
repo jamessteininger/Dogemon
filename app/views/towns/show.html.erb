@@ -2,44 +2,61 @@
 <!-- Town Show -->
 <!-- Town Show -->
 
-<p id="notice"><%= notice %></p>
-
+<div class='row'>
+  <div class='col-md-3'>
+    <center><br><br><br><br>
+      <% if Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.presence %>
+      <%= link_to Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-left lg' %> WEST<br><%= Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
+      <% else %>
+      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-left lg' %> WEST<br>
+      Discover New Location<% end %>
+      <% end %>
+    </center>
+  </div>
+  <div class='col-md-6'>
+    <center>
+      <% if Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.presence %>
+      <%= link_to  Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.name %><% end %><br>
+      <% else %>
+      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br>
+      Discover New Location<% end %><br>
+      <% end %>
+      <div class="animated fadeIn jumbotron" style="background-size:cover; background-image: url(<%= @town.image_url %>);">
+        <h1 style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.name %> </h1>
+        <p style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.description %></p>
+        <h3>
+          <span class='label label-success'>Rank: #</span>
+          <span class='label label-info'>Guild Wins:  </span>
+        </h3>
+      </div>
+      <% if Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.presence %>
+      <%= link_to  Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.name %><% end %><br>
+      <% else %>
+      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br>
+      Discover New Location<% end %>
+      <% end %>
+    </center>
+  </div>
+  <div class='col-md-3'>
+    <center><br><br><br><br>
+      <% if Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
+      <%= link_to  Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-right lg' %> EAST<br><%= Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
+      <% else %>
+      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-right lg' %> EAST<br>
+      Discover New Location<% end %>
+      <% end %>
+    </center>
+  </div>
+</div>
+<hr>
 <div class='row'>
   <div class='col-md-4'>
 
-<%= link_to "All Towns", towns_path, class: 'btn btn-primary' %><br>
-<h1><%= @town.name %></h1>
-    <%= image_tag(@town.image_url, class: 'img-responsive') %><br>
   </div>
   <div class='col-md-4'>
-<p>
-  <strong>Description:</strong>
-  <%= @town.description %>
-  <br>
-  X: <%= @town.x_coordinate %> Y: <%= @town.y_coordinate %><br>
-</p>
-
-<h3>Routes</h3>
-North: <% if Town.where(x_coordinate: @town.y_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
-    <%= Town.where(x_coordinate: @town.y_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %>
-    <% else %>
-    <%= link_to "Discover New Location", new_town_path(@town) %><br>
+    <% if User.where(town_id: @town.id).presence then @pets = Pet.where(user_id: User.where(town_id: @town.id).first.id) %>
+    <%= render 'static_pages/leaderboard', top_doge: @pets.order('ghost_wins + against_ghost_wins DESC').limit(10) %>
     <% end %>
-East: <% if Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
-    <%= Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %>
-    <% else %>
-    <%= link_to "Discover New Location", new_town_path(@town) %><br>
-    <% end %>
-   
-South:
-West:
-    <% if Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.presence %>
-    <%= link_to Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.name, Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary' %><br>
-    <% end %>
-
-<%= link_to 'Edit', edit_town_path(@town) %> |
-<%= link_to 'Back', towns_path %>
-    
   </div>
   <div class='col-md-4'>
     Current Users At Location<br>

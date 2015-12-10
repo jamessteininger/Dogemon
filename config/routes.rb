@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :comments
+
   resources :notifications
 
   resources :doge_elements

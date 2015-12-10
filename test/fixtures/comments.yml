@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  town_id: 1
+  content: MyText
+  body_html: MyText
+  body: MyText
+  upvotes: 1
+  downvotes: 1
+  guild_id: 1
+
+two:
+  user_id: 1
+  town_id: 1
+  content: MyText
+  body_html: MyText
+  body: MyText
+  upvotes: 1
+  downvotes: 1
+  guild_id: 1

@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Dogemon is a world invented and upheld by players using cryptocurrency to battle and sell their own creations." />
     <meta name="author" content="James Steininger" />
-    
-    
+
+
   </head>
 
   <body>
@@ -74,82 +74,92 @@
               <i class="fa fa-question fa-2x"></i>
               <% end %>
             </li>
-            
+
           </ul>
-          
+
           <ul class="nav navbar-nav navbar-right">
-<li class="dropdown">
-            <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style=""><%= current_user.dogetag %> <%= fa_icon 'chevron-down  ' %></span> 
-            </a>
-            <ul class="dropdown-menu dropdown-menu-left" style="">
-              <li>
-                <%= link_to main_app.user_path(current_user) do %><%= fa_icon "user" %> Show Profile <% end %>
-              </li>  
-            <% if user_signed_in? and current_user.b_mod %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+                <span style=""><%= current_user.dogetag %> <%= fa_icon 'chevron-down  ' %></span> 
+              </a>
+              <ul class="dropdown-menu dropdown-menu-left" style="">
+                <li>
+                  <%= link_to main_app.user_path(current_user), class: '' do %><center><%= fa_icon "user 2x" %> <br>Show Profile <% end %>
+                  </li>  
+                  <% if user_signed_in? and current_user.b_mod %><hr>
+                <li>
+                  <%= link_to main_app.user_mod_path(current_user) do %>
+                  <center>
+                    <%= fa_icon "cog 2x" %><br> Moderation Panel<% end %>
+                  </center>
+                </li>
+                <% end %>
+                <% if user_signed_in? and current_user.town_id.presence %><hr>
+                <li>
+                  <center>
+                    <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home 2x" %><br><%= Town.find(current_user.town_id).name %><br><%= image_tag(Town.find(current_user.town_id).image_url, class: 'img-responsive') %><% end %>
+                  </center>
+                </li>
+                <% end %>
+                </li>  
+            <li class="divider"></li>
             <li>
-              <%= link_to main_app.user_mod_path(current_user) do %><%= fa_icon "cog" %> Moderation Panel<% end %>
+              <%= link_to  main_app.logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
             </li>
-            <% end %>
-              </li>  
-              <li class="divider"></li>
-              <li>
-                <%= link_to  main_app.logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
-              </li>
-            </ul>
+          </ul>
           </li>
 
 
-          </ul>
+        </ul>
 
-          <% else %>
-          <ul class="nav navbar-nav">
-            <li>
-              <%= link_to "How to Play", main_app.how_to_play_path %>
-            </li>
-            <li>
-              <%= link_to "About", main_app.about_path %>
-            </li>
+      <% else %>
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to "How to Play", main_app.how_to_play_path %>
+        </li>
+        <li>
+          <%= link_to "About", main_app.about_path %>
+        </li>
 
-            <li>
+        <li>
 
-            </li>
+        </li>
 
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <%= link_to main_app.new_user_registration_path do %><i class="fa fa- fax"></i> Sign Up<% end %>
-            </li>
-            <li>
-              <%= link_to main_app.new_user_session_path do %><i class="fa fa-sign-in fax"></i> Log In<% end %>
-            </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to main_app.new_user_registration_path do %><i class="fa fa- fax"></i> Sign Up<% end %>
+        </li>
+        <li>
+          <%= link_to main_app.new_user_session_path do %><i class="fa fa-sign-in fax"></i> Log In<% end %>
+        </li>
 
-          </ul>
-          <% end %>
-        </div>
-      </div>
+      </ul>
+      <% end %>
     </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <div class="container">
   <%= render 'layouts/messages' %>
   <%= yield %><script>
- new WOW().init();
-</script>
+  new WOW().init();
+  </script>
 
   <hr>
   <strong>
     <center>&copy; Dogemon, 2014 <br>
       <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Forum", forem.root_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", main_app.about_path %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
       </body>
-    
+
     <script>
-      
-$(function () {
-  $("[rel='tooltip']").tooltip();
-});
+
+      $(function () {
+        $("[rel='tooltip']").tooltip();
+      });
     </script>
 
     <script>
