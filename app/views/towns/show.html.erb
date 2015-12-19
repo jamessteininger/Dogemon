@@ -61,7 +61,7 @@
 </div>
 <hr>
 <% if @town.gameplay_mechanic == 'Marketplace' %>
-<%= render 'items/grid', items: Item.where("b_mod_blocked IS NULL OR b_mod_blocked = ?", false).paginate(:page => params[:page], :per_page => 16) %>
+<%= render 'items/grid', items: Item.where("b_mod_blocked IS NULL OR b_mod_blocked = ?", false).where(creator_id: @town.user_id).paginate(:page => params[:page], :per_page => 16) %>
 <% end %>
 <div class='row'>
   <div class='col-md-6 col-md-offset-3'>
