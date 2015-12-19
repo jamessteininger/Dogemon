@@ -11,6 +11,14 @@ class TownsController < ApplicationController
   # GET /towns/1
   # GET /towns/1.json
   def show
+    @town = Town.find(params[:id])
+    @users = User.where(town_id: params[:id])
+    if @users.any?
+      @pets = Pet.where(user_id: @users.first.id)
+      @users.each do |f|
+        @pets.merge!(f.pets.all)
+      end
+    end
   end
 
   # GET /towns/new
@@ -63,13 +71,13 @@ class TownsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_town
-      @town = Town.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_town
+    @town = Town.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def town_params
-      params.require(:town).permit(:x_coordinate, :y_coordinate, :image_url, :name, :description, :north_id, :south_id, :east_id, :west_id, :sound_file_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def town_params
+    params.require(:town).permit(:x_coordinate, :gameplay_mechanic,  :y_coordinate, :user_id, :image_url, :name, :description, :north_id, :south_id, :east_id, :west_id, :sound_file_id)
+  end
 end

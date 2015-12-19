@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     @user.set_town(params[:town_id])
     @town = Town.find(params[:town_id])
-    redirect_to @town, notice: 'Traveled to ' + @town.name
+    redirect_to @town
   end
   
   def destroy

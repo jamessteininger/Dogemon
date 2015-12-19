@@ -1,30 +1,12 @@
-<%= current_user.town_id %>
-
 <div class="row">
   <h1>Listing towns</h1>
   <% @towns.each do |town| %>
-  <div class="col-md-4">
-    <div class="media" style='padding-left: 50px; '>
-      <div class="media-left">
-        <a href="#">
-          <%= link_to image_tag(town.image_url, class: 'img-square media', height: 30, style: 'max-width: 300px;'), town, height: 30 %>
-        </a>
-      </div>
-      <div class="media-body">
-        <h3><%= town.name %></h3>
-        <p><%= town.description %></p>
-      </div>
-    </div>
-    <%= link_to image_tag(town.image_url, class: 'img-square media', height: 90, style: 'max-width: 200px;'), town, height: 90 %><br>
+  <div class="col-md-3">
+    <%= link_to town, class: 'btn btn-default' do %>
+    <%= image_tag(town.image_url, class: 'img-square media', height: 60, style: 'max-width: 300px;')  %>
     <h3><%= town.name %></h3>
     <p><%= town.description %></p>
-    <p><%= link_to 'Travel Here', user_set_town_path(current_user, town_id: town.id), class: 'btn btn-primary' %></p>
-    <% if current_user.b_mod %>
-    <%= link_to 'Edit', edit_town_path(town) %> | 
-    <%= link_to 'Destroy', town, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </div>
   <% end %>
 </div>
-<br>
-<%= link_to 'New Town', new_town_path %>

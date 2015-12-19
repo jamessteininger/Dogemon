@@ -1,0 +1,7 @@
+<% if comment.user_id %>
+<% comment_user = User.find(comment.user_id) %>
+<p>
+  <b> <%= fa_icon 'user' %> <%= link_to comment.user.dogetag, comment.user %>:</b><br>
+  <%= comment.body %>
+</p><hr>
+<% end %>

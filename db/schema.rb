@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203200434) do
+ActiveRecord::Schema.define(version: 20151214221903) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -87,6 +87,19 @@ ActiveRecord::Schema.define(version: 20151203200434) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "b_mod_blocked"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "town_id"
+    t.text     "content"
+    t.text     "body_html"
+    t.text     "body"
+    t.integer  "upvotes"
+    t.integer  "downvotes"
+    t.integer  "guild_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "doge_elements", force: true do |t|
@@ -434,6 +447,8 @@ ActiveRecord::Schema.define(version: 20151203200434) do
     t.boolean  "b_mod_blocked"
     t.integer  "x_coordinate"
     t.integer  "y_coordinate"
+    t.integer  "user_id"
+    t.string   "gameplay_mechanic"
   end
 
   create_table "transactions", force: true do |t|

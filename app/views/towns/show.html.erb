@@ -1,36 +1,37 @@
 <!-- Town Show -->
 <!-- Town Show -->
 <!-- Town Show -->
-
+<% if @town.x_coordinate.presence %>
 <div class='row'>
   <div class='col-md-3'>
-    <center><br><br><br><br>
-      <% if Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.presence %>
-      <%= link_to Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-left lg' %> WEST<br><%= Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
+    <center> 
+      <% if @town.x_coordinate.presence and Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.presence %>
+      <%= link_to user_set_town_path(current_user, town_id: Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.id), class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-left lg' %> WEST<br><%= Town.where(x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
       <% else %>
       <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate - 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-left lg' %> WEST<br>
       Discover New Location<% end %>
       <% end %>
     </center>
+    <% if @users.any? %>
+    <%= render 'static_pages/leaderboard', top_doge: @pets.order('ghost_wins + against_ghost_wins DESC').limit(10) %>
+    <% end %>
+    <% end %>
   </div>
   <div class='col-md-6'>
     <center>
       <% if Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.presence %>
-      <%= link_to  Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.name %><% end %><br>
+      <%= link_to user_set_town_path(current_user, town_id: Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.id), class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1).first.name %><% end %><br>
       <% else %>
-      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br>
+      <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br>
       Discover New Location<% end %><br>
       <% end %>
       <div class="animated fadeIn jumbotron" style="background-size:cover; background-image: url(<%= @town.image_url %>);">
         <h1 style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.name %> </h1>
         <p style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.description %></p>
-        <h3>
-          <span class='label label-success'>Rank: #</span>
-          <span class='label label-info'>Guild Wins:  </span>
-        </h3>
+        <% if @town.gameplay_mechanic.presence %><h4><span class='label label-primary'><%= @town.gameplay_mechanic %></span></h4><% end %>
       </div>
       <% if Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.presence %>
-      <%= link_to  Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.name %><% end %><br>
+      <%= link_to user_set_town_path(current_user, town_id: Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.id), class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.name %><% end %><br>
       <% else %>
       <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br>
       Discover New Location<% end %>
@@ -38,31 +39,51 @@
     </center>
   </div>
   <div class='col-md-3'>
-    <center><br><br><br><br>
+    <center> 
       <% if Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.presence %>
-      <%= link_to  Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first, class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-right lg' %> EAST<br><%= Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
+      <%= link_to user_set_town_path(current_user, town_id: Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.id), class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.image_url + ');' do %><%= fa_icon 'arrow-circle-right lg' %> EAST<br><%= Town.where(x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate).first.name %><% end %><br>
       <% else %>
       <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate + 1, y_coordinate: @town.y_coordinate), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-right lg' %> EAST<br>
       Discover New Location<% end %>
       <% end %>
     </center>
-  </div>
-</div>
-<hr>
-<div class='row'>
-  <div class='col-md-4'>
-
-  </div>
-  <div class='col-md-4'>
-    <% if User.where(town_id: @town.id).presence then @pets = Pet.where(user_id: User.where(town_id: @town.id).first.id) %>
-    <%= render 'static_pages/leaderboard', top_doge: @pets.order('ghost_wins + against_ghost_wins DESC').limit(10) %>
+    <% if user_signed_in? and current_user.b_mod %>
+    <%= link_to "Edit", edit_town_path(@town), class: 'btn btn-primary' %><br>
     <% end %>
-  </div>
-  <div class='col-md-4'>
-    Current Users At Location<br>
+    Utility: <%= @town.gameplay_mechanic %><br>
+    <% if @town.user_id %>Founder: <%= link_to @town.user.dogetag, @town.user %><br><% end %>
+    Current Users At Location:<br>
     <% @residing_users = User.where(town_id: @town.id) %>
     <% @residing_users.each do |f| %>
     <%= link_to f.dogetag, f %><br>
     <% end %>
+  </div>
+</div>
+<hr>
+<% if @town.gameplay_mechanic == 'Marketplace' %>
+<%= render 'items/grid', items: Item.where("b_mod_blocked IS NULL OR b_mod_blocked = ?", false).paginate(:page => params[:page], :per_page => 16) %>
+<% end %>
+<div class='row'>
+  <div class='col-md-6 col-md-offset-3'>
+    <% if @town.gameplay_mechanic == 'Message Board' %>
+    <div class='well'>
+      <h4><%= fa_icon 'comments' %> Message Board</h4>
+      <%= form_for @town.comments.new do |f| %>
+      <%= f.text_area :body, class: 'form-control', placeholder: 'Write a message...' %>
+      <%= f.hidden_field :town_id, value: @town.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <br>
+      <%= f.submit class: 'btn btn-primary btn-sm' %>
+      <% end %>
+      <% @town.comments.each do |f| %>
+      <%= render 'comments/comment', comment: f %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <div class='col-md-4'>
+    
+  </div>
+  <div class='col-md-4'>
   </div>
 </div>

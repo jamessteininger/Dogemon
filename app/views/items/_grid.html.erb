@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<% if user_signed_in? and current_user.block_io_wallet_id.presence %>
+<div class="pull-right">
+  <% if current_user.b_mod %>
+  <%= link_to 'Elements', doge_elements_path, class: 'btn btn-default' %> 
+  <% end %>
+  <%= link_to 'Make a new Item', new_item_path, class: 'btn btn-default' %>
+</div>
+<h1><i class="fa fa-shopping-cart"></i> Marketplace</h1>
+<!--
+<div class="navbar -default">
+<ul class="nav navbar-nav">
+  <li class="active"><%= link_to "All", items_path %></li>
+  <li><%= link_to "Votes", items_path %></li>
+  <li><%= link_to "Newest", items_path %></li>
+  <li><%= link_to "Price", items_path %></li>
+  <li><%= link_to "Downloads", items_path %></li>
+  
+</ul>
+</div>-->
+<hr>
+<% items.each do |item| %>
+<div class="col-md-3">
+  <div class="well wow fadeIn">
+    <%= item_element_button(item.element, truncate(item.name, length: 15), item) %><br>
+    <center><div style="height: 160px;"><%= link_to image_tag(item.imageurl, class: 'btn- btn', style: 'max-height: 160px; max-width: 160px;'), item, style: 'height: 160px; max-width: 160px;' %></div><br><br></center>
+    <p class=""><i>"<%= truncate(item.description, length: 23) %>"</i></p><h4>
+
+   <%= item.utility_type %> <%= item.attack %> / Magic <%= item.magic %></h4>
+    <%= link_to item, class: 'tag-tooltip btn btn-sm btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Cost in Dogecoin", 'data-placement' => 'bottom' do %>
+    <i class='fa fa-tag'></i> <%= item.worth %> 
+    <% end %><span> </span><%= link_to item, class: 'tag-tooltip btn btn-sm btn-default', data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Downloads", 'data-placement' => 'bottom' do %>
+    <i class='fa fa-download'></i> <%= item.downloads %> 
+    <% end %><span> </span><%= link_to item_upvote_path(item, id: item.id), class: "tag-tooltip btn-sm btn btn-default", data: {:toggle=>"tooltip"}, 'data-original-title' => "Number of Favorites", 'data-placement' => 'bottom' do %><i class="fa fa-heart-o"></i> <%= item.market_item_votes.count %><% end %> 
+  </div>
+</div>
+<% end %>
+<p><%= will_paginate items %></p>
+</div>
+<% else %>
+<h2>You're almost there!</h2>
+<p class="lead">The Market has a ton of great content made entirely by the community! You can buy and sell items that help Dogemon in battle. In order to get started, you first need to <%= link_to 'get your wallet', wallet_path %>.
+<% end %>

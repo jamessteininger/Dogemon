@@ -1,6 +1,37 @@
 <h1>Editing town</h1>
 
-<%= render 'form' %>
+<%= bootstrap_form_for(@town) do |f| %>
+<% if @town.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@town.errors.count, "error") %> prohibited this town from being saved:</h2>
 
-<%= link_to 'Show', @town %> |
-<%= link_to 'Back', towns_path %>
+  <ul>
+    <% @town.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field">
+  <%= f.text_field :image_url, placeholder: 'Paste a URL to an image here (ending with JPG, JPEG, or PNG)', hide_label: true %>
+</div>
+
+<div class="field">
+  <%= f.text_field :name, placeholder: 'Name of Location', hide_label: true %>
+</div>
+<div class="field">
+  <%= f.text_area :description, placeholder: 'Description', hide_label: true %>
+</div>
+<%= f.select :gameplay_mechanic, ["Healing Center", "Battle Zone", "Message Board", "Marketplace"], include_blank: false %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :x_coordinate %>
+<%= f.hidden_field :y_coordinate  %>
+<% if current_user.b_mod %>
+<%= f.text_field :x_coordinate  %>
+<%= f.text_field :y_coordinate  %>
+<% end %>
+<div class="actions">
+  <%= f.submit "Discover!", class: 'btn btn-primary btn-lg' %>
+</div>
+<% end %>

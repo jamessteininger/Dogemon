@@ -91,13 +91,15 @@
 
   <div class="col-md-4">
 
-    <% if user_signed_in? and current_user.b_mod %>
+    <% if user_signed_in?  %>
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
-        <h2><%= fa_icon 'home' %> Town</h2>
+        <h2><%= fa_icon 'compass' %> Location</h2>
       </div>
       <div class="panel-body">
-        <%= link_to 'Towns', towns_path, class: 'btn btn-primary' %>
+        <% if @user.town_id == nil %>
+        <% @user.update_attribute(:town_id, 1) %>
+        <% end %>
         <% if @user.town_id.presence %>
         Currently Residing: 
         <%= link_to Town.find(@user.town_id).name, Town.find(@user.town_id) %><br>

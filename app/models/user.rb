@@ -7,12 +7,15 @@ class User < ActiveRecord::Base
   validates :dogetag, presence: true
   validates :imageurl, presence: true
   validates :if_accepted_terms, presence: true
+  has_one :town
   has_many :transactions
   has_one :guild
   has_many :owned_guilds, class_name: 'Guild', foreign_key: 'owner_id'
   has_many :bounties
   has_many :sales, dependent: :destroy
   has_many :logs
+  has_many :comments
+  has_many :towns
   has_many :pvp_battles, class_name: 'PvpBattle', foreign_key: 'user_id'
   has_many :pvp_battles_p2, class_name: 'PvpBattle', foreign_key: 'other_id'
   has_many :battles, class_name: 'Battle', foreign_key: 'user_id'
