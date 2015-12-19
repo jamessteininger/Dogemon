@@ -64,11 +64,13 @@
               <i class="fa fa-money fa-2x"></i>
               <% end %>
             </li>
+            <% if current_user.b_mod %>
             <li> 
               <%= link_to main_app.notifications_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Notifications", 'data-placement' => 'bottom' do %>
               <i class="fa fa-inbox fa-2x"></i>
               <% end %>
             </li>
+            <% end %>
             <li> 
               <%= link_to main_app.how_to_play_path, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Help", 'data-placement' => 'bottom' do %>
               <i class="fa fa-question fa-2x"></i>
