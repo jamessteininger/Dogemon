@@ -1,17 +1,16 @@
 <h1>
-<%= link_to 'Start a New Guild', new_guild_path, class: 'btn btn-success btn-lg pull-right' %>Guilds <% if current_user.guild_id.presence %>
+  <%= link_to 'Start a New Guild', new_guild_path, class: 'btn btn-success btn-lg pull-right' %>Guilds <% if current_user.guild_id.presence %>
   <%= link_to guild_path(Guild.find(current_user.guild_id)), class: 'btn btn-primary btn-lg pull-' do %><%= fa_icon 'home' %> Go to my Guild <% end %><% end %>
   <a class="btn btn-lg btn-default" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     <%= fa_icon 'search' %>
-</a>
+  </a>
 </h1>
-<h2><center><%= User.all.count %> people playing Dogemon!</center></h2>
-  <div class="collapse" id="collapseExample">
+<div class="collapse" id="collapseExample">
   <div class="well animated fadeIn ">
-    
+
     <%= form_tag guilds_path, :method => 'get', class: 'pull-', style: 'padding-right: 10px;' do %>
-  <%= text_field_tag :search, params[:search], placeholder: 'Find a guild', class: 'form-control', style: 'width: ;' %><br>
-  <%= submit_tag "Search", class: 'btn-block btn btn-default', style: 'padding-right: 10px;' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Find a guild', class: 'form-control', style: 'width: ;' %><br>
+    <%= submit_tag "Search", class: 'btn-block btn btn-default', style: 'padding-right: 10px;' %>
     <% end %>
   </div>
 </div><br>

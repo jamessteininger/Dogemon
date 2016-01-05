@@ -2,6 +2,7 @@ class GhostsController < ApplicationController
   before_action :set_ghost, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   
+  
   def index
     @ghosts = current_user.ghosts.all
   end

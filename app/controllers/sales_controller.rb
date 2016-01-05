@@ -1,9 +1,9 @@
 class SalesController < ApplicationController
   before_action :set_sale, only: [:show, :edit, :update, :destroy]
-before_filter :authenticate_user!
+  before_filter :authenticate_user!
   # GET /sales
   # GET /sales.json
-  
+
   def index
     @sales = Sale.all
   end
@@ -23,7 +23,7 @@ before_filter :authenticate_user!
   # GET /sales/1/edit
   def edit
   end
-  
+
   def give_booster
     @user = User.find(params[:user_id])
     @item1 = Item.find(rand(0..Item.all.count))
@@ -44,24 +44,27 @@ before_filter :authenticate_user!
     @user = User.find(params[:user_id])
     @item = Item.find(params[:item_id])
     @sale = @user.sales.new(sale_params.merge(item_id: params[:item_id]))
-    
-    
-    
+
     respond_to do |format|
       if @sale.save
         @item.update_attribute(:downloads, @item.downloads += 1)
         #@user.update_attribute(:coin, @user.coin -= @item.worth)
         @creator = User.find(@item.creator_id)
-        @creator.update_attribute(:coin_made, @creator.coin_made += (@item.worth.to_f * 0.95))
-        #@creator.update_attribute(:coin, @creator.coin += @item.worth)
-        
-        percent_creator = (@item.worth.to_f * 0.95)
-        percent_company = (@item.worth.to_f * 0.05)
-        pay_to = BlockIo.get_user_address user_id: @creator.block_io_wallet_id
-        pay_from = BlockIo.get_user_address user_id: current_user.block_io_wallet_id
-        BlockIo.withdraw_from_addresses from_addresses: pay_from['data']['address'], payment_address: pay_to['data']['address'], amount: percent_creator
-        
-        format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
+        if params[:b_free] == false
+          @creator.update_attribute(:coin_made, @creator.coin_made += (@item.worth.to_f * 0.95))
+
+          #@creator.update_attribute(:coin, @creator.coin += @item.worth)
+
+          percent_creator = (@item.worth.to_f * 0.95)
+          percent_company = (@item.worth.to_f * 0.05)
+          pay_to = BlockIo.get_user_address user_id: @creator.block_io_wallet_id
+          pay_from = BlockIo.get_user_address user_id: current_user.block_io_wallet_id
+          BlockIo.withdraw_from_addresses from_addresses: pay_from['data']['address'], payment_address: pay_to['data']['address'], amount: percent_creator
+
+          format.html { redirect_to current_user, notice: 'Paid ' + @item.worth.to_s + ' for ' + @item.name +  ' successfully.' }
+        else 
+          format.html { redirect_to current_user, notice: 'Used free weekly item credit.' }
+        end
         format.json { render :show, status: :created, location: @sale }
       else
         format.html { render :new }
@@ -88,7 +91,7 @@ before_filter :authenticate_user!
   # DELETE /sales/1.json
   def destroy
     @user = User.find(params[:user_id])
-      @sale = Sale.find(params[:id])
+    @sale = Sale.find(params[:id])
     @sale.destroy
     respond_to do |format|
       format.html { redirect_to @user, notice: 'Sale was successfully destroyed.' }
@@ -97,13 +100,13 @@ before_filter :authenticate_user!
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sale
-      @sale = Sale.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sale
+    @sale = Sale.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sale_params
-      params.require(:sale).permit(:user_id, :item_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sale_params
+    params.require(:sale).permit(:user_id, :item_id)
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214221903) do
+ActiveRecord::Schema.define(version: 20151230193110) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(version: 20151214221903) do
     t.integer  "upvotes"
     t.integer  "downvotes"
     t.integer  "guild_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conversations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "other_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -286,6 +293,7 @@ ActiveRecord::Schema.define(version: 20151214221903) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "b_mod_blocked"
+    t.integer  "town_id"
   end
 
   create_table "item_insts", force: true do |t|
@@ -329,6 +337,16 @@ ActiveRecord::Schema.define(version: 20151214221903) do
   create_table "market_item_votes", force: true do |t|
     t.integer  "user_id"
     t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "conversation_id"
+    t.text     "content"
+    t.boolean  "b_read"
+    t.integer  "other_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -449,6 +467,8 @@ ActiveRecord::Schema.define(version: 20151214221903) do
     t.integer  "y_coordinate"
     t.integer  "user_id"
     t.string   "gameplay_mechanic"
+    t.string   "resource_url"
+    t.string   "resource_name"
   end
 
   create_table "transactions", force: true do |t|

@@ -1,6 +1,10 @@
 class StaticPagesController < ApplicationController
   before_filter :authenticate_user!, only: [:wallet, :spirits, :user_home]
   
+  def full_game
+    
+  end
+  
    def user_home
      @user = current_user
      if (@user.block_io_wallet_id.presence)

@@ -28,15 +28,46 @@
       <% user_dogecoin = BlockIo.get_user_balance user_id: current_user.block_io_wallet_id %>
       <% if user_dogecoin['data']['available_balance'].to_i > @item.worth %>
       <p>
-        <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id} do |f| %>
+        <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id, b_free: false} do |f| %>
         <%= f.hidden_field :user_id %>
         <%= f.hidden_field :item_id %>
         <%= f.submit "Buy", class: 'btn btn-success btn-raised btn-lg btn-block' %>
         <% end %>
+        <% else %>
+        <%= link_to "Insufficient Dogecoin", wallet_path, class: 'btn btn-danger btn- btn-block btn-raised' %>
+        <% end %>
       </p>
-      <% else %>
-      <%= link_to "Insufficient Dogecoin", wallet_path, class: 'btn btn-danger btn- btn-block btn-raised' %>
+
+      <% if !current_user.sales.where("created_at >= ?", 1.week.ago.utc).any? %>
+      <!-- Weekly free item purchase -->
+      <!-- Button trigger modal -->
+      <p>
+        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModal">
+         <%= fa_icon 'tag' %> Buy (As Weekly Free Item)
+        </button>
+      </p>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h4>You get to buy one item per week for free.<br><br>Are you sure you would like to use your weekly free item credit to purchase <%= @item.name %>?</h4>
+            </div>
+            <div class="modal-footer">
+              <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id, b_free: true} do |f| %>
+              <%= f.hidden_field :user_id %>
+              <%= f.hidden_field :item_id %>
+              <%= f.submit "Yes, buy it!", class: 'btn btn-success' %> 
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% else %><h4>
+      <span class='label label-default label-lg'>Free weekly credit used</span></h4>
       <% end %>
+
       <% if user_signed_in? and @item.creator == current_user %><center>You are the creator of this item.</center>
       <%= link_to "Update Item", edit_item_path(@item), class: 'btn btn-primary btn- btn-block btn-raised' %><br>
       <% end %>

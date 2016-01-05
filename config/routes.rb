@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :conversations
+
+  resources :messages
+
   resources :comments
 
   resources :notifications
@@ -21,12 +25,15 @@ Rails.application.routes.draw do
 
   resources :blogs
 
-  resources :ghost_logs
+  resources :ghost_logs do
+    get 'destroyall'
+  end
 
   resources :ghosts 
   
   
   resources :guilds do
+    get 'move_guild'
     collection do
       get :user
     end
@@ -55,6 +62,7 @@ Rails.application.routes.draw do
   get 'home', to: 'static_pages#home'
   get 'roadmap', to: 'static_pages#roadmap'
   get 'leaderboard', to: 'static_pages#leaderboard'
+  get 'full_game', to: 'static_pages#full_game'
   
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'

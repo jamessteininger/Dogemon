@@ -1,5 +1,7 @@
 <h1>Listing ghost_logs</h1>
-
+<% if current_user.b_mod %>
+<%= link_to "Destroy all ghost logs", ghost_log_destroyall_path(@ghost_logs) %>
+<% end %>
 <table>
   <thead>
     <tr>

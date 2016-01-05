@@ -25,11 +25,16 @@
       <%= link_to new_town_path(@town, x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate + 1), class: 'btn btn-lg btn-success btn-block' do %><%= fa_icon 'arrow-circle-up lg' %> NORTH<br>
       Discover New Location<% end %><br>
       <% end %>
+
       <div class="animated fadeIn jumbotron" style="background-size:cover; background-image: url(<%= @town.image_url %>);">
+
+        <!-- If a resource exists, or rather just a 'source' to the artwork or company or whatever, show a link to that here-with the display name -->
+
         <h1 style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.name %> </h1>
         <p style="color: #fff; text-shadow: 2px 2px #000;"><%= @town.description %></p>
         <% if @town.gameplay_mechanic.presence %><h4><span class='label label-primary'><%= @town.gameplay_mechanic %></span></h4><% end %>
       </div>
+
       <% if Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.presence %>
       <%= link_to user_set_town_path(current_user, town_id: Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.id), class: 'btn btn-lg btn-primary btn-block', style: 'background-size:cover; background-image: url(' + Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.image_url + ');' do %><%= fa_icon 'arrow-circle-down lg' %> SOUTH<br><%= Town.where(x_coordinate: @town.x_coordinate, y_coordinate: @town.y_coordinate - 1).first.name %><% end %><br>
       <% else %>
@@ -47,8 +52,25 @@
       Discover New Location<% end %>
       <% end %>
     </center>
+    <audio controls class='pull-left'>
+      <source src="http://216.227.134.162/ost/golden-sun/vvvxdafxos/00-venus-lighthouse.mp3" type="audio/mpeg" />
+      <a href="http://www.w3schools.com/html/horse.mp3">horse</a>
+    </audio><br><br>
     <% if user_signed_in? and current_user.b_mod %>
-    <%= link_to "Edit", edit_town_path(@town), class: 'btn btn-primary' %><br>
+    <%= link_to "Edit", edit_town_path(@town), class: 'btn btn-block btn-primary' %><br>
+    <% end %>
+    <% if user_signed_in? and Guild.where(owner_id: current_user.id).any? %>
+    <div class="dropdown">
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <%= fa_icon 'flag' %> Set Guild Location
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li class="dropdown-header">Guilds You Lead</li>
+        <% Guild.where(owner_id: current_user.id).each do |f| %>
+        <li><%= link_to f.name, guild_move_guild_path(f) %></li>
+        <% end %>
+      </ul>
+    </div><br>
     <% end %>
     Utility: <%= @town.gameplay_mechanic %><br>
     <% if @town.user_id %>Founder: <%= link_to @town.user.dogetag, @town.user %><br><% end %>
@@ -57,6 +79,9 @@
     <% @residing_users.each do |f| %>
     <%= link_to f.dogetag, f %><br>
     <% end %>
+    <!-- GUILD - Many guilds can reside here. A guild has a town id it can set. A guild needs to be a certain elemental type. The more guilds at a location of a certain type, the more in-battle bonus there will be when you are there. Rather, elemental power is directly multiplied by the number of guilds of that element in town. -->
+
+
   </div>
 </div>
 <hr>
@@ -82,7 +107,7 @@
     <% end %>
   </div>
   <div class='col-md-4'>
-    
+
   </div>
   <div class='col-md-4'>
   </div>

@@ -86,63 +86,66 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-left" style="">
                 <li>
-                  <%= link_to main_app.user_path(current_user), class: '' do %><center><%= fa_icon "user 2x" %> <br>Show Profile <% end %>
-                  </li>  
-                  <% if user_signed_in? and current_user.b_mod %><hr>
-                <li>
-                  <%= link_to main_app.user_mod_path(current_user) do %>
-                  <center>
-                    <%= fa_icon "cog 2x" %><br> Moderation Panel<% end %>
-                  </center>
-                </li>
-                <% end %>
-                <% if user_signed_in? and current_user.town_id.presence %><hr>
-                <li>
-                  <center>
-                    <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home 2x" %><br><%= Town.find(current_user.town_id).name %><br><%= image_tag(Town.find(current_user.town_id).image_url, class: 'img-responsive') %><% end %>
-                  </center>
-                </li>
-                <% end %>
+                  <%= link_to main_app.user_path(current_user) do %><%= fa_icon "user" %> Profile <% end %>
                 </li>  
-            <li class="divider"></li>
-            <li>
-              <%= link_to  main_app.logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
+                <% if user_signed_in? and current_user.b_mod %>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to main_app.user_mod_path(current_user) do %><%= fa_icon "cog" %> Mod Panel<% end %>
+                </li>
+                <% end %>
+                <% if user_signed_in? and current_user.town_id.presence %>
+                <li class="divider"></li>
+                <li> 
+                    <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home" %> <%= Town.find(current_user.town_id).name %> <% end %>
+ 
+                </li>
+                <li class="divider"></li>
+                <% end %>
+                <% if current_user.b_mod %>
+                <li>
+                  <%= link_to main_app.full_game_path do %><%= fa_icon 'compass' %> Dogemap <% end %>
+                  <% end %>
+                </li>  
+                <li class="divider"></li>
+                <li>
+                  <%= link_to  main_app.logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
+                </li>
+              </ul>
             </li>
+
+
           </ul>
-          </li>
 
+          <% else %>
+          <ul class="nav navbar-nav">
+            <li>
+              <%= link_to "How to Play", main_app.how_to_play_path %>
+            </li>
+            <li>
+              <%= link_to "About", main_app.about_path %>
+            </li>
 
-        </ul>
+            <li>
 
-      <% else %>
-      <ul class="nav navbar-nav">
-        <li>
-          <%= link_to "How to Play", main_app.how_to_play_path %>
-        </li>
-        <li>
-          <%= link_to "About", main_app.about_path %>
-        </li>
+            </li>
 
-        <li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to main_app.new_user_registration_path do %><i class="fa fa- fax"></i> Sign Up<% end %>
+            </li>
+            <li>
+              <%= link_to main_app.new_user_session_path do %><i class="fa fa-sign-in fax"></i> Log In<% end %>
+            </li>
 
-        </li>
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to main_app.new_user_registration_path do %><i class="fa fa- fax"></i> Sign Up<% end %>
-        </li>
-        <li>
-          <%= link_to main_app.new_user_session_path do %><i class="fa fa-sign-in fax"></i> Log In<% end %>
-        </li>
-
-      </ul>
-      <% end %>
+          </ul>
+          <% end %>
+        </div>
+      </div>
     </div>
     </div>
   </div>
-</div>
-</div>
 </div>
 
 <div class="container">
@@ -155,6 +158,9 @@
   <strong>
     <center>&copy; Dogemon, 2014 <br>
       <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Forum", forem.root_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", main_app.about_path %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
+      <%= image_tag "DogemonNavbarWhite.png", width: 36 %>
+      <br>
+      <br>
       </body>
 
     <script>
