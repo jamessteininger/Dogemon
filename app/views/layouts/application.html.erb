@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Dogemon - Battle and Sell Your Own Creations</title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag current_theme, media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag "forem" %>
     <%= javascript_include_tag "forem" %><script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Dogemon is a world invented and upheld by players using cryptocurrency to battle and sell their own creations." />
     <meta name="author" content="James Steininger" />
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
 
   <body>
-
+    <% if !current_page?(main_app.vr_game_path) %>
     <div class="navbar navbar-default navbar- navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -25,9 +25,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to root_path, style: 'padding-top: ; height:', class: "navbar-brand" do %>
-          <%= image_tag "DogemonNavbarWhite.png", width: 36, style: 'margin-top: -5px;' %>
-          <strong class='text-'>DOGE</strong><span class='text-default'>MON</span> - <span class='text-'>BETA</span>
+          <%= link_to root_path, style: '', class: "pull-left navbar-brand" do %>
+          <strong class='text-' style='pull-left'> <% if user_signed_in? and current_theme == 'application_light' %><%= image_tag "DogemonNavbarDarkGrey.png", width: 36, style: 'margin-top: -5px;' %><% else %><%= image_tag "DogemonNavbarWhite.png", width: 36, style: 'margin-top: -5px;' %><% end %> DOGE</strong><span class='text-default'>MON</span> - <span class='text-'>BETA</span>
           <% end %>
         </div>
         <div class="collapse navbar-collapse">  
@@ -82,12 +81,16 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-                <span style=""><%= current_user.dogetag %> <%= fa_icon 'chevron-down  ' %></span> 
+                <span style=""><%= image_tag(current_user.imageurl, height: 25) %> <%= current_user.dogetag %> <%= fa_icon 'chevron-down  ' %></span> 
               </a>
               <ul class="dropdown-menu dropdown-menu-left" style="">
                 <li>
                   <%= link_to main_app.user_path(current_user) do %><%= fa_icon "user" %> Profile <% end %>
                 </li>  
+                <li class="divider"></li>
+                <li>
+                  <%= link_to main_app.edit_user_registration_path(@user) do %><%= fa_icon "pencil" %> Edit Profile <% end %>
+                </li>
                 <% if user_signed_in? and current_user.b_mod %>
                 <li class="divider"></li>
                 <li>
@@ -97,15 +100,17 @@
                 <% if user_signed_in? and current_user.town_id.presence %>
                 <li class="divider"></li>
                 <li> 
-                    <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home" %> <%= Town.find(current_user.town_id).name %> <% end %>
- 
+                  <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home" %> <%= Town.find(current_user.town_id).name %> <% end %>
+
                 </li>
                 <li class="divider"></li>
                 <% end %>
-                <% if current_user.b_mod %>
                 <li>
                   <%= link_to main_app.full_game_path do %><%= fa_icon 'compass' %> Dogemap <% end %>
-                  <% end %>
+                </li>  
+                <li class="divider"></li>
+                <li>
+                  <%= link_to main_app.vr_game_path do %><%= fa_icon 'eye' %> Dogemap (VR) <% end %>
                 </li>  
                 <li class="divider"></li>
                 <li>
@@ -147,11 +152,13 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <div class="container">
   <%= render 'layouts/messages' %>
-  <%= yield %><script>
-  new WOW().init();
+  <%= yield %>
+  <script>
+    new WOW().init();
   </script>
 
   <hr>

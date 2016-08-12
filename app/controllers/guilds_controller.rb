@@ -1,6 +1,9 @@
 class GuildsController < InheritedResources::Base
   before_filter :authenticate_user!
-
+  def move_guild 
+    redirect_to full_game_path
+  end
+  
   def show
     @guild = Guild.find(params[:id])
     @guild_battles = @guild.battles

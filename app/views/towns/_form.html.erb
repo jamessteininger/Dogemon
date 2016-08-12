@@ -24,11 +24,7 @@
 <%= f.select :gameplay_mechanic, ["Healing Center", "Battle Zone", "Message Board"], include_blank: false %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.hidden_field :x_coordinate, value: params[:x_coordinate] %>
-<%= f.hidden_field :y_coordinate, valule: params[:y_coordinate] %>
-<% if current_user.b_mod %>
-<%= f.text_field :x_coordinate, value: params[:x_coordinate] %>
-<%= f.text_field :y_coordinate, value: params[:y_coordinate] %>
-<% end %>
+<%= f.hidden_field :y_coordinate, value: params[:y_coordinate] %>
 <div class="actions">
   <%= f.submit "Discover!", class: 'btn btn-primary btn-lg' %>
 </div>

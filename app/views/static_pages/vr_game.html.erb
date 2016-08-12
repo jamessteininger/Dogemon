@@ -1,0 +1,58 @@
+<!-- Aframe JS Script -->
+<script src="https://aframe.io/releases/latest/aframe.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
+<%= javascript_include_tag "aframe-text-component.min.js" %>
+<!-- AFRAME SCENE -->
+<a-scene fog="type: linear; color: #AAA; far: 10000;"> 
+  <!-- CAMERA -->
+  <a-camera id="player" look-controls-enabled="true" wasd-controls-enabled="true" position='0 2 4' cursor-scale="2" cursor-color="#4CC3D9" cursor-opacity="0.5"></a-camera>
+
+  <!-- CURSOR -->
+  <!-- Orange cube -->
+  <a-cube   position="0 3.5 -2" rotation="30 30 0" width="1" depth="1" height="2" color="#F16745" roughness="0.8" href="<%= vr_game_path %>">
+
+    <a-mouseenter scale="3 1 1" color="#FFC65D"></a-mouseenter>
+    <a-mouseenter target="#shadow" scale="2 1 1"></a-mouseenter>
+
+    <a-mouseleave scale="1 1 1" color="#F16745"></a-mouseleave>
+    <a-mouseleave target="#shadow" scale="1 1 1"></a-mouseleave>  
+  </a-cube>
+
+  <!-- Click template + template (yellow) -->
+  <a-cube position="1 2 0" rotation="30 30 0" width="1" depth="1" height="1" color="#FFC65D">
+  
+    <a-mouseleave scale="1 1 1" color="#FFC65D"></a-mouseleave>  
+    <a-click scale="2 2 2" color="#F16745"></a-click>
+
+  </a-cube>
+
+  <!-- Cube's shadow -->
+  <a-image id="shadow" position="0 0 -2" src="../_images/radial-shadow-2.png" opacity="0.5" rotation="-90 0 0" scale="2 2 2"></a-image>
+
+
+  <!-- INTERACTIVITY -->
+  <!-- 
+<a-entity id="squirrel">
+<a-animation id="running" attribute="position" to="100 0 0"
+dur="10000"
+fill="forwards"
+repeat="indefinite">
+</a-animation>
+</a-entity>
+-->
+  <!-- TEXT -->
+  <a-entity position="-2 5 -2" text="text: <%= @town.name %> " material="color: black"></a-entity>
+  <a-entity position="-5 3 -2" text="text: <%= current_user.dogetag %>; size: 0.3;" material="color: black"></a-entity>
+
+  <!-- GEOMETRY -->    
+  <a-cube rotation="0 45 0" width="12" depth="12" height="1" src="<%= @town.image_url %>" opacity="1"></a-cube>
+
+  <!-- LIGHTING -->
+
+  <!-- SOUND -->
+
+  <!-- SKY -->
+  <a-sky src="<%= @town.image_url %>"></a-sky>
+</a-scene>   <script>console.log(5 + 6);function doSomething() {console.log(5 + 6);} 
+</script>

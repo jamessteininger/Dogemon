@@ -38,7 +38,7 @@
         <% end %>
       </p>
 
-      <% if !current_user.sales.where("created_at >= ?", 1.week.ago.utc).any? %>
+      <% if !current_user.sales.where("created_at >= ?", 1.week.ago.utc).where("b_free = ?", true).any? %>
       <!-- Weekly free item purchase -->
       <!-- Button trigger modal -->
       <p>
@@ -57,6 +57,7 @@
               <%= form_for [@user, @item, Sale.new], url: {controller: :sales, user_id: current_user.id, item_id: @item.id, b_free: true} do |f| %>
               <%= f.hidden_field :user_id %>
               <%= f.hidden_field :item_id %>
+              <%= f.hidden_field :b_free, value: true %>
               <%= f.submit "Yes, buy it!", class: 'btn btn-success' %> 
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
               <% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   resources :conversations
 
   resources :messages
@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   end
 
   resources :ghosts 
-  
-  
+
+
   resources :guilds do
     get 'move_guild'
     collection do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+
   resources :wallpapers
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -56,20 +56,21 @@ Rails.application.routes.draw do
     post 'set_pet2'
     get 'restore_health'
   end
-  
+
   root 'static_pages#home'
-  
+
   get 'home', to: 'static_pages#home'
   get 'roadmap', to: 'static_pages#roadmap'
   get 'leaderboard', to: 'static_pages#leaderboard'
   get 'full_game', to: 'static_pages#full_game'
-  
+  get 'vr_game', to: 'static_pages#vr_game'
+
   get 'index', to: 'static_pages#index', as: 'index'
   get 'about', to: 'static_pages#about'
   get 'how_to_play', to: 'static_pages#how_to_play'
   get 'legal', to: 'static_pages#legal', as: 'legal'
   get 'dogecoin_intro', to: 'static_pages#dogecoin_intro', as: 'dogecoin_intro'
-  
+
   resources :equipment
 
   resources :market_item_votes
@@ -108,7 +109,7 @@ Rails.application.routes.draw do
 
   resources :colusseums
   resources :sales
-  
+
   get 'items/grid'
   resources :items do
     get 'upvote'
@@ -134,35 +135,36 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:sessions] do
     get 'set_town'
     members do
-      get 'set_town'
+      get 'set_town' 
       patch :edit, 'set_town'
     end
   end
-resources :users do
-  get 'sell_all'
-  get 'add_coin'
-  get 'make_wallet'
-  get 'mod'
-  post 'send_doge'
-  get 'get_booster'
-  get 'join_guild'
-  resources :transactions
-  post 'set_town'
-  get 'set_town'
-  resources :pvp_battles
+  resources :users do
+    get 'sell_all'
+    get 'add_coin'
+    get 'make_wallet'
+    get 'mod'
+    post 'send_doge'
+    get 'get_booster'
+    get 'join_guild'
+    resources :transactions
+    post 'set_town'
+    get 'set_town'
+    get 'give_doge'
+    resources :pvp_battles
+    resources :item_insts
+    resources :sales
+  end
   resources :item_insts
   resources :sales
-end
-resources :item_insts
-resources :sales
-resources :colusseums
+  resources :colusseums
 
-# This line mounts Monologue's routes at the root of your application.
-# This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.
-# If you would like to change where this engine is mounted, simply change the :at option to something different.
-#
-# We ask that you don't use the :as option here, as Monologue relies on it being the default of "monologue"
-mount Monologue::Engine, at: '/blog' # or whatever path, be it "/blog" or "/monologue"
+  # This line mounts Monologue's routes at the root of your application.
+  # This means, any requests to URLs such as /my-post, will go to Monologue::PostsController.
+  # If you would like to change where this engine is mounted, simply change the :at option to something different.
+  #
+  # We ask that you don't use the :as option here, as Monologue relies on it being the default of "monologue"
+  mount Monologue::Engine, at: '/blog' # or whatever path, be it "/blog" or "/monologue"
 
 
 

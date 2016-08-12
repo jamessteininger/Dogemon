@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   
+  def give_doge
+    @user = User.find(params[:user_id])
+    @user.give_doge(params[:doge])
+    respond_to do |format|
+      format.html { redirect_to @user, notice: ':) You gave Doge!' }
+    end
+  end
+  
   def mod
     @user = User.find(params[:user_id])
   end

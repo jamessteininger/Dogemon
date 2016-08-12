@@ -9,13 +9,15 @@
   <% end %>
   </h1>
 </div>
+
+
 <br>
 
 <div class="row">
   <div class="col-md-8">
     <div class="animated fadeIn panel panel-primary">
       <div class="panel-heading">
-        <h2><% if @user.pets.count < 4 %><%= link_to "Click here to discover a new Dogemon!", new_pet_path, class: 'pull-right btn btn-primary' %><% end %> <%= fa_icon 'home' %> Dogemon Den</h2>
+        <h2 style='color: #fff; text-shadow: 2px 2px #000;'><% if @user.pets.count < 4 %><%= link_to "Click here to discover a new Dogemon!", new_pet_path, class: 'pull-right btn btn-primary' %><% end %> <%= fa_icon 'home' %> Dogemon Den</h2>
       </div>
       <div class="panel-body">
         <% @user.pets.each do |pet| %>
@@ -24,6 +26,18 @@
             <center>
               <h4 style="margin: 0">
                 <%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= truncate(pet.name, length: 15) %>
+                <div class="progress">
+                  <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.health.to_f/100 * 100) %>%;">
+                    <span class="sr-onl">HP <%= pet.health %>/100</span>
+                  </div>
+                  <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.health.to_f/100 * 100) %>%"></div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.magic.to_f/100 * 100) %>%;">
+                    <span class="sr-onl">MP <%= pet.magic %>/100</span>
+                  </div>
+                  <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.magic.to_f/100 * 100) %>%"></div>
+                </div>
               </h4>
               <br>
               <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 160px; max-width: 160px;'), pet %><br>
@@ -46,7 +60,7 @@
       <div class="col-md-12">
         <div class="panel panel-primary animated fadeIn ">
           <div class="panel-heading">
-            <h2><%= fa_icon 'suitcase' %> Inventory</h2>
+            <h2 style='color: #fff; text-shadow: 2px 2px #000;'><%= fa_icon 'suitcase' %> Inventory</h2>
           </div>
           <div class="panel-body">
             <% if @user.sales.count == 0 %>
@@ -70,7 +84,7 @@
     <div class="panel panel-primary animated fadeIn ">
 
       <div class="panel-heading">
-        <h2><%= fa_icon 'paint-brush' %> Marketplace Creations</h2>
+        <h2 style='color: #fff; text-shadow: 2px 2px #000;'><%= fa_icon 'paint-brush' %> Marketplace Creations</h2>
       </div>
       <div class="panel-body">
         Total Dogecoin made: <% if @user.coin_made == nil %> 0 <% end %><%= @user.coin_made %>
@@ -94,7 +108,7 @@
     <% if user_signed_in?  %>
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
-        <h2><%= fa_icon 'compass' %> Location</h2>
+        <h2 style='color: #fff; text-shadow: 2px 2px #000;'><%= fa_icon 'compass' %> Location</h2>
       </div>
       <div class="panel-body">
         <% if @user.town_id == nil %>
@@ -108,10 +122,10 @@
       </div>
     </div>
     <% end %>
-    
+
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
-        <h2><%= fa_icon 'flag' %> Guild</h2>
+        <h2 style='color: #fff; text-shadow: 2px 2px #000;'><%= fa_icon 'flag' %> Guild</h2>
       </div>
       <div class="panel-body">
         <% @user.owned_guilds.each do |f| %><h3>
@@ -126,7 +140,7 @@
     </div>
     <div class="panel panel-primary animated fadeIn ">
       <div class="panel-heading">
-        <h2><%= fa_icon 'book' %> Adventure Log</h2>
+        <h2 style='color: #fff; text-shadow: 2px 2px #000;'><%= fa_icon 'book' %> Adventure Log</h2>
       </div>
       <div class="panel-body">
         <%= form_for [@user, Log.new], url: {controller: :logs, user_id: @user.id } do |f| %>
@@ -142,6 +156,11 @@
   </div>
   <% else %>
   </h1>
+<% if @user != current_user %>
+<div class='well'>
+  <%= link_to "Give 100 Doge", user_give_doge_path(current_user, doge: 100) %>
+</div>
+<% end %>
 <div class="panel panel-default animated fadeIn ">
   <div class="panel-heading"><h2>Dogemon</h2></div>
   <div class="panel-body">
@@ -155,7 +174,7 @@
   </div>
   <!--    END OF DOGEMON CONTAINER -->
 
-  <h2><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2>
+  <h2 style='color: #fff; text-shadow: 2px 2px #000;'><i class="fa fa-paint-brush"></i> Creator of these magic scrolls</h2>
 
   <% @user.items.each do |f| %>
   <p>

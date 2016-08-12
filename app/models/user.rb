@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     update_attribute(:coin, self.coin+amount)
   end
   
+  def give_doge(doge)
+    update_attribute(:town_id, town)
+  end 
+  
   def set_town(town)
     update_attribute(:town_id, town)
   end 

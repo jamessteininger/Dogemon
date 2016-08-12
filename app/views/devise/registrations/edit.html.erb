@@ -13,6 +13,9 @@
 
 <div><%= f.label :dogetag %> <i>(this will be your gamer tag)</i><br />
   <%= f.text_field :dogetag, class: 'form-control' %></div>
+  
+  <div><%= f.label :theme %><br />
+    <%= f.select :css_theme, options_for_select([["Light","application_light"], ["Dark","application"]]), class: 'form-control' %></div>
 
 <div class="profile"><%= f.label :profile_icon %><br />
     <div class="btn-group" data-toggle="buttons">

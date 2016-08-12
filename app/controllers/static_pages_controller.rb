@@ -1,8 +1,39 @@
 class StaticPagesController < ApplicationController
   before_filter :authenticate_user!, only: [:wallet, :spirits, :user_home]
   
+  def vr_game
+    @user = current_user
+    @town = Town.find(@user.town_id)
+    @users = User.where(town_id: @user.town_id)
+    if @users.any?
+      @pets = Pet.where(user_id: @users.first.id)
+      @users.each do |f|
+        @pets.merge!(f.pets.all)
+      end
+    end
+    if (@user.block_io_wallet_id.presence)
+      @blockio = BlockIo.get_user_balance user_id: @user.block_io_wallet_id
+    #@blockio_address = BlockIo.get_address_by_label label: @user.email
+    end
+    @sales = @user.sales
+  end
+  
+  #Should be exactly the same as vr_game
   def full_game
-    
+    @user = current_user
+    @town = Town.find(@user.town_id)
+    @users = User.where(town_id: @user.town_id)
+    if @users.any?
+      @pets = Pet.where(user_id: @users.first.id)
+      @users.each do |f|
+        @pets.merge!(f.pets.all)
+      end
+    end
+    if (@user.block_io_wallet_id.presence)
+      @blockio = BlockIo.get_user_balance user_id: @user.block_io_wallet_id
+    #@blockio_address = BlockIo.get_address_by_label label: @user.email
+    end
+    @sales = @user.sales
   end
   
    def user_home

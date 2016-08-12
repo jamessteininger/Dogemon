@@ -1,0 +1,68 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+
+*= require_self
+* require 'forem/base'
+* require "forem-bootstrap"
+*/
+
+//$brand-primary: #36B6F7;
+//$brand-success: #36B6F7;
+//$brand-warning: #;
+//$brand-danger: #;
+//$brand-info: #;
+
+
+$brand-primary: #2F4C78;
+$brand-success: #3CA651;
+$brand-danger: #C44A3F;
+$navbar-height: 60px;
+//$link-color: $brand-success;
+
+@import "bootstrap-sprockets";
+@import "bootswatch/spacelab/variables";
+@import "bootstrap";
+@import "font-awesome";
+
+
+
+body {
+  padding-top: 80px;
+}
+
+.navbar-brand{
+  // padding-top:0 !important;
+}
+
+.footer{
+  margin-top:50px;
+  margin-bottom:50px;
+
+}
+
+.btn-item{
+  width:70px;
+}
+
+.balance{
+  // margin-top:10px;
+}
+
+.form-control {
+  color: black;
+}
+
+.input-mini { width: 60px; } .input-small { width: 90px; } .input-medium { width: 150px; } .input-large { width: 210px; } .input-xlarge { width: 270px; } .input-xxlarge { width: 530px; }
+
+@import "bootswatch/spacelab/bootswatch";
+

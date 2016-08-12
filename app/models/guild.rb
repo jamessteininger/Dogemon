@@ -9,6 +9,11 @@ class Guild < ActiveRecord::Base
   has_many :pets, through: :users
   has_many :battles, through: :pets
 
+  def move_guild
+    
+    guild.update_attribute(town_id: params[:guild_id])
+  end
+  
   def guild_wins
     guild_wins = 0
     self.users.each do |f|

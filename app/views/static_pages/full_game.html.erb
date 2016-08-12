@@ -1,0 +1,64 @@
+</div>
+<div class='container-fluid'>
+  <div class="well row">
+    <div class='col-md-4'>
+      <h1>
+        <%= image_tag(@user.imageurl, height: 55) %>
+        <%= @user.dogetag %>
+        <% if @user.block_io_wallet_id.presence %>  <span class="label label-warning">Dogecoin: <%= @blockio["data"]["available_balance"].to_i %></span> 
+      </h1>
+      <% end %>
+      </h1>
+  </div>
+  <div class='col-md-5'>
+
+  </div>
+</div>
+</div>
+
+<div class='col-md-3'>
+  <div class="animated fadeIn panel panel-primary">
+    <div class="panel-heading">
+      <h2><% if @user.pets.count < 4 %><%= link_to "Click here to discover a new Dogemon!", new_pet_path, class: 'pull-right btn btn-primary' %><% end %> <%= fa_icon 'home' %> Den</h2>
+    </div>
+    <div class="panel-body">
+      <% @user.pets.each do |pet| %>
+      <div class="col-md-6">
+        <div class="well">
+          <center>
+            <h4 style="margin: 0">
+              <%= element_icon(pet.element) %> <%= pet.pvp_battle_id %><%= truncate(pet.name, length: 15) %>
+              <div class="progress" style='margin-top: 10px; '>
+                <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.health.to_f/100 * 100) %>%;">
+                  <span class="sr-onl">HP <%= pet.health %>/100</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.health.to_f/100 * 100) %>%"></div>
+              </div>
+              <div class="progress" style='margin-bottom: 5px; '>
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= Integer(pet.magic.to_f/100 * 100) %>%;">
+                  <span class="sr-onl">MP <%= pet.magic %>/100</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" role="" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= 100 - Integer(pet.magic.to_f/100 * 100) %>%"></div>
+                </h4>
+              <%= link_to image_tag(pet.imageurl, class: 'btn', style: 'max-height: 160px; max-width: 160px;'), pet %><br>
+              <%= truncate(pet.description, length: 12) %>
+              <p><% if pet.pvp_battle.presence or pet.battles.include?(:bounty_id) %></p>
+              <h4>
+                <%= link_to pet.pvp_battle do %>In battle with <%= pet.pvp_battle.other.dogetag %><% end %><% else %>
+              </h4>
+              <h3><span class="label label-success">Relaxing<% end %></span></h3>
+
+              </center>
+            </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class='col-md-6'>
+    <%= render 'towns/town', town: @town %>
+  </div>
+  <div class='col-md-3'>
+  </div>
+</div>

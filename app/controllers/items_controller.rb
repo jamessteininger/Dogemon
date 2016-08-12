@@ -35,6 +35,10 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @user = current_user
+    if current_user.block_io_wallet_id.presence
+    else
+      redirect_to wallet_path 
+    end
   end
 
   # GET /items/new

@@ -1,4 +1,5 @@
 <h1>
+  <%= link_to 'Find Friends', users_path, class: 'btn btn-primary btn-lg pull-right' %> 
   <%= link_to 'Start a New Guild', new_guild_path, class: 'btn btn-success btn-lg pull-right' %>Guilds <% if current_user.guild_id.presence %>
   <%= link_to guild_path(Guild.find(current_user.guild_id)), class: 'btn btn-primary btn-lg pull-' do %><%= fa_icon 'home' %> Go to my Guild <% end %><% end %>
   <a class="btn btn-lg btn-default" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -16,7 +17,7 @@
 </div><br>
 <% @guilds.each do |guild| %>
 <div class="well animated fadeIn " style="background-size:cover; background-image: url(<%= guild.imageurl %>);">
-  <h3 style="color: #fff; text-shadow: 2px 2px #000;">
+  <h3 style='color: #fff; text-shadow: 1px 1px #000;'>
     <%= link_to guild.name, guild %> <span class='label label-primary'>Members: <%= guild.users.count %></span> <span class='label label-success'>Rank: <%= Guild.all.sort_by(&:guild_wins).reverse.index(guild) + 1 %></span>
     <% if current_user.guild_id.presence and current_user.guild_id == guild.id %> <span class='label label-info'><%= fa_icon 'home' %> </span><% end %>
   </h3>

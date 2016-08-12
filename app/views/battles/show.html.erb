@@ -35,49 +35,49 @@
     <% if @battle.background_url.presence %>
     <div class="well" style="background-size:cover; background-image: url(<%= @battle.background_url %>);" %>
       <% else %>
-    <div class="well">
+      <div class="well">
+        <% end %>
+        <div class="row">
+          <div class="col-md-6">
+            <center>
+              <%= render partial: "pets/pet_overview", locals: { pet: @battle.pet } %>    </center>
+          </div>
+          <div class="col-md-6">
+            <center>
+              <%= render partial: "ghosts/ghost_overview", locals: { pet: @battle.ghost } %>    </center>
+          </div>
+        </div>
+      </div>
       <% end %>
+
+      <% if (@battle.b_pet_turn == false or @battle.b_pet_turn == 'false') and @battle.battle_state != 'completed' %>
+      <div class="">
+        <%= link_to battle_ghost_attack_path(@battle), class: 'btn-block btn btn-lg btn-danger' do %><h3>
+        <%= fa_icon 'arrow-right ' %><br>Next Turn</h3>
+        <% end %>
+        <br>
+        <%= link_to "?", "#", class: 'btn btn-lg btn-block btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Your turn has ended, so click Next Turn to have the enemy Dogemon play their move", 'data-placement' => 'bottom' %>
+      </div>
+      <% end %>
+      <% if @battle.b_pet_turn == true or @battle.b_pet_turn == 'true' %>
+      <% if current_user.id == @battle.user_id %>
       <div class="row">
-        <div class="col-md-6">
-          <center>
-            <%= render partial: "pets/pet_overview", locals: { pet: @battle.pet } %>    </center>
+        <% @battle.pet.equipments.each do |f| %>
+        <div class="col-md-3">
+          <%= render partial: "items/item_ghost_view", locals: { item: f.sale, equipment: f } %>
         </div>
-        <div class="col-md-6">
-          <center>
-            <%= render partial: "ghosts/ghost_overview", locals: { pet: @battle.ghost } %>    </center>
-        </div>
+        <% end %>
       </div>
+      <%= form_for [@battle, GhostLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :ghost_logs, battle_id: @battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
+      <%= f.hidden_field :battle_id, value: @battle.id %>
+      <%= f.hidden_field :pet_id, value: @battle.pet_id %>
+      <%= f.hidden_field :description, value: Pet.find(@battle.pet_id).name + " skips its turn. " %>
+      <%= f.hidden_field :bMessage, value: 'false' %>
+      <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
+      <% end %>
+      <% end %>
+      <% end %>
     </div>
-    <% end %>
 
-    <% if (@battle.b_pet_turn == false or @battle.b_pet_turn == 'false') and @battle.battle_state != 'completed' %>
-    <div class="">
-      <%= link_to battle_ghost_attack_path(@battle), class: 'btn-block btn btn-lg btn-danger' do %><h3>
-      <%= fa_icon 'arrow-right ' %><br>Next Turn</h3>
-      <% end %>
-      <br>
-      <%= link_to "?", "#", class: 'btn btn-lg btn-block btn-default tag-tooltip', data: {:toggle=>"tooltip"}, 'data-original-title' => "Your turn has ended, so click Next Turn to have the enemy Dogemon play their move", 'data-placement' => 'bottom' %>
-    </div>
-    <% end %>
-    <% if @battle.b_pet_turn == true or @battle.b_pet_turn == 'true' %>
-    <% if current_user.id == @battle.user_id %>
-    <div class="row">
-      <% @battle.pet.equipments.each do |f| %>
-      <div class="col-md-3">
-        <%= render partial: "items/item_ghost_view", locals: { item: f.sale, equipment: f } %>
-      </div>
-      <% end %>
-    </div>
-    <%= form_for [@battle, GhostLog.new], html: { id: 'form_id3' } , class: "form form-inline  form-horizontal ", url: {bMessage: false, controller: :ghost_logs, battle_id: @battle.id, amount: 0, magic_amount: 0, attacker: 2, defender: 2 } do |f| %> 
-    <%= f.hidden_field :battle_id, value: @battle.id %>
-    <%= f.hidden_field :pet_id, value: @battle.pet_id %>
-    <%= f.hidden_field :description, value: Pet.find(@battle.pet_id).name + " skips its turn. " %>
-    <%= f.hidden_field :bMessage, value: 'false' %>
-    <%= f.submit "Skip turn?", class: "btn btn-block btn-default" %>
-    <% end %>
-    <% end %>
-    <% end %>
   </div>
-
-</div>
 </div>

@@ -3,3 +3,5 @@ Rails.application.config.assets.precompile += %w( monologue/foundation_icons/soc
 Rails.application.config.assets.precompile += %w( monologue/foundation_icons/social_foundicons.ttf )
 Rails.application.config.assets.precompile += %w( forem.css )
 Rails.application.config.assets.precompile += %w( forem.js )
+Rails.application.config.assets.precompile += %w( application_light.css )
+Rails.application.config.assets.precompile += %w( aframe-text-component.min.js )

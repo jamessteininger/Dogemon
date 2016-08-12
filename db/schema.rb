@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230193110) do
+ActiveRecord::Schema.define(version: 20160210030452) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(version: 20151230193110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "equipment_id"
+    t.boolean  "b_free"
   end
 
   create_table "towns", force: true do |t|
@@ -513,6 +514,7 @@ ActiveRecord::Schema.define(version: 20151230193110) do
     t.boolean  "b_sound_on"
     t.boolean  "b_mod"
     t.boolean  "b_mod_blocked"
+    t.string   "css_theme"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,6 +1,6 @@
 class BattleLogsController < ApplicationController
   before_action :set_battle_log, only: [:show, :edit, :update, :destroy]
-before_filter :authenticate_user!
+  before_filter :authenticate_user!
   # GET /battle_logs
   # GET /battle_logs.json
   def index
@@ -37,44 +37,44 @@ before_filter :authenticate_user!
         @pet2.update_attribute(:health, 0)
       end
     else
-    if (params[:bMessage] == 'false')
-      amount = params[:amount]
-      utility_type = params[:utility_type]
-      magic_amount = params[:magic_amount]
-      attacker = params[:attacker]
-      defender = params[:defender]
-      @pvp_battle.update_attribute(:user1_turn, !@pvp_battle.user1_turn)
-      #@user = User.find(@battle.user_id)
-     # @aenemy = @battle.aenemies.first
-      if (attacker.to_i < 2)
-        if (utility_type == 'Attack')
-          @pet2.take_damage(Integer(amount))
+      if (params[:bMessage] == 'false')
+        amount = params[:amount]
+        utility_type = params[:utility_type]
+        magic_amount = params[:magic_amount]
+        attacker = params[:attacker]
+        defender = params[:defender]
+        @pvp_battle.update_attribute(:user1_turn, !@pvp_battle.user1_turn)
+        #@user = User.find(@battle.user_id)
+        # @aenemy = @battle.aenemies.first
+        if (attacker.to_i < 2)
+          if (utility_type == 'Attack')
+            @pet2.take_damage(Integer(amount))
+          end
+          if (utility_type == 'Drain')
+            @pet2.take_magic_damage(Integer(amount))
+          end
+          if (utility_type == 'Heal')
+            @pet1.heal_health(Integer(amount))
+          end
+          @pet1.use_magic(Integer(magic_amount))
+        elsif (attacker.to_i > 1)
+          if (utility_type == 'Attack')
+            @pet1.take_damage(Integer(amount))
+          end
+          if (utility_type == 'Drain')
+            @pet1.take_magic_damage(Integer(amount))
+          end
+          if (utility_type == 'Heal')
+            @pet2.heal_health(Integer(amount))
+          end
+          @pet2.use_magic(Integer(magic_amount))
         end
-        if (utility_type == 'Drain')
-          @pet2.take_magic_damage(Integer(amount))
-        end
-        if (utility_type == 'Heal')
-          @pet1.heal_health(Integer(amount))
-        end
-        @pet1.use_magic(Integer(magic_amount))
-      elsif (attacker.to_i > 1)
-        if (utility_type == 'Attack')
-          @pet1.take_damage(Integer(amount))
-        end
-        if (utility_type == 'Drain')
-          @pet1.take_magic_damage(Integer(amount))
-        end
-        if (utility_type == 'Heal')
-          @pet2.heal_health(Integer(amount))
-        end
-        @pet2.use_magic(Integer(magic_amount))
+      else
+
       end
-    else
-      
+
     end
-      
-    end
-    
+
     if (@pvp_battle.pet1.health <= 0)
       @pvp_battle.update_attribute(:winner_id, @pvp_battle.other.id)
       @pvp_battle.update_attribute(:battle_state, "completed")
@@ -128,13 +128,13 @@ before_filter :authenticate_user!
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_battle_log
-      @battle_log = BattleLog.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_battle_log
+    @battle_log = BattleLog.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def battle_log_params
-      params.require(:battle_log).permit(:pvp_battle_id, :description, :type, :battle_id, :bMessage)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def battle_log_params
+    params.require(:battle_log).permit(:pvp_battle_id, :description, :type, :battle_id, :bMessage)
+  end
 end

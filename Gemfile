@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.0' #requires ruby-2.1.5
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'bootswatch-rails'
