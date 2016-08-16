@@ -1,40 +1,44 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0' #requires ruby-2.1.5
+gem 'websocket-rails'
+
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'bootswatch-rails'
+gem 'bootstrap_form'
 gem 'font-awesome-rails'
+
 gem 'activeadmin', github: 'activeadmin'
 gem 'dogecoin_client'
 gem 'bootstrap-slider-rails'
 gem 'bootstrap-material-design'
 gem 'block_io', '0.1.3'
+
 gem 'will_paginate-bootstrap'
 gem 'will_paginate', '~> 3.0.5'
-gem 'bootstrap_form'
+
 gem 'aws-sdk'
 gem 'redis'
-gem 'websocket-rails'
 gem 'monologue'
 gem 'nokogiri'
 gem 'forem', :github => "radar/forem", :branch => "rails4"
 gem 'forem-bootstrap', :github => "radar/forem-bootstrap"
-group :development do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-end
+gem 'pg'
+
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
+  gem 'unicorn'
 end
 
-group :development, :test do
-  gem 'foreman'
-end
+group :development do 
+  gem 'puma', '3.1'
+  gem 'spring'
+  gem 'foreman' 
+  gem 'rails_layout'
+end 
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -54,8 +58,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

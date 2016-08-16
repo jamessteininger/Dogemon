@@ -114,6 +114,6 @@ class UsersController < ApplicationController
   
   private 
   def user_params
-    params.require(:user).permit(:email, :coin, :health, :total_health, :magic, :attack)
+    params.require(:user).permit(:email, :coin, :health, :total_health, :magic, :attack, :css_theme)
    end
 end
