@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     friendships.find_by_friend_id(other_user.id)
   end
   
+  def remove_battle_logs
+    GhostLog.all.destroy_all
+  end
+  
   def add_coin(amount)
     update_attribute(:coin, self.coin+amount)
   end

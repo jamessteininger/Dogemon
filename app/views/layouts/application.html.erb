@@ -4,8 +4,7 @@
     <title>Dogemon - Battle and Sell Your Own Creations</title>
     <%= stylesheet_link_tag current_theme, media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag "forem" %>
-    <%= javascript_include_tag "forem" %><script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.2.6/animate.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
@@ -99,8 +98,8 @@
                   <%= link_to main_app.user_mod_path(current_user) do %><%= fa_icon "cog" %> Mod Panel<% end %>
                 </li>
                 <% end %>
-                <% if user_signed_in? and current_user.town_id.presence %>
                 <li class="divider"></li>
+                <% if user_signed_in? and current_user.town_id.presence and Town.exists?(1) %>
                 <li> 
                   <%= link_to main_app.town_path(current_user.town_id) do %><%= fa_icon "home" %> <%= Town.find(current_user.town_id).name %> <% end %>
 
@@ -165,8 +164,8 @@
 
   <hr>
   <strong>
-    <center>&copy; Dogemon, 2014 <br>
-      <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Forum", forem.root_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", main_app.about_path %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
+    <center>&copy; Dogemon, 2014-2016 <br>
+      <%= link_to "How to Play", main_app.how_to_play_path %> | <%= link_to "Blog & Updates", main_app.posts_path %> | <%= link_to "Roadmap", main_app.roadmap_path %> | <%= link_to "Feedback", main_app.new_feedback_path %> | <%= link_to "About", main_app.about_path %> | <%= link_to "Contact", main_app.about_path %> | <%= link_to "Terms & Conditions", main_app.legal_path %><br><br>
       <%= image_tag "DogemonNavbarWhite.png", width: 36 %>
       <br>
       <br>

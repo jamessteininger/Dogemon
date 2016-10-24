@@ -1,7 +1,12 @@
+#Dogemon Gemfile
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.2.2'
 
-gem 'rails', '4.1.0' #requires ruby-2.1.5
+gem 'rails', '5.0.0.1'
+
+#Style
+gem 'sass-rails'
+
 gem 'websocket-rails'
 
 gem 'bootstrap-sass'
@@ -10,7 +15,7 @@ gem 'bootswatch-rails'
 gem 'bootstrap_form'
 gem 'font-awesome-rails'
 
-gem 'activeadmin', github: 'activeadmin'
+#gem 'activeadmin', github: 'activeadmin'
 gem 'dogecoin_client'
 gem 'bootstrap-slider-rails'
 gem 'bootstrap-material-design'
@@ -23,8 +28,8 @@ gem 'aws-sdk'
 gem 'redis'
 gem 'monologue'
 gem 'nokogiri'
-gem 'forem', :github => "radar/forem", :branch => "rails4"
-gem 'forem-bootstrap', :github => "radar/forem-bootstrap"
+#gem 'forem', :github => "radar/forem", :branch => "rails4"
+#gem 'forem-bootstrap', :github => "radar/forem-bootstrap"
 gem 'pg'
 
 
@@ -35,17 +40,14 @@ end
 
 group :development do 
   gem 'puma', '3.1'
-  gem 'spring'
   gem 'foreman' 
   gem 'rails_layout'
 end 
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -60,7 +62,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt-ruby', '3.1.5', :require => 'bcrypt'
 
 # Use unicorn as the app server
 # gem 'unicorn'

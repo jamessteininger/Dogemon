@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   
+  def remove_battle_logs
+    @user = User.find(params[:user_id])
+    @user.remove_battle_logs
+    respond_to do |format|
+      format.html { redirect_to @user, notice: ':) You removed all Ghost Logs!' }
+    end
+  end
+  
   def give_doge
     @user = User.find(params[:user_id])
     @user.give_doge(params[:doge])

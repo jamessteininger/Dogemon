@@ -7,6 +7,8 @@
   Total Dogemon: <%= Pet.all.count %>
 </p>
 <hr>
+<h4><%= link_to "Remove Battle Logs", user_remove_battle_logs_path(current_user) %></h4>
+<hr>
 <h4>Items Blocked For Moderation</h4>
 <% Item.mod_blocked.each do |f| %>
 <div class='well'>

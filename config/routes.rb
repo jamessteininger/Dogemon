@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # If you would like to change where this extension is mounted, simply change the :at option to something different.
   #
   # We ask that you don't use the :as option here, as Forem relies on it being the default of "forem"
-  mount Forem::Engine, :at => '/forums'
+  #mount Forem::Engine, :at => '/forums'
   resources :posts
 
   resources :blogs
@@ -49,8 +49,8 @@ Rails.application.routes.draw do
 
   resources :wallpapers
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+ # devise_for :admin_users, ActiveAdmin::Devise.config
+ # ActiveAdmin.routes(self)
   resources :pvp_battles do
     get 'apply_regen'
     post 'set_pet2'
@@ -143,6 +143,7 @@ Rails.application.routes.draw do
     get 'sell_all'
     get 'add_coin'
     get 'make_wallet'
+    get 'remove_battle_logs'
     get 'mod'
     post 'send_doge'
     get 'get_booster'
