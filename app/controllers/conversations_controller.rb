@@ -1,4 +1,4 @@
-class ConversationsController < InheritedResources::Base
+class ConversationsController < ApplicationController
 
   private
 

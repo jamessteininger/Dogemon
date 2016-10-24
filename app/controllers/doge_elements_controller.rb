@@ -1,4 +1,4 @@
-class DogeElementsController < InheritedResources::Base
+class DogeElementsController < ApplicationController
 
   private
 
