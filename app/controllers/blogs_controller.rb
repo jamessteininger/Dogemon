@@ -1,5 +1,7 @@
-class BlogsController < InheritedResources::Base
-
+class BlogsController < ApplicationController
+def index
+    @blogs = Blog.all
+  end
   private
 
     def blog_params
