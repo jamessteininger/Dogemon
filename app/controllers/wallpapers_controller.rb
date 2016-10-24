@@ -1,4 +1,4 @@
-class WallpapersController < InheritedResources::Base
+class WallpapersController < ApplicationController
 
   private
 

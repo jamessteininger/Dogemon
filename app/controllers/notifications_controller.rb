@@ -1,4 +1,4 @@
-class NotificationsController < InheritedResources::Base
+class NotificationsController < ApplicationController
 
   private
 
