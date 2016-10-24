@@ -1,4 +1,4 @@
-class MessagesController < InheritedResources::Base
+class MessagesController < ApplicationController
 
   private
 
