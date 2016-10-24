@@ -1,4 +1,4 @@
-class BountiesController < InheritedResources::Base
+class BountiesController < ApplicationController
 
   def show
     @bounty = Bounty.find(params[:id])
