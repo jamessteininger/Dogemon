@@ -1,13 +1,12 @@
 <div class='row'>
   <div class='col-md-4'>
-    <%= render 'layouts/panel_head' %>
     <h3><%= fa_icon "envelope-o" %> Messages 
-      <%= link_to 'New Conversation', new_user_conversation_path(current_user), class: 'btn btn- pull-right btn-primary' %>
+      <%= link_to 'New Conversation', new_conversation_path, class: 'btn btn- pull-right btn-primary' %>
     </h3> <br>
 
     <table class='table table- table-hover table-responsive'>
       <tbody>
-        <% @conversations.each do |conversation| %>
+        <% current_user.conversations.each do |conversation| %>
         <% if conversation.other_id.presence and conversation.user.presence and conversation.other.presence %>
         <tr class='<%= 'active' if current_page?(conversation_path(conversation.id)) %>'>
           <td>
@@ -30,7 +29,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= render 'layouts/panel_foot' %>
 
   </div>
   <div class='col-md-8'>
@@ -40,33 +38,35 @@
         <% if @conversation.user_id == current_user.id %>
         <h4 style='color: #;'>
           Conversation with 
-         <%= render 'users/profile_photo', user: @conversation.user, size: ':comment' %> <%= link_to @conversation.other.full_name, @conversation.other, style: 'color: #;'  %>
         </h4>
         <% else %>
         <h4 style='color: #;'> Conversation with 
-        <%= render 'users/profile_photo', user: @conversation.user, size: ':comment' %>   <%= link_to @conversation.user.full_name, @conversation.user, style: 'color: #;' %>
         </h4>
         <% end %>
       </div>
       <div class='panel-body'>
-        <%= bootstrap_form_for Message.new  do |f| %>
+        <%= bootstrap_form_for [@conversation, Message.new], remote: true  do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :conversation_id, value: @conversation.id %>
-        <%= f.hidden_field :other_id, value: @conversation.other.id %>
+        <%= f.hidden_field :other_id, value: @conversation.other_id %>
         <%= f.text_area :content, rows: 2, hide_label: true, placeholder: 'Enter a message...'  %>
         <%= f.submit 'Send Message', class: 'btn btn-block btn-success'  %><br>
         <% end %>
-        <% @messages.each do |f| %>
-        <h4>
-          <%= render 'users/profile_photo', user: f.user, size: ':comment' %> <%= link_to f.user.full_name, f.user, style: 'padding-left: 5px;'%> <small><%= time_ago_in_words(f.created_at) %> ago</small>
-          </p>
-        <p>
-          <%= f.content %>
-        </p>
-        <hr>
-        <% end %>
-        <%= render 'layouts/panel_foot' %>
 
-        <%= will_paginate @messages, class: 'pagination', renderer: BootstrapPagination::Rails %>
+
+        <section id="messages" data-channel="messages" data-conversation-id="<%= @conversation.id %>">
+          <% @messages.each do |f| %>
+          <h4>
+            <%= render 'users/profile_photo', user: f.user, size: ':comment' %> <%= link_to f.user.full_name, f.user, style: 'padding-left: 5px;'%> <small><%= time_ago_in_words(f.created_at) %> ago</small>
+            </p>
+          <p>
+            <%= f.content %>
+          </p>
+          <hr>
+          <% end %>
+        </section>
+
+
+
       </div>
     </div>

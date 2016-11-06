@@ -5,6 +5,7 @@
     <%= stylesheet_link_tag current_theme, media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
+    <%= action_cable_meta_tag %>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.2.6/animate.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
@@ -96,6 +97,9 @@
                 <li class="divider"></li>
                 <li>
                   <%= link_to main_app.user_mod_path(current_user) do %><%= fa_icon "cog" %> Mod Panel<% end %>
+                </li>
+                <li>
+                  <%= link_to conversations_path do %><%= fa_icon "cog" %> Messages<% end %>
                 </li>
                 <% end %>
                 <li class="divider"></li>

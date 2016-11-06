@@ -1,0 +1,5 @@
+local: &local
+  url: redis://localhost:3000
+
+development: *local
+test: *local
